@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../semantic/dist/semantic.min.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"/>
+    <script src="../semantic/dist/semantic.min.js"></script>
+    <link rel="shortcut icon" href="../Ressources/favicon.png" />
+    <link rel="stylesheet" href="../semantic/dist/components/dropdown.min.css"/>
+    <script src="../semantic/dist/components/dimmer.min.js" ></script>
+
+    <title>Site tout claqué (pour l'instant)</title>
+
+    <style>
+        .main.container
+        {
+            padding-top: 140px;
+        }
+
+    </style>
+
+
+</head>
+
+
+<body>
+
+<div class="ui fixed menu">
+    <div class="header item">
+        <img src="../Ressources/Logo400x400.jpg">
+    </div>
+    <div class="active item text">
+        <h4>Dashboard</h4>
+    </div>
+    <div class="item text">
+        <h4>Capteurs</h4>
+    </div>
+    <div class="item text">
+        <h4>Statistiques</h4>
+    </div>
+    <div class="item tiny flag">
+        <i class="france flag"></i>
+    </div>
+
+    <div class="item ui right aligned small">
+        <span>
+            <div class="text">
+                <img class="ui avatar image" src="../Ressources/heyliot_logo_couleurs.png">
+                <span>ADMIN Heyliot</span>
+            </div>
+        </span>
+     </div>
+</div>
+
+
+<div class="ui main container" id="app">
+    <div class="ui grid">
+        <div class="four wide column">
+            <div class="ui blue inverted segment">
+                <h2>{{nbPres}}</h2>
+                <h4>Présentoirs</h4>
+            </div>
+        </div>
+        <div class="four wide column">
+            <div class="ui green inverted segment">
+                <h2>{{nbPres / 3}}</h2>
+                <h4>Présentoirs remplis</h4>
+            </div>
+        </div>
+        <div class="four wide column">
+            <div class="ui grey inverted segment">
+                <h2>{{nbPres / 3}}</h2>
+                <h4>Présentoirs ni plein ni vide</h4>
+            </div>
+        </div>
+        <div class="four wide column">
+            <div class="ui red inverted segment">
+                <h2>{{nbPres / 3}}</h2>
+                <h4>Présentoirs vides</h4>
+            </div>
+        </div>
+    </div>
+
+    <input type="text">
+    <div class="ui animated green button" @click="dl_done">
+        <div class="hidden content">
+            <img src="../Ressources/icons/download-to-storage-drive.png">
+        </div>
+        <div class="visible content">Telechager</div>
+    </div>
+    <br>
+    <div class="ui success message" v-if="Success">
+        Votre fichier excel est en cours de téléchargement !
+        <img src="../Ressources/icons/remove.png" class="ui right floated image" @click="v_close">
+    </div>
+
+
+</div>
+
+<div class="ui blue inverted vertical footer segment">
+    <div class="ui center aligned container">
+    <img src="../Ressources/logo_horizontal.png" class="ui centered small image">
+        <div class="ui horizontal inverted small divided link list">
+            <a class="item "  href="https://www.heyliot.com/contact/">Contactez Nous</a>
+            <a class="item" target="_blank" href="https://www.heyliot.com/">Nous visiter</a>
+            <a class="item" target="_blank" href="https://twitter.com/heyliotFr">
+                <img src="../Ressources/icons/twitter-logo.png" class="ui image">
+            </a>
+            <a class="item" target="_blank" href="https://www.facebook.com/heyliot/">
+                <img src="../Ressources/icons/facebook-logo.png" class="ui image">
+            </a>
+            <a class="item" href="mailto:contact@heyliot.com">
+                <img src="../Ressources/icons/envelope.png" class="ui image">
+            </a>
+        </div>
+
+    </div>
+</div>
+<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="JS/app.js"></script>
+
+</body>
+</html>
