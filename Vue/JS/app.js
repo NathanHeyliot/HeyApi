@@ -1,7 +1,7 @@
 new Vue({
     el: '#app',
     data: {
-        nbPres: nbdev,
+        nbPres: 150,
         Success: false,
     },
     methods: {

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="34ce7695-6fb4-47c5-885e-fda50500a5a4" name="Default" comment="" />
+    <list default="true" id="34ce7695-6fb4-47c5-885e-fda50500a5a4" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vue/JS/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/Vue/JS/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vue/JS/app.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Vue/view.html" beforeDir="false" afterPath="$PROJECT_DIR$/Vue/view.html" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,133 +29,42 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.44210526">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/server.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="357">
-                  <caret line="33" column="25" lean-forward="true" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="OrganisationController.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/api/controllers/OrganisationController.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="534">
-                  <caret line="45" column="74" selection-start-line="45" selection-start-column="74" selection-end-line="45" selection-end-column="74" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="app.ts" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Vue/JS/app.ts">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="68">
-                  <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="DeviceController.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/api/controllers/DeviceController.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="51">
-                  <caret line="3" column="38" lean-forward="true" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="DeviceModel.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/api/models/DeviceModel.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="357">
-                  <caret line="21" column="23" lean-forward="true" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="GroupController.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/api/controllers/GroupController.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="799">
-                  <caret line="47" column="2" selection-start-line="47" selection-start-column="2" selection-end-line="47" selection-end-column="2" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="ApiRoute.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/api/routes/ApiRoute.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="272">
-                  <caret line="22" column="25" lean-forward="true" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ApiController.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/api/controllers/ApiController.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-595">
-                  <caret line="73" selection-start-line="73" selection-end-line="73" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="ApiModel.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/api/models/ApiModel.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="391">
-                  <caret line="23" column="10" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="view.html" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Vue/view.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="380">
-                  <caret line="72" column="48" selection-start-line="72" selection-start-column="48" selection-end-line="72" selection-end-column="48" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="semantic.css" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/semantic/dist/semantic.css">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="152082">
-                  <caret line="8944" selection-start-line="8944" selection-end-line="8944" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="semantic.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/semantic/dist/semantic.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="289">
-                  <caret line="17" column="2" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="theme.config" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/semantic/src/theme.config">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1241">
-                  <caret line="73" selection-start-line="73" selection-end-line="73" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-142">
+              <caret line="15" column="27" lean-forward="true" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="view.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Vue/view.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="228">
+              <caret line="129" column="80" selection-start-line="129" selection-start-column="80" selection-end-line="129" selection-end-column="80" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Vue/JS/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="15" selection-start-line="15" selection-end-line="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
@@ -166,12 +81,14 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/Vue/view.html" />
         <option value="$PROJECT_DIR$/api/routes/ApiRoute.js" />
-        <option value="$PROJECT_DIR$/Vue/JS/app.ts" />
         <option value="$PROJECT_DIR$/api/controllers/DeviceController.js" />
         <option value="$PROJECT_DIR$/api/controllers/ApiController.js" />
         <option value="$PROJECT_DIR$/api/models/ApiModel.js" />
+        <option value="$PROJECT_DIR$/Vue/JS/app.ts" />
+        <option value="$PROJECT_DIR$/Vue/JS/map.js" />
+        <option value="$PROJECT_DIR$/Vue/JS/app.js" />
+        <option value="$PROJECT_DIR$/Vue/view.html" />
       </list>
     </option>
   </component>
@@ -187,46 +104,49 @@
       <select />
     </treeState>
   </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/node_modules" />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="nodetest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodetest" type="462c0819:PsiDirectoryNode" />
+              <item name="HeyApi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HeyApi" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="nodetest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodetest" type="462c0819:PsiDirectoryNode" />
+              <item name="HeyApi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HeyApi" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="nodetest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodetest" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="HeyApi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HeyApi" type="462c0819:PsiDirectoryNode" />
+              <item name="semantic" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="nodetest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodetest" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
+              <item name="HeyApi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HeyApi" type="462c0819:PsiDirectoryNode" />
+              <item name="Vue" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="nodetest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodetest" type="462c0819:PsiDirectoryNode" />
-              <item name="api" type="462c0819:PsiDirectoryNode" />
-              <item name="Modules" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="nodetest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="nodetest" type="462c0819:PsiDirectoryNode" />
-              <item name="Ressources" type="462c0819:PsiDirectoryNode" />
+              <item name="HeyApi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HeyApi" type="462c0819:PsiDirectoryNode" />
+              <item name="Vue" type="462c0819:PsiDirectoryNode" />
+              <item name="JS" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -234,11 +154,20 @@
       </pane>
       <pane id="PackagesPane" />
       <pane id="AndroidView" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="preferences.mongoOptions" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\DEV_Heyliot\HeyApi\Vue\JS" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -314,7 +243,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="f3b7c890-4047-4488-9203-d2093cc2cf17" name="Default" comment="" />
+      <changelist id="34ce7695-6fb4-47c5-885e-fda50500a5a4" name="Default" comment="" />
       <created>1522928939708</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -326,11 +255,12 @@
       <workItem from="1524138021114" duration="4665000" />
       <workItem from="1524488629886" duration="72182000" />
       <workItem from="1525269072668" duration="21293000" />
+      <workItem from="1526307823085" duration="8715000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19460000" />
+    <option name="totallyTimeSpent" value="28175000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -377,6 +307,14 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
     </layout>
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/Vue/JS/app.js" />
+      </list>
+    </option>
+  </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
@@ -385,272 +323,83 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/server.js" />
+    <entry file="file://$PROJECT_DIR$/api/controllers/OrganisationController.js" />
+    <entry file="file://$PROJECT_DIR$/semantic/src/site/elements/icon.variables" />
+    <entry file="file://$PROJECT_DIR$/api/controllers/DeviceController.js" />
+    <entry file="file://$PROJECT_DIR$/api/controllers/GroupController.js" />
+    <entry file="file://$PROJECT_DIR$/Vue/JS/app.ts" />
+    <entry file="file://$PROJECT_DIR$/api/routes/ApiRoute.js" />
+    <entry file="file://$PROJECT_DIR$/api/controllers/ApiController.js" />
+    <entry file="file://$PROJECT_DIR$/semantic/dist/semantic.css" />
+    <entry file="file://$PROJECT_DIR$/semantic/dist/semantic.js" />
+    <entry file="file://$PROJECT_DIR$/semantic/src/theme.config" />
+    <entry file="file://$PROJECT_DIR$/Vue/view.html" />
+    <entry file="file://$PROJECT_DIR$/semantic/src/themes/default/elements/icon.variables" />
+    <entry file="file://$PROJECT_DIR$/node_modules/semantic-ui/src/_site/globals/site.variables" />
+    <entry file="file://$PROJECT_DIR$/node_modules/semantic-ui/dist/semantic.css" />
+    <entry file="file://$PROJECT_DIR$/node_modules/semantic-ui/dist/components/icon.css" />
+    <entry file="file://$PROJECT_DIR$/semantic/src/theme.less" />
+    <entry file="file://$PROJECT_DIR$/semantic/dist/themes/default/views/item.variables" />
+    <entry file="file://$PROJECT_DIR$/semantic/src/site/elements/icon.overrides" />
+    <entry file="file://$PROJECT_DIR$/semantic/dist/themes/default/globals/site.variables" />
+    <entry file="file://$PROJECT_DIR$/semantic/dist/themes/default/elements/icon.variables" />
+    <entry file="file://$PROJECT_DIR$/semantic/src/site/globals/site.variables" />
+    <entry file="file://$PROJECT_DIR$/semantic/src/site/elements/icon.variables" />
+    <entry file="file://$PROJECT_DIR$/semantic/src/theme.config" />
+    <entry file="file://$PROJECT_DIR$/semantic/dist/semantic.js" />
+    <entry file="file://$PROJECT_DIR$/semantic/dist/components/icon.css" />
+    <entry file="file://$PROJECT_DIR$/semantic/dist/semantic.css" />
+    <entry file="file://$PROJECT_DIR$/api/models/UserModel.js" />
+    <entry file="file://$PROJECT_DIR$/api/controllers/OrganisationController.js" />
+    <entry file="file://$PROJECT_DIR$/package.json" />
+    <entry file="file://$PROJECT_DIR$/api/controllers/ApiController.js" />
+    <entry file="file://$PROJECT_DIR$/api/controllers/DeviceController.js" />
+    <entry file="file://$PROJECT_DIR$/api/routes/ApiRoute.js" />
+    <entry file="file://$PROJECT_DIR$/api/models/ApiModel.js" />
+    <entry file="file://$PROJECT_DIR$/api/models/DeviceModel.js" />
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitattributes">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="18" column="3" selection-start-line="18" selection-start-column="3" selection-end-line="18" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/controllers/OrganisationController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="765">
-          <caret line="45" column="74" selection-start-line="45" selection-start-column="74" selection-end-line="45" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic/src/site/elements/icon.variables">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/controllers/DeviceController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1479">
-          <caret line="87" selection-start-line="87" selection-end-line="87" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/controllers/GroupController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="47" column="2" selection-start-line="47" selection-start-column="2" selection-end-line="47" selection-end-column="2" />
+        <state relative-caret-position="-142">
+          <caret line="15" column="27" lean-forward="true" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Vue/JS/app.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="32" lean-forward="true" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+        <state relative-caret-position="340">
+          <caret line="20" lean-forward="true" selection-start-line="20" selection-end-line="20" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/routes/ApiRoute.js">
+    <entry file="file://$PROJECT_DIR$/Vue/JS/map.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/controllers/ApiController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2465">
-          <caret line="145" selection-start-line="145" selection-end-line="145" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic/dist/semantic.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152082">
-          <caret line="8944" selection-start-line="8944" selection-end-line="8944" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic/dist/semantic.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="2" lean-forward="true" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic/src/theme.config">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1241">
-          <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vue/view.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" column="10" lean-forward="true" selection-start-line="34" selection-start-column="10" selection-end-line="34" selection-end-column="10" />
+        <state relative-caret-position="204">
+          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Vue/JS/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic/src/themes/default/elements/icon.variables">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="16" selection-start-line="5" selection-start-column="16" selection-end-line="5" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/semantic-ui/src/_site/globals/site.variables">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="15" selection-start-line="7" selection-start-column="15" selection-end-line="7" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/semantic-ui/dist/semantic.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="7491" column="32" lean-forward="true" selection-start-line="7491" selection-start-column="32" selection-end-line="7491" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/semantic-ui/dist/components/icon.css">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
-          <caret line="15" column="12" lean-forward="true" selection-end-line="4787" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic/src/theme.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="50" column="65" selection-start-line="50" selection-start-column="65" selection-end-line="50" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic/dist/themes/default/views/item.variables">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2180" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic/src/site/elements/icon.overrides">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic/dist/themes/default/globals/site.variables">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="4" column="21" lean-forward="true" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic/dist/themes/default/elements/icon.variables">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-510" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic/src/site/globals/site.variables">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic/src/site/elements/icon.variables">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" selection-start-line="3" selection-end-line="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic/src/theme.config">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1241">
-          <caret line="73" selection-start-line="73" selection-end-line="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic/dist/semantic.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="2" selection-start-line="17" selection-start-column="2" selection-end-line="17" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic/dist/components/icon.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7939">
-          <caret line="503" selection-start-line="503" selection-end-line="503" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/semantic/dist/semantic.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152082">
-          <caret line="8944" selection-start-line="8944" selection-end-line="8944" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/models/UserModel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="489">
-          <caret line="56" column="2" selection-start-line="56" selection-start-column="2" selection-end-line="56" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Vue/JS/app.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/controllers/OrganisationController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="534">
-          <caret line="45" column="74" selection-start-line="45" selection-start-column="74" selection-end-line="45" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="22" lean-forward="true" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="33" column="25" lean-forward="true" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Vue/view.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="72" column="48" selection-start-line="72" selection-start-column="48" selection-end-line="72" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/controllers/ApiController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-595">
-          <caret line="73" selection-start-line="73" selection-end-line="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/controllers/DeviceController.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="38" lean-forward="true" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/routes/ApiRoute.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="22" column="25" lean-forward="true" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/models/ApiModel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="10" selection-start-line="23" selection-start-column="10" selection-end-line="23" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/models/DeviceModel.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="23" lean-forward="true" selection-start-line="21" selection-start-column="23" selection-end-line="21" selection-end-column="23" />
+        <state relative-caret-position="228">
+          <caret line="129" column="80" selection-start-line="129" selection-start-column="80" selection-end-line="129" selection-end-column="80" />
         </state>
       </provider>
     </entry>

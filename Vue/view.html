@@ -8,7 +8,8 @@
     <link rel="shortcut icon" href="../Ressources/favicon.png" />
     <link rel="stylesheet" href="../semantic/dist/components/dropdown.min.css"/>
     <script src="../semantic/dist/components/dimmer.min.js" ></script>
-
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+    <script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>
     <title>Site tout claqué (pour l'instant)</title>
 
     <style>
@@ -26,6 +27,9 @@
 <body>
 
 <div class="ui fixed menu">
+
+
+
     <div class="header item">
         <img src="../Ressources/Logo400x400.jpg">
     </div>
@@ -81,6 +85,10 @@
         </div>
     </div>
 
+    <div class="ui blue inverted segment">
+        <div id="map" class="map"></div>
+    </div>
+
     <input type="text">
     <div class="ui animated green button" @click="dl_done">
         <div class="hidden content">
@@ -119,5 +127,20 @@
 <script src="../node_modules/vue/dist/vue.js"></script>
 <script src="JS/app.js"></script>
 
+<!--TODO: C'est moche faut mettre ca dans un fichier js et l'inclure proprement -->
+<script type="text/javascript">
+    var map = new ol.Map({
+        target: 'map',
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.OSM()
+            })
+        ],
+        view: new ol.View({
+            center: ol.proj.fromLonLat([-1.6742900, 48.1119800]),
+            zoom: 12
+        })
+    });
+</script>
 </body>
 </html>
