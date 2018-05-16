@@ -15,6 +15,7 @@ mongoose.connect('mongodb://localhost/PayDb');
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 
+app.set('views', __dirname + '/views');
 
 let routes = require('./api/routes/ApiRoute');
 

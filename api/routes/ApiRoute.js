@@ -7,6 +7,10 @@ module.exports = function (app) {
     let orgApi = require("../controllers/OrganisationController");
     let typeApi = require("../controllers/TypesController");
 
+    app.route('/mainPage')
+        .get(function(req, res) {
+            res.sendFile('view.html')
+        });
     app.route('/payloads')
         .get(payApi.list_payload)
         .post(payApi.create_payload);

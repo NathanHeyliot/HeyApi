@@ -21,6 +21,10 @@ exports.list_payload = function (req, res) //GET all the payloads
             res.send(err);
         }
         res.json(payload);
+        /*res.render('/affichage',  {
+            variable: maValue
+        })
+        res.sendFile*/
     });
 };
 
