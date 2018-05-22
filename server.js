@@ -14,8 +14,15 @@ mongoose.connect('mongodb://localhost/PayDb');
 
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
-
+app.use(express.static('public'));
 app.set('views', __dirname + '/views');
+
+        console.log(__dirname+ '/api/models');
+app.use(require('forest-express-mongoose').init({
+     modelsDir: __dirname+ '/api/models',
+     envSecret: "9843fddf5534e1c8024522285fcdc0be3281ffdd24a0bd66aee24193b3e56d0d",
+    authSecret: "ta29HHDJExGoIrv7c0IGdm6z23CM1lbE",
+}));
 
 let routes = require('./api/routes/ApiRoute');
 

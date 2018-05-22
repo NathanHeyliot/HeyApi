@@ -6,11 +6,13 @@ module.exports = function (app) {
     let groupApi = require("../controllers/GroupController");
     let orgApi = require("../controllers/OrganisationController");
     let typeApi = require("../controllers/TypesController");
+    let express = require('express');
 
     app.route('/mainPage')
         .get(function(req, res) {
-            res.sendFile('view.html')
+            res.sendFile( app.settings.views + '/view.html');
         });
+
     app.route('/payloads')
         .get(payApi.list_payload)
         .post(payApi.create_payload);
