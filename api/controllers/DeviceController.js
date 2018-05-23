@@ -1,20 +1,21 @@
 'use strict'
 
 let mongoose = require('mongoose'),
-    Device = mongoose.model('Device');
+    Device = mongoose.model('Device'),
+    globals = require('../../globals');
+
 exports.list_device = function (req, res)
 {
     Device.find({}, function (err, device)
     {
-        console.log("Launching device get function " + req.body );
         if (err)
         {
             console.log("Error at : " + err);
             res.send(err);
         }
-        nbdev = device.length;
-        console.log("Device got : " + device);
-        res.json(device);
+        res.locals.nb = device.length;
+        res.sendFile( globals.path + '/Devices.html');
+
     });
 };
 

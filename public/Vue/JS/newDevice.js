@@ -2,6 +2,7 @@ new Vue({
     el: '#newDevice',
     data: {
         cancel: false,
+        devnb: 33,
     },
     methods: {
         openCancel: function () {

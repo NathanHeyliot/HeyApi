@@ -28,7 +28,7 @@
     <div class="header item">
         <img src="../Ressources/Logo400x400.jpg">
     </div>
-    <a href="view.html">
+    <a href="/mainPage">
         <div class="item text">
             <h4>Dashboard</h4>
          </div>
@@ -54,10 +54,10 @@
 
 
 <div class="ui main container" id="newDevice">
-
+    <script>console.log('#{nb}')</script>
     <div class="ui blue message" v-if="cancel">
         <p>Voulez vous vraiment annuler ?</p>
-        <a href="Devices.html">
+        <a href="/devices">
             <button class=" large positive ui button">
                 Oui
             </button>
@@ -98,7 +98,7 @@
     </div>
 </div>
 
-<script src="../node_modules/vue/dist/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
 <script src="../Vue/JS/newDevice.js"></script>
 
 </body>
