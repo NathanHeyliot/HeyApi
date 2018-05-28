@@ -48,18 +48,6 @@ let DevicesSchema = new Schema
         {
             type: Position
         },*/
-    MeasureTimer:
-        {
-            type: String, required: true, default: "2001"
-        },
-    SendTimer:
-        {
-            type: String, required: true, default: "2004"
-        },
-    GeoTimer:
-        {
-            type: String, required: true, default: '  '
-        },
     DeviceType:
         {
             type: String, required : true

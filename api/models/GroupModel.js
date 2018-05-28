@@ -13,6 +13,10 @@ let GroupsSchema = new Schema
         {
             type: String,
         },
+    ParentGroupId:
+        {
+            type: String,
+        }
 });
 
 module.exports =  mongoose.model('Group', GroupsSchema);
