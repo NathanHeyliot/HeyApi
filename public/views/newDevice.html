@@ -12,16 +12,23 @@
     <title>Plateforme Heyliot - Devices </title>
 
     <style>
+        .Site
+        {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
         .main.container
         {
-            padding-top: 140px;
+            padding-top: 100px;
+            flex: 1;
         }
 
     </style>
 </head>
 
 
-<body>
+<body class="Site">
 
 
 <div class="ui fixed menu">
@@ -54,7 +61,6 @@
 
 
 <div class="ui main container" id="newDevice">
-    <script>console.log('#{nb}')</script>
     <div class="ui blue message" v-if="cancel">
         <p>Voulez vous vraiment annuler ?</p>
         <a href="/devices">
@@ -62,19 +68,47 @@
                 Oui
             </button>
         </a>
-
         <button class=" large negative ui button" @click="closeCancel">
             Non
         </button>
     </div>
 
+    <div class="ui success message" v-if="cancel">
+        <p>Nouveau device sauvegardé! Voulez vous en ajouter un autre ?</p>
+        <a href="/devices">
+            <button class=" large positive ui button">
+                Oui, Rester sur cette page.
+            </button>
+        </a>
+        <button class=" large negative ui button" @click="closeCancel">
+            Non, Revenir a la page precedente
+        </button>
+    </div>
 
-    <button class="positive ui button">
-        Sauvegarder
-    </button>
-    <button class="negative ui button" @click="openCancel">
-        Annuler
-    </button>
+    <div class="ui blue inverted segment">
+        <div class="ui grid">
+
+            <div class="ui input three wide column">
+                <input type="text" placeholder="Nom">
+            </div>
+
+            <div class="ui input three wide column">
+                <input type="text" placeholder="ID">
+            </div>
+
+            <div class="ui input three wide column">
+                <input type="text" placeholder="Group">
+            </div>
+
+        </div>
+        <br>
+        <button class="positive ui button">
+            Sauvegarder
+        </button>
+        <button class="negative ui button" @click="openCancel">
+            Annuler
+        </button>
+    </div>
 </div>
 
 

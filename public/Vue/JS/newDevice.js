@@ -1,6 +1,7 @@
 new Vue({
     el: '#newDevice',
     data: {
+        save: false,
         cancel: false,
         devnb: 33,
     },

@@ -12,13 +12,21 @@
     <script src="../semantic/dist/semantic.min.js"></script>
     <link rel="shortcut icon" href="Ressources/icons/logo_seul_couleurs.ico" />
 
-    <title>Site tout claqué (pour l'instant)</title>
+    <title>Platerforme Heyliot - Dashboard</title>
 
     <style>
+        .Site
+        {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
         .main.container
         {
-            padding-top: 60px;
+            padding-top: 100px;
+            flex: 1;
         }
+
     </style>
 </head>
 
@@ -29,7 +37,8 @@
     </div>
 <% }) %>
 <%- variable %>
-<body>
+<body class="Site">
+
 <div class="ui fixed menu">
     <div class="header item">
             <img src="Ressources/Logo400x400.jpg">
