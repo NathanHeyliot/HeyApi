@@ -46,7 +46,9 @@ module.exports = function (app) {
         .post(groupApi.create_group);
 
     app.route('/groups/id/:appId')
+        .delete(groupApi.delete_group)
         .put (groupApi.update_group);
+
 
     app.route('/organisations')
         .get(orgApi.list_organisation)

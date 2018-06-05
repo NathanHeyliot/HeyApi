@@ -13,11 +13,11 @@ exports.list_device = function (req, res)
             console.log("Error at : " + err);
             res.send(err);
         }
-        res.locals.nb = device.length;
-        res.sendFile( globals.path + '/Devices.html');
-
+        console.log(device);
+        res.render( globals.path + '/Devices.ejs', {dev: device});
     });
 };
+
 
 
 exports.create_device = function (req, res)
@@ -57,7 +57,7 @@ exports.read_device = function (req, res)
     {
         if (err)
             res.send(err)
-        res.json(device);
+        res.render( globals.path + '/Detail.ejs', {dev: device});
     });
 };
 

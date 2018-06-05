@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="/Vue/JS/jqmeter.min.js"></script>
+    <script src="/semantic/dist/semantic.min.js"></script>
+    <link rel="shortcut icon" href="../Ressources/favicon.png" />
+    <script src="/semantic/dist/components/dimmer.min.js" ></script>
+    <link rel="stylesheet" href="https://openlayers.org/en/v4.6.5/css/ol.css" type="text/css">
+    <script src="https://openlayers.org/en/v4.6.5/build/ol.js" type="text/javascript"></script>
+    <title>Plateforme Heyliot - Devices </title>
+
+    <style>
+        .Site
+        {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+        .main.container
+        {
+            padding-top: 100px;
+            flex: 1;
+        }
+
+    </style>
+</head>
+
+
+<body class="Site">
+
+
+<div class="ui fixed menu">
+    <div class="header item">
+        <img src="../Ressources/Logo400x400.jpg">
+    </div>
+    <div class="item text">
+        <a href="/mainPage">
+            <h4>Dashboard</h4>
+        </a>
+    </div>
+    <div class="active item text">
+        <h4>Capteurs</h4>
+    </div>
+    <div class="item text">
+        <h4>Statistiques</h4>
+    </div>
+    <div class="item tiny flag">
+        <i class="france flag"></i>
+    </div>
+
+    <div class="item ui right aligned small">
+        <span>
+            <div class="text">
+                <img class="ui avatar image" src="../Ressources/heyliot_logo_couleurs.png">
+                <span>ADMIN Heyliot</span>
+            </div>
+        </span>
+    </div>
+</div>
+
+
+<div class="ui main container" id="Device1">
+
+    <div class="ui blue inverted segment">
+        <img class="ui middle aligned image" src="/Ressources/icons/group-of-people-in-a-formation.png">
+        <div class="ui input">
+            <input placeholder="Rechercher Groupe" type="text">
+        </div>
+        <div class="ui right aligned input ">
+            <input placeholder="Nom" type="text">
+        </div>
+
+
+    </div>
+
+    <br>
+
+
+    <div class="ui grid " >
+        <% for (var i = 0; i != dev.length; i++) { %>
+        <% let link = "/devices/id/" + dev[i]._id %>
+            <div class="four wide column">
+                    <div class="ui stacked segments">
+                        <% if (dev[i].FillLevel <= 25) { %>
+                            <div class="ui red inverted segment">
+                                <h2><%= dev[i].Name %></h2>
+                            </div>
+                        <%}%>
+                        <%  if (dev[i].FillLevel >= 75) { %>
+                            <div class="ui green inverted segment">
+                                <h2><%= dev[i].Name %></h2>
+                            </div>
+                        <% } %>
+                        <% if (dev[i].FillLevel > 25 && dev[i].FillLevel < 75) { %>
+                            <div class="ui blue inverted segment">
+                                <h2><%= dev[i].Name %></h2>
+                            </div>
+                        <% } %>
+
+
+
+                        <div class="ui center aligned white segment">
+                            <br>
+                            <% if (dev[i].FillLevel <= 25) { %>
+                                <div class="low" test="<%= dev[i].FillLevel %>" style="padding-left: 85px"></div> <!-- Encore et toujours des magic number pour centrer les jauges  -->
+                            <% } if (dev[i].FillLevel >= 75) { %>
+                                <div class="high" style="padding-left: 85px"></div>
+                            <% } if (dev[i].FillLevel > 25 && dev[i].FillLevel < 75) { %>
+                                <div class="mid" style="padding-left: 85px"></div>
+                            <%}%>
+                            <br>
+                            Dernier message le:
+                            <br>
+                            <%= dev[i].LastUpdate %>
+                            <br>
+                            <br>
+                            <span>420 Rue de la Bonne 35000 Rennes</span>
+                            <br>
+                            <% if (dev[i].FillLevel <= 25) { %>
+                            <a href=" <%= link %>">
+                                <button class="ui red button">
+                                    Détails
+                                </button>
+                            </a>
+                            <% } if (dev[i].FillLevel >= 75) { %>
+                                <a href="<%= link %>">
+                                    <button class="ui green button" >
+                                     Détails
+                                 </button>
+                                </a>
+                            <% } if (dev[i].FillLevel > 25 && dev[i].FillLevel < 75) { %>
+                                <a href="<%= link %>">
+                                    <button class="ui blue button">
+                                        Détails
+                                     </button>
+                                </a>
+                            <%}%>
+                        </div>
+                    </div>
+                </div>
+        <%}%>
+    </div>
+</div>
+
+
+<div class="ui blue inverted vertical footer segment">
+    <div class="ui center aligned container">
+        <img src="/Ressources/logo_horizontal.png" class="ui centered small image">
+        <div class="ui horizontal inverted small divided link list">
+            <a class="item "  href="https://www.heyliot.com/contact/">Contactez Nous</a>
+            <a class="item" target="_blank" href="https://www.heyliot.com/">Nous visiter</a>
+            <a class="item" target="_blank" href="https://twitter.com/heyliotFr">
+                <img src="../Ressources/icons/twitter-logo.png" class="ui image">
+            </a>
+            <a class="item" target="_blank" href="https://www.facebook.com/heyliot/">
+                <img src="../Ressources/icons/facebook-logo.png" class="ui image">
+            </a>
+            <a class="item" href="mailto:contact@heyliot.com">
+                <img src="../Ressources/icons/envelope.png" class="ui image">
+            </a>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+<script src="Vue/JS/Devices.js"></script>
+
+</body>
+</html>
