@@ -62,33 +62,34 @@
                 <span>ADMIN Heyliot</span>
             </div>
         </span>
-     </div>
+    </div>
 </div>
 
 
 <div class="ui main container" id="app">
+
     <div class="ui grid">
         <div class="four wide column">
             <div class="ui blue inverted segment">
-                <h2>{{nbPres}}</h2>
+                <h2><%= dev.length%></h2>
                 <h4>Présentoirs</h4>
             </div>
         </div>
         <div class="four wide column">
             <div class="ui green inverted segment">
-                <h2>{{nbPres / 3}}</h2>
+                <h2><%= full %></h2>
                 <h4>Présentoirs remplis</h4>
             </div>
         </div>
         <div class="four wide column">
             <div class="ui grey inverted segment">
-                <h2>{{nbPres / 3}}</h2>
+                <h2><%= neutral %></h2>
                 <h4>Présentoirs ni plein ni vide</h4>
             </div>
         </div>
         <div class="four wide column">
             <div class="ui red inverted segment">
-                <h2>{{nbPres / 3}}</h2>
+                <h2><%= empty %></h2>
                 <h4>Présentoirs vides</h4>
             </div>
         </div>
@@ -115,7 +116,7 @@
 
 <div class="ui blue inverted vertical footer segment">
     <div class="ui center aligned container">
-    <img src="Ressources/logo_horizontal.png" class="ui centered small image">
+        <img src="Ressources/logo_horizontal.png" class="ui centered small image">
         <div class="ui horizontal inverted small divided link list">
             <a class="item "  href="https://www.heyliot.com/contact/">Contactez Nous</a>
             <a class="item" target="_blank" href="https://www.heyliot.com/">Nous visiter</a>
@@ -137,18 +138,55 @@
 
 <!--TODO: C'est moche faut mettre ca dans un fichier js et l'inclure proprement -->
 <script type="text/javascript">
-    var map = new ol.Map({
-        target: 'map',
-        layers: [
-            new ol.layer.Tile({
-                source: new ol.source.OSM()
+    (function(){
+        var vectorSource = new ol.source.Vector({
+            //create empty vector
+        });
+        //create a bunch of icons and add to source vector
+        <% for (var i=0;i <= dev.length -1  ;i++) { %>
+            <%if ( dev[i].Lon != null && dev[i].Lat != null){%>
+
+                <%console.log(dev[i])%>
+                var iconFeature = new ol.Feature({
+                    geometry: new
+                    ol.geom.Point(ol.proj.transform([<%= dev[i].Lon %>, <%= dev[i].Lat %>], 'EPSG:4326', 'EPSG:3857')),
+                    name: "<%= dev[i].Name%>",
+                    population: 4000,
+                    rainfall: 500
+                });
+                vectorSource.addFeature(iconFeature);
+            <%}%>
+
+        <%}%>
+
+        //create the style
+        var iconStyle = new ol.style.Style({
+            image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+                anchor: [0, 0],
+                anchorXUnits: 'fraction',
+                anchorYUnits: 'pixels',
+                opacity: 1,
+                src: '/Ressources/icons/map-pin-red.png'
+            }))
+        });
+
+
+
+        //add the feature vector to the layer vector, and apply a style to whole layer
+        var vectorLayer = new ol.layer.Vector({
+            source: vectorSource,
+            style: iconStyle
+        });
+
+        var map = new ol.Map({
+            layers: [new ol.layer.Tile({ source: new ol.source.OSM() }), vectorLayer],
+            target: document.getElementById('map'),
+            view: new ol.View({
+                center: ol.proj.fromLonLat([2.342222222, 48.85666667]),
+                zoom: 3
             })
-        ],
-        view: new ol.View({
-            center: ol.proj.fromLonLat([-1.6742900, 48.1119800]),
-            zoom: 12
-        })
-    });
+        });
+    })();
 </script>
 </body>
 </html>

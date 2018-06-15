@@ -72,31 +72,140 @@
     <div class="ui green inverted segment" >
         <h2><%= dev.Name %></h2>
     </div>
-    <table class="ui green celled table">
+    <table class="ui green fixed celled table">
         <tbody>
             <tr>
                 <td>
-                    <div  data-preset="fan"  data-stroke="#45b384" style="width: 40%; height: 40%" class="ldBar label-center" data-value="<%= dev.FillLevel %>"></div>
+                    <div  data-preset="fan"  data-stroke="#45b384" style="width: 90%; height: 90%" class="ldBar label-center" data-value="<%= dev.FillLevel %>"></div>
                 </td>
                 <td>
-
-                </td>
+                    <% if (dev.Lon == null|| dev.Lat == null ) {%>
+                    <div class="ui error message">
+                        Erreur le capteur n'as pas pu etre géolocalisé!
+                    </div>
+                    <%} else {%>
+                    <div id="map" style="width:535px; height:500px"></div>
+                    <%}%>                </td>
             </tr>
         </tbody>
     </table>
+
+
 
     <% } if (dev.FillLevel <= 25) { %>
     <div class="ui red inverted segment" >
         <h2><%= dev.Name %></h2>
     </div>
-    <div  data-preset="fan"  data-stroke="#ea5153" style="width: 40%; height: 40%" class="ldBar label-center" data-value="<%= dev.FillLevel %>"></div>
+    <table class="ui red fixed celled table">
+        <tbody>
+            <tr>
+                <td>
+                    <div  data-preset="fan"  data-stroke="#ea5153" style="width: 90%; height: 90%" class="ldBar label-center" data-value="<%= dev.FillLevel %>"></div>
+                </td>
+                <td>
+                    <% if (dev.Lon == null|| dev.Lat == null ) {%>
+                    <div class="ui error message">
+                        Erreur le capteur n'as pas pu etre géolocalisé!
+                    </div>
+                    <%} else {%>
+                    <div id="map" style="width:535px; height:500px"></div>
+                    <%}%>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
 
     <% } if (dev.FillLevel < 75 && dev.FillLevel > 25 ) { %>
     <div class="ui blue inverted segment" >
         <h2><%= dev.Name %></h2>
     </div>
-    <div  data-preset="fan"  data-stroke="#007cb3" style="width: 40%; height: 40%" class="ldBar label-center" data-value="<%= dev.FillLevel %>"></div>
+    <table class="ui blue fixed celled table">
+        <tbody>
+            <tr>
+                <td>
+                    <div  data-preset="fan"  data-stroke="#007cb3" style="width: 90%; height: 90%" class="ldBar label-center" data-value="<%= dev.FillLevel %>"></div>
+                </td>
+                <td>
+                    <% if (dev.Lon == null|| dev.Lat == null ) {%>
+                        <div class="ui error message">
+                            Erreur le capteur n'as pas pu etre géolocalisé!
+                        </div>
+                    <%} else {%>
+                        <div id="map" style="width:535px; height:500px"></div>
+                    <%}%>
+                </td>
+            </tr>
+        </tbody>
+    </table>
     <% } %>
+
+    <div class="ui stacked segment">
+        <% if (dev.FillLevel >= 75) { %>
+            <div class="ui green inverted segment">
+                <h3>Historique</h3>
+            </div>
+        <% } if (dev.FillLevel <= 25) { %>
+            <div class="ui red inverted segment">
+                <h3>Historique</h3>
+            </div>
+        <% } if (dev.FillLevel < 75 && dev.FillLevel > 25 ) { %>
+        <div class="ui blue inverted segment">
+            <h3>Historique</h3>
+        </div>
+
+
+        <% } for(let i = pay.length -1 ; i != -1; i-- ) {%>
+
+            <% if (dev.FillLevel >= 75) { %>
+                <div class="ui green segment">
+            <% } else if (dev.FillLevel <= 25) { %>
+                <div class="ui red segment">
+            <%} else {%>
+                <div class="ui blue segment">
+            <%}%>
+
+
+                <%if (pay[i].EventCode == 1){%>
+                    <% if (dev.FillLevel >= 75) { %>
+                        <span class="ui green large ribbon label">Mesure</span>
+                    <% } else if (dev.FillLevel <= 25) { %>
+                        <span class="ui red large ribbon label">Mesure</span>
+                    <%} else {%>
+                        <span class="ui blue large ribbon label">Mesure</span>
+                    <%}%>
+                <%} else if (pay[i].EventCode == 0){%>
+                    <% if (dev.FillLevel >= 75) { %>
+                        <span class="ui green large ribbon label">Calibration</span>
+                    <% } else if (dev.FillLevel <= 25) { %>
+                        <span class="ui red large ribbon label">Calibration</span>
+                    <%} else {%>
+                        <span class="ui blue large ribbon label">Calibration</span>
+                    <%}%>
+                <%}%>
+                    <span>
+                        <%= pay[i].DateGot %>
+                        <br>
+                        <%= pay[i].Mesure %>  (<%= (100 - (pay[i].Mesure * 100 / dev.CalibrationMeasure))%> %)
+                    </span>
+                </div>
+        <%}%>
+
+
+        <% if (dev.FillLevel >= 75) { %>
+            <div class="ui green segment">
+                <span class="ui green large ribbon label">Création</span>
+                <% } else if (dev.FillLevel <= 25) { %>
+            <div class="ui red segment">
+                <span class="ui red large ribbon label">Création</span>
+                <%} else {%>
+            <div class="ui blue segment">
+                <span class="ui blue large ribbon label">Création</span>
+        <%}%>
+            Date de création:  <%= dev.Created %>
+        </div>
+    </div>
 
 
     <div class="ui right aligned">
@@ -132,6 +241,56 @@
 
     </div>
 </div>
+
+<!--TODO: C'est moche aussi pareil que sur la mainPage -->
+<script type="text/javascript">
+    (function(){
+        var vectorSource = new ol.source.Vector({
+            //create empty vector
+        });
+
+        //create a bunch of icons and add to source vector
+        for (var i=0;i<=0;i++){
+
+            var iconFeature = new ol.Feature({
+                geometry: new
+                ol.geom.Point(ol.proj.transform([<%= dev.Lon %>, <%= dev.Lat %>], 'EPSG:4326',   'EPSG:3857')),
+                name: "Device",
+                population: 4000,
+                rainfall: 500
+            });
+            vectorSource.addFeature(iconFeature);
+        }
+
+        //create the style
+        var iconStyle = new ol.style.Style({
+            image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+                anchor: [0, 0],
+                anchorXUnits: 'fraction',
+                anchorYUnits: 'pixels',
+                opacity: 1,
+                src: '/Ressources/icons/map-pin-red.png'
+            }))
+        });
+
+
+
+        //add the feature vector to the layer vector, and apply a style to whole layer
+        var vectorLayer = new ol.layer.Vector({
+            source: vectorSource,
+            style: iconStyle
+        });
+
+        var map = new ol.Map({
+            layers: [new ol.layer.Tile({ source: new ol.source.OSM() }), vectorLayer],
+            target: document.getElementById('map'),
+            view: new ol.View({
+                center: ol.proj.fromLonLat([<%= dev.Lon %>, <%= dev.Lat %>]),
+                zoom: 15
+            })
+        });
+    })();
+</script>
 
 </body>
 </html>

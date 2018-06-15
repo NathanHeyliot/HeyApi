@@ -169,14 +169,9 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                         console.log("cal is : " + cal);
                            newDevice.FillLevel =  100 - (newPayload[i].Mesure * 100 / cal);
 
-                           if(newDevice.FillLevel >= 75)
-                               newDevice.FillIndicator = 'PLEIN';
-                            else if (newDevice.FillLevel <= 25)
-                                newDevice.FillIndicator = 'VIDE';
-                            else
-                                newDevice.FillIndicator = 'NEUTRE';
+
                             Device.findOneAndUpdate({AccessId: newDevice.AccessId},
-                                {FillLevel:newDevice.FillLevel, FillIndicator: newDevice.FillIndicator, LastUpdate: newDevice.LastUpdate},
+                                {FillLevel:newDevice.FillLevel, LastUpdate: newDevice.LastUpdate},
                                 {new: true}, function (err, device)
                                 {
                                     if (err)

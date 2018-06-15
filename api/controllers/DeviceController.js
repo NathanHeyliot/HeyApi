@@ -2,6 +2,8 @@
 
 let mongoose = require('mongoose'),
     Device = mongoose.model('Device'),
+    Payload = mongoose.model('Payload'),
+
     globals = require('../../globals');
 
 exports.list_device = function (req, res)
@@ -18,6 +20,16 @@ exports.list_device = function (req, res)
     });
 };
 
+exports.update_device = function (req, res) //PUT Edit the specified payload
+{
+    Device.findOneAndUpdate({_id: req.params.appId}, (req.body), {new: true}, function (err, device)
+    {
+        if (err)
+            res.send(err);
+        res.json(device);
+    });
+
+};
 
 
 exports.create_device = function (req, res)
@@ -56,8 +68,10 @@ exports.read_device = function (req, res)
     Device.findById(req.params.appId,  function (err, device)
     {
         if (err)
-            res.send(err)
-        res.render( globals.path + '/Detail.ejs', {dev: device});
+            res.send(err);
+        Payload.find({DeviceId: device.AccessId}, function (err, payloads) {
+            res.render( globals.path + '/Detail.ejs', {dev: device, pay: payloads});
+         });
     });
 };
 

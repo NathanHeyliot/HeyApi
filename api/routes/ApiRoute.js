@@ -6,12 +6,11 @@ module.exports = function (app) {
     let groupApi = require("../controllers/GroupController");
     let orgApi = require("../controllers/OrganisationController");
     let typeApi = require("../controllers/TypesController");
+    let dashboard = require("../controllers/dashboardController");
     let express = require('express');
 
     app.route('/mainPage')
-        .get(function(req, res) {
-            res.sendFile( app.settings.views + '/view.html');
-        });
+        .get(dashboard.get_main);
 
     app.route('/payloads')
         .get(payApi.list_payload)
@@ -32,13 +31,14 @@ module.exports = function (app) {
 
     app.route('/devices/id/:appId')
         .get(deviceApi.read_device)
+        .put(deviceApi.update_device)
         .delete(deviceApi.delete_device);
 
     app.route('/devices/group/:GroupId')
         .get(deviceApi.list_group_devices);
 
     app.route('/devices/type/:DeviceType')
-        .get(deviceApi.list_bytype)
+        .get(deviceApi.list_bytype);
 
 
     app.route('/groups')

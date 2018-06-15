@@ -11,7 +11,7 @@ let GroupsSchema = new Schema
         },
     Name:
         {
-            type: String,
+            type: String, required: true
         },
     ParentGroupId:
         {

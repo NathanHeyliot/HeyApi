@@ -27,20 +27,19 @@ let DevicesSchema = new Schema
         {
             type: Number
         },
-    FillIndicator:
-        {
-            type: [{
-                type: String,
-                enum: ['PLEIN', 'NEUTRE', 'VIDE']
-            }],
-            required: true,
-            default: ['NEUTRE']
-        },
     Created:
         {
             type: String
         },
     LastUpdate:
+        {
+            type: String
+        },
+    Lon:
+        {
+            type: String
+        },
+    Lat:
         {
             type: String
         },
