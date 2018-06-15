@@ -43,10 +43,6 @@ let DevicesSchema = new Schema
         {
             type: String
         },
-   /* DevicePosition:
-        {
-            type: String
-        },*/
     DeviceType:
         {
             type: String, required : true
