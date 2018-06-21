@@ -11,9 +11,9 @@ let DevicesSchema = new Schema
        {
            type: String, unique: true, required: true
        },
-    AccessId:
+    SigfoxId:
         {
-          type: String, required: true, unique: true
+          type: String, required: true,
         },
     GroupId:
         {

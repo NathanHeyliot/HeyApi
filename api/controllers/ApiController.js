@@ -139,7 +139,7 @@ let fill_device = function(newPayload)
         newDevice = getpos();
     }*/
     newDevice.LastUpdate = newPayload.DateGot;
-    newDevice.AccessId = newPayload.DeviceId;
+    newDevice.SigfoxId = newPayload.DeviceId;
 
     return(newDevice);
 };
@@ -164,13 +164,13 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
                 if (i === newPayload.length - 1)
                 {
-                    Device.find({AccessId: newDevice.AccessId}, function (err, obj) {
+                    Device.find({SigfoxId: newDevice.SigfoxId}, function (err, obj) {
                         cal = (obj[0].toObject().CalibrationMeasure);
                         console.log("cal is : " + cal);
                            newDevice.FillLevel =  100 - (newPayload[i].Mesure * 100 / cal);
 
 
-                            Device.findOneAndUpdate({AccessId: newDevice.AccessId},
+                            Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},
                                 {FillLevel:newDevice.FillLevel, LastUpdate: newDevice.LastUpdate},
                                 {new: true}, function (err, device)
                                 {
@@ -198,7 +198,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
             if (err)
                 return(res.send(err));
             res.write(JSON.stringify(payload));
-            Device.findOneAndUpdate({AccessId: newDevice.AccessId},{FillLevel: 0, CalibrationMeasure: newPayload.Mesure, LastUpdate: newDevice.LastUpdate },
+            Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},{FillLevel: 0, CalibrationMeasure: newPayload.Mesure, LastUpdate: newDevice.LastUpdate },
                 {new: true}, function (err, device)
                 {
                 if (err)

@@ -46,7 +46,7 @@ exports.create_device = function (req, res)
     newDevice.LastUpdate = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;
     newDevice.Name = req.body.Name;
     newDevice.GroupId = req.body.GroupId;
-    newDevice.AccessId = req.body.AccessId;
+    newDevice.SigfoxId = req.body.SigfoxId;
     newDevice.DeviceType = req.body.DeviceType;
 
     //on initialise un nouveau capteur avec un remplissage a 0% et une calibration pour faciliter la mesure de calibration ensuite
@@ -69,7 +69,7 @@ exports.read_device = function (req, res)
     {
         if (err)
             res.send(err);
-        Payload.find({DeviceId: device.AccessId}, function (err, payloads) {
+        Payload.find({DeviceId: device.SigfoxId}, function (err, payloads) {
             res.render( globals.path + '/Detail.ejs', {dev: device, pay: payloads});
          });
     });
