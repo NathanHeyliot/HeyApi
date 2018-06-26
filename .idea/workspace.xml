@@ -1,5 +1,296 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="86e69831-8237-49af-8d65-35a202be4ccd" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/controllers/ApiController.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/controllers/PayloadsController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/controllers/DeviceController.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/controllers/DeviceController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/controllers/GroupController.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/controllers/GroupController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/controllers/OrganisationController.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/controllers/OrganisationController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/controllers/dashboardController.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/controllers/dashboardController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/models/ApiModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/PayloadsModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/models/GroupModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/GroupModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/models/UserModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/models/UserModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/routes/ApiRoute.js" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/ApiRoute.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/Detail.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/Detail.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/Devices.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/Devices.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/views/main.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/views/main.ejs" afterDir="false" />
+    </list>
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <splitter split-orientation="horizontal" split-proportion="0.47594613">
+      <split-first>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="ApiRoute.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/api/routes/ApiRoute.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="351">
+                  <caret line="73" column="44" lean-forward="true" selection-start-line="73" selection-start-column="44" selection-end-line="73" selection-end-column="44" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="dashboardController.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/api/controllers/dashboardController.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="507">
+                  <caret line="34" column="73" selection-start-line="34" selection-start-column="73" selection-end-line="34" selection-end-column="73" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="UserModel.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/api/models/UserModel.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="952">
+                  <caret line="56" column="39" selection-start-line="56" selection-start-column="39" selection-end-line="56" selection-end-column="39" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="DeviceModel.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/api/models/DeviceModel.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state>
+                  <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="DeviceController.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/api/controllers/DeviceController.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="68">
+                  <caret line="31" column="25" lean-forward="true" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="GroupController.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/api/controllers/GroupController.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="697">
+                  <caret line="49" column="62" selection-start-line="49" selection-start-column="62" selection-end-line="49" selection-end-column="62" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="PayloadsModel.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/api/models/PayloadsModel.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="459">
+                  <caret line="27" column="58" selection-start-line="27" selection-start-column="58" selection-end-line="27" selection-end-column="58" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="OrganisationController.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/api/controllers/OrganisationController.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="323">
+                  <caret line="19" column="72" lean-forward="true" selection-start-line="19" selection-start-column="72" selection-end-line="19" selection-end-column="72" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="PayloadsController.js" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/api/controllers/PayloadsController.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="388">
+                  <caret line="226" selection-start-line="226" selection-end-line="226" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="TypesController.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/api/controllers/TypesController.js">
+              <provider selected="true" editor-type-id="text-editor" />
+            </entry>
+          </file>
+        </leaf>
+      </split-first>
+      <split-second>
+        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+          <file leaf-file-name="Detail.ejs" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/views/Detail.ejs">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="306">
+                  <caret line="135" column="65" lean-forward="true" selection-start-line="135" selection-start-column="65" selection-end-line="135" selection-end-column="65" />
+                  <folding>
+                    <element signature="n#style#0;n#div#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="server.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/server.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="504">
+                  <caret line="37" column="3" lean-forward="true" selection-start-line="37" selection-start-column="3" selection-end-line="37" selection-end-column="3" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="main.ejs" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/views/main.ejs">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="170">
+                  <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
+                </state>
+              </provider>
+            </entry>
+          </file>
+        </leaf>
+      </split-second>
+    </splitter>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>420</find>
+      <find>AccessId</find>
+      <find>id</find>
+      <find>cal</find>
+      <find>fill</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>SigfoxId</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/api/controllers/ApiController.js" />
+        <option value="$PROJECT_DIR$/api/models/DeviceModel.js" />
+        <option value="$PROJECT_DIR$/api/models/GroupModel.js" />
+        <option value="$PROJECT_DIR$/views/main.ejs" />
+        <option value="$PROJECT_DIR$/views/Devices.ejs" />
+        <option value="$PROJECT_DIR$/server.js" />
+        <option value="$PROJECT_DIR$/views/Detail.ejs" />
+        <option value="$PROJECT_DIR$/api/controllers/DeviceController.js" />
+        <option value="$PROJECT_DIR$/api/models/UserModel.js" />
+        <option value="$PROJECT_DIR$/api/routes/ApiRoute.js" />
+        <option value="$PROJECT_DIR$/api/controllers/PayloadsController.js" />
+        <option value="$PROJECT_DIR$/api/controllers/GroupController.js" />
+        <option value="$PROJECT_DIR$/api/controllers/dashboardController.js" />
+        <option value="$PROJECT_DIR$/api/controllers/OrganisationController.js" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="59" />
+    <option name="y" value="-11" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="HeyApi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HeyApi" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HeyApi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HeyApi" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HeyApi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HeyApi" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HeyApi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HeyApi" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="models" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HeyApi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HeyApi" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HeyApi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HeyApi" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HeyApi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HeyApi" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="Vue" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HeyApi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HeyApi" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="Vue" type="462c0819:PsiDirectoryNode" />
+              <item name="JS" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="HeyApi" type="b2602c69:ProjectViewProjectNode" />
+              <item name="HeyApi" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="Application" factoryName="Application">
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -42,5 +333,407 @@
       <properties />
       <listeners />
     </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="34ce7695-6fb4-47c5-885e-fda50500a5a4" name="Default" comment="" />
+      <created>1522928939708</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1522928939708</updated>
+      <workItem from="1522928941289" duration="69354000" />
+      <workItem from="1523517592475" duration="50294000" />
+      <workItem from="1524127184409" duration="4887000" />
+      <workItem from="1524127184409" duration="3685000" />
+      <workItem from="1524138021114" duration="4665000" />
+      <workItem from="1524488629886" duration="72182000" />
+      <workItem from="1525269072668" duration="21293000" />
+      <workItem from="1526307013840" duration="5816000" />
+      <workItem from="1527059962103" duration="16063000" />
+      <workItem from="1527773271884" duration="81913000" />
+      <workItem from="1528961343116" duration="62673000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="47714000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <layout>
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="right" id="Maven Projects" order="3" weight="0.32995737" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="right" id="Mongo Explorer" order="4" weight="0.32995737" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info anchor="bottom" id="TypeScript" order="8" weight="0.32897604" />
+      <window_info id="Designer" order="2" />
+      <window_info anchor="right" id="Database" order="3" weight="0.32995737" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32897604" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.23202614" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="7" visible="true" weight="0.35076252" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16897655" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32897604" />
+      <window_info id="Learn" order="2" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info id="Designer" order="2" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.23202614" />
+      <window_info id="Image Layers" order="3" />
+      <window_info anchor="bottom" id="TypeScript" order="10" weight="0.32897604" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32897604" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.35076252" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="right" id="Mongo Explorer" order="9" weight="0.32995737" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
+      <window_info anchor="right" id="Maven Projects" order="5" weight="0.32995737" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18869936" />
+      <window_info id="Learn" order="7" />
+      <window_info anchor="right" id="Database" order="6" weight="0.32995737" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32897604" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="8" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+    </layout-to-restore>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/api/controllers/DeviceController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="18" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/models/DeviceModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="425">
+          <caret line="25" column="14" lean-forward="true" selection-start-line="25" selection-start-column="14" selection-end-line="25" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/routes/ApiRoute.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="37" selection-start-line="17" selection-start-column="37" selection-end-line="17" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/Vue/JS/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/controllers/DeviceController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="18" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="33" lean-forward="true" selection-start-column="33" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/views/newDevice.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1054">
+          <caret line="62" column="21" lean-forward="true" selection-start-line="62" selection-start-column="21" selection-end-line="62" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/globals.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="20" lean-forward="true" selection-start-line="1" selection-start-column="20" selection-end-line="1" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/view.html" />
+    <entry file="file://$PROJECT_DIR$/semantic/src/theme.less" />
+    <entry file="file://$PROJECT_DIR$/semantic/dist/themes/default/views/item.variables" />
+    <entry file="file://$PROJECT_DIR$/semantic/src/site/elements/icon.overrides" />
+    <entry file="file://$PROJECT_DIR$/semantic/dist/themes/default/globals/site.variables" />
+    <entry file="file://$PROJECT_DIR$/semantic/dist/themes/default/elements/icon.variables" />
+    <entry file="file://$PROJECT_DIR$/semantic/src/site/globals/site.variables" />
+    <entry file="file://$PROJECT_DIR$/semantic/src/site/elements/icon.variables" />
+    <entry file="file://$PROJECT_DIR$/semantic/dist/components/icon.css" />
+    <entry file="file://$PROJECT_DIR$/Vue/JS/app.ts" />
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" column="6" selection-start-line="6" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/semantic/dist/semantic.css" />
+    <entry file="file://$PROJECT_DIR$/semantic/dist/semantic.js" />
+    <entry file="file://$PROJECT_DIR$/semantic/src/theme.config" />
+    <entry file="file://$PROJECT_DIR$/public/Vue/JS/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" selection-start-line="15" selection-end-line="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/semantic/dist/semantic.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="20316" column="31" selection-start-line="20316" selection-start-column="26" selection-end-line="20316" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/Vue/JS/jqmeter.min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="54" selection-start-line="10" selection-start-column="54" selection-end-line="10" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/Devices.html" />
+    <entry file="file://$PROJECT_DIR$/public/Vue/JS/loading-bar.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2856" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/view.html" />
+    <entry file="file://$PROJECT_DIR$/node_modules/mongoose/lib/query.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="1457" column="38" selection-start-line="1457" selection-start-column="38" selection-end-line="1457" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/views/newDevice.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1853">
+          <caret line="109" column="17" selection-start-line="109" selection-start-column="17" selection-end-line="109" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/User.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="31" column="9" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="uml://JavaScript-modules-diagram/C:/Users/DEV_Heyliot/HeyApi/api/models/DeviceModel.js">
+      <provider selected="true" editor-type-id="UmlEditorProvider">
+        <state>
+          <ID>JavaScript-modules-diagram</ID>
+          <OriginalElement>$PROJECT_DIR$/api/models/DeviceModel.js</OriginalElement>
+          <nodes>
+            <node x="0.0" y="125.0">$PROJECT_DIR$/api/models/DeviceModel.js#Position#85;C:/Users/DEV_Heyliot/HeyApi/api/models/DeviceModel.js#mongoose#19;</node>
+            <node x="19.0" y="0.0">$PROJECT_DIR$/api/Class/PositionClass.js</node>
+            <node x="91.0" y="271.0">$PROJECT_DIR$/node_modules/mongoose/index.js</node>
+          </nodes>
+          <notes />
+          <edges>
+            <edge source="$PROJECT_DIR$/api/models/DeviceModel.js#Position#85;C:/Users/DEV_Heyliot/HeyApi/api/models/DeviceModel.js#mongoose#19;" target="$PROJECT_DIR$/api/Class/PositionClass.js">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+            <edge source="$PROJECT_DIR$/api/models/DeviceModel.js#Position#85;C:/Users/DEV_Heyliot/HeyApi/api/models/DeviceModel.js#mongoose#19;" target="$PROJECT_DIR$/node_modules/mongoose/index.js">
+              <point x="0.0" y="0.0" />
+              <point x="0.0" y="0.0" />
+            </edge>
+          </edges>
+          <settings layout="Hierarchic Group" zoom="1.0" x="2.0" y="63.5" />
+          <SelectedNodes>
+            <node>$PROJECT_DIR$/api/models/DeviceModel.js#Position#85;C:/Users/DEV_Heyliot/HeyApi/api/models/DeviceModel.js#mongoose#19;</node>
+          </SelectedNodes>
+          <Categories>
+            <Category>All</Category>
+          </Categories>
+          <VISIBILITY>Details</VISIBILITY>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/Vue/JS/Devices.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="20" selection-start-line="18" selection-start-column="20" selection-end-line="18" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/Vue/JS/newDevice.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/globals.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" lean-forward="true" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/models/TypeModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="12" lean-forward="true" selection-start-column="12" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/main.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/Devices.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="89">
+          <caret line="160" column="13" selection-start-line="160" selection-start-column="13" selection-end-line="160" selection-end-column="13" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#3;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#3;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#div#3;n#div#0;n#div#0;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="37" column="3" lean-forward="true" selection-start-line="37" selection-start-column="3" selection-end-line="37" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/models/UserModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="952">
+          <caret line="56" column="39" selection-start-line="56" selection-start-column="39" selection-end-line="56" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/routes/ApiRoute.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="73" column="44" lean-forward="true" selection-start-line="73" selection-start-column="44" selection-end-line="73" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/models/GroupModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="29" lean-forward="true" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/controllers/dashboardController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="507">
+          <caret line="34" column="73" selection-start-line="34" selection-start-column="73" selection-end-line="34" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/controllers/GroupController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="49" column="62" selection-start-line="49" selection-start-column="62" selection-end-line="49" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/views/Detail.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="135" column="65" lean-forward="true" selection-start-line="135" selection-start-column="65" selection-end-line="135" selection-end-column="65" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/controllers/OrganisationController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="72" lean-forward="true" selection-start-line="19" selection-start-column="72" selection-end-line="19" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/models/DeviceModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="18" column="9" lean-forward="true" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/controllers/DeviceController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="31" column="25" lean-forward="true" selection-start-line="31" selection-start-column="25" selection-end-line="31" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/controllers/TypesController.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/models/PayloadsModel.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="58" selection-start-line="27" selection-start-column="58" selection-end-line="27" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/controllers/PayloadsController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="388">
+          <caret line="226" selection-start-line="226" selection-end-line="226" />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>
