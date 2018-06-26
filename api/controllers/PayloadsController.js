@@ -1,13 +1,10 @@
 'use strict';
 
-
-
+//includes
 let mongoose = require('mongoose'),
     Payload = mongoose.model('Payload'),
     Device = mongoose.model('Device');
-/*
-    https = require('https');
-*/
+
 let cal;
 
 
@@ -21,10 +18,7 @@ exports.list_payload = function (req, res) //GET all the payloads
             res.send(err);
         }
         res.json(payload);
-        /*res.render('/affichage',  {
-            variable: maValue
-        })
-        res.sendFile*/
+
     });
 };
 
@@ -32,13 +26,13 @@ exports.list_payload = function (req, res) //GET all the payloads
 let checkEventCode = function(gotPayload)
 {
    return(Number(gotPayload.Code.toString().substring(0,2)));
-}
+};
 
-let fillParsed = function(gotPayload, EventCode) //Parse the payload and add it in a new payload
+let fillParsed = function(gotPayload, EventCode) //Parse le payload et le stocke dans une var
 {
 
-    console.log(EventCode);
 
+    //on recupere la date de reception
     let ActualTime = new Date();
     let dd = ActualTime.getDate();
     let mm = ActualTime.getMonth()+1;
@@ -46,14 +40,24 @@ let fillParsed = function(gotPayload, EventCode) //Parse the payload and add it 
     let hh = ActualTime.getHours();
     let min = ActualTime.getMinutes();
 
+    if (dd.toString().length === 1)
+        dd = "0" + dd;
+    if (mm.toString().length === 1)
+        mm = "0" + mm;
+    if (hh.toString().length === 1)
+        hh = "0" + hh;
+    if (min.toString().length === 1)
+        min = "0" + min;
+
 
     if (EventCode === 2)
     {
         let newPayload = new Payload();
         newPayload.PositionCode = String(gotPayload.Code.toString().substring(2,22));
+        //TODO envoyer les coordonnées GPS via Ubiscale et l'addresse via locationIq
     }
 
-
+    //traite les payloads en fonction des Event Codes
     else if(EventCode === 0)
     {
         let newPayload = new Payload;
@@ -65,6 +69,7 @@ let fillParsed = function(gotPayload, EventCode) //Parse the payload and add it 
         console.log("Calibration ... Valeur :\n" + newPayload);
         return(newPayload);
     }
+
 
     else if(EventCode === 1)
     {
@@ -87,45 +92,7 @@ let fillParsed = function(gotPayload, EventCode) //Parse the payload and add it 
         throw ("WARNING: Unknown Event Code ! ");
 };
 
-// let getPos = function (gotPayload)
-// {
-//    let jsonObject = JSON.stringify
-//    ({
-//        "type" : "ubiwifi",
-//        "device" : gotPayload.DeviceId,
-//        "data" : gotPayload.PositionCode
-//    });
-//
-//    let postHeaders = {
-//        'Content-Type' : 'application/json',
-//        'Content-Length' : Buffer.byteLength(jsonObject, 'utf8')
-//    };
-//
-//    let postOption = {
-//        host : 'api.ubignss.com',
-//        path : '/position',
-//        method : 'POST',
-//        headers : postHeaders
-//    };
-//     console.log("POST " + postOption);
-//
-//     let reqPost = https.request(postOption, function (res)
-//     {
-//      console.log("Status " + res.statusCode);
-//      res.on('data', function(d)
-//      {
-//         console.log(d);
-//
-//      });
-//     });
-//     let tmp = reqPost;
-//     reqPost.on('error', function (e)
-//     {
-//         console.error(e);
-//     });
-//     return(tmp);
-// };
-
+//Crée un device temporaire pour mettre a jour la BDD
 let fill_device = function(newPayload)
 {
     let newDevice = new Device;
@@ -134,23 +101,18 @@ let fill_device = function(newPayload)
         newDevice.FillLevel = 0;
         newDevice.CalibrationMeasure = newPayload.Mesure;
     }
- /*   else if (newPayload == 2)
-    {
-        newDevice = getpos();
-    }*/
     newDevice.LastUpdate = newPayload.DateGot;
     newDevice.SigfoxId = newPayload.DeviceId;
 
     return(newDevice);
 };
 
+
 exports.create_payload = function (req, res) //create a new payload and POST it
 {
     let event;
-   // let newPayload = fillParsed(req.body);
 
-    //console.log("Payload is :\n" + newPayload);
-
+    //si event = 1 -> mesures on les stockes toutes une par une et on update le device associé
     if ((event = checkEventCode(req.body)) === 1)
     {
         let newPayload = fillParsed((req.body), 1);
@@ -164,12 +126,12 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
                 if (i === newPayload.length - 1)
                 {
+                    //calcul du pourcentage de remplissage
                     Device.find({SigfoxId: newDevice.SigfoxId}, function (err, obj) {
                         cal = (obj[0].toObject().CalibrationMeasure);
-                        console.log("cal is : " + cal);
                            newDevice.FillLevel =  100 - (newPayload[i].Mesure * 100 / cal);
 
-
+                           //On update le device
                             Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},
                                 {FillLevel:newDevice.FillLevel, LastUpdate: newDevice.LastUpdate},
                                 {new: true}, function (err, device)
@@ -188,6 +150,8 @@ exports.create_payload = function (req, res) //create a new payload and POST it
         }
     }
 
+
+    //si event = 0 -> calibration On sauvegarde la mesure et on update le device
     else if((event = checkEventCode(req.body)) === 0)
     {
         let newPayload = fillParsed((req.body), 0);
@@ -198,6 +162,8 @@ exports.create_payload = function (req, res) //create a new payload and POST it
             if (err)
                 return(res.send(err));
             res.write(JSON.stringify(payload));
+
+
             Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},{FillLevel: 0, CalibrationMeasure: newPayload.Mesure, LastUpdate: newDevice.LastUpdate },
                 {new: true}, function (err, device)
                 {
@@ -212,7 +178,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
 
 
-exports.get_paybydevice = function(req, res) //GET the payloads from sensor's name
+exports.get_paybydevice = function(req, res) //GET les payload associés au device
 {
     Payload.find({DeviceId: req.params.DeviceId}, function (err, payload)
     {
@@ -226,7 +192,7 @@ exports.get_paybydevice = function(req, res) //GET the payloads from sensor's na
     });
 };
 
-exports.read_payload = function (req, res) //GET payloads from ID
+exports.read_payload = function (req, res) //GET payloads grace a leurs ID
 {
     Payload.findById(req.params.appId, function (err, payload)
     {
@@ -238,7 +204,7 @@ exports.read_payload = function (req, res) //GET payloads from ID
 };
 
 
-exports.update_payload = function (req, res) //PUT Edit the specified payload
+exports.update_payload = function (req, res) //PUT Editer le payload spécifié
 {
     Payload.findOneAndUpdate({_id: req.params.appId}, (req.body), {new: true}, function (err, payload)
     {
@@ -250,7 +216,7 @@ exports.update_payload = function (req, res) //PUT Edit the specified payload
 };
 
 
-exports.delete_payload = function (req, res) //DELETE the specified payload
+exports.delete_payload = function (req, res) //DELETE le payload specifié
 {
         Payload.remove({_id: req.params.appId}, function (err, payload)
         {

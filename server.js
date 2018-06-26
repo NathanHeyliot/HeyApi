@@ -1,8 +1,10 @@
+
+//includes
 var express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'),
-    Payload = require('./api/models/ApiModel'),
+    Payload = require('./api/models/PayloadsModel'),
     Device = require('./api/models/DeviceModel'),
     bodyParser = require('body-parser'),
     Group = require('./api/models/GroupModel'),
@@ -10,26 +12,26 @@ var express = require('express'),
     DeviceTypes = require('./api/models/TypeModel');
 
 
+//connection a la BDD
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/PayDb');
+
 
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs')
+app.set('view engine', 'ejs');
 
-        console.log(__dirname+ '/api/models');
 
 
 let routes = require('./api/routes/ApiRoute');
-
 routes(app);
 
 app.listen(port);
 
-//error management 
 
+//error management
 app.use(function(req, res)
 {
     res.status(404).send({url: req.originalUrl + ' not found !'})

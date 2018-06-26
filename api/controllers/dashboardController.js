@@ -6,8 +6,9 @@ let mongoose = require('mongoose'),
     globals = require('../../globals');
 
 
-exports.get_main = function(req, res)
+exports.get_main = function(req, res)// Recupere les infos des devices et les renders sur le front
 {
+    //Var qui serviront a afficher le nombre de capteurs
     let nbEmpty = 0,
         nbFull = 0,
         nbNeutral = 0;
@@ -30,7 +31,8 @@ exports.get_main = function(req, res)
                 nbNeutral++;
         }
 
-
+        //On render la page puis on envoie les data a recuperer sur le front pour les afficher
+        //On se servira de la balise <%%> pour utiliser du js grace a ejs
         res.render( globals.path  + '/main.ejs', {dev: device, empty: nbEmpty, full: nbFull, neutral: nbNeutral});
     });
 };

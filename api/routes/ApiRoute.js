@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = function (app) {
-    let payApi = require("../controllers/ApiController");
+    let payApi = require("../controllers/PayloadsController");
     let deviceApi = require("../controllers/DeviceController");
     let groupApi = require("../controllers/GroupController");
     let orgApi = require("../controllers/OrganisationController");
@@ -9,9 +9,12 @@ module.exports = function (app) {
     let dashboard = require("../controllers/dashboardController");
     let express = require('express');
 
+
     app.route('/mainPage')
         .get(dashboard.get_main);
 
+
+//routes des payloads
     app.route('/payloads')
         .get(payApi.list_payload)
         .post(payApi.create_payload);
@@ -25,6 +28,8 @@ module.exports = function (app) {
         .get(payApi.get_paybydevice);
 
 
+
+//routes des devices
     app.route('/devices')
         .get(deviceApi.list_device)
         .post(deviceApi.create_device);
@@ -40,17 +45,26 @@ module.exports = function (app) {
     app.route('/devices/type/:DeviceType')
         .get(deviceApi.list_bytype);
 
+    app.route('/devices/vue/')
+        .get(deviceApi.render_device);
 
+    app.route('/devices/vue/id/:appId')
+        .get(deviceApi.render_detail);
+
+
+
+//routes des groupes
     app.route('/groups')
         .get(groupApi.list_group)
         .post(groupApi.create_group);
 
     app.route('/groups/id/:appId')
         .delete(groupApi.delete_group)
+        .get(groupApi.read_group)
         .put (groupApi.update_group);
 
 
-
+//routes Organisations
     app.route('/organisations')
         .get(orgApi.list_organisation)
         .post(orgApi.crate_organisation);
@@ -59,10 +73,14 @@ module.exports = function (app) {
         .put(orgApi.update_organisation)
         .delete(orgApi.delete_organisation);
 
+
+    //routes types
     app.route('/devicestypes')
         .get(typeApi.list_devicetypes)
         .post(typeApi.create_devicetypes);
 
     app.route('/devicestypes/name/:Name')
         .delete(typeApi.delete_devicestypes);
+
+    //TODO ajouter les routes User avec login
 };

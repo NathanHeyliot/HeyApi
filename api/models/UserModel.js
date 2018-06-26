@@ -55,3 +55,4 @@ module.exports = mongoose.model('User', UserSchema);
 
 
 //TODO: ajouter requetes avec la connection
+//TODO ajouter les variables necessaires

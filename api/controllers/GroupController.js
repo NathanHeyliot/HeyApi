@@ -3,7 +3,7 @@
 let mongoose =  require('mongoose'),
     Group = mongoose.model('Group');
 
-exports.list_group = function (req, res)
+exports.list_group = function (req, res) //get tout les devices
 {
     Group.find({}, function (err, group)
     {
@@ -16,7 +16,7 @@ exports.list_group = function (req, res)
     });
 };
 
-exports.create_group = function (req, res)
+exports.create_group = function (req, res)//crée un nouveau groupe
 {
     let newGroup = new Group(req.body);
     newGroup.save(function (err, group)
@@ -27,7 +27,7 @@ exports.create_group = function (req, res)
     });
 };
 
-exports.update_group = function (req, res)
+exports.update_group = function (req, res) //modifie les informations d'un groupe
 {
     Group.findOneAndUpdate({_id: req.params.appId}, req.body, {new: true}, function (err, group)
     {
@@ -37,7 +37,17 @@ exports.update_group = function (req, res)
     });
 };
 
-exports.delete_group = function(req, res)
+exports.read_group = function(req, res)//renvoie les information d'un groupe
+{
+    Group.findById(req.params.appId, function(err, group)
+    {
+        if (err)
+            res.send(err);
+        res.json(group);
+    })
+};
+
+exports.delete_group = function(req, res) //supprime le groupe
 {
     Group.remove({_id: req.params.appId}, function(err, group)
     {
