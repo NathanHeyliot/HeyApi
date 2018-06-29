@@ -172,25 +172,40 @@
 
                 <%if (pay[i].EventCode == 1){%>
                     <% if (dev.FillLevel >= 75) { %>
-                        <span class="ui green large ribbon label">Mesure</span>
+                        <%if (pay[i].Mesure != 9999){ %>
+                            <span class="ui green large ribbon label">► Mesure</span>
+                        <%} else {%>
+                            <span class="ui green large ribbon label">► Erreur</span>
+                        <%}%>
                     <% } else if (dev.FillLevel <= 25) { %>
-                        <span class="ui red large ribbon label">Mesure</span>
+                        <%if (pay[i].Mesure != 9999){ %>
+                            <span class="ui red large ribbon label">► Mesure</span>
+                        <%} else {%>
+                            <span class="ui red large ribbon label">► Erreur</span>
+                        <%}%>
                     <%} else {%>
-                        <span class="ui blue large ribbon label">Mesure</span>
+                        <%if (pay[i].Mesure != 9999){ %>
+                            <span class="ui blue large ribbon label">► Mesure</span>
+                        <%} else {%>
+                            <span class="ui blue green large ribbon label">► Erreur</span>
+                        <%}%>
                     <%}%>
                 <%} else if (pay[i].EventCode == 0){%>
                     <% if (dev.FillLevel >= 75) { %>
-                        <span class="ui green large ribbon label">Calibration</span>
+                        <span class="ui green large ribbon label">► Calibration</span>
                     <% } else if (dev.FillLevel <= 25) { %>
-                        <span class="ui red large ribbon label">Calibration</span>
+                        <span class="ui red large ribbon label">► Calibration</span>
                     <%} else {%>
-                        <span class="ui blue large ribbon label">Calibration</span>
-                    <%}%>
-                <%}%>
+                        <span class="ui blue large ribbon label">► Calibration</span>
+                    <%}}%>
                     <span>
                         <%= pay[i].DateGot %>
                         <br>
-                        <%= pay[i].Mesure %>  (<%= (100 - (pay[i].Mesure * 100 / dev.CalibrationMeasure))%> %)
+                        <%if(pay[i].Mesure != 9999 ){%>
+                        <%let per = (100 - (pay[i].Mesure * 100 / dev.CalibrationMeasure));%>
+                        <%per = per.toFixed(2)%>
+                            <%= pay[i].Mesure %> (<%= per %>)
+                        <%}%>
                     </span>
                 </div>
         <%}%>
@@ -198,13 +213,13 @@
 
         <% if (dev.FillLevel >= 75) { %>
             <div class="ui green segment">
-                <span class="ui green large ribbon label">Création</span>
+                <span class="ui green large ribbon label">► Création</span>
                 <% } else if (dev.FillLevel <= 25) { %>
             <div class="ui red segment">
-                <span class="ui red large ribbon label">Création</span>
+                <span class="ui red large ribbon label">► Création</span>
                 <%} else {%>
             <div class="ui blue segment">
-                <span class="ui blue large ribbon label">Création</span>
+                <span class="ui blue large ribbon label">► Création</span>
         <%}%>
             Date de création:  <%= dev.Created %>
         </div>
@@ -224,7 +239,7 @@
     <br>
 </div>
 
-
+<!--Footer-->
 <div class="ui blue inverted vertical footer segment">
     <div class="ui center aligned container">
         <img src="/Ressources/logo_horizontal.png" class="ui centered small image">

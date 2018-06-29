@@ -25,7 +25,8 @@ exports.list_payload = function (req, res) //GET all the payloads
 
 let checkEventCode = function(gotPayload)
 {
-   return(Number(gotPayload.Code.toString().substring(0,2)));
+    if(typeof gotPayload.Code ==="string")
+        return(Number(gotPayload.Code.substring(0,2)));
 };
 
 let fillParsed = function(gotPayload, EventCode) //Parse le payload et le stocke dans une var
@@ -129,8 +130,11 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                     //calcul du pourcentage de remplissage
                     Device.find({SigfoxId: newDevice.SigfoxId}, function (err, obj) {
                         cal = (obj[0].toObject().CalibrationMeasure);
+                        if (newPayload[i].Mesure !== 9999)// 9999 = error
                            newDevice.FillLevel =  100 - (newPayload[i].Mesure * 100 / cal);
-
+                        else
+                            newDevice.FillLevel = obj[0].toObject().FillLevel;
+                        newDevice.FillLevel = newDevice.FillLevel.toFixed(2);
                            //On update le device
                             Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},
                                 {FillLevel:newDevice.FillLevel, LastUpdate: newDevice.LastUpdate},
