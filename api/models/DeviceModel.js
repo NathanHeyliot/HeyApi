@@ -7,6 +7,7 @@ let Position = require('../Class/PositionClass');
 
 let DevicesSchema = new Schema
 ({
+
     Name:
        {
            type: String, unique: true, required: true

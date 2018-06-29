@@ -73,7 +73,7 @@
 <!-- permet d'afficher les infos du capteur en faisant varier la couleur du theme en fonction du remplissage-->
     <% if (dev.FillLevel >= 75) { %>
     <div class="ui green inverted segment" >
-        <h2><%= dev.Name %></h2>
+        <h2><%= dev.Name %>  (<%= dev.SigfoxId%>)</h2>
     </div>
     <table class="ui green fixed celled table">
         <tbody>
