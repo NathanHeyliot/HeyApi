@@ -203,8 +203,7 @@
                         <br>
                         <%if(pay[i].Mesure != 9999 ){%>
                         <%let per = (100 - (pay[i].Mesure * 100 / dev.CalibrationMeasure));%>
-                        <%per = per.toFixed(2)%>
-                            <%= pay[i].Mesure %> (<%= per %>)
+                            <%= pay[i].Mesure %> (<%= per.toFixed(2) %>)
                         <%}%>
                     </span>
                 </div>

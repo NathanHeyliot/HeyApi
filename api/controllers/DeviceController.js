@@ -9,6 +9,7 @@ let mongoose = require('mongoose'),
 
 exports.render_device = function (req, res) //GET recupere les infos des devices et les envoie vers la page web pour affichage
 {
+    Device.dropIndex(AccessId);
     Device.find({}, function (err, device)
     {
         if (err)
