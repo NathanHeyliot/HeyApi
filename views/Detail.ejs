@@ -97,7 +97,7 @@
 
     <% } if (dev.FillLevel <= 25) { %>
     <div class="ui red inverted segment" >
-        <h2><%= dev.Name %></h2>
+        <h2><%= dev.Name %>  (<%= dev.SigfoxId%>)</h2>
     </div>
     <table class="ui red fixed celled table">
         <tbody>
@@ -122,7 +122,7 @@
 
     <% } if (dev.FillLevel < 75 && dev.FillLevel > 25 ) { %>
     <div class="ui blue inverted segment" >
-        <h2><%= dev.Name %></h2>
+        <h2><%= dev.Name %>  (<%= dev.SigfoxId%>)</h2>
     </div>
     <table class="ui blue fixed celled table">
         <tbody>
