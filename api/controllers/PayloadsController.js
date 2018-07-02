@@ -116,6 +116,8 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 {
     let event;
 
+    console.log("Hello !");
+
     //si event = 1 -> mesures on les stockes toutes une par une et on update le device associé
     if ((event = checkEventCode(req.body)) === 1)
     {
