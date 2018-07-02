@@ -120,7 +120,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
     console.log(req.body);
     console.log("Trying to applying an JSON parse on it \n");
     let json_test = JSON.parse(req.body);
-    console.log(json_test.Code);
+    console.log(json_test);
 
 
 
