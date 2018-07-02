@@ -76,7 +76,7 @@ let fillParsed = function(gotPayload, EventCode) //Parse le payload et le stocke
 
     else if(EventCode === 1)
     {
-        console.log("payload creation -- code : " + gotPayload.Code);
+        console.log("payload creation");
         let nbmes = Number(gotPayload.Code.toString().substr(2,2));
         let PayloadArray = new Array(nbmes);
 
@@ -100,7 +100,6 @@ let fillParsed = function(gotPayload, EventCode) //Parse le payload et le stocke
 let fill_device = function(newPayload)
 {
     let newDevice = new Device;
-    console.log("TMP Payload : " + newPayload);
     if (newPayload.EventCode === 0) //some time undefined ???
     {
         newDevice.FillLevel = 0;
@@ -165,8 +164,6 @@ exports.create_payload = function (req, res) //create a new payload and POST it
             });
         }
     }
-
-
     //si event = 0 -> calibration On sauvegarde la mesure et on update le device
     else if((event = checkEventCode(req.body)) === 0)
     {
