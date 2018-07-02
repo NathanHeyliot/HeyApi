@@ -116,31 +116,10 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 {
     let event;
 
-    console.log("Incomming request for payload creation... \n");
-    console.log(req.body);
-    console.log("Trying to applying an JSON parse on it \n");
-    let json_test = JSON.parse(req.body);
-    console.log(json_test);
-
-
-
     //si event = 1 -> mesures on les stockes toutes une par une et on update le device associé
     if ((event = checkEventCode(req.body)) === 1)
     {
         let newPayload = fillParsed((req.body), 1);
-
-       /*
-        * Debug Incomming information without parsing and with it
-       */
-       console.log("Incomming with no parsing\n");
-       console.log(req.body.DeviceId);
-       console.log(req.body.Code);
-       console.log("Incomming with parsing\n");
-       console.log(newPayload);
-       /*
-        * Debug Incomming information without parsing and with it
-       */
-
 
         let newDevice = fill_device(newPayload[newPayload.length - 1]);
         for (let i = 0; i !== newPayload.length; i++) {
@@ -154,18 +133,14 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                 {
                     //calcul du pourcentage de remplissage
                     Device.find({SigfoxId: newDevice.SigfoxId}, function (err, obj) {
-
-                        if(obj[0] == undefined) {
-                            console.log("OBJ[0] is an undefined item");  //TODO add check for bad deviceID (generate a undefined item)
-                        }
-
-                        cal = (obj[0].toObject().CalibrationMeasure);
-                        if (newPayload[i].Mesure !== 9999)// 9999 = error
-                           newDevice.FillLevel =  100 - (newPayload[i].Mesure * 100 / cal);
-                        else
-                            newDevice.FillLevel = obj[0].toObject().FillLevel;
-                        newDevice.FillLevel = newDevice.FillLevel.toFixed(2);
-                           //On update le device
+                        if(obj[0] != undefined && obj[0] != null) { //check if device has been found in database
+                            cal = (obj[0].toObject().CalibrationMeasure);
+                            if (newPayload[i].Mesure !== 9999)// 9999 = error
+                                newDevice.FillLevel =  100 - (newPayload[i].Mesure * 100 / cal);
+                            else
+                                newDevice.FillLevel = obj[0].toObject().FillLevel;
+                            newDevice.FillLevel = newDevice.FillLevel.toFixed(2);
+                            //On update le device
                             Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},
                                 {FillLevel:newDevice.FillLevel, LastUpdate: newDevice.LastUpdate},
                                 {new: true}, function (err, device)
@@ -178,6 +153,10 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                     res.write(JSON.stringify(device));
                                     return (res.end());
                                 });
+                        } else {
+                            console.log("Device not found");
+                            return (res.end());
+                        }
                     });
                 }
             });
