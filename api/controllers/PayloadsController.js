@@ -100,7 +100,8 @@ let fillParsed = function(gotPayload, EventCode) //Parse le payload et le stocke
 let fill_device = function(newPayload)
 {
     let newDevice = new Device;
-    if (newPayload.EventCode === 0)
+    console.log("TMP Payload : " + newPayload);
+    if (newPayload.EventCode === 0) //some time undefined ???
     {
         newDevice.FillLevel = 0;
         newDevice.CalibrationMeasure = newPayload.Mesure;
@@ -135,7 +136,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                 {
                     //calcul du pourcentage de remplissage
                     Device.find({SigfoxId: newDevice.SigfoxId}, function (err, obj) {
-                        if(obj[0] != undefined && obj[0] != null) { //check if device has been found in database
+                        if(obj[0] !== undefined && obj[0] != null) { //check if device has been found in database
                             cal = (obj[0].toObject().CalibrationMeasure);
                             if (newPayload[i].Mesure !== 9999)// 9999 = error
                                 newDevice.FillLevel =  100 - (newPayload[i].Mesure * 100 / cal);
