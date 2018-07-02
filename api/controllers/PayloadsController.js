@@ -118,8 +118,10 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
     console.log("Incomming request for payload creation... \n");
     console.log(req.body);
-    console.log("Second part \n");
-    console.log(req.body.toString());
+    console.log("Trying to applying an JSON parse on it \n");
+    let json_test = JSON.parse(req.body);
+    console.log(json_test.Code);
+
 
 
     //si event = 1 -> mesures on les stockes toutes une par une et on update le device associé
