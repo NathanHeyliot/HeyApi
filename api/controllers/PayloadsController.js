@@ -10,6 +10,8 @@ let cal;
 
 exports.list_payload = function (req, res) //GET all the payloads
 {
+    console.log("Getting payloads list");
+
     Payload.find({}, function (err, payload)
     {
         if (err)
