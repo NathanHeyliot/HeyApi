@@ -76,7 +76,7 @@ let fillParsed = function(gotPayload, EventCode) //Parse le payload et le stocke
 
     else if(EventCode === 1)
     {
-        console.log("payload creation");
+        console.log("payload creation -- code : " + gotPayload.Code);
         let nbmes = Number(gotPayload.Code.toString().substr(2,2));
         let PayloadArray = new Array(nbmes);
 
@@ -115,6 +115,8 @@ let fill_device = function(newPayload)
 exports.create_payload = function (req, res) //create a new payload and POST it
 {
     let event;
+
+    console.log("Event Code : " + checkEventCode(req.body));
 
     //si event = 1 -> mesures on les stockes toutes une par une et on update le device associé
     if ((event = checkEventCode(req.body)) === 1)
@@ -175,7 +177,6 @@ exports.create_payload = function (req, res) //create a new payload and POST it
             if (err)
                 return(res.send(err));
             res.write(JSON.stringify(payload));
-
 
             Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},{FillLevel: 0, CalibrationMeasure: newPayload.Mesure, LastUpdate: newDevice.LastUpdate },
                 {new: true}, function (err, device)
