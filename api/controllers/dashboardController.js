@@ -31,8 +31,6 @@ exports.get_main = function(req, res)// Recupere les infos des devices et les re
                 nbNeutral++;
         }
 
-        //On render la page puis on envoie les data a recuperer sur le front pour les afficher
-        //On se servira de la balise <%%> pour utiliser du js grace a ejs
         res.render( globals.path  + '/main.ejs', {dev: device, empty: nbEmpty, full: nbFull, neutral: nbNeutral});
     });
 };

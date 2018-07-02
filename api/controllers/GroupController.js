@@ -39,7 +39,8 @@ exports.update_group = function (req, res) //modifie les informations d'un group
 
 exports.read_group = function(req, res)//renvoie les information d'un groupe
 {
-    Group.findById(req.params.appId, function(err, group)
+    //Group.findById(req.params.appId, function(err, group)
+    Group.find({GroupId: req.params.appId}, function (err, group)
     {
         if (err)
             res.send(err);
