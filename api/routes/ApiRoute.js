@@ -16,7 +16,13 @@ module.exports = function (app) {
     */
 
     app.route('/mainPage')
-        .get(dashboard.get_main);
+        .get(dashboard.get_main); //the main Page view
+
+    app.route('/devices/vue/')
+        .get(deviceApi.render_device); //the devices list view
+
+    app.route('/devices/vue/id/:appId')
+        .get(deviceApi.render_detail); //view used to show informations about a device
 
     /*
     * ----------------------------------------
@@ -25,30 +31,43 @@ module.exports = function (app) {
      */
 
 
-//routes des payloads
+    /*
+    * AVANT DE METTRE L APPLICATION SUR LE SERVEUR, IL EST CONSEILLER DE PURGER LA BDD
+     */
+
+
+    /*
+    *--------------------------
+    * PAYLOAD ROUTER
+    * -------------------------
+     */
     app.route('/payloads')
         .get(payApi.list_payload)   // OK
         .post(payApi.create_payload); // OK
 
     app.route('/payloads/id/:appId')
         .get(payApi.read_payload) //OK ---> must be the ID of the payload
-        .put(payApi.update_payload) // temporaire voué a disparaitre!
-        .delete(payApi.delete_payload);
+        .delete(payApi.delete_payload); //OK --> must be the ID of the payload
 
     app.route('/payloads/deviceId/:DeviceId')
         .get(payApi.get_paybydevice); //OK ---> must be the DEVICE ID of the paylaod
 
 
 
-//routes des devices
+    /*
+    *--------------------------
+    * DEVICE ROUTER
+    * -------------------------
+     */
     app.route('/devices')
         .get(deviceApi.list_device) // OK
-        .post(deviceApi.create_device);
+        .post(deviceApi.create_device) // OK --> fonctionne mais besoin de drop la database au préalable sous risque de conflit de Index Access_ID
+        .delete(deviceApi.delete_all_devices); //used to delete all devices in mongoDB
 
     app.route('/devices/id/:appId')
         .get(deviceApi.read_device)  // OK ---> must be the ID of the device
-        .put(deviceApi.update_device)
-        .delete(deviceApi.delete_device);
+        .put(deviceApi.update_device) //OK --> used to update a specified device
+        .delete(deviceApi.delete_device); //OK --> used to delete a specified device
 
     app.route('/devices/group/:GroupId')
         .get(deviceApi.list_group_devices); // OK --> must be the group ID of the device
@@ -57,46 +76,45 @@ module.exports = function (app) {
         .get(deviceApi.list_bytype); // OK --> must be the device type of the device
 
 
-    //VIEW OF DEVICES
-
-    app.route('/devices/vue/')
-        .get(deviceApi.render_device);
-
-    app.route('/devices/vue/id/:appId')
-        .get(deviceApi.render_detail);
-
-    //VIEW OF DEVICES
-
-
-
-//routes des groupes
+    /*
+    *--------------------------
+    * GROUPS ROUTER
+    * -------------------------
+     */
     app.route('/groups')
         .get(groupApi.list_group) // OK --> list of groups
-        .post(groupApi.create_group);
+        .post(groupApi.create_group); //OK --> create a group -- group id must be unique
 
     app.route('/groups/id/:appId')
-        .delete(groupApi.delete_group)
+        .delete(groupApi.delete_group) // OK --> must be a _id of the named group
         .get(groupApi.read_group) // OK --> return properties of a group
-        .put (groupApi.update_group);
+        .put (groupApi.update_group); //OK
 
 
-//routes Organisations
+    /*
+    *--------------------------
+    * ORGANISATIONS ROUTER
+    * -------------------------
+     */
     app.route('/organisations')
         .get(orgApi.list_organisation) // OK --> list of all organisations
-        .post(orgApi.crate_organisation);
+        .post(orgApi.create_organisation); //OK --> create an organisation
 
     app.route('/organisations/id/:appId')
-        .put(orgApi.update_organisation)
-        .delete(orgApi.delete_organisation);
+        .put(orgApi.update_organisation) //OK --> used to update an organisation information
+        .get(orgApi.get_organisation) //OK --> get information about a group
+        .delete(orgApi.delete_organisation); //OK --> used to delete an specified organisation
 
-
-    //routes types
+    /*
+    *--------------------------
+    * DEVICES TYPES ROUTER
+    * -------------------------
+     */
     app.route('/devicestypes')
         .get(typeApi.list_devicetypes) // OK --> list of devices types
-        .post(typeApi.create_devicetypes);
+        .post(typeApi.create_devicetypes); //OK --> create a device type
 
     app.route('/devicestypes/name/:Name')
-        .delete(typeApi.delete_devicestypes);
-
-    //TODO ajouter les routes User avec login
+        .delete(typeApi.delete_devicestypes) //OK --> delete a specified device types
+        .get(typeApi.information_devicestypes); //OK --> get information about a specified device
 };

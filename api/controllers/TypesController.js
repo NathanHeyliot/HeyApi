@@ -30,6 +30,16 @@ exports.delete_devicestypes = function (req, res)
     {
         if(err)
             res.send(err);
-        res.json({message: "Le type de device a été supprimé avec succes "});
+        res.json({message: "Device Type succefully deleted !"});
     });
 };
+
+exports.information_devicestypes = function (req, res)
+{
+    DeviceType.find({Name: req.params.Name}, function (err, devicestypes) {
+        if(err)
+            res.send(err);
+        else
+            res.json(devicestypes);
+    });
+}

@@ -7,7 +7,7 @@ let GroupsSchema = new Schema
 ({
     GroupId:
         {
-            type : String, required: true
+            type : String, unique: true, required: true
         },
     Name:
         {

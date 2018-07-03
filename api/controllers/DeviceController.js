@@ -44,9 +44,18 @@ exports.update_device = function (req, res) //PUT Edit the specified payload
 
 };
 
+
+exports.delete_all_devices = function (req, res)
+{
+    console.log("Deleting all devices ....");
+    Device.collection.remove({});
+}
+
+
 //POST crée un nouveau device
 exports.create_device = function (req, res)
 {
+
     //on recupere la date
     let ActualTime = new Date();
     let dd = ActualTime.getDate();
@@ -67,7 +76,6 @@ exports.create_device = function (req, res)
         min = "0" + min;
 
 
-
     newDevice.Created = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;
     newDevice.LastUpdate = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;
     newDevice.Name = req.body.Name;
@@ -80,11 +88,18 @@ exports.create_device = function (req, res)
     newDevice.FillLevel = 0;
     newDevice.CalibrationMeasure = -30;
 
+    console.log("Submitting new device ...");
+    console.log(newDevice);
+
     //Ajoute le nouveau device a la BDD
     newDevice.save(function (err, device)
     {
-        if(err)
+        if(err) {
+            console.log("Device can not be created.");
             res.send(err);
+        } else {
+            console.log("Device succefully created.");
+        }
         res.json(Device);
     });
 };
