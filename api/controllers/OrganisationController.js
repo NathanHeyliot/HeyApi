@@ -22,6 +22,7 @@ exports.delete_all_organisations = function (req, res)
     console.log("Deleting all organisations....");
     Organisation.collection.remove({});
     res.end();
+    console.log("Success");
 }
 
 exports.create_organisation = function (req, res)//crée un nouveau client

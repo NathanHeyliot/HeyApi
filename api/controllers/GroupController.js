@@ -21,6 +21,7 @@ exports.delete_all_groups = function (req, res)
     console.log("Deleting all groups....");
     Group.collection.remove({});
     res.end();
+    console.log("Success");
 }
 
 exports.create_group = function (req, res)//crée un nouveau groupe

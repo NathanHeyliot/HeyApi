@@ -117,6 +117,7 @@ exports.delete_all_payloads = function (req, res)
     console.log("Deleting all payloads ...");
     Payload.collection.remove({});
     res.end();
+    console.log("Success");
 }
 
 exports.create_payload = function (req, res) //create a new payload and POST it
