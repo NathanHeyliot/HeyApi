@@ -23,10 +23,16 @@ app.use(express.static('public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
+/*
+* SET ROUTER IN DEV MODE
+ */
+
+let route_dev = true;
+
 
 
 let routes = require('./api/routes/ApiRoute');
-routes(app);
+routes(app, route_dev);
 
 app.listen(port);
 
@@ -63,3 +69,4 @@ app.use(function (req, res)
 });
 
 console.log('Server started on: ' + port);
+console.log("Route loaded in developpement mode : " + route_dev);
