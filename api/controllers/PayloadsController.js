@@ -112,6 +112,13 @@ let fill_device = function(newPayload)
 };
 
 
+exports.delete_all_payloads = function (req, res)
+{
+    console.log("Deleting all payloads ...");
+    Payload.collection.remove({});
+    res.end();
+}
+
 exports.create_payload = function (req, res) //create a new payload and POST it
 {
     let event;

@@ -43,3 +43,10 @@ exports.information_devicestypes = function (req, res)
             res.json(devicestypes);
     });
 }
+
+exports.delete_all_devicestypes = function (req, res)
+{
+    console.log("Deleting all devices types ...");
+    DeviceType.collection.remove({});
+    res.end();
+}

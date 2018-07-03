@@ -16,6 +16,13 @@ exports.list_group = function (req, res) //get tout les devices
     });
 };
 
+exports.delete_all_groups = function (req, res)
+{
+    console.log("Deleting all groups....");
+    Group.collection.remove({});
+    res.end();
+}
+
 exports.create_group = function (req, res)//crée un nouveau groupe
 {
     let newGroup = new Group(req.body);

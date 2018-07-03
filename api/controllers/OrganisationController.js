@@ -17,6 +17,13 @@ exports.list_organisation = function (req, res) //Liste tout les clients
     });
 };
 
+exports.delete_all_organisations = function (req, res)
+{
+    console.log("Deleting all organisations....");
+    Organisation.collection.remove({});
+    res.end();
+}
+
 exports.create_organisation = function (req, res)//crée un nouveau client
 {
     let newOrganisation = new Organisation(req.body);

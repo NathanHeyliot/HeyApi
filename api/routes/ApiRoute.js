@@ -44,6 +44,7 @@ module.exports = function (app) {
     app.route('/payloads')
         .get(payApi.list_payload)   // OK
         .post(payApi.create_payload); // OK
+      //  .delete(payApi.delete_all_payloads); // OK
 
     app.route('/payloads/id/:appId')
         .get(payApi.read_payload) //OK ---> must be the ID of the payload
@@ -61,8 +62,8 @@ module.exports = function (app) {
      */
     app.route('/devices')
         .get(deviceApi.list_device) // OK
-        .post(deviceApi.create_device) // OK --> fonctionne mais besoin de drop la database au préalable sous risque de conflit de Index Access_ID
-        .delete(deviceApi.delete_all_devices); //used to delete all devices in mongoDB
+        .post(deviceApi.create_device); // OK --> fonctionne mais besoin de drop la database au préalable sous risque de conflit de Index Access_ID
+     //   .delete(deviceApi.delete_all_devices); //used to delete all devices in mongoDB
 
     app.route('/devices/id/:appId')
         .get(deviceApi.read_device)  // OK ---> must be the ID of the device
@@ -84,6 +85,8 @@ module.exports = function (app) {
     app.route('/groups')
         .get(groupApi.list_group) // OK --> list of groups
         .post(groupApi.create_group); //OK --> create a group -- group id must be unique
+     //   .delete(groupApi.delete_all_groups); // OK --> delete all groups
+
 
     app.route('/groups/id/:appId')
         .delete(groupApi.delete_group) // OK --> must be a _id of the named group
@@ -99,6 +102,7 @@ module.exports = function (app) {
     app.route('/organisations')
         .get(orgApi.list_organisation) // OK --> list of all organisations
         .post(orgApi.create_organisation); //OK --> create an organisation
+     //   .delete(orgApi.delete_all_organisations); // OK --> delete all organisations
 
     app.route('/organisations/id/:appId')
         .put(orgApi.update_organisation) //OK --> used to update an organisation information
@@ -113,6 +117,7 @@ module.exports = function (app) {
     app.route('/devicestypes')
         .get(typeApi.list_devicetypes) // OK --> list of devices types
         .post(typeApi.create_devicetypes); //OK --> create a device type
+       // .delete(typeApi.delete_all_devicestypes); // OK --> delete all devices types
 
     app.route('/devicestypes/name/:Name')
         .delete(typeApi.delete_devicestypes) //OK --> delete a specified device types

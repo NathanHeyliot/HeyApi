@@ -49,6 +49,7 @@ exports.delete_all_devices = function (req, res)
 {
     console.log("Deleting all devices ....");
     Device.collection.remove({});
+    res.end();
 }
 
 
