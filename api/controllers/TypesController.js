@@ -34,6 +34,17 @@ exports.delete_devicestypes = function (req, res)
     });
 };
 
+exports.update_devicestypes = function (req, res)
+{
+
+    DeviceType.findOneAndUpdate({Name: req.params.Name}, req.body, {new: true}, function (err, devicestypes)
+    {
+        if(err)
+            res.send(err);
+        res.json(devicestypes);
+    });
+};
+
 exports.information_devicestypes = function (req, res)
 {
     DeviceType.find({Name: req.params.Name}, function (err, devicestypes) {
@@ -43,6 +54,39 @@ exports.information_devicestypes = function (req, res)
             res.json(devicestypes);
     });
 }
+
+exports.delete_devicestypesid = function (req, res)
+{
+    DeviceType.remove({_id: req.params.id}, function (err, devicetypes)
+    {
+        if(err)
+            res.send(err);
+        res.json({message: "Device Type succefully deleted !"});
+    });
+};
+
+exports.update_devicestypesid = function (req, res)
+{
+
+    DeviceType.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, function (err, devicestypes)
+    {
+        if(err)
+            res.send(err);
+        res.json(devicestypes);
+    });
+};
+
+exports.information_devicestypesid = function (req, res)
+{
+    DeviceType.find({_id: req.params.id}, function (err, devicestypes) {
+        if(err)
+            res.send(err);
+        else
+            res.json(devicestypes);
+    });
+}
+
+
 
 exports.delete_all_devicestypes = function (req, res)
 {

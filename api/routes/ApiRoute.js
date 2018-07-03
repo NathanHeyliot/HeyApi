@@ -121,5 +121,11 @@ module.exports = function (app) {
 
     app.route('/devicestypes/name/:Name')
         .delete(typeApi.delete_devicestypes) //OK --> delete a specified device types
-        .get(typeApi.information_devicestypes); //OK --> get information about a specified device
+        .get(typeApi.information_devicestypes) //OK --> get information about a specified device type
+        .put(typeApi.update_devicestypes); // OK --> update information about a device type
+
+    app.route('/devicestypes/id/:id')
+        .delete(typeApi.delete_devicestypesid) // OK --> delete a devicestypes by ID
+        .get(typeApi.information_devicestypesid) //OK --> get information of devicestypes by ID
+        .put(typeApi.update_devicestypesid); //OK --> update information about a device type by ID
 };
