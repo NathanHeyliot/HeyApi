@@ -9,6 +9,7 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     Group = require('./api/models/GroupModel'),
     Organisation = require('./api/models/OrganisationModel'),
+    User = require("./api/models/UserModel");
     DeviceTypes = require('./api/models/TypeModel');
 
 

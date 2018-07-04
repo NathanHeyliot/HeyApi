@@ -3,6 +3,7 @@
 let mongoose = require('mongoose'),
     Device = mongoose.model('Device'),
     Payload = mongoose.model('Payload'),
+    jwt_auth = require("../controllers/AuthController"),
 
     globals = require('../../globals');
 

@@ -7,12 +7,14 @@ module.exports = function (app, route_dev) {
     let orgApi = require("../controllers/OrganisationController");
     let typeApi = require("../controllers/TypesController");
     let dashboard = require("../controllers/dashboardController");
-    let express = require('express');
-
+    let jwt_auth = require("../controllers/AuthController");
+    let userApi = require("../controllers/UserController");
 
     /*
     * VAR FOR DEVELOPPEMENT MODE
      */
+
+    app.use(jwt_auth.middle_token);
 
     if(route_dev) {
         app.route('/payloads')
@@ -146,4 +148,34 @@ module.exports = function (app, route_dev) {
         .delete(typeApi.delete_devicestypesid) // OK --> delete a devicestypes by ID
         .get(typeApi.information_devicestypesid) //OK --> get information of devicestypes by ID
         .put(typeApi.update_devicestypesid); //OK --> update information about a device type by ID
+
+    /*
+    *-----------------------
+    * USER ROUTER
+    * ----------------------
+     */
+
+    app.route('/users')
+        .get(userApi.list_users) // OK
+        .delete(userApi.delete_all_users) // OK
+        .post(userApi.create_user); // OK
+
+    app.route('/users/id/:UserId')
+        .get(userApi.user_info) //OK
+        .delete(userApi.delete_user) //OK
+        .put(userApi.update_user); //OK
+
+    app.route('')
+        .get();
+
+
+    /*
+    *-----------------------
+    * AUTH ROUTE
+    * ----------------------
+    */
+
+    app.route('/auth/:user/:password')
+        .get(jwt_auth.submit_auth);
+
 };

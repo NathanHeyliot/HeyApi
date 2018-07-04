@@ -5,10 +5,6 @@ let Schema = mongoose.Schema;
 
 let UserSchema = new Schema
 ({
-    UserName:
-        {
-            type: String, required: true, unique: true,
-        },
     FirstName:
         {
             type: String, required: true
@@ -25,34 +21,18 @@ let UserSchema = new Schema
         {
             type: String, required: true
         },
-    Confirmed:
-        {
-            type: Boolean, default: false
-        },
-    Token:
-        {
-            type: String, Default: "NoTkn"
-        },
-    IsModo:
-        {
-            type: Boolean, default: false
-        },
     OrganisationID:
         {
           type: String, required: true
         },
-    GroupId:
-        {
-            type: String, required: true
-        },
     Created:
+        {
+            type: Date, default: Date.now
+        },
+    LastUpdated:
         {
             type: Date, default: Date.now
         },
 });
 
 module.exports = mongoose.model('User', UserSchema);
-
-
-//TODO: ajouter requetes avec la connection
-//TODO ajouter les variables necessaires
