@@ -28,7 +28,7 @@ app.set('view engine', 'ejs');
 * SET ROUTER IN DEV MODE
  */
 
-let route_dev = true;
+let route_dev = false;
 
 
 
