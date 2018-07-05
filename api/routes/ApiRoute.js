@@ -9,6 +9,7 @@ module.exports = function (app, route_dev) {
     let dashboard = require("../controllers/dashboardController");
     let jwt_auth = require("../controllers/AuthController");
     let userApi = require("../controllers/UserController");
+    let userGroupApi = require("../controllers/UserGroupController");
 
     /*
     * VAR FOR DEVELOPPEMENT MODE
@@ -23,7 +24,7 @@ module.exports = function (app, route_dev) {
         app.route('/devices')
            .delete(deviceApi.delete_all_devices); //used to delete all devices in mongoDB
 
-        app.route('/groups')
+        app.route('/devicesgroups')
            .delete(groupApi.delete_all_groups); // OK --> delete all groups
 
         app.route('/organisations')
@@ -31,6 +32,9 @@ module.exports = function (app, route_dev) {
 
         app.route('/devicestypes')
          .delete(typeApi.delete_all_devicestypes); // OK --> delete all devices types
+
+        app.route('/users')
+            .delete(userApi.delete_all_users) // OK --> delete all users
     }
 
     /*
@@ -105,12 +109,12 @@ module.exports = function (app, route_dev) {
     * GROUPS ROUTER
     * -------------------------
      */
-    app.route('/groups')
+    app.route('/devicesgroups')
         .get(groupApi.list_group) // OK --> list of groups
         .post(groupApi.create_group); //OK --> create a group -- group id must be unique
 
 
-    app.route('/groups/id/:appId')
+    app.route('/devicesgroups/id/:appId')
         .delete(groupApi.delete_group) // OK --> must be a _id of the named group
         .get(groupApi.read_group) // OK --> return properties of a group
         .put (groupApi.update_group); //OK
@@ -156,18 +160,28 @@ module.exports = function (app, route_dev) {
      */
 
     app.route('/users')
-        .get(userApi.list_users) // OK
-        .delete(userApi.delete_all_users) // OK
-        .post(userApi.create_user); // OK
+        .get(userApi.list_users) // OK --> list of all users
+        .post(userApi.create_user); // OK --> create a user
 
     app.route('/users/id/:UserId')
-        .get(userApi.user_info) //OK
-        .delete(userApi.delete_user) //OK
-        .put(userApi.update_user); //OK
+        .get(userApi.user_info) //OK --> get information of user
+        .delete(userApi.delete_user) //OK --> delete a user
+        .put(userApi.update_user); //OK --> update a user
 
-    app.route('')
-        .get();
+    /*
+    *----------------------
+    * USER GROUP ROUTER
+    * ---------------------
+     */
 
+    app.route('/usersgroups')
+        .get(userGroupApi.list_groups) // OK
+        .post(userGroupApi.create_group); // OK
+
+    app.route('/usersgroups/id/:Gid')
+        .get(userGroupApi.get_info) // OK
+        .delete(userGroupApi.delete_group); // OK
+    
 
     /*
     *-----------------------

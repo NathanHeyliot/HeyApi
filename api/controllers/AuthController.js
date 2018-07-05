@@ -35,7 +35,7 @@ exports.middle_token = function (req, res, next) {
                 next();
             }
         });
-    } else if (req.url.startsWith("/auth", 0)) {
+    } else if (req.url.startsWith("/auth", 0) || req.url.startsWith("/payloads", 0)) {
             next();
     } else {
         res.json({message: "No token !"});

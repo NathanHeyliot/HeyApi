@@ -10,7 +10,8 @@ var express = require('express'),
     Group = require('./api/models/GroupModel'),
     Organisation = require('./api/models/OrganisationModel'),
     User = require("./api/models/UserModel");
-    DeviceTypes = require('./api/models/TypeModel');
+    DeviceTypes = require('./api/models/TypeModel'),
+    UserGroup = require("./api/models/UserGroupModel");
 
 
 //connection a la BDD
