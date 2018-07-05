@@ -39,6 +39,17 @@ exports.get_info = function (req, res)
     })
 }
 
+exports.get_infoU = function (req, res)
+{
+    UserGroup.find({user_id: req.params.Uid}, function (err, group) {
+        if(err) {
+            error("Error at: " + err);
+            res.send(err);
+        }
+        res.json(group);
+    })
+}
+
 exports.delete_group = function (req, res) {
     UserGroup.remove({_id: req.params.Gid}, function (err, group)
     {

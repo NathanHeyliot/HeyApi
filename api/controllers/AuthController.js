@@ -15,10 +15,10 @@ exports.submit_auth = function (req, res)
                 user: req.params.user, password: req.params.password
             }, secret_encrypt, { expiresIn: expiration_time});
             console.log("AUTH : [user : " + req.params.user + ", token : " + token + "]");
-            res.json(token);
+            res.json({messages: token});
             res.end();
         } else {
-            res.json({messages: "Bad Creditentials !"});
+            res.json({error: "Bad Creditentials !"});
             res.end();
         }
     })

@@ -7,7 +7,7 @@ let UserGroupSchema = new Schema
 ({
     user_id:
         {
-            type: String, required: true
+            type: String, required: true //mettre l'adresse mail x)
         },
     device_group_id:
         {
