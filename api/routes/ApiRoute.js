@@ -11,6 +11,10 @@ module.exports = function (app, route_dev, auth_activated) {
     let userApi = require("../controllers/UserController");
     let userGroupApi = require("../controllers/UserGroupController");
 
+    var cors = require('cors');
+
+    app.use(cors());
+
     /*
     * VAR FOR DEVELOPPEMENT MODE
      */
