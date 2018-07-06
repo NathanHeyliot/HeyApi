@@ -60,12 +60,14 @@ exports.delete_user = function (req, res)
 
 exports.create_user = function (req, res)
 {
-    let newUser = new User(req.body);
+   let newUser = new User(req.body);
 
-    newUser.save(function (err, user)
-    {
-        if(err)
-            return(res.send(err));
-        res.json(user);
-    });
+   newUser.save(function (err, user)
+   {
+       console.log("test");
+
+       if(err)
+           return(res.send(err));
+       res.json(user);
+   });
 };

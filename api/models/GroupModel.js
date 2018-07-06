@@ -15,7 +15,7 @@ let GroupsSchema = new Schema
         },
     ParentGroupId:
         {
-            type: String,
+            type: String, //dependante du parent group id
         },
 
 });

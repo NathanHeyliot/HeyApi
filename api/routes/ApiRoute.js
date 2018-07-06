@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function (app, route_dev) {
+module.exports = function (app, route_dev, auth_activated) {
     let payApi = require("../controllers/PayloadsController");
     let deviceApi = require("../controllers/DeviceController");
     let groupApi = require("../controllers/GroupController");
@@ -15,7 +15,8 @@ module.exports = function (app, route_dev) {
     * VAR FOR DEVELOPPEMENT MODE
      */
 
-    app.use(jwt_auth.middle_token);
+    if(auth_activated)
+        app.use(jwt_auth.middle_token);
 
     if(route_dev) {
         app.route('/payloads')
@@ -35,6 +36,9 @@ module.exports = function (app, route_dev) {
 
         app.route('/users')
             .delete(userApi.delete_all_users) // OK --> delete all users
+
+        app.route('/usersgroups')
+            .delete(userGroupApi.delete_all_usergroups); //ok --> deleting all users groups
     }
 
     /*

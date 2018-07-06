@@ -17,7 +17,7 @@ let DevicesSchema = new Schema
         },
     GroupId:
         {
-            type: String, required: true
+            type: String, required: true //dependante d'un ID de groupe
         },
     CalibrationMeasure:
         {
@@ -45,7 +45,7 @@ let DevicesSchema = new Schema
         },
     DeviceType:
         {
-            type: String, required : true
+            type: String, required : true //dependante du type de device
         },
 });
 

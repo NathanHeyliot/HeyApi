@@ -23,7 +23,7 @@ let UserSchema = new Schema
         },
     OrganisationID:
         {
-          type: String, required: true
+          type: String, required: true // dependante of organisation !!!!
         },
     Created:
         {

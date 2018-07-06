@@ -8,7 +8,7 @@ let PayloadSchema = new Schema
 
     DeviceId:
         {
-            type: String, required: true
+            type: String, required: true //dependante du device ID
         },
     EventCode:
         {

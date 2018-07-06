@@ -15,7 +15,7 @@ let DeviceTypesSchema = new Schema
         },
     Logo:
         {
-            type: String,
+            type: String, required: true
         },
 
 });
