@@ -59,6 +59,15 @@ exports.delete_group = function (req, res) {
     });
 }
 
+exports.update_group = function (req, res) {
+    UserGroup.findOneAndUpdate({_id: req.params.Gid}, req.body, {new: true}, function (err, group)
+    {
+        if(err)
+            res.send(err);
+        res.json(group);
+    });
+}
+
 exports.delete_all_usergroups = function (req, res)
 {
     console.log("Deleting all User groups ....");

@@ -188,7 +188,8 @@ module.exports = function (app, route_dev, auth_activated) {
 
     app.route('/usersgroups/id/:Gid')
         .get(userGroupApi.get_info) // OK
-        .delete(userGroupApi.delete_group); // OK
+        .delete(userGroupApi.delete_group) // OK
+        .put(userGroupApi.update_group);
 
     app.route('/usersgroups/user/:Uid')
         .get(userGroupApi.get_infoU);
