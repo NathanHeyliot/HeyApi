@@ -5,6 +5,12 @@ let mongoose = require('mongoose'),
     Payload = mongoose.model('Payload'),
     Device = mongoose.model('Device');
 
+// Standalone usage
+var XMLHttpRequest = require('node-http-xhr');
+
+// Usage as global XHR constructor
+global.XMLHttpRequest = require('node-http-xhr');
+
 let cal;
 
 
@@ -51,14 +57,6 @@ let fillParsed = function(gotPayload, EventCode) //Parse le payload et le stocke
         hh = "0" + hh;
     if (min.toString().length === 1)
         min = "0" + min;
-
-
-    if (EventCode === 2)
-    {
-        let newPayload = new Payload();
-        newPayload.PositionCode = String(gotPayload.Code.toString().substring(2,22));
-        //TODO envoyer les coordonnées GPS via Ubiscale et l'addresse via locationIq
-    }
 
     //traite les payloads en fonction des Event Codes
     else if(EventCode === 0)
@@ -193,6 +191,61 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                 return(res.end());
             });
         });
+    }
+    //si event code == 2 --> fonction de géolocalisation
+    else if((event = checkEventCode(req.body)) === 2)
+    {
+        //ici faut s'occuper de l'event 2 qui permet la récupération d'une localisation avec une info crypté
+        let PositionCode = String(req.body.Code.toString().substring(2,22));
+        let DeviceId = req.body.DeviceId;
+
+        var req = new XMLHttpRequest();
+
+        req.addEventListener('load', function() {
+            var parsed_info = JSON.parse(req.response);
+            if(parsed_info.code === "TECHNICAL") {
+                console.log("Could not retrieve lat / long of the payload !");
+                res.json({message: "Error with API"});
+            } else {
+                req = new XMLHttpRequest();
+
+                req.addEventListener('load', function() {
+                    var parsed_get = JSON.parse(req.response);
+
+                    //on recupere la date de reception
+                    let ActualTime = new Date();
+                    let dd = ActualTime.getDate();
+                    let mm = ActualTime.getMonth()+1;
+                    let yyyy = ActualTime.getFullYear();
+                    let hh = ActualTime.getHours();
+                    let min = ActualTime.getMinutes();
+
+                    if (dd.toString().length === 1)
+                        dd = "0" + dd;
+                    if (mm.toString().length === 1)
+                        mm = "0" + mm;
+                    if (hh.toString().length === 1)
+                        hh = "0" + hh;
+                    if (min.toString().length === 1)
+                        min = "0" + min;
+
+                    Device.findOneAndUpdate({SigfoxId: DeviceId}, ({LastUpdate: dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min, Lon: parsed_info.lng, Lat: parsed_info.lat, City: parsed_get.address.village, Address: parsed_get.address.road}), {new: true}, function (err, device)
+                    {
+                        if (err)
+                            res.send(err);
+                        res.json({device_id: DeviceId, lat: parsed_info.lat, long: parsed_info.lng, accuracy: parsed_info.accuracy, city: parsed_get.address.village, address: parsed_get.address.road});
+                    });
+                });
+
+                req.open("GET", "https://eu1.locationiq.org/v1/reverse.php?key=9126593a665608&lat=" + parsed_info.lat + "&lon=" + parsed_info.lng + "&format=json", true);
+                req.send(null);
+            }
+        });
+
+        req.open("POST", "https://api.ubignss.com/position", true);
+        req.setRequestHeader("Content-Type", "application/json");
+        req.setRequestHeader("Authorization", "Basic aGV5bGlvdF9ldmFsOlJ3ZGpkOnR5MUMyfg==");
+        req.send(JSON.stringify({type: "ubiwifi", device: DeviceId, data: PositionCode}));
     }
 };
 

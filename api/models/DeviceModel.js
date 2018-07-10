@@ -43,6 +43,14 @@ let DevicesSchema = new Schema
         {
             type: String
         },
+    City:
+        {
+            type: String
+        },
+    Address:
+        {
+            type: String
+        },
     DeviceType:
         {
             type: String, required : true //dependante du type de device

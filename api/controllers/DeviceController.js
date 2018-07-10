@@ -102,8 +102,8 @@ exports.create_device = function (req, res)
             res.send(err);
         } else {
             console.log("Device succefully created.");
+            res.json(Device);
         }
-        res.json(Device);
     });
 };
 
