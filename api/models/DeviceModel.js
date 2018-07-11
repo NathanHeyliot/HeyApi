@@ -51,6 +51,10 @@ let DevicesSchema = new Schema
         {
             type: String
         },
+    PostCode:
+        {
+            type: String
+        },
     DeviceType:
         {
             type: String, required : true //dependante du type de device

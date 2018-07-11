@@ -229,11 +229,11 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                     if (min.toString().length === 1)
                         min = "0" + min;
 
-                    Device.findOneAndUpdate({SigfoxId: DeviceId}, ({LastUpdate: dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min, Lon: parsed_info.lng, Lat: parsed_info.lat, City: parsed_get.address.village, Address: parsed_get.address.road}), {new: true}, function (err, device)
+                    Device.findOneAndUpdate({SigfoxId: DeviceId}, ({PostCode: parsed_get.address.postcode, LastUpdate: dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min, Lon: parsed_info.lng, Lat: parsed_info.lat, City: parsed_get.address.village, Address: parsed_get.address.road}), {new: true}, function (err, device)
                     {
                         if (err)
                             res.send(err);
-                        res.json({device_id: DeviceId, lat: parsed_info.lat, long: parsed_info.lng, accuracy: parsed_info.accuracy, city: parsed_get.address.village, address: parsed_get.address.road});
+                        res.json({device_id: DeviceId, lat: parsed_info.lat, long: parsed_info.lng, accuracy: parsed_info.accuracy, city: parsed_get.address.village, address: parsed_get.address.road, postcode: parsed_get.address.postcode});
                     });
                 });
 

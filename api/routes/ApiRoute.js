@@ -10,6 +10,7 @@ module.exports = function (app, route_dev, auth_activated) {
     let jwt_auth = require("../controllers/AuthController");
     let userApi = require("../controllers/UserController");
     let userGroupApi = require("../controllers/UserGroupController");
+    let LocalisationApi = require("../controllers/LocalisationController");
 
     var cors = require('cors');
 
@@ -193,6 +194,19 @@ module.exports = function (app, route_dev, auth_activated) {
 
     app.route('/usersgroups/user/:Uid')
         .get(userGroupApi.get_infoU);
+
+
+    /*
+    *------------------------
+    * LOCALISATION ROUTER
+    * -----------------------
+     */
+
+    app.route('/localisation/crypted')
+        .post(LocalisationApi.crypted);
+
+    app.route('/localisation/uncrypted')
+        .post(LocalisationApi.uncrypted);
 
 
     /*
