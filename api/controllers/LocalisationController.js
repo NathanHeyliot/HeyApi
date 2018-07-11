@@ -11,7 +11,7 @@ exports.crypted = function (req, res) {
     req.addEventListener('load', function() {
         var parsed_info = JSON.parse(req.response);
         if(parsed_info.code === "TECHNICAL") {
-            console.log("Could not retrieve lat / long of the payload !");
+            console.log("Could not retrieve lat / long !");
             console.log(parsed_info);
             res.json({message: "Error with API"});
         } else {

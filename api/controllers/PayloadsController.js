@@ -131,46 +131,47 @@ exports.create_payload = function (req, res) //create a new payload and POST it
     if ((event = checkEventCode(req.body)) === 1)
     {
         let newPayload = fillParsed((req.body), 1);
+        if(newPayload !== undefined) {
+            let newDevice = fill_device(newPayload[newPayload.length - 1]);
+            for (let i = 0; i !== newPayload.length; i++) {
 
-        let newDevice = fill_device(newPayload[newPayload.length - 1]);
-        for (let i = 0; i !== newPayload.length; i++) {
+                newPayload[i].save(function (err, payload) {
+                    if (err)
+                        return (res.send(err));
+                    res.write(JSON.stringify(payload));
 
-            newPayload[i].save(function (err, payload) {
-                if (err)
-                    return (res.send(err));
-                res.write(JSON.stringify(payload));
-
-                if (i === newPayload.length - 1)
-                {
-                    //calcul du pourcentage de remplissage
-                    Device.find({SigfoxId: newDevice.SigfoxId}, function (err, obj) {
-                        if(obj[0] !== undefined && obj[0] != null) { //check if device has been found in database
-                            cal = (obj[0].toObject().CalibrationMeasure);
-                            if (newPayload[i].Mesure !== 9999)// 9999 = error
-                                newDevice.FillLevel =  100 - (newPayload[i].Mesure * 100 / cal);
-                            else
-                                newDevice.FillLevel = obj[0].toObject().FillLevel;
-                            newDevice.FillLevel = newDevice.FillLevel.toFixed(2);
-                            //On update le device
-                            Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},
-                                {FillLevel:newDevice.FillLevel, LastUpdate: newDevice.LastUpdate},
-                                {new: true}, function (err, device)
-                                {
-                                    if (err)
+                    if (i === newPayload.length - 1)
+                    {
+                        //calcul du pourcentage de remplissage
+                        Device.find({SigfoxId: newDevice.SigfoxId}, function (err, obj) {
+                            if(obj[0] !== undefined && obj[0] != null) { //check if device has been found in database
+                                cal = (obj[0].toObject().CalibrationMeasure);
+                                if (newPayload[i].Mesure !== 9999)// 9999 = error
+                                    newDevice.FillLevel =  100 - (newPayload[i].Mesure * 100 / cal);
+                                else
+                                    newDevice.FillLevel = obj[0].toObject().FillLevel;
+                                newDevice.FillLevel = newDevice.FillLevel.toFixed(2);
+                                //On update le device
+                                Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},
+                                    {FillLevel:newDevice.FillLevel, LastUpdate: newDevice.LastUpdate},
+                                    {new: true}, function (err, device)
                                     {
-                                        console.log("Error updating Device");
-                                        return (res.send(err));
-                                    }
-                                    res.write(JSON.stringify(device));
-                                    return (res.end());
-                                });
-                        } else {
-                            console.log("Device not found");
-                            return (res.end());
-                        }
-                    });
-                }
-            });
+                                        if (err)
+                                        {
+                                            console.log("Error updating Device");
+                                            return (res.send(err));
+                                        }
+                                        res.write(JSON.stringify(device));
+                                        return (res.end());
+                                    });
+                            } else {
+                                console.log("Device not found");
+                                return (res.end());
+                            }
+                        });
+                    }
+                });
+            }
         }
     }
     //si event = 0 -> calibration On sauvegarde la mesure et on update le device
@@ -208,6 +209,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
             var parsed_info = JSON.parse(req.response);
             if(parsed_info.code === "TECHNICAL") {
                 console.log("Could not retrieve lat / long of the payload !");
+                console.log(parsed_info);
                 res.json({message: "Error with API"});
             } else {
                 req = new XMLHttpRequest();
