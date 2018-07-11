@@ -23,6 +23,8 @@ exports.render_device = function (req, res) //GET recupere les infos des devices
 
 exports.list_device = function(req, res) // GET recupere les infos des devices et les retournes en format JSON
 {
+    console.log("List of devices");
+
     Device.find({}, function(err, device)
     {
         if(err)
@@ -36,6 +38,8 @@ exports.list_device = function(req, res) // GET recupere les infos des devices e
 
 exports.update_device = function (req, res) //PUT Edit the specified payload
 {
+    console.log("Ipdate a device");
+
     Device.findOneAndUpdate({_id: req.params.appId}, (req.body), {new: true}, function (err, device)
     {
         if (err)
@@ -133,6 +137,8 @@ exports.read_device = function(req, res) //recupere les details d'un capteur et 
 
 exports.delete_device = function (req, res) //supprime le device séléctionné
 {
+    console.log("Deleting a device, ID : " + req.params.appId);
+
     Device.remove({_id: req.params.appId}, function (err, device)
     {
         if (err)
@@ -144,6 +150,8 @@ exports.delete_device = function (req, res) //supprime le device séléctionné
 
 exports.list_group_devices = function (req, res) //Recupere tout les device d'un groupe séléctionné
 {
+    console.log("List of groups of devices by id, GROUP ID : " + req.params.GroupId);
+
     Device.find({GroupId: req.params.GroupId}, function (err, device)
     {
         console.log("Looking for devices from group :" + req.params.GroupId);
@@ -158,6 +166,8 @@ exports.list_group_devices = function (req, res) //Recupere tout les device d'un
 
 exports.list_bytype = function (req, res) //recupere tout les device du type spécifié
 {
+    console.log("List groups of device by types, TYPES : " + req.params.DeviceType);
+
     Device.find({DeviceType: req.params.DeviceType}, function (err, device)
     {
         if (err)

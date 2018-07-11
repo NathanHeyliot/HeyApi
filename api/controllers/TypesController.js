@@ -5,6 +5,8 @@ let mongoose = require('mongoose'),
 
 exports.list_devicetypes = function(req, res)
 {
+    console.log("List of devices types");
+
     DeviceType.find({}, function(err, devicetypes)
     {
         if (err)
@@ -15,6 +17,8 @@ exports.list_devicetypes = function(req, res)
 
 exports.create_devicetypes = function (req, res)
 {
+    console.log("Creating a device types");
+
     let newDevicesTypes = new DeviceType(req.body);
     newDevicesTypes.save(function (err, devicetypes)
     {
@@ -26,6 +30,8 @@ exports.create_devicetypes = function (req, res)
 
 exports.delete_devicestypes = function (req, res)
 {
+    console.log("Deleting a specified device types, Name : " + req.params.Name);
+
     DeviceType.remove({Name: req.params.Name}, function (err, devicetypes)
     {
         if(err)
@@ -37,6 +43,8 @@ exports.delete_devicestypes = function (req, res)
 exports.update_devicestypes = function (req, res)
 {
 
+    console.log("Updating device types, Name : " + req.params.Name);
+
     DeviceType.findOneAndUpdate({Name: req.params.Name}, req.body, {new: true}, function (err, devicestypes)
     {
         if(err)
@@ -47,6 +55,8 @@ exports.update_devicestypes = function (req, res)
 
 exports.information_devicestypes = function (req, res)
 {
+    console.log("Retrieve information of device types, Name : " + req.params.Name);
+
     DeviceType.find({Name: req.params.Name}, function (err, devicestypes) {
         if(err)
             res.send(err);
@@ -57,6 +67,8 @@ exports.information_devicestypes = function (req, res)
 
 exports.delete_devicestypesid = function (req, res)
 {
+    console.log("Delete a specified device, ID : " + req.params.id);
+
     DeviceType.remove({_id: req.params.id}, function (err, devicetypes)
     {
         if(err)
@@ -68,6 +80,8 @@ exports.delete_devicestypesid = function (req, res)
 exports.update_devicestypesid = function (req, res)
 {
 
+    console.log("Update device types id : " + req.params.id)
+
     DeviceType.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, function (err, devicestypes)
     {
         if(err)
@@ -78,6 +92,8 @@ exports.update_devicestypesid = function (req, res)
 
 exports.information_devicestypesid = function (req, res)
 {
+    console.log("Retrieve information for device types, ID : " + req.params.id);
+
     DeviceType.find({_id: req.params.id}, function (err, devicestypes) {
         if(err)
             res.send(err);

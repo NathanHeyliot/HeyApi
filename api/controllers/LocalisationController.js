@@ -2,6 +2,8 @@
 
 exports.crypted = function (req, res) {
 
+    console.log("Decrypt a location, CODE : " + req.body.PositionCode);
+
     var PositionCode = String(req.body.PositionCode);
 
     var req = new XMLHttpRequest();
@@ -29,6 +31,8 @@ exports.crypted = function (req, res) {
 };
 
 exports.uncrypted = function (req, res) {
+
+    console.log("getting information with location... LAT : " + req.body.Lat + " , LON : " + req.body.Lon);
 
     let Lat = req.body.Lat;
     let Lon = req.body.Lon;

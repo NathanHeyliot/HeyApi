@@ -6,6 +6,8 @@ let mongoose = require('mongoose'),
 
 exports.list_organisation = function (req, res) //Liste tout les clients
 {
+    console.log("List of organisations...");
+
     Organisation.find({}, function (err, organisation)
     {
         if (err)
@@ -27,6 +29,8 @@ exports.delete_all_organisations = function (req, res)
 
 exports.create_organisation = function (req, res)//crée un nouveau client
 {
+    console.log("Submitting a new organisation");
+
     let newOrganisation = new Organisation(req.body);
     newOrganisation.save(function (err, organisation)
     {
@@ -38,6 +42,9 @@ exports.create_organisation = function (req, res)//crée un nouveau client
 
 exports.update_organisation = function (req, res) //met a jour les informations d'un client #CTristOnAPlusDeThunes
 {
+
+    console.log("Updating organisations, ID : " + req.params.appId);
+
     Organisation.findOneAndUpdate({_id: req.params.appId}, req.body, {new: true}, function (err, organisation)
     {
         if(err)
@@ -48,6 +55,9 @@ exports.update_organisation = function (req, res) //met a jour les informations 
 
 exports.get_organisation = function (req, res) //get information about an organisation
 {
+
+    console.log("Get organisation information, ID : " + req.params.appId);
+
     Organisation.find({_id: req.params.appId}, function(err, organisation) {
        if(err)
            res.send(err);
@@ -58,6 +68,8 @@ exports.get_organisation = function (req, res) //get information about an organi
 
 exports.delete_organisation = function (req, res) //Supprime un client
 {
+    console.log("Deleting of specified information, ID : " + req.params.appId);
+
     Organisation.remove({_id: req.params.appId}, function(err, organisation)
     {
             if(err)

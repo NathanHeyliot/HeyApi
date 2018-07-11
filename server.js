@@ -37,8 +37,6 @@ let route_dev = false;
  */
 let auth_activated = false;
 
-
-
 let routes = require('./api/routes/ApiRoute');
 routes(app, route_dev, auth_activated);
 

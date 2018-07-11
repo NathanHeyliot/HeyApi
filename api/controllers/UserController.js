@@ -6,6 +6,9 @@ let mongoose = require('mongoose'),
 
 exports.list_users = function (req, res)
 {
+
+    console.log("List of users...");
+
     User.find({}, function(err, user)
     {
         if(err)
@@ -19,6 +22,8 @@ exports.list_users = function (req, res)
 
 exports.user_info = function (req, res)
 {
+    console.log("user Info about : " + req.params.UserId)
+
     User.find({_id: req.params.UserId}, function(err, user)
     {
         if(err)
@@ -32,6 +37,8 @@ exports.user_info = function (req, res)
 
 exports.update_user = function (req, res)
 {
+    console.log("Updating a user : " + req.params.UserId)
+
     User.findOneAndUpdate({_id: req.params.UserId}, (req.body), {new: true}, function (err, device)
     {
         if (err)
@@ -50,6 +57,8 @@ exports.delete_all_users = function (req, res)
 
 exports.delete_user = function (req, res)
 {
+    console.log("deleteing an user : " + req.params.UserId)
+
     User.remove({_id: req.params.UserId}, function (err, user)
     {
         if (err)
@@ -60,6 +69,8 @@ exports.delete_user = function (req, res)
 
 exports.create_user = function (req, res)
 {
+    console.log("Craeting a new user");
+
    let newUser = new User(req.body);
 
    newUser.save(function (err, user)

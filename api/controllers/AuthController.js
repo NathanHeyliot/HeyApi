@@ -18,6 +18,7 @@ exports.submit_auth = function (req, res)
             res.json({messages: token});
             res.end();
         } else {
+            console.log("bad Creditentials !");
             res.json({error: "Bad Creditentials !"});
             res.end();
         }
