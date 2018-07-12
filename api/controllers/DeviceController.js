@@ -169,7 +169,7 @@ exports.list_user_devices = function (req, res)
 {
     console.log("List of devices for users : " + req.params.UID);
 
-    let devices_list = [];
+    var devices_list = [];
 
     UserGroup.find({user_id: req.params.UID}, function (err, group) {
         if(err) {
