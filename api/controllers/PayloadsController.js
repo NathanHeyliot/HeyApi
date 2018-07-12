@@ -232,7 +232,31 @@ exports.create_payload = function (req, res) //create a new payload and POST it
     //si event = 0 -> calibration On sauvegarde la mesure et on update le device
     else if((event = checkEventCode(req.body)) === 0)
     {
-        let newPayload = fillParsed(req.body, 0);
+        //on recupere la date de reception
+        let ActualTime = new Date();
+        let dd = ActualTime.getDate();
+        let mm = ActualTime.getMonth()+1;
+        let yyyy = ActualTime.getFullYear();
+        let hh = ActualTime.getHours();
+        let min = ActualTime.getMinutes();
+
+        if (dd.toString().length === 1)
+            dd = "0" + dd;
+        if (mm.toString().length === 1)
+            mm = "0" + mm;
+        if (hh.toString().length === 1)
+            hh = "0" + hh;
+        if (min.toString().length === 1)
+            min = "0" + min;
+
+
+        let newPayload = new Payload;
+        newPayload.EventCode = event;
+        newPayload.Mesure = Number(req.body.Code.toString().substr(2, 4));
+        newPayload.DeviceId = req.body.DeviceId;
+        newPayload.DateGot = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;
+
+        console.log("Calibration ... Valeur :\n" + newPayload);
         let newDevice = fill_device(newPayload, 0);
 
         newPayload.save(function(err, payload)
