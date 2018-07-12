@@ -37,80 +37,6 @@ let checkEventCode = function(gotPayload)
         return(Number(gotPayload.Code.substring(0,2)));
 };
 
-let fillParsed = async function(gotPayload, EventCode) //Parse le payload et le stocke dans une var
-{
-    //on recupere la date de reception
-    let ActualTime = new Date();
-    let dd = ActualTime.getDate();
-    let mm = ActualTime.getMonth()+1;
-    let yyyy = ActualTime.getFullYear();
-    let hh = ActualTime.getHours();
-    let min = ActualTime.getMinutes();
-
-    if (dd.toString().length === 1)
-        dd = "0" + dd;
-    if (mm.toString().length === 1)
-        mm = "0" + mm;
-    if (hh.toString().length === 1)
-        hh = "0" + hh;
-    if (min.toString().length === 1)
-        min = "0" + min;
-
-    //traite les payloads en fonction des Event Codes
-    else if(EventCode === 0)
-    {
-        let newPayload = new Payload;
-        newPayload.EventCode = EventCode;
-        newPayload.Mesure = Number(gotPayload.Code.toString().substr(2, 4));
-        newPayload.DeviceId = gotPayload.DeviceId;
-        newPayload.DateGot = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;
-
-        console.log("Calibration ... Valeur :\n" + newPayload);
-        return(newPayload);
-    }
-
-
-    else if(EventCode === 1)
-    {
-        console.log("payload creation");
-        let nbmes = Number(gotPayload.Code.toString().substr(2,2));
-        let PayloadArray = new Array(nbmes);
-
-
-        Device.findOne({SigfoxId: gotPayload.DeviceId}, function (err, device)
-        {
-            if(device !== undefined) {
-                    //Calcul de l'heure de la mesure
-                    var now = new Date();
-                    var heureActuelle = now.getHours();
-
-                    for(let i = 0; i !== nbmes; i++)
-                    {
-                        PayloadArray[i] = new Payload();
-                        PayloadArray[i].EventCode = EventCode;
-                        PayloadArray[i].Mesure = Number(gotPayload.Code.toString().substr(4 + (i * 4), 4));
-                        PayloadArray[i].DeviceId = gotPayload.DeviceId;
-                        //PayloadArray[i].DateGot = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;
-
-                        if (heureActuelle >= parseInt(device.Phase_start) && heureActuelle < parseInt(device.Phase_stop))
-                            var offset = (nbmes - (i+1)) * parseInt(device.Wake_in);
-                        else
-                            var offset = (nbmes - (i+1)) * parseInt(device.Wake_out);
-
-                        var MS_PER_MINUTE = 60000;
-                        var dateMeasure = new Date(now - (offset * MS_PER_MINUTE));
-                        PayloadArray[i].DateGot = dateMeasure;
-                    }
-
-                    console.log("Payload Array : " + PayloadArray);
-                    return(PayloadArray);
-            }
-        });
-    }
-    else
-        throw ("WARNING: Unknown Event Code ! ");
-};
-
 //Crée un device temporaire pour mettre a jour la BDD
 let fill_device = function(newPayload, EventCode)
 {
@@ -147,7 +73,6 @@ exports.create_payload = function (req, res) //create a new payload and POST it
     //si event = 1 -> mesures on les stockes toutes une par une et on update le device associé
     if ((event = checkEventCode(req.body)) === 1)
     {
-        //let newPayload = fillParsed(req.body, 1);
         console.log("payload creation");
         let nbmes = Number(req.body.Code.toString().substr(2,2));
         let PayloadArray = new Array(nbmes);
