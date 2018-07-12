@@ -147,55 +147,87 @@ exports.create_payload = function (req, res) //create a new payload and POST it
     //si event = 1 -> mesures on les stockes toutes une par une et on update le device associé
     if ((event = checkEventCode(req.body)) === 1)
     {
-        let newPayload = fillParsed(req.body, 1);
-        if(newPayload !== undefined) {
-            let newDevice = fill_device(newPayload, 1);
-            for (let i = 0; i !== newPayload.length; i++) {
+        //let newPayload = fillParsed(req.body, 1);
+        console.log("payload creation");
+        let nbmes = Number(req.body.Code.toString().substr(2,2));
+        let PayloadArray = new Array(nbmes);
 
-                newPayload[i].save(function (err, payload) {
+        Device.findOne({SigfoxId: req.body.DeviceId}, function (err, device)
+        {
+            if(device !== undefined) {
+                //Calcul de l'heure de la mesure
+                var now = new Date();
+                var heureActuelle = now.getHours();
 
-                    console.log("Saving Payload...");
+                for(let i = 0; i !== nbmes; i++)
+                {
+                    PayloadArray[i] = new Payload();
+                    PayloadArray[i].EventCode = EventCode;
+                    PayloadArray[i].Mesure = Number(gotPayload.Code.toString().substr(4 + (i * 4), 4));
+                    PayloadArray[i].DeviceId = gotPayload.DeviceId;
+                    //PayloadArray[i].DateGot = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;
 
-                    if (err)
-                        return (res.send(err));
-                    res.write(JSON.stringify(payload));
+                    if (heureActuelle >= parseInt(device.Phase_start) && heureActuelle < parseInt(device.Phase_stop))
+                        var offset = (nbmes - (i+1)) * parseInt(device.Wake_in);
+                    else
+                        var offset = (nbmes - (i+1)) * parseInt(device.Wake_out);
 
-                    if (i === newPayload.length - 1)
-                    {
-                        //calcul du pourcentage de remplissage
-                        Device.find({SigfoxId: newDevice.SigfoxId}, function (err, obj) {
-                            if(obj[0] !== undefined && obj[0] != null) { //check if device has been found in database
-                                cal = (obj[0].toObject().CalibrationMeasure);
-                                if (newPayload[i].Mesure !== 9999)// 9999 = error
-                                    newDevice.FillLevel =  100 - (newPayload[i].Mesure * 100 / cal);
-                                else
-                                    newDevice.FillLevel = obj[0].toObject().FillLevel;
-                                newDevice.FillLevel = newDevice.FillLevel.toFixed(2);
-                                //On update le device
-                                Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},
-                                    {FillLevel:newDevice.FillLevel, LastUpdate: newDevice.LastUpdate},
-                                    {new: true}, function (err, device)
-                                    {
+                    var MS_PER_MINUTE = 60000;
+                    var dateMeasure = new Date(now - (offset * MS_PER_MINUTE));
+                    PayloadArray[i].DateGot = dateMeasure;
+                }
 
-                                        console.log("Updating device ...");
+                console.log("Payload Array : " + PayloadArray);
+                if(PayloadArray !== undefined) {
+                    let newDevice = fill_device(PayloadArray, 1);
+                    for (let i = 0; i !== PayloadArray.length; i++) {
 
-                                        if (err)
-                                        {
-                                            console.log("Error updating Device");
-                                            return (res.send(err));
-                                        }
-                                        res.write(JSON.stringify(device));
+                        PayloadArray[i].save(function (err, payload) {
+
+                            console.log("Saving Payload...");
+
+                            if (err)
+                                return (res.send(err));
+                            res.write(JSON.stringify(payload));
+
+                            if (i === PayloadArray.length - 1)
+                            {
+                                //calcul du pourcentage de remplissage
+                                Device.find({SigfoxId: newDevice.SigfoxId}, function (err, obj) {
+                                    if(obj[0] !== undefined && obj[0] != null) { //check if device has been found in database
+                                        cal = (obj[0].toObject().CalibrationMeasure);
+                                        if (PayloadArray[i].Mesure !== 9999)// 9999 = error
+                                            newDevice.FillLevel =  100 - (PayloadArray[i].Mesure * 100 / cal);
+                                        else
+                                            newDevice.FillLevel = obj[0].toObject().FillLevel;
+                                        newDevice.FillLevel = newDevice.FillLevel.toFixed(2);
+                                        //On update le device
+                                        Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},
+                                            {FillLevel:newDevice.FillLevel, LastUpdate: newDevice.LastUpdate},
+                                            {new: true}, function (err, device)
+                                            {
+
+                                                console.log("Updating device ...");
+
+                                                if (err)
+                                                {
+                                                    console.log("Error updating Device");
+                                                    return (res.send(err));
+                                                }
+                                                res.write(JSON.stringify(device));
+                                                return (res.end());
+                                            });
+                                    } else {
+                                        console.log("Device not found");
                                         return (res.end());
-                                    });
-                            } else {
-                                console.log("Device not found");
-                                return (res.end());
+                                    }
+                                });
                             }
                         });
                     }
-                });
+                }
             }
-        }
+        });
     }
     //si event = 0 -> calibration On sauvegarde la mesure et on update le device
     else if((event = checkEventCode(req.body)) === 0)
