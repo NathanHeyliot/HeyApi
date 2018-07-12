@@ -175,6 +175,8 @@ exports.list_user_devices = function (req, res)
             res.send(err);
         }
 
+        console.log("Groups found : " + group);
+
         group.forEach(function (element) {
             Device.find({GroupId: element.device_group_id}, function (err, device)
             {
