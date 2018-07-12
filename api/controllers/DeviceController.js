@@ -185,7 +185,7 @@ exports.list_user_devices = function (req, res)
                     }
 
                     device.forEach(function (element) {
-                        res.json(element);
+                        res.send(element);
                     });
                 });
             });
