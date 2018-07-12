@@ -37,7 +37,7 @@ let checkEventCode = function(gotPayload)
         return(Number(gotPayload.Code.substring(0,2)));
 };
 
-let fillParsed = function(gotPayload, EventCode) //Parse le payload et le stocke dans une var
+let fillParsed = async function(gotPayload, EventCode) //Parse le payload et le stocke dans une var
 {
     //on recupere la date de reception
     let ActualTime = new Date();
@@ -104,9 +104,9 @@ let fillParsed = function(gotPayload, EventCode) //Parse le payload et le stocke
 
                     console.log("Payload Array : " + PayloadArray);
                     return(PayloadArray);
+            } else {
+                return undefined;
             }
-
-            return undefined;
         });
     }
     else
@@ -149,7 +149,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
     //si event = 1 -> mesures on les stockes toutes une par une et on update le device associé
     if ((event = checkEventCode(req.body)) === 1)
     {
-        let newPayload = fillParsed((req.body), 1);
+        let newPayload = fillParsed(req.body, 1);
         if(newPayload !== undefined) {
             let newDevice = fill_device(newPayload[newPayload.length - 1]);
             for (let i = 0; i !== newPayload.length; i++) {
@@ -202,7 +202,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
     //si event = 0 -> calibration On sauvegarde la mesure et on update le device
     else if((event = checkEventCode(req.body)) === 0)
     {
-        let newPayload = fillParsed((req.body), 0);
+        let newPayload = fillParsed(req.body, 0);
         let newDevice = fill_device(newPayload);
 
         newPayload.save(function(err, payload)
