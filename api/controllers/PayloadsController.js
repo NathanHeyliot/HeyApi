@@ -202,24 +202,35 @@ exports.create_payload = function (req, res) //create a new payload and POST it
     //si event = 0 -> calibration On sauvegarde la mesure et on update le device
     else if((event = checkEventCode(req.body)) === 0)
     {
-        let newPayload = fillParsed((req.body), 0);
-        let newDevice = fill_device(newPayload);
+        Promise.all([
+            fillParsed(req.body, 0)
+        ]).then(resp1 => {
+            let newPayload = resp1;
+            Promise.all([
+                fill_device(newPayload)
+            ]).then(resp2 => {
+               let newDevice = resp2;
 
-        newPayload.save(function(err, payload)
-        {
-            if (err)
-                return(res.send(err));
-            res.write(JSON.stringify(payload));
-
-            Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},{FillLevel: 0, CalibrationMeasure: newPayload.Mesure, LastUpdate: newDevice.LastUpdate },
-                {new: true}, function (err, device)
+                newPayload.save(function(err, payload)
                 {
-                if (err)
-                    return(res.send(err));
-                res.write(JSON.stringify(device));
-                return(res.end());
+                    if (err)
+                        return(res.send(err));
+                    res.write(JSON.stringify(payload));
+
+                    Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},{FillLevel: 0, CalibrationMeasure: newPayload.Mesure, LastUpdate: newDevice.LastUpdate },
+                        {new: true}, function (err, device)
+                        {
+                            if (err)
+                                return(res.send(err));
+                            res.write(JSON.stringify(device));
+                            return(res.end());
+                        });
+                });
+
             });
         });
+        //let newPayload = fillParsed((req.body), 0);
+        //let newDevice = fill_device(newPayload);
     }
     //si event code == 2 --> fonction de géolocalisation
     else if((event = checkEventCode(req.body)) === 2)
