@@ -90,6 +90,10 @@ exports.create_device = function (req, res)
     newDevice.GroupId = req.body.GroupId;
     newDevice.SigfoxId = req.body.SigfoxId;
     newDevice.DeviceType = req.body.DeviceType;
+    newDevice.Phase_start = req.body.Phase_start;
+    newDevice.Phase_stop = req.body.Phase_stop;
+    newDevice.Wake_in = req.body.Wake_in;
+    newDevice.Wake_out = req.body.Wake_out;
 
     //on initialise un nouveau capteur avec un remplissage a 0% et une calibration a - 30 pour faciliter la mesure de calibration ensuite
 
