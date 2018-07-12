@@ -154,7 +154,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
         Device.findOne({SigfoxId: req.body.DeviceId}, function (err, device)
         {
-            if(device !== undefined) {
+            if(device !== undefined && device !== null) {
                 //Calcul de l'heure de la mesure
                 var now = new Date();
                 var heureActuelle = now.getHours();
