@@ -162,7 +162,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                 for(let i = 0; i !== nbmes; i++)
                 {
                     PayloadArray[i] = new Payload();
-                    PayloadArray[i].EventCode = EventCode;
+                    PayloadArray[i].EventCode = event;
                     PayloadArray[i].Mesure = Number(gotPayload.Code.toString().substr(4 + (i * 4), 4));
                     PayloadArray[i].DeviceId = gotPayload.DeviceId;
                     //PayloadArray[i].DateGot = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;
