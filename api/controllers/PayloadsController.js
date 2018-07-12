@@ -76,13 +76,14 @@ let fillParsed = function(gotPayload, EventCode) //Parse le payload et le stocke
         let nbmes = Number(gotPayload.Code.toString().substr(2,2));
         let PayloadArray = new Array(nbmes);
 
-        console.log("HERE");
 
         Device.find({SigfoxId: gotPayload.DeviceId}, function (err, device)
         {
             if(device !== undefined && device !== null) {
 
                 var fdevice = device[0];
+
+                console.log("FDEVICE : " + fdevice);
 
                 if(fdevice !== undefined && fdevice !== null) {
                     //Calcul de l'heure de la mesure
@@ -106,6 +107,8 @@ let fillParsed = function(gotPayload, EventCode) //Parse le payload et le stocke
                         var dateMeasure = new Date(now - (offset * MS_PER_MINUTE));
                         PayloadArray[i].DateGot = dateMeasure;
                     }
+
+                    console.log("Payload Array : " + PayloadArray);
                     return(PayloadArray);
                 }
 
