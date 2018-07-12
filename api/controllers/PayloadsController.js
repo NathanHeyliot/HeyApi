@@ -155,6 +155,9 @@ exports.create_payload = function (req, res) //create a new payload and POST it
             for (let i = 0; i !== newPayload.length; i++) {
 
                 newPayload[i].save(function (err, payload) {
+
+                    console.log("Saving Payload...");
+
                     if (err)
                         return (res.send(err));
                     res.write(JSON.stringify(payload));
@@ -175,6 +178,9 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                     {FillLevel:newDevice.FillLevel, LastUpdate: newDevice.LastUpdate},
                                     {new: true}, function (err, device)
                                     {
+
+                                        console.log("Updating device ...");
+
                                         if (err)
                                         {
                                             console.log("Error updating Device");
