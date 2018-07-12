@@ -185,9 +185,10 @@ exports.list_user_devices = function (req, res)
                     console.log("Error at : " + err);
                     res.send(err);
                 }
-                res.json(device);
+                res.send(device);
             });
         });
+        res.end();
     })
 }
 
