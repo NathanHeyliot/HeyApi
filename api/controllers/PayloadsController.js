@@ -165,7 +165,6 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                     PayloadArray[i].EventCode = event;
                     PayloadArray[i].Mesure = Number(req.body.Code.toString().substr(4 + (i * 4), 4));
                     PayloadArray[i].DeviceId = req.body.DeviceId;
-                    //PayloadArray[i].DateGot = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;
 
                     if (heureActuelle >= parseInt(device.Phase_start) && heureActuelle < parseInt(device.Phase_stop))
                         var offset = (nbmes - (i+1)) * parseInt(device.Wake_in);
@@ -181,8 +180,26 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                 if(PayloadArray !== undefined) {
                     for (let i = 0; i !== PayloadArray.length; i++) {
 
+                        //on recupere la date de reception
+                        let ActualTime = new Date();
+                        let dd = ActualTime.getDate();
+                        let mm = ActualTime.getMonth()+1;
+                        let yyyy = ActualTime.getFullYear();
+                        let hh = ActualTime.getHours();
+                        let min = ActualTime.getMinutes();
+
+                        if (dd.toString().length === 1)
+                            dd = "0" + dd;
+                        if (mm.toString().length === 1)
+                            mm = "0" + mm;
+                        if (hh.toString().length === 1)
+                            hh = "0" + hh;
+                        if (min.toString().length === 1)
+                            min = "0" + min;
+
+
                         let newDevice = new Device;
-                        newDevice.LastUpdate = PayloadArray[i].DateGot;
+                        newDevice.LastUpdate = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;;
                         newDevice.SigfoxId = PayloadArray[i].DeviceId;
 
                         PayloadArray[i].save(function (err, payload) {
