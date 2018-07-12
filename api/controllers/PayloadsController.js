@@ -179,7 +179,10 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
                 console.log("Payload Array : " + PayloadArray);
                 if(PayloadArray !== undefined) {
-                    let newDevice = fill_device(PayloadArray, 1);
+                    let newDevice = new Device;
+                    newDevice.LastUpdate = newPayload.DateGot;
+                    newDevice.SigfoxId = newPayload.DeviceId;
+
                     for (let i = 0; i !== PayloadArray.length; i++) {
 
                         PayloadArray[i].save(function (err, payload) {
