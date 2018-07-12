@@ -57,19 +57,19 @@ let DevicesSchema = new Schema
         },
     Phase_start:
         {
-            type: int, required : true //Heure de début de phase
+            type: Number, required : true //Heure de début de phase
         },
     Phase_stop:
         {
-            type: int, required : true //Heure de fin de phase
+            type: Number, required : true //Heure de fin de phase
         },
     Wake_in:
         {
-            type: int, required : true //Wake up in minute dans la phase
+            type: Number, required : true //Wake up in minute dans la phase
         },
     Wake_out:
         {
-            type: int, required : true //Wake up in minute sortie de la phase
+            type: Number, required : true //Wake up in minute sortie de la phase
         },
     DeviceType:
         {
