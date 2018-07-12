@@ -188,9 +188,9 @@ exports.list_user_devices = function (req, res)
                     res.send(err);
                 }
 
-                console.log(device);
-
-                devices_list.push(device);
+                device.forEach(function (element) {
+                    devices_list.push(element);
+                });
             });
         });
         res.json(devices_list);
