@@ -39,8 +39,6 @@ let checkEventCode = function(gotPayload)
 
 let fillParsed = function(gotPayload, EventCode) //Parse le payload et le stocke dans une var
 {
-
-
     //on recupere la date de reception
     let ActualTime = new Date();
     let dd = ActualTime.getDate();
@@ -78,17 +76,44 @@ let fillParsed = function(gotPayload, EventCode) //Parse le payload et le stocke
         let nbmes = Number(gotPayload.Code.toString().substr(2,2));
         let PayloadArray = new Array(nbmes);
 
-        for(let i = 0; i !== nbmes; i++)
+        console.log("HERE");
+
+        Device.find({SigfoxId: gotPayload.DeviceId}, function (err, device)
         {
-            PayloadArray[i] = new Payload();
-            PayloadArray[i].EventCode = EventCode;
-            PayloadArray[i].Mesure = Number(gotPayload.Code.toString().substr(4 + (i * 4), 4));
-            PayloadArray[i].DeviceId = gotPayload.DeviceId;
-            PayloadArray[i].DateGot = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;
+            if(device !== undefined && device !== null) {
 
-        }
+                var fdevice = device[0];
 
-        return(PayloadArray);
+                if(fdevice !== undefined && fdevice !== null) {
+                    //Calcul de l'heure de la mesure
+                    var now = new Date();
+                    var heureActuelle = now.getHours();
+
+                    for(let i = 0; i !== nbmes; i++)
+                    {
+                        PayloadArray[i] = new Payload();
+                        PayloadArray[i].EventCode = EventCode;
+                        PayloadArray[i].Mesure = Number(gotPayload.Code.toString().substr(4 + (i * 4), 4));
+                        PayloadArray[i].DeviceId = gotPayload.DeviceId;
+                        //PayloadArray[i].DateGot = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;
+
+                        if (heureActuelle >= parseInt(fdevice.Phase_start) && heureActuelle < parseInt(fdevice.Phase_stop))
+                            var offset = (nbmes - (i+1)) * parseInt(fdevice.Wake_in);
+                        else
+                            var offset = (nbmes - (i+1)) * parseInt(fdevice.Wake_out);
+
+                        var MS_PER_MINUTE = 60000;
+                        var dateMeasure = new Date(now - (offset * MS_PER_MINUTE));
+                        PayloadArray[i].DateGot = dateMeasure;
+                    }
+                    return(PayloadArray);
+                }
+
+                return undefined;
+            }
+
+            return undefined;
+        });
     }
     else
         throw ("WARNING: Unknown Event Code ! ");
