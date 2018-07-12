@@ -49,7 +49,7 @@ exports.get_infoU = function (req, res)
 {
     console.log("getting user info, USERID : " + req.params.Uid)
 
-    UserGroup.find({user_id: req.params.Uid}, function (err, group) {
+    UserGroup.find({user_id: req.params.Uid}, {'_id': 0, 'user_id': 0, '__v': 0}, function (err, group) {
         if(err) {
             error("Error at: " + err);
             res.send(err);

@@ -194,7 +194,7 @@ let get_user_devices_anex = async function(res, group)
     var group_do = 0;
 
     await group.forEach(function (element, index, array) {
-        Device.find({GroupId: element.device_group_id}, {'_id': 0, 'Created': 0, 'LastUpdate': 0, 'SigfoxId': 0, 'DeviceType': 0, '__v': 0}, function (err, device)
+        Device.find({GroupId: element.device_group_id}, {'_id': 0, 'Created': 0, 'LastUpdate': 0, 'SigfoxId': 0, 'DeviceType': 0, '__v': 0, 'CalibrationMeasure': 0}, function (err, device)
         {
             group_do++;
             if (err)
