@@ -169,29 +169,47 @@ exports.list_user_devices = function (req, res)
 {
     console.log("List of devices for users : " + req.params.UID);
 
+
+
+
+
     UserGroup.find({user_id: req.params.UID}, function (err, group) {
         if(err) {
             error("Error at: " + err);
             res.send(err);
         }
-        console.log("Groups found : " + group);
-        group.forEach(function (element) {
-                Device.find({GroupId: element.device_group_id}, function (err, device)
-                {
-                    if (err)
-                    {
-                        console.log("Error at : " + err);
-                        res.send(err);
-                    }
 
-                    device.forEach(function (element) {
-                        res.send(element);
-                    });
-                });
-            });
-            }
-        )
+        console.log("Groups found : " + group);
+        get_user_devices_anex(res, group);
+    }
+)
+
+
 };
+
+
+let get_user_devices_anex = async function(res, group)
+{
+    var devices_list = [];
+    var group_do = 0;
+
+    await group.forEach(function (element, index, array) {
+        Device.find({GroupId: element.device_group_id}, function (err, device)
+        {
+            group_do++;
+            if (err)
+            {
+                console.log("Error at : " + err);
+                res.send(err);
+            }
+            devices_list.push(device);
+
+            if(group_do === array.length) {
+                res.json(devices_list);
+            }
+        });
+    });
+}
 
 exports.list_bytype = function (req, res) //recupere tout les device du type spécifié
 {
