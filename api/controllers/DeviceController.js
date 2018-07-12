@@ -169,6 +169,8 @@ exports.list_user_devices = function (req, res)
 {
     console.log("List of devices for users : " + req.params.UID);
 
+    let devices_list = null;
+
     UserGroup.find({user_id: req.params.UID}, function (err, group) {
         if(err) {
             error("Error at: " + err);
@@ -185,10 +187,10 @@ exports.list_user_devices = function (req, res)
                     console.log("Error at : " + err);
                     res.send(err);
                 }
-                res.send(device);
+                devices_list.push(device);
             });
         });
-        res.end();
+        res.json(devices_list);
     })
 }
 
