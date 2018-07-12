@@ -205,7 +205,7 @@ let get_user_devices_anex = async function(res, group)
             devices_list.push(device);
 
             if(group_do === array.length) {
-                res.json({group: element.device_group_id, data: devices_list[0]});
+                res.json({group: element.device_group_id, data: devices_list});
             }
         });
     });
