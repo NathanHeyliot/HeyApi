@@ -30,7 +30,7 @@ app.set('view engine', 'ejs');
 * SET ROUTER IN DEV MODE
  */
 
-let route_dev = false;
+let route_dev = true;
 
 /*
 * SET AUTH TOKEN TO ON
