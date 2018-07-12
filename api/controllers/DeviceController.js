@@ -3,6 +3,7 @@
 let mongoose = require('mongoose'),
     Device = mongoose.model('Device'),
     Payload = mongoose.model('Payload'),
+    UserGroup = mongoose.model('UserGroup'),
     jwt_auth = require("../controllers/AuthController"),
 
     globals = require('../../globals');
@@ -163,6 +164,30 @@ exports.list_group_devices = function (req, res) //Recupere tout les device d'un
         res.json(device);
     });
 };
+
+exports.list_user_devices = function (req, res)
+{
+    console.log("List of devices for users : " + req.params.UID);
+
+    UserGroup.find({user_id: req.params.UID}, function (err, group) {
+        if(err) {
+            error("Error at: " + err);
+            res.send(err);
+        }
+
+        group.forEach(function (element) {
+            Device.find({GroupId: element.device_group_id}, function (err, device)
+            {
+                if (err)
+                {
+                    console.log("Error at : " + err);
+                    res.send(err);
+                }
+                res.json(device);
+            });
+        });
+    })
+}
 
 exports.list_bytype = function (req, res) //recupere tout les device du type spécifié
 {

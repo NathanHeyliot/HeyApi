@@ -109,6 +109,9 @@ module.exports = function (app, route_dev, auth_activated) {
     app.route('/devices/group/:GroupId')
         .get(deviceApi.list_group_devices); // OK --> must be the group ID of the device
 
+    app.route('/devices/user/:UID')
+        .get(deviceApi.list_user_devices);
+
     app.route('/devices/type/:DeviceType')
         .get(deviceApi.list_bytype); // OK --> must be the device type of the device
 
