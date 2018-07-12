@@ -79,7 +79,7 @@ let fillParsed = async function(gotPayload, EventCode) //Parse le payload et le 
 
         Device.findOne({SigfoxId: gotPayload.DeviceId}, function (err, device)
         {
-            if(device !== undefined && device !== null) {
+            if(device !== undefined) {
                     //Calcul de l'heure de la mesure
                     var now = new Date();
                     var heureActuelle = now.getHours();
@@ -104,8 +104,6 @@ let fillParsed = async function(gotPayload, EventCode) //Parse le payload et le 
 
                     console.log("Payload Array : " + PayloadArray);
                     return(PayloadArray);
-            } else {
-                return undefined;
             }
         });
     }
