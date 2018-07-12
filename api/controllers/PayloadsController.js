@@ -163,8 +163,8 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                 {
                     PayloadArray[i] = new Payload();
                     PayloadArray[i].EventCode = event;
-                    PayloadArray[i].Mesure = Number(gotPayload.Code.toString().substr(4 + (i * 4), 4));
-                    PayloadArray[i].DeviceId = gotPayload.DeviceId;
+                    PayloadArray[i].Mesure = Number(req.body.Code.toString().substr(4 + (i * 4), 4));
+                    PayloadArray[i].DeviceId = req.body.DeviceId;
                     //PayloadArray[i].DateGot = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;
 
                     if (heureActuelle >= parseInt(device.Phase_start) && heureActuelle < parseInt(device.Phase_stop))
@@ -206,9 +206,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                             {FillLevel:newDevice.FillLevel, LastUpdate: newDevice.LastUpdate},
                                             {new: true}, function (err, device)
                                             {
-
                                                 console.log("Updating device ...");
-
                                                 if (err)
                                                 {
                                                     console.log("Error updating Device");
@@ -248,7 +246,6 @@ exports.create_payload = function (req, res) //create a new payload and POST it
             hh = "0" + hh;
         if (min.toString().length === 1)
             min = "0" + min;
-
 
         let newPayload = new Payload;
         newPayload.EventCode = event;
