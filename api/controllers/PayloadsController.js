@@ -114,10 +114,10 @@ let fillParsed = async function(gotPayload, EventCode) //Parse le payload et le 
 };
 
 //Crée un device temporaire pour mettre a jour la BDD
-let fill_device = function(newPayload)
+let fill_device = function(newPayload, EventCode)
 {
     let newDevice = new Device;
-    if (newPayload.EventCode === 0) //some time undefined ???
+    if (EventCode === 0) //some time undefined ???
     {
         newDevice.FillLevel = 0;
         newDevice.CalibrationMeasure = newPayload.Mesure;
@@ -151,7 +151,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
     {
         let newPayload = fillParsed(req.body, 1);
         if(newPayload !== undefined) {
-            let newDevice = fill_device(newPayload[newPayload.length - 1]);
+            let newDevice = fill_device(newPayload[newPayload.length - 1], event);
             for (let i = 0; i !== newPayload.length; i++) {
 
                 newPayload[i].save(function (err, payload) {
@@ -203,7 +203,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
     else if((event = checkEventCode(req.body)) === 0)
     {
         let newPayload = fillParsed(req.body, 0);
-        let newDevice = fill_device(newPayload);
+        let newDevice = fill_device(newPayload, event);
 
         newPayload.save(function(err, payload)
         {
