@@ -77,15 +77,9 @@ let fillParsed = function(gotPayload, EventCode) //Parse le payload et le stocke
         let PayloadArray = new Array(nbmes);
 
 
-        Device.find({SigfoxId: gotPayload.DeviceId}, function (err, device)
+        Device.findOne({SigfoxId: gotPayload.DeviceId}, function (err, device)
         {
             if(device !== undefined && device !== null) {
-
-                var fdevice = device[0];
-
-                console.log("FDEVICE : " + fdevice);
-
-                if(fdevice !== undefined && fdevice !== null) {
                     //Calcul de l'heure de la mesure
                     var now = new Date();
                     var heureActuelle = now.getHours();
@@ -98,10 +92,10 @@ let fillParsed = function(gotPayload, EventCode) //Parse le payload et le stocke
                         PayloadArray[i].DeviceId = gotPayload.DeviceId;
                         //PayloadArray[i].DateGot = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;
 
-                        if (heureActuelle >= parseInt(fdevice.Phase_start) && heureActuelle < parseInt(fdevice.Phase_stop))
-                            var offset = (nbmes - (i+1)) * parseInt(fdevice.Wake_in);
+                        if (heureActuelle >= parseInt(device.Phase_start) && heureActuelle < parseInt(device.Phase_stop))
+                            var offset = (nbmes - (i+1)) * parseInt(device.Wake_in);
                         else
-                            var offset = (nbmes - (i+1)) * parseInt(fdevice.Wake_out);
+                            var offset = (nbmes - (i+1)) * parseInt(device.Wake_out);
 
                         var MS_PER_MINUTE = 60000;
                         var dateMeasure = new Date(now - (offset * MS_PER_MINUTE));
@@ -110,9 +104,6 @@ let fillParsed = function(gotPayload, EventCode) //Parse le payload et le stocke
 
                     console.log("Payload Array : " + PayloadArray);
                     return(PayloadArray);
-                }
-
-                return undefined;
             }
 
             return undefined;
