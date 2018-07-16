@@ -2,6 +2,7 @@
 //include
 let mongoose = require('mongoose'),
     User = mongoose.model('User'),
+    md5 = require('md5'),
     globals = require('../../globals');
 
 exports.list_users = function (req, res)
@@ -57,7 +58,7 @@ exports.delete_all_users = function (req, res)
 
 exports.delete_user = function (req, res)
 {
-    console.log("deleteing an user : " + req.params.UserId)
+    console.log("Deleting an user : " + req.params.UserId)
 
     User.remove({_id: req.params.UserId}, function (err, user)
     {
@@ -69,14 +70,17 @@ exports.delete_user = function (req, res)
 
 exports.create_user = function (req, res)
 {
-    console.log("Craeting a new user");
+    console.log("Creating a new user");
 
-   let newUser = new User(req.body);
+   let newUser = new User();
+   newUser.FirstName = req.body.FirstName;
+   newUser.LastName = req.body.LastName;
+   newUser.Email = req.body.Email;
+   newUser.Password = md5(req.body.Password);
+   newUser.OrganisationID = req.body.OrganisationID;
 
    newUser.save(function (err, user)
    {
-       console.log("test");
-
        if(err)
            return(res.send(err));
        res.json(user);

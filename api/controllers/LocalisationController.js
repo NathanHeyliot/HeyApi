@@ -1,7 +1,5 @@
 'use strict'
 
-var $ = require('jquery');
-
 exports.crypted = function (req, res) {
 
     console.log("Decrypt a location, CODE : " + req.body.PositionCode);
