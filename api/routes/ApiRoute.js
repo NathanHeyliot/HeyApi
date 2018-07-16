@@ -6,7 +6,6 @@ module.exports = function (app, route_dev, auth_activated) {
     let groupApi = require("../controllers/GroupController");
     let orgApi = require("../controllers/OrganisationController");
     let typeApi = require("../controllers/TypesController");
-    let dashboard = require("../controllers/dashboardController");
     let jwt_auth = require("../controllers/AuthController");
     let userApi = require("../controllers/UserController");
     let userGroupApi = require("../controllers/UserGroupController");
@@ -45,23 +44,6 @@ module.exports = function (app, route_dev, auth_activated) {
         app.route('/usersgroups')
             .delete(userGroupApi.delete_all_usergroups); //ok --> deleting all users groups
     }
-
-    /*
-    * --------------------------------
-    * DASH BOARD ROUTE
-    * --------------------------------
-    */
-
-
-    app.route('/mainPage')
-        .get(dashboard.get_main); //the main Page view
-
-    app.route('/devices/vue/')
-        .get(deviceApi.render_device); //the devices list view
-
-    app.route('/devices/vue/id/:appId')
-        .get(deviceApi.render_detail); //view used to show informations about a device
-
     /*
     * ----------------------------------------
     * API ROUTE
@@ -72,6 +54,15 @@ module.exports = function (app, route_dev, auth_activated) {
     /*
     * AVANT DE METTRE L APPLICATION SUR LE SERVEUR, IL EST CONSEILLER DE PURGER LA BDD
      */
+
+    /*
+    *---------------------
+    * ROAD ROUTER
+    * -------------------
+     */
+
+    app.route("/road")
+        .get(LocalisationApi.road);
 
 
     /*
@@ -210,7 +201,6 @@ module.exports = function (app, route_dev, auth_activated) {
 
     app.route('/localisation/uncrypted')
         .post(LocalisationApi.uncrypted);
-
 
     /*
     *-----------------------

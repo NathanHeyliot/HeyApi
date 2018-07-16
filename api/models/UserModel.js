@@ -21,6 +21,10 @@ let UserSchema = new Schema
         {
             type: String, required: true
         },
+    isAdmin:
+        {
+            type: Boolean, default: false
+        },
     OrganisationID:
         {
           type: String, required: true // dependante of organisation !!!!

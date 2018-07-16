@@ -1,5 +1,7 @@
 'use strict'
 
+var $ = require('jquery');
+
 exports.crypted = function (req, res) {
 
     console.log("Decrypt a location, CODE : " + req.body.PositionCode);
@@ -47,4 +49,19 @@ exports.uncrypted = function (req, res) {
 
     req.open("GET", "https://eu1.locationiq.org/v1/reverse.php?key=9126593a665608&lat=" + Lat + "&lon=" + Lon + "&format=json", true);
     req.send(null);
-}
+};
+
+exports.road = function (req, res) {
+    console.log("useing API for road");
+
+    req = new XMLHttpRequest();
+
+    req.addEventListener('load', function() {
+        //var parsed_info = JSON.parse(req.response);
+        console.log(req.response);
+    });
+
+    req.open("POST", "http://localhost/script/Main.py", true);
+    //req.send(JSON.stringify({name: "TestName", lat: "-1.41243", lon: "45646"}));
+    req.send(null);
+};
