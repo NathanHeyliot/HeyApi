@@ -40,6 +40,10 @@ exports.update_user = function (req, res)
 {
     console.log("Updating a user : " + req.params.UserId)
 
+
+    if(req.body.Password)
+        req.body.Password = md5(req.body.Password);
+
     User.findOneAndUpdate({_id: req.params.UserId}, (req.body), {new: true}, function (err, device)
     {
         if (err)
