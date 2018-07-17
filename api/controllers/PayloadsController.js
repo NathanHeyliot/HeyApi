@@ -66,6 +66,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
     let event;
 
     console.log("Event Code : " + checkEventCode(req.body));
+    console.log("Incomming HOST : " + req.headers.host);
 
     console.log("Payloads informations....");
     console.log(req.body);
