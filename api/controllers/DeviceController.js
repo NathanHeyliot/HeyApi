@@ -40,6 +40,7 @@ exports.list_device = function(req, res) // GET recupere les infos des devices e
 exports.update_device = function (req, res) //PUT Edit the specified payload
 {
     console.log("Ipdate a device");
+    console.log(req.body);
 
     Device.findOneAndUpdate({_id: req.params.appId}, (req.body), {new: true}, function (err, device)
     {

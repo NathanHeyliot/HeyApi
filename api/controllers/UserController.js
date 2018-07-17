@@ -39,7 +39,7 @@ exports.user_info = function (req, res)
 exports.update_user = function (req, res)
 {
     console.log("Updating a user : " + req.params.UserId)
-
+    console.log(req.body);
 
     if(req.body.Password)
         req.body.Password = md5(req.body.Password);
