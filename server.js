@@ -37,12 +37,12 @@ app.set('view engine', 'ejs');
 * SET ROUTER IN DEV MODE
  */
 
-let route_dev = true;
+let route_dev = false;
 
 /*
 * SET AUTH TOKEN TO ON
  */
-let auth_activated = false;
+let auth_activated = true;
 
 let routes = require('./api/routes/ApiRoute');
 routes(app, route_dev, auth_activated);
