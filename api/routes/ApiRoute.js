@@ -62,7 +62,7 @@ module.exports = function (app, route_dev, auth_activated) {
      */
 
     app.route("/road")
-        .get(LocalisationApi.road);
+        .post(LocalisationApi.road);
 
 
     /*

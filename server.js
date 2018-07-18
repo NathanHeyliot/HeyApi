@@ -20,7 +20,7 @@ mongoose.connect('mongodb://localhost/PayDb');
 
 app.use(require('forest-express-mongoose').init({
     modelsDir: __dirname + '/api/models',
-    envSecret: "bff3b926857a3d9ee993bbbe1228e5875be68a36e0949c16b94c1226171d9b58",
+    envSecret: "6bcbf7f384a0eb3871ec51f9a169cb89326c485e90eff43a7d1e62795e5c7fa5",
     authSecret: "9yGLmCHaMslu21NGftFLmaLL6E6Jh16A",
     mongoose: require('mongoose')
 }));

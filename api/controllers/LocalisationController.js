@@ -52,14 +52,23 @@ exports.uncrypted = function (req, res) {
 exports.road = function (req, res) {
     console.log("useing API for road");
 
-    req = new XMLHttpRequest();
+    //[{"name": 0, "latitude": -40, "longitude": 79}, {"name": 1, "latitude": -42, "longitude": 93}, {"name": 2, "latitude": 63, "longitude": 20}, {"name": 3, "latitude": 42, "longitude": 33}]
 
-    req.addEventListener('load', function() {
-        //var parsed_info = JSON.parse(req.response);
-        console.log(req.response);
-    });
-
-    req.open("POST", "http://localhost/script/Main.py", true);
-    //req.send(JSON.stringify({name: "TestName", lat: "-1.41243", lon: "45646"}));
-    req.send(null);
+    if(req.body.locations) {
+        const exec = require('child_process').exec;
+        const child = exec(__dirname + '\\RoadAPI.py "' + req.body.locations + '"',
+            (error, stdout, stderr) => {
+                if(stdout) {
+                    console.log(`Sortie du script : ${stdout}`);
+                    res.json(JSON.parse(stdout));
+                }
+                if(stderr)
+                    console.log(`Erreur trouvée : ${stderr}`);
+                if (error !== null) {
+                    console.log(`exec error: ${error}`);
+                }
+            });
+    } else {
+        console.log("No location give :/");
+    }
 };
