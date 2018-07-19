@@ -21,9 +21,9 @@ let UserSchema = new Schema
         {
             type: String, required: true
         },
-    isAdmin:
+    AdminLevel:
         {
-            type: Boolean, default: false
+            type: Number, default: 0
         },
     OrganisationID:
         {

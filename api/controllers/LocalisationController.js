@@ -54,6 +54,8 @@ exports.road = function (req, res) {
 
     //[{"name": 0, "latitude": -40, "longitude": 79}, {"name": 1, "latitude": -42, "longitude": 93}, {"name": 2, "latitude": 63, "longitude": 20}, {"name": 3, "latitude": 42, "longitude": 33}]
 
+    //TODO --> http://project-osrm.org/docs/v5.15.2/api/#route-object
+
     if(req.body.locations) {
         const exec = require('child_process').exec;
         const child = exec(__dirname + '\\RoadAPI.py "' + req.body.locations + '"',
