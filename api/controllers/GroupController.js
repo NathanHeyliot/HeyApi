@@ -37,7 +37,7 @@ exports.create_group = function (req, res)//crée un nouveau groupe
 
 exports.update_group = function (req, res) //modifie les informations d'un groupe
 {
-    Group.findOneAndUpdate({GroupId: req.params.appId}, req.body, {new: true}, function (err, group)
+    Group.findOneAndUpdate({_id: req.params.appId}, req.body, {new: true}, function (err, group)
     {
         if(err)
             res.send(err);
@@ -47,7 +47,7 @@ exports.update_group = function (req, res) //modifie les informations d'un group
 
 exports.read_group = function(req, res)//renvoie les information d'un groupe
 {
-    Group.find({GroupId: req.params.appId}, function (err, group)
+    Group.find({_id: req.params.appId}, function (err, group)
     {
         if (err)
             res.send(err);
