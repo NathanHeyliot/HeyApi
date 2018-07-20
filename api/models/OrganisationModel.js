@@ -13,10 +13,6 @@ let OrganisationsSchema = new Schema
         {
             type: String, unique: true
         },
-    ImgUrl:
-        {
-            type: String
-        },
 });
 
 module.exports = mongoose.model('Organisation', OrganisationsSchema);
