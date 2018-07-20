@@ -5,10 +5,6 @@ let Schema = mongoose.Schema;
 
 let GroupsSchema = new Schema
 ({
-    GroupId:
-        {
-            type : String, unique: true, required: true
-        },
     Name:
         {
             type: String, required: true

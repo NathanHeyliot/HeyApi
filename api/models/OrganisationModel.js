@@ -5,10 +5,6 @@ let Schema = mongoose.Schema;
 
 let OrganisationsSchema = new Schema
 ({
-    OrgId:
-        {
-            type: String, unique: true, required: true
-        },
     Name:
         {
             type: String, unique: true

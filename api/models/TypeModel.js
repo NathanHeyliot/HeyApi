@@ -13,11 +13,6 @@ let DeviceTypesSchema = new Schema
         {
             type: String, required: true, default: 'mm'
         },
-    Logo:
-        {
-            type: String, required: true
-        },
-
 });
 
 module.export = mongoose.model('DeviceTypes', DeviceTypesSchema);
