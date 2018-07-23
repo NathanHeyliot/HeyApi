@@ -173,7 +173,7 @@ exports.list_group_devices = function (req, res) //Recupere tout les device d'un
 exports.list_user_devices = function (req, res)
 {
     console.log("List of devices for users : " + req.params.UID);
-    
+
     UserGroup.find({user_id: req.params.UID}, function (err, group) {
         if(err) {
             error("Error at: " + err);
@@ -207,7 +207,7 @@ let get_user_devices_anex = async function(res, group)
             }
         });
     });
-}
+};
 
 exports.list_bytype = function (req, res) //recupere tout les device du type spécifié
 {
