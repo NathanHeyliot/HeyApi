@@ -23,7 +23,7 @@ let UserSchema = new Schema
         },
     AdminLevel:
         {
-            type: Number, default: 0
+            type: Number, required: true
         },
     OrganisationID:
         {
