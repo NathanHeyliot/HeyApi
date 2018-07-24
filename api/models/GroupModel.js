@@ -11,7 +11,7 @@ let GroupsSchema = new Schema
         },
     ParentId:
         {
-            type: String, required: true
+            type: String, default: ""
         },
 });
 
