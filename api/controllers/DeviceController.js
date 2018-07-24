@@ -95,6 +95,7 @@ exports.create_device = function (req, res)
     newDevice.Phase_stop = req.body.Phase_stop;
     newDevice.Wake_in = req.body.Wake_in;
     newDevice.Wake_out = req.body.Wake_out;
+    newDevice.MesureNbr = req.body.MesureNbr;
 
     //on initialise un nouveau capteur avec un remplissage a 0% et une calibration a - 30 pour faciliter la mesure de calibration ensuite
 
