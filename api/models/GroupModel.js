@@ -9,6 +9,10 @@ let GroupsSchema = new Schema
         {
             type: String, required: true
         },
+    ParentId:
+        {
+            type: String, required: true
+        },
 });
 
 module.exports =  mongoose.model('Group', GroupsSchema);

@@ -75,6 +75,10 @@ let DevicesSchema = new Schema
         {
             type: String, required : true //dependante du type de device
         },
+    MesureNbr:
+        {
+            type: Number, required : true
+        },
 });
 
 
