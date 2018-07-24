@@ -114,7 +114,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                         hh = "0" + hh;
                     if (min.toString().length === 1)
                         min = "0" + min;
-                    
+
                     PayloadArray[i].DateGot = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;
                 }
 

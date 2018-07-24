@@ -13,10 +13,6 @@ let UserGroupSchema = new Schema
         {
             type: String, required: true //dependante of devices groupes --> set the GroupId
         },
-    display_name:
-        {
-            type: String, required: true
-        },
 });
 
 module.exports = mongoose.model('UserGroup', UserGroupSchema);
