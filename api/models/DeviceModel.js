@@ -77,7 +77,7 @@ let DevicesSchema = new Schema
         },
     MesureNbr:
         {
-            type: Number, required : true
+            type: Number, required : true, default: 1
         },
     Downlink:
         {
