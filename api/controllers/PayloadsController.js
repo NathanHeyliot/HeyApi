@@ -180,10 +180,10 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
                                                     //check if is good
 
-                                                    let SigfoxId = device[0].toObject().SigfoxId;
+                                                    let SigfoxId = device.toObject().SigfoxId;
 
                                                     //response in json ???? maybe bad ???
-                                                    res.json({SigfoxId: {"downlinkData": hh + mm + device[0].toObject().Phase_start + device[0].toObject().Phase_stop + device[0].toObject().Wake_in + device[0].toObject().Wake_out + device[0].toObject().MesureNbr}});
+                                                    res.json({SigfoxId: {"downlinkData": hh + mm + device.toObject().Phase_start + device.toObject().Phase_stop + device.toObject().Wake_in + device.toObject().Wake_out + device.toObject().MesureNbr}});
                                                 }
                                                 return (res.end());
                                             });
