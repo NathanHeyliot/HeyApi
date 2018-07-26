@@ -202,7 +202,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                                     else if(resp_PH2.toString().length === 2)
                                                         resp_PH2 = "0" + resp_PH2;
 
-                                                    res.json({SigfoxId: {"downlinkData": hh + mm + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N}});
+                                                    res.json({devices.toObject().SigfoxId: {"downlinkData": hh + mm + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N}});
 
                                                     //res.json({SigfoxId: {"downlinkData": hh + mm + device.toObject().Phase_start + device.toObject().Phase_stop + device.toObject().Wake_in + device.toObject().Wake_out + device.toObject().MesureNbr}});
                                                 }
