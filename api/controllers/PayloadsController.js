@@ -256,48 +256,49 @@ exports.create_payload = function (req, res) //create a new payload and POST it
             if (err)
                 return(res.send(err));
             res.write(JSON.stringify(payload));
+            Device.find({SigfoxId: DeviceId}, function (err, obj) {
+                if (obj[0] !== undefined && obj[0] != null) { //check if device has been found in database
+                    let needDownlink = obj[0].toObject().Downlink;
+                    Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},{Downlink: 0, FillLevel: 0, CalibrationMeasure: newPayload.Mesure, LastUpdate: newDevice.LastUpdate },
+                        {new: true}, function (err, device)
+                        {
+                            if(needDownlink === 1) {
 
-            Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},{Downlink: 0, FillLevel: 0, CalibrationMeasure: newPayload.Mesure, LastUpdate: newDevice.LastUpdate },
-                {new: true}, function (err, device)
-                {
+                                //check if is good
 
-                    let needDownlink = device.toObject().Downlink;
+                                let SigfoxId = device.toObject().SigfoxId;
 
-                    if(needDownlink === 1) {
+                                //response in json ???? maybe bad ???
+                                let resp_HD = device.toObject().Phase_start;
+                                let resp_HF = device.toObject().Phase_stop;
+                                let resp_PH1 = device.toObject().Wake_in;
+                                let resp_PH2 = device.toObject().Wake_out;
+                                let resp_N = device.toObject().MesureNbr;
 
-                        //check if is good
-
-                        let SigfoxId = device.toObject().SigfoxId;
-
-                        //response in json ???? maybe bad ???
-                        let resp_HD = device.toObject().Phase_start;
-                        let resp_HF = device.toObject().Phase_stop;
-                        let resp_PH1 = device.toObject().Wake_in;
-                        let resp_PH2 = device.toObject().Wake_out;
-                        let resp_N = device.toObject().MesureNbr;
-
-                        if(resp_HD.toString().length === 1)
-                            resp_HD = "0" + resp_HD;
-                        if(resp_HF.toString().length === 1)
-                            resp_HF = "0" + resp_HF;
-                        if(resp_PH1.toString().length === 1)
-                            resp_PH1 = "00" + resp_PH1;
-                        else if(resp_PH1.toString().length === 2)
-                            resp_PH1 = "0" + resp_PH1;
-                        if(resp_PH2.toString().length === 1)
-                            resp_PH2 = "00" + resp_PH2;
-                        else if(resp_PH2.toString().length === 2)
-                            resp_PH2 = "0" + resp_PH2;
+                                if(resp_HD.toString().length === 1)
+                                    resp_HD = "0" + resp_HD;
+                                if(resp_HF.toString().length === 1)
+                                    resp_HF = "0" + resp_HF;
+                                if(resp_PH1.toString().length === 1)
+                                    resp_PH1 = "00" + resp_PH1;
+                                else if(resp_PH1.toString().length === 2)
+                                    resp_PH1 = "0" + resp_PH1;
+                                if(resp_PH2.toString().length === 1)
+                                    resp_PH2 = "00" + resp_PH2;
+                                else if(resp_PH2.toString().length === 2)
+                                    resp_PH2 = "0" + resp_PH2;
 
 
-                        let data = {
-                            [SigfoxId] : {"downlinkData": hh + mm + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N},
-                        };
+                                let data = {
+                                    [SigfoxId] : {"downlinkData": hh + mm + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N},
+                                };
 
-                        res.json(data);
-                    }
+                                res.json(data);
+                            }
 
-                return(res.end());
+                            return(res.end());
+                        });
+                }
             });
         });
     }
@@ -315,7 +316,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
             if(parsed_info.code === "TECHNICAL") {
                 console.log("Could not retrieve lat / long of the payload !");
                 console.log(parsed_info);
-                res.json({message: "Error with API"});
+                return (res.end());
             } else {
                 req = new XMLHttpRequest();
 
@@ -339,48 +340,52 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                     if (min.toString().length === 1)
                         min = "0" + min;
 
-                    Device.findOneAndUpdate({SigfoxId: DeviceId}, ({Downlink: 0, PostCode: parsed_get.address.postcode, LastUpdate: dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min, Lon: parsed_info.lng, Lat: parsed_info.lat, City: parsed_get.address.village, Address: parsed_get.address.road}), {new: true}, function (err, device)
-                    {
-                        if (err)
-                            console.log(err);
 
-                        let needDownlink = device.toObject().Downlink;
+                    Device.find({SigfoxId: DeviceId}, function (err, obj) {
+                        if(obj[0] !== undefined && obj[0] != null) { //check if device has been found in database
+                            let needDownlink = obj[0].toObject().Downlink;
+                            Device.findOneAndUpdate({SigfoxId: DeviceId}, ({Downlink: 0, PostCode: parsed_get.address.postcode, LastUpdate: dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min, Lon: parsed_info.lng, Lat: parsed_info.lat, City: parsed_get.address.village, Address: parsed_get.address.road}), {new: true}, function (err, device)
+                            {
+                                if (err)
+                                    console.log(err);
 
-                        if(needDownlink === 1) {
+                                if(needDownlink === 1) {
 
-                            //check if is good
+                                    //check if is good
 
-                            let SigfoxId = device.toObject().SigfoxId;
+                                    let SigfoxId = device.toObject().SigfoxId;
 
-                            //response in json ???? maybe bad ???
-                            let resp_HD = device.toObject().Phase_start;
-                            let resp_HF = device.toObject().Phase_stop;
-                            let resp_PH1 = device.toObject().Wake_in;
-                            let resp_PH2 = device.toObject().Wake_out;
-                            let resp_N = device.toObject().MesureNbr;
+                                    //response in json ???? maybe bad ???
+                                    let resp_HD = device.toObject().Phase_start;
+                                    let resp_HF = device.toObject().Phase_stop;
+                                    let resp_PH1 = device.toObject().Wake_in;
+                                    let resp_PH2 = device.toObject().Wake_out;
+                                    let resp_N = device.toObject().MesureNbr;
 
-                            if(resp_HD.toString().length === 1)
-                                resp_HD = "0" + resp_HD;
-                            if(resp_HF.toString().length === 1)
-                                resp_HF = "0" + resp_HF;
-                            if(resp_PH1.toString().length === 1)
-                                resp_PH1 = "00" + resp_PH1;
-                            else if(resp_PH1.toString().length === 2)
-                                resp_PH1 = "0" + resp_PH1;
-                            if(resp_PH2.toString().length === 1)
-                                resp_PH2 = "00" + resp_PH2;
-                            else if(resp_PH2.toString().length === 2)
-                                resp_PH2 = "0" + resp_PH2;
+                                    if(resp_HD.toString().length === 1)
+                                        resp_HD = "0" + resp_HD;
+                                    if(resp_HF.toString().length === 1)
+                                        resp_HF = "0" + resp_HF;
+                                    if(resp_PH1.toString().length === 1)
+                                        resp_PH1 = "00" + resp_PH1;
+                                    else if(resp_PH1.toString().length === 2)
+                                        resp_PH1 = "0" + resp_PH1;
+                                    if(resp_PH2.toString().length === 1)
+                                        resp_PH2 = "00" + resp_PH2;
+                                    else if(resp_PH2.toString().length === 2)
+                                        resp_PH2 = "0" + resp_PH2;
 
 
-                            let data = {
-                                [SigfoxId] : {"downlinkData": hh + mm + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N},
-                            };
+                                    let data = {
+                                        [SigfoxId] : {"downlinkData": hh + mm + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N},
+                                    };
 
-                            res.json(data);
+                                    res.json(data);
+                                }
+
+                                return (res.end());
+                            });
                         }
-
-                        return (res.end());
                     });
                 });
 
