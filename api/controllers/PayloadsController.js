@@ -189,9 +189,9 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                                     let resp_PH2 = device.toObject().Wake_out;
                                                     let resp_N = device.toObject().MesureNbr;
 
-                                                    if(resp_HD.toString().length === 2)
+                                                    if(resp_HD.toString().length === 1)
                                                         resp_HD = "0" + resp_HD;
-                                                    if(resp_HF.toString().length === 2)
+                                                    if(resp_HF.toString().length === 1)
                                                         resp_HF = "0" + resp_HF;
                                                     if(resp_PH1.toString().length === 1)
                                                         resp_PH1 = "00" + resp_PH1;
