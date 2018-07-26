@@ -79,6 +79,10 @@ let DevicesSchema = new Schema
         {
             type: Number, required : true
         },
+    Downlink:
+        {
+            type: Number, default: 1
+        },
 });
 
 

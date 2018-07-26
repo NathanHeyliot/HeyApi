@@ -59,7 +59,7 @@ exports.delete_all_payloads = function (req, res)
     Payload.collection.remove({});
     res.end();
     console.log("Success");
-}
+};
 
 exports.create_payload = function (req, res) //create a new payload and POST it
 {
@@ -163,9 +163,10 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                         else
                                             newDevice.FillLevel = obj[0].toObject().FillLevel;
                                         newDevice.FillLevel = newDevice.FillLevel.toFixed(2);
+                                        let needDownlink = obj[0].toObject().Downlink;
                                         //On update le device
                                         Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},
-                                            {FillLevel:newDevice.FillLevel, LastUpdate: newDevice.LastUpdate},
+                                            {FillLevel:newDevice.FillLevel, LastUpdate: newDevice.LastUpdate, Downlink: 0},
                                             {new: true}, function (err, device)
                                             {
                                                 console.log("Updating device ...");
@@ -174,7 +175,16 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                                     console.log("Error updating Device");
                                                     return (res.send(err));
                                                 }
-                                                res.write(JSON.stringify(device));
+
+                                                if(needDownlink === 1) {
+
+                                                    //check if is good
+
+                                                    let SigfoxId = device[0].toObject().SigfoxId;
+
+                                                    //response in json ???? maybe bad ???
+                                                    res.json({SigfoxId: {"downlinkData": hh + mm + device[0].toObject().Phase_start + device[0].toObject().Phase_stop + device[0].toObject().Wake_in + device[0].toObject().Wake_out + device[0].toObject().MesureNbr}});
+                                                }
                                                 return (res.end());
                                             });
                                     } else {
