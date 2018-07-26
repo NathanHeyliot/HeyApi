@@ -204,8 +204,8 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                                     };
 
                                                     res.json(data);
-                                                    return(res.end());
                                                 }
+                                                return(res.end());
                                             });
                                     } else {
                                         console.log("Device not found");
@@ -293,8 +293,8 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                 };
 
                                 res.json(data);
-                                return(res.end());
                             }
+                            return(res.end());
                     });
                 } else {
                     return(res.end());
@@ -381,8 +381,8 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                     };
 
                                     res.json(data);
-                                    return(res.end());
                                 }
+                                return(res.end());
                             });
                         } else {
                             return(res.end());
