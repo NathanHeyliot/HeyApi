@@ -173,7 +173,6 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                                 if (err)
                                                 {
                                                     console.log("Error updating Device");
-                                                    return (res.send(err));
                                                 }
 
                                                 if(needDownlink === 1) {
@@ -205,11 +204,9 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
                                                     let data = {
                                                         [SigfoxId] : {"downlinkData": hh + mm + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N},
-                                                    }
+                                                    };
 
                                                     res.json(data);
-
-                                                    //res.json({SigfoxId: {"downlinkData": hh + mm + device.toObject().Phase_start + device.toObject().Phase_stop + device.toObject().Wake_in + device.toObject().Wake_out + device.toObject().MesureNbr}});
                                                 }
                                                 return (res.end());
                                             });
@@ -263,9 +260,43 @@ exports.create_payload = function (req, res) //create a new payload and POST it
             Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},{FillLevel: 0, CalibrationMeasure: newPayload.Mesure, LastUpdate: newDevice.LastUpdate },
                 {new: true}, function (err, device)
                 {
-                if (err)
-                    return(res.send(err));
-                res.write(JSON.stringify(device));
+
+                    let needDownlink = device.toObject().Downlink;
+
+                    if(needDownlink === 1) {
+
+                        //check if is good
+
+                        let SigfoxId = device.toObject().SigfoxId;
+
+                        //response in json ???? maybe bad ???
+                        let resp_HD = device.toObject().Phase_start;
+                        let resp_HF = device.toObject().Phase_stop;
+                        let resp_PH1 = device.toObject().Wake_in;
+                        let resp_PH2 = device.toObject().Wake_out;
+                        let resp_N = device.toObject().MesureNbr;
+
+                        if(resp_HD.toString().length === 1)
+                            resp_HD = "0" + resp_HD;
+                        if(resp_HF.toString().length === 1)
+                            resp_HF = "0" + resp_HF;
+                        if(resp_PH1.toString().length === 1)
+                            resp_PH1 = "00" + resp_PH1;
+                        else if(resp_PH1.toString().length === 2)
+                            resp_PH1 = "0" + resp_PH1;
+                        if(resp_PH2.toString().length === 1)
+                            resp_PH2 = "00" + resp_PH2;
+                        else if(resp_PH2.toString().length === 2)
+                            resp_PH2 = "0" + resp_PH2;
+
+
+                        let data = {
+                            [SigfoxId] : {"downlinkData": hh + mm + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N},
+                        };
+
+                        res.json(data);
+                    }
+
                 return(res.end());
             });
         });
@@ -311,8 +342,45 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                     Device.findOneAndUpdate({SigfoxId: DeviceId}, ({PostCode: parsed_get.address.postcode, LastUpdate: dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min, Lon: parsed_info.lng, Lat: parsed_info.lat, City: parsed_get.address.village, Address: parsed_get.address.road}), {new: true}, function (err, device)
                     {
                         if (err)
-                            res.send(err);
-                        res.json({device_id: DeviceId, lat: parsed_info.lat, long: parsed_info.lng, accuracy: parsed_info.accuracy, city: parsed_get.address.village, address: parsed_get.address.road, postcode: parsed_get.address.postcode});
+                            console.log(err);
+
+                        let needDownlink = device.toObject().Downlink;
+
+                        if(needDownlink === 1) {
+
+                            //check if is good
+
+                            let SigfoxId = device.toObject().SigfoxId;
+
+                            //response in json ???? maybe bad ???
+                            let resp_HD = device.toObject().Phase_start;
+                            let resp_HF = device.toObject().Phase_stop;
+                            let resp_PH1 = device.toObject().Wake_in;
+                            let resp_PH2 = device.toObject().Wake_out;
+                            let resp_N = device.toObject().MesureNbr;
+
+                            if(resp_HD.toString().length === 1)
+                                resp_HD = "0" + resp_HD;
+                            if(resp_HF.toString().length === 1)
+                                resp_HF = "0" + resp_HF;
+                            if(resp_PH1.toString().length === 1)
+                                resp_PH1 = "00" + resp_PH1;
+                            else if(resp_PH1.toString().length === 2)
+                                resp_PH1 = "0" + resp_PH1;
+                            if(resp_PH2.toString().length === 1)
+                                resp_PH2 = "00" + resp_PH2;
+                            else if(resp_PH2.toString().length === 2)
+                                resp_PH2 = "0" + resp_PH2;
+
+
+                            let data = {
+                                [SigfoxId] : {"downlinkData": hh + mm + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N},
+                            };
+
+                            res.json(data);
+                        }
+
+                        return (res.end());
                     });
                 });
 
