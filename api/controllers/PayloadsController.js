@@ -183,7 +183,10 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                                     let SigfoxId = device.toObject().SigfoxId;
 
                                                     //response in json ???? maybe bad ???
-                                                    res.json({SigfoxId: {"downlinkData": hh + mm + device.toObject().Phase_start + device.toObject().Phase_stop + device.toObject().Wake_in + device.toObject().Wake_out + device.toObject().MesureNbr}});
+
+                                                    res.json({SigfoxId: {"downlinkData": "HH" + hh + "MM" + mm + "HD" + device.toObject().Phase_start + "HF" + device.toObject().Phase_stop + "PH1" + device.toObject().Wake_in + "PH2" + device.toObject().Wake_out + "N" + device.toObject().MesureNbr}});
+
+                                                    //res.json({SigfoxId: {"downlinkData": hh + mm + device.toObject().Phase_start + device.toObject().Phase_stop + device.toObject().Wake_in + device.toObject().Wake_out + device.toObject().MesureNbr}});
                                                 }
                                                 return (res.end());
                                             });
