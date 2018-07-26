@@ -148,9 +148,9 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
                             console.log("Saving Payload...");
 
-                            if (err)
-                                return (res.send(err));
-                            res.write(JSON.stringify(payload));
+                            //if (err)
+                              //  return (res.send(err));
+                            //res.write(JSON.stringify(payload));
 
                             if (i === PayloadArray.length - 1)
                             {
