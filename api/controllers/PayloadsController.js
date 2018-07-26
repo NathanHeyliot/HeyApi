@@ -169,6 +169,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                                 if (err)
                                                 {
                                                     console.log("Error updating Device");
+                                                    return(res.end());
                                                 }
 
                                                 if(needDownlink === 1) {
@@ -203,10 +204,12 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                                     };
 
                                                     res.json(data);
+                                                    return(res.end());
                                                 }
                                             });
                                     } else {
                                         console.log("Device not found");
+                                        return(res.end());
                                     }
                                 });
                             }
@@ -247,8 +250,11 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
         newPayload.save(function(err, payload)
         {
-            if (err)
-                return(console.log(err));
+            if (err) {
+                console.log(err);
+                return(res.end());
+            }
+
 
             Device.find({SigfoxId: DeviceId}, function (err, obj) {
                 if (obj[0] !== undefined && obj[0] != null) { //check if device has been found in database
@@ -287,8 +293,11 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                 };
 
                                 res.json(data);
+                                return(res.end());
                             }
                     });
+                } else {
+                    return(res.end());
                 }
             });
         });
@@ -307,7 +316,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
             if(parsed_info.code === "TECHNICAL") {
                 console.log("Could not retrieve lat / long of the payload !");
                 console.log(parsed_info);
-                return (res.end());
+                return(res.end());
             } else {
                 req = new XMLHttpRequest();
 
@@ -372,8 +381,11 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                     };
 
                                     res.json(data);
+                                    return(res.end());
                                 }
                             });
+                        } else {
+                            return(res.end());
                         }
                     });
                 });
@@ -388,8 +400,6 @@ exports.create_payload = function (req, res) //create a new payload and POST it
         req.setRequestHeader("Authorization", "Basic aGV5bGlvdF9ldmFsOlJ3ZGpkOnR5MUMyfg==");
         req.send(JSON.stringify({type: "ubiwifi", device: DeviceId, data: PositionCode}));
     }
-
-    return(res.end());
 };
 
 
