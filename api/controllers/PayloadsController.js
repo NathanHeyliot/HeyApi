@@ -183,8 +183,26 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                                     let SigfoxId = device.toObject().SigfoxId;
 
                                                     //response in json ???? maybe bad ???
+                                                    let resp_HD = device.toObject().Phase_start;
+                                                    let resp_HF = device.toObject().Phase_stop;
+                                                    let resp_PH1 = device.toObject().Wake_in;
+                                                    let resp_PH2 = device.toObject().Wake_out;
+                                                    let resp_N = device.toObject().MesureNbr;
 
-                                                    res.json({SigfoxId: {"downlinkData": "HH" + hh + "MM" + mm + "HD" + device.toObject().Phase_start + "HF" + device.toObject().Phase_stop + "PH1" + device.toObject().Wake_in + "PH2" + device.toObject().Wake_out + "N" + device.toObject().MesureNbr}});
+                                                    if(resp_HD.toString().length === 2)
+                                                        resp_HD = "0" + resp_HD;
+                                                    if(resp_HF.toString().length === 2)
+                                                        resp_HF = "0" + resp_HF;
+                                                    if(resp_PH1.toString().length === 1)
+                                                        resp_PH1 = "00" + resp_PH1;
+                                                    else if(resp_PH1.toString().length === 2)
+                                                        resp_PH1 = "0" + resp_PH1;
+                                                    if(resp_PH2.toString().length === 1)
+                                                        resp_PH2 = "00" + resp_PH2;
+                                                    else if(resp_PH2.toString().length === 2)
+                                                        resp_PH2 = "0" + resp_PH2;
+
+                                                    res.json({SigfoxId: {"downlinkData": "HH" + hh + "MM" + mm + "HD" + resp_HD + "HF" + resp_HF + "PH1" + resp_PH1 + "PH2" + resp_PH2 + "N" + resp_N}});
 
                                                     //res.json({SigfoxId: {"downlinkData": hh + mm + device.toObject().Phase_start + device.toObject().Phase_stop + device.toObject().Wake_in + device.toObject().Wake_out + device.toObject().MesureNbr}});
                                                 }
