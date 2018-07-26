@@ -257,7 +257,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                 return(res.send(err));
             res.write(JSON.stringify(payload));
 
-            Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},{FillLevel: 0, CalibrationMeasure: newPayload.Mesure, LastUpdate: newDevice.LastUpdate },
+            Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},{Downlink: 0, FillLevel: 0, CalibrationMeasure: newPayload.Mesure, LastUpdate: newDevice.LastUpdate },
                 {new: true}, function (err, device)
                 {
 
@@ -339,7 +339,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                     if (min.toString().length === 1)
                         min = "0" + min;
 
-                    Device.findOneAndUpdate({SigfoxId: DeviceId}, ({PostCode: parsed_get.address.postcode, LastUpdate: dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min, Lon: parsed_info.lng, Lat: parsed_info.lat, City: parsed_get.address.village, Address: parsed_get.address.road}), {new: true}, function (err, device)
+                    Device.findOneAndUpdate({SigfoxId: DeviceId}, ({Downlink: 0, PostCode: parsed_get.address.postcode, LastUpdate: dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min, Lon: parsed_info.lng, Lat: parsed_info.lat, City: parsed_get.address.village, Address: parsed_get.address.road}), {new: true}, function (err, device)
                     {
                         if (err)
                             console.log(err);
