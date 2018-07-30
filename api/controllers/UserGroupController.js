@@ -43,7 +43,7 @@ exports.get_info = function (req, res)
         }
         res.json(group);
     })
-}
+};
 
 exports.get_infoU = function (req, res)
 {
@@ -56,7 +56,20 @@ exports.get_infoU = function (req, res)
         }
         res.json(group);
     })
-}
+};
+
+exports.delete_infoU = function (req, res)
+{
+    console.log("Delete user info, USERID : " + req.params.Uid);
+
+    UserGroup.remove({user_id: req.params.Uid}, function (err, group) {
+        if(err) {
+            error("Error at: " + err);
+            res.send(err);
+        }
+        res.json({message: "Link successfully deleted"});
+    })
+};
 
 exports.delete_group = function (req, res) {
 
