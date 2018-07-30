@@ -71,6 +71,19 @@ exports.delete_infoU = function (req, res)
     })
 };
 
+exports.delete_infoG = function (req, res)
+{
+    console.log("Delete user info, GroupID : " + req.params.Gid);
+
+    UserGroup.remove({device_group_id: req.params.Gid}, function (err, group) {
+        if(err) {
+            error("Error at: " + err);
+            res.send(err);
+        }
+        res.json({message: "Link successfully deleted"});
+    })
+};
+
 exports.delete_group = function (req, res) {
 
     console.log("Deleting an user group");

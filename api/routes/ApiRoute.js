@@ -190,6 +190,9 @@ module.exports = function (app, route_dev, auth_activated) {
         .get(userGroupApi.get_infoU)
         .delete(userGroupApi.delete_infoU);
 
+    app.route('/usersgroups/group/:Gid')
+        .delete(userGroupApi.delete_infoG);
+
 
     /*
     *------------------------
