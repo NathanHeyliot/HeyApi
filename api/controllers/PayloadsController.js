@@ -188,6 +188,17 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                                     let resp_PH2 = device.toObject().Wake_out;
                                                     let resp_N = device.toObject().MesureNbr;
 
+
+
+                                                    let hh2 = dateMeasure.getHours();
+                                                    let min2 = dateMeasure.getMinutes();
+                                                    if (hh2.toString().length === 1)
+                                                        hh2 = "0" + hh2;
+                                                    if (min2.toString().length === 1)
+                                                        min2 = "0" + min2;
+
+
+
                                                     if(resp_HD.toString().length === 1)
                                                         resp_HD = "0" + resp_HD;
                                                     if(resp_HF.toString().length === 1)
@@ -203,10 +214,10 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
 
                                                     let data = {
-                                                        [SigfoxId] : {"downlinkData": hh + "" + min + "" + resp_HD + "" + resp_HF + "" + resp_PH1 + "" + resp_PH2 + "" + resp_N + "0"},
+                                                        [SigfoxId] : {"downlinkData": hh2 + "" + min2 + "" + resp_HD + "" + resp_HF + "" + resp_PH1 + "" + resp_PH2 + "" + resp_N + "0"},
                                                     };
 
-                                                    console.log("DATA : " + hh + min + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N + "0");
+                                                    console.log("DATA : " + hh2 + min2 + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N + "0");
                                                     downsend = true;
                                                     res.json(data);
                                                 }
