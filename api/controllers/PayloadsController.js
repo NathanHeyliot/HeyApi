@@ -203,7 +203,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                                         [SigfoxId] : {"downlinkData": hh + min + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N + "0"},
                                                     };
 
-                                                    console.log("DATA" + data);
+                                                    console.log("DATA : " + hh + min + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N + "0");
                                                     res.json(data);
                                                 }
                                                 return(res.end());
@@ -293,7 +293,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                     [SigfoxId] : {"downlinkData": hh + min + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N + "0"},
                                 };
 
-                                console.log("DATA" + data);
+                                console.log("DATA : " + hh + min + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N + "0");
                                 res.json(data);
                             }
                             return(res.end());
@@ -382,7 +382,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                         [SigfoxId] : {"downlinkData": hh + min + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N + "0"},
                                     };
 
-                                    console.log("DATA" + data);
+                                    console.log("DATA : " + hh + min + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N + "0");
                                     res.json(data);
                                 }
                                 return(res.end());
