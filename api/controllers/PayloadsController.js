@@ -120,6 +120,9 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
                 console.log("Payload Array : " + PayloadArray);
                 if(PayloadArray !== undefined) {
+
+                    let needDownlink = 0;
+
                     for (let i = 0; i !== PayloadArray.length; i++) {
 
                         //on recupere la date de reception
@@ -159,7 +162,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                         else
                                             newDevice.FillLevel = obj[0].toObject().FillLevel;
                                         newDevice.FillLevel = newDevice.FillLevel.toFixed(2);
-                                        let needDownlink = obj[0].toObject().Downlink;
+                                        needDownlink = obj[0].toObject().Downlink;
                                         //On update le device
                                         Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},
                                             {FillLevel:newDevice.FillLevel, LastUpdate: newDevice.LastUpdate, Downlink: 0},
