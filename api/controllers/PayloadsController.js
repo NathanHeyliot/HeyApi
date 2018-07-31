@@ -200,7 +200,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
 
                                                     let data = {
-                                                        [SigfoxId] : {"downlinkData": hh + min + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N + "0"},
+                                                        [SigfoxId] : {"downlinkData": hh + "" + min + "" + resp_HD + "" + resp_HF + "" + resp_PH1 + "" + resp_PH2 + "" + resp_N + "0"},
                                                     };
 
                                                     console.log("DATA : " + hh + min + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N + "0");
@@ -290,7 +290,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
 
                                 let data = {
-                                    [SigfoxId] : {"downlinkData": hh + min + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N + "0"},
+                                    [SigfoxId] : {"downlinkData": hh + "" + min + "" + resp_HD + "" + resp_HF + "" + resp_PH1 + "" + resp_PH2 + "" + resp_N + "0"},
                                 };
 
                                 console.log("DATA : " + hh + min + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N + "0");
@@ -379,7 +379,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
 
                                     let data = {
-                                        [SigfoxId] : {"downlinkData": hh + min + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N + "0"},
+                                        [SigfoxId] : {"downlinkData": hh + "" + min + "" + resp_HD + "" + resp_HF + "" + resp_PH1 + "" + resp_PH2 + "" + resp_N + "0"},
                                     };
 
                                     console.log("DATA : " + hh + min + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N + "0");
