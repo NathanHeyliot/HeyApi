@@ -256,7 +256,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
             }
 
 
-            Device.find({SigfoxId: DeviceId}, function (err, obj) {
+            Device.find({SigfoxId: newPayload.DeviceId}, function (err, obj) {
                 if (obj[0] !== undefined && obj[0] != null) { //check if device has been found in database
                     let needDownlink = obj[0].toObject().Downlink;
                     Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},{Downlink: 0, FillLevel: 0, CalibrationMeasure: newPayload.Mesure, LastUpdate: newDevice.LastUpdate },
