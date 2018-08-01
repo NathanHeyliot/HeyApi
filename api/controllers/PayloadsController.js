@@ -485,6 +485,7 @@ function sendBOT(Name, SigFoxId, id, Signal, Information, Date, Color)
 {
     let req = new XMLHttpRequest();
     let data = JSON.stringify({
+        "chanel" : Name,
         "attachments": [{
             "fallback": "Capteur : " + Name + " SigfoxId : " + SigFoxId + " <http://app.heyliot.com/devices/view/" + id + "|Voir le device>",
             "pretext":"Capteur : " + Name + " SigfoxId : " + SigFoxId + " <http://app.heyliot.com/devices/view/" + id + "|Voir le device>",
@@ -501,5 +502,5 @@ function sendBOT(Name, SigFoxId, id, Signal, Information, Date, Color)
 
     req.open("POST", "https://hooks.slack.com/services/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", true);
     req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    req.send('payload=' + data + '&chanel=' + Name);
+    req.send('payload=' + data);
 }
