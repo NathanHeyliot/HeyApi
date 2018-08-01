@@ -116,6 +116,12 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                         min = "0" + min;
 
                     PayloadArray[i].DateGot = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;
+
+
+                    if(PayloadArray[i].Mesure === 9999)
+                        sendBOT(device.toObject().Name, req.body.DeviceId, "Mesure",  "Erreur de mesure", PayloadArray[i].DateGot,  "#ea5153");
+                    else
+                        sendBOT(device.toObject().Name, req.body.DeviceId, "Mesure",  PayloadArray[i].Mesure, PayloadArray[i].DateGot, "#45b384");
                 }
 
                 console.log("Payload Array : " + PayloadArray);
@@ -174,11 +180,6 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                                     console.log("Error updating Device");
                                                     return(res.end());
                                                 }
-
-                                                if(PayloadArray[i].Mesure === 9999)
-                                                    sendBOT(device.toObject().Name, req.body.DeviceId, "Mesure",  "Erreur de mesure", "#ea5153");
-                                                else
-                                                    sendBOT(device.toObject().Name, req.body.DeviceId, "Mesure",  PayloadArray[i].Mesure, "#45b384");
 
                                                 if(needDownlink === 1 && downsend === false) {
 
@@ -267,7 +268,6 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                 console.log(err);
                 return(res.end());
             }
-
 
             Device.find({SigfoxId: newPayload.DeviceId}, function (err, obj) {
                 if (obj[0] !== undefined && obj[0] != null) { //check if device has been found in database
@@ -476,18 +476,18 @@ exports.delete_payload = function (req, res) //DELETE le payload specifié
 
 
 
-function sendBOT(Name, SigFoxId, Signal, Information, Color)
+function sendBOT(Name, SigFoxId, Signal, Information, Date, Color)
 {
     let req = new XMLHttpRequest();
     let data = JSON.stringify({
         "attachments": [{
-            "fallback": "Capteur :" + Name + " SigfoxId: " + SigFoxId + " <https://app.heyliot.com/|Voir le device>",
-            "pretext":"Capteur :" + Name + " SigfoxId: " + SigFoxId + " <https://app.heyliot.com|Voir le device>",
+            "fallback": "Capteur : " + Name + " SigfoxId : " + SigFoxId + " <https://app.heyliot.com/|Voir le device>",
+            "pretext":"Capteur : " + Name + " SigfoxId : " + SigFoxId + " <https://app.heyliot.com|Voir le device>",
             "color": Color,
             "fields":[
                 {
                     "title":"Informations",
-                    "value":"Type de signal : " + Signal + " \n Information : " + Information + "\n",
+                    "value":"Type de signal : " + Signal + " \n Information : " + Information + "\n Date : " + Date + "",
                     "short":false
                 }
             ]
