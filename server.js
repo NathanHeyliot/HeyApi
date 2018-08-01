@@ -42,7 +42,7 @@ let route_dev = false;
 /*
 * SET AUTH TOKEN TO ON
  */
-let auth_activated = true;
+let auth_activated = false;
 
 let routes = require('./api/routes/ApiRoute');
 routes(app, route_dev, auth_activated);

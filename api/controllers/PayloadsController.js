@@ -92,6 +92,12 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                     PayloadArray[i].Mesure = Number(req.body.Code.toString().substr(4 + (i * 4), 4));
                     PayloadArray[i].DeviceId = req.body.DeviceId;
 
+                    if(PayloadArray[i].Mesure === 9999)
+                        sendBOT(req.body.DeviceId, "Mesure",  "Erreur de mesure", "#ea5153");
+                    else
+                        sendBOT(req.body.DeviceId, "Mesure",  PayloadArray[i].Mesure, "#45b384");
+
+
                     if (heureActuelle >= parseInt(device.Phase_start) && heureActuelle < parseInt(device.Phase_stop))
                         var offset = (nbmes - (i+1)) * parseInt(device.Wake_in);
                     else
@@ -210,6 +216,9 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                                     downsend = true;
                                                     res.json(data);
                                                 }
+
+
+
                                                 return(res.end());
                                             });
                                     } else {
@@ -300,6 +309,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                 console.log("DATA : " + hh + min + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N + "0");
                                 res.json(data);
                             }
+
                             return(res.end());
                     });
                 } else {
@@ -464,3 +474,34 @@ exports.delete_payload = function (req, res) //DELETE le payload specifié
         res.json({message: "Payload successfully  deleted"});
     });
 };
+
+
+
+function sendBOT(SigFoxId, Signal, Information, Color)
+{
+    let req = new XMLHttpRequest();
+    console.log("BOT");
+
+    req.addEventListener('load', function() {
+        console.log("Response : " + req.response);
+    });
+
+    let data = JSON.stringify({
+        "attachments": [{
+            "fallback": "Capteur :" + SigFoxId + " <https://app.heyliot.com/|Voir le device>",
+            "pretext":"Capteur : " + SigFoxId + " <https://app.heyliot.com|Voir le device>",
+            "color": Color,
+            "fields":[
+                {
+                    "title":"Informations",
+                    "value":"Type de signal : " + Signal + " \n Information : " + Information + "\n",
+                    "short":false
+                }
+            ]
+        }]
+    });
+
+    req.open("POST", "https://hooks.slack.com/services/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", true);
+    req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    req.send('payload=' + data);
+}
