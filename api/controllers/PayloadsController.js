@@ -499,7 +499,7 @@ function sendBOT(Name, SigFoxId, id, Signal, Information, Date, Color)
         }]
     });
 
-    req.open("POST", "https://hooks.slack.com/services/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", true);
+    req.open("POST", "https://hooks.slack.com/services/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", true);
     req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     req.send('payload=' + data);
 }
