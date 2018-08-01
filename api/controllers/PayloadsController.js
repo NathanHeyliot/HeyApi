@@ -119,9 +119,9 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
 
                     if(PayloadArray[i].Mesure === 9999)
-                        sendBOT(device.toObject().Name, req.body.DeviceId, "Mesure",  "Erreur de mesure", PayloadArray[i].DateGot,  "#ea5153");
+                        sendBOT(device.toObject().Name, req.body.DeviceId, device.toObject()._id, "Mesure",  "Erreur de mesure", PayloadArray[i].DateGot,  "#ea5153");
                     else
-                        sendBOT(device.toObject().Name, req.body.DeviceId, "Mesure",  PayloadArray[i].Mesure, PayloadArray[i].DateGot, "#45b384");
+                        sendBOT(device.toObject().Name, req.body.DeviceId, device.toObject()._id, "Mesure",  PayloadArray[i].Mesure, PayloadArray[i].DateGot, "#45b384");
                 }
 
                 console.log("Payload Array : " + PayloadArray);
@@ -476,13 +476,13 @@ exports.delete_payload = function (req, res) //DELETE le payload specifié
 
 
 
-function sendBOT(Name, SigFoxId, Signal, Information, Date, Color)
+function sendBOT(Name, SigFoxId, id, Signal, Information, Date, Color)
 {
     let req = new XMLHttpRequest();
     let data = JSON.stringify({
         "attachments": [{
-            "fallback": "Capteur : " + Name + " SigfoxId : " + SigFoxId + " <https://app.heyliot.com/|Voir le device>",
-            "pretext":"Capteur : " + Name + " SigfoxId : " + SigFoxId + " <https://app.heyliot.com|Voir le device>",
+            "fallback": "Capteur : " + Name + " SigfoxId : " + SigFoxId + " <http://app.heyliot.com/devices/view/" + id + "|Voir le device>",
+            "pretext":"Capteur : " + Name + " SigfoxId : " + SigFoxId + " <http://app.heyliot.com/devices/view/" + id + "|Voir le device>",
             "color": Color,
             "fields":[
                 {
