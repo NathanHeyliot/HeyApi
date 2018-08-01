@@ -275,6 +275,9 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                     Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},{Downlink: 0, FillLevel: 0, CalibrationMeasure: newPayload.Mesure, LastUpdate: newDevice.LastUpdate },
                         {new: true}, function (err, device)
                         {
+
+                            sendBOT(device.toObject().Name, device.toObject().SigfoxId, device.toObject()._id, "Calibration",  newPayload.Mesure,newPayload.DateGot,  "#007cb3");
+
                             if(needDownlink === 1) {
                                 //check if is good
 
@@ -363,6 +366,8 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                             {
                                 if (err)
                                     console.log(err);
+
+                                sendBOT(device.toObject().Name, device.toObject().SigfoxId, device.toObject()._id, "Localisation",  "Latitude : " + parsed_info.lat + "Longitude : " + parsed_info.lng, dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min,  "#ffbe33");
 
                                 if(needDownlink === 1) {
 
