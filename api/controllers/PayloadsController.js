@@ -92,12 +92,6 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                     PayloadArray[i].Mesure = Number(req.body.Code.toString().substr(4 + (i * 4), 4));
                     PayloadArray[i].DeviceId = req.body.DeviceId;
 
-                    if(PayloadArray[i].Mesure === 9999)
-                        sendBOT(req.body.DeviceId, "Mesure",  "Erreur de mesure", "#ea5153");
-                    else
-                        sendBOT(req.body.DeviceId, "Mesure",  PayloadArray[i].Mesure, "#45b384");
-
-
                     if (heureActuelle >= parseInt(device.Phase_start) && heureActuelle < parseInt(device.Phase_stop))
                         var offset = (nbmes - (i+1)) * parseInt(device.Wake_in);
                     else
@@ -180,6 +174,11 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                                     console.log("Error updating Device");
                                                     return(res.end());
                                                 }
+
+                                                if(PayloadArray[i].Mesure === 9999)
+                                                    sendBOT(device.toObject().Name, req.body.DeviceId, "Mesure",  "Erreur de mesure", "#ea5153");
+                                                else
+                                                    sendBOT(device.toObject().Name, req.body.DeviceId, "Mesure",  PayloadArray[i].Mesure, "#45b384");
 
                                                 if(needDownlink === 1 && downsend === false) {
 
@@ -477,19 +476,13 @@ exports.delete_payload = function (req, res) //DELETE le payload specifié
 
 
 
-function sendBOT(SigFoxId, Signal, Information, Color)
+function sendBOT(Name, SigFoxId, Signal, Information, Color)
 {
     let req = new XMLHttpRequest();
-    console.log("BOT");
-
-    req.addEventListener('load', function() {
-        console.log("Response : " + req.response);
-    });
-
     let data = JSON.stringify({
         "attachments": [{
-            "fallback": "Capteur :" + SigFoxId + " <https://app.heyliot.com/|Voir le device>",
-            "pretext":"Capteur : " + SigFoxId + " <https://app.heyliot.com|Voir le device>",
+            "fallback": "Capteur :" + Name + " SigfoxId: " + SigFoxId + " <https://app.heyliot.com/|Voir le device>",
+            "pretext":"Capteur :" + Name + " SigfoxId: " + SigFoxId + " <https://app.heyliot.com|Voir le device>",
             "color": Color,
             "fields":[
                 {
