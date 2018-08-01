@@ -367,7 +367,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                 if (err)
                                     console.log(err);
 
-                                sendBOT(device.toObject().Name, device.toObject().SigfoxId, device.toObject()._id, "Localisation",  "Latitude : " + parsed_info.lat + "Longitude : " + parsed_info.lng, dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min,  "#ffbe33");
+                                sendBOT(device.toObject().Name, device.toObject().SigfoxId, device.toObject()._id, "Localisation",  "Latitude : " + parsed_info.lat + " , Longitude : " + parsed_info.lng, dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min,  "#ffbe33");
 
                                 if(needDownlink === 1) {
 
