@@ -485,7 +485,7 @@ function sendBOT(Name, SigFoxId, id, Signal, Information, Date, Color)
 {
     let req = new XMLHttpRequest();
     let data = JSON.stringify({
-        "chanel" : Name,
+        "channel" : Name,
         "attachments": [{
             "fallback": "Capteur : " + Name + " SigfoxId : " + SigFoxId + " <http://app.heyliot.com/devices/view/" + id + "|Voir le device>",
             "pretext":"Capteur : " + Name + " SigfoxId : " + SigFoxId + " <http://app.heyliot.com/devices/view/" + id + "|Voir le device>",
