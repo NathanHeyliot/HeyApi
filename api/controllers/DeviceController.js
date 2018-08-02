@@ -88,6 +88,7 @@ exports.create_device = function (req, res)
     newDevice.Created = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;
     newDevice.LastUpdate = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;
     newDevice.Name = req.body.Name;
+    newDevice.Description = req.body.Description;
     newDevice.GroupId = req.body.GroupId;
     newDevice.SigfoxId = req.body.SigfoxId;
     newDevice.DeviceType = req.body.DeviceType;

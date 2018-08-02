@@ -15,6 +15,10 @@ let DevicesSchema = new Schema
         {
           type: String, required: true,
         },
+    Description:
+        {
+          type: String, default: "",
+        },
     GroupId:
         {
             type: String, required: true //dependante d'un ID de groupe
