@@ -27,7 +27,10 @@ exports.hasPermission = async function (perm, req)
                                 if (err)
                                     resolve(false);
 
-                                return ((permissions[perm] === true) ?  true : false);
+                                if(permissions[perm] !== true)
+                                    resolve(false);
+                                else
+                                    resolve(true);
                             });
                         } else {
                             resolve(false);
