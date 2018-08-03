@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = function (app, route_dev, auth_activated) {
+module.exports = function (app) {
     let payApi = require("../controllers/PayloadsController");
     let deviceApi = require("../controllers/DeviceController");
     let groupApi = require("../controllers/GroupController");
@@ -16,34 +16,11 @@ module.exports = function (app, route_dev, auth_activated) {
     app.use(cors());
 
     /*
-    * VAR FOR DEVELOPPEMENT MODE
+    * MIDDLEWARE AUTH
      */
 
-    if(auth_activated)
-        app.use(jwt_auth.middle_token);
+    app.use(jwt_auth.middle_token);
 
-    if(route_dev) {
-        app.route('/payloads')
-            .delete(payApi.delete_all_payloads); // OK
-
-        app.route('/devices')
-           .delete(deviceApi.delete_all_devices); //used to delete all devices in mongoDB
-
-        app.route('/devicesgroups')
-           .delete(groupApi.delete_all_groups); // OK --> delete all groups
-
-        app.route('/organisations')
-           .delete(orgApi.delete_all_organisations); // OK --> delete all organisations
-
-        app.route('/devicestypes')
-         .delete(typeApi.delete_all_devicestypes); // OK --> delete all devices types
-
-        app.route('/users')
-            .delete(userApi.delete_all_users) // OK --> delete all users
-
-        app.route('/usersgroups')
-            .delete(userGroupApi.delete_all_usergroups); //ok --> deleting all users groups
-    }
     /*
     * ----------------------------------------
     * API ROUTE
@@ -51,9 +28,18 @@ module.exports = function (app, route_dev, auth_activated) {
      */
 
 
+    app.route('/callback')
+        .post(payApi.create_payload); //ROUTE FOR SIGFOX NO PERMISSION NEEDED
+
+
     /*
-    * AVANT DE METTRE L APPLICATION SUR LE SERVEUR, IL EST CONSEILLER DE PURGER LA BDD
-     */
+    *-----------------------
+    * AUTH ROUTE
+    * ----------------------
+    */
+
+    app.route('/auth/:user/:password')
+        .get(jwt_auth.submit_auth); //NO PERMISSION NEEDED
 
     /*
     *---------------------
@@ -62,7 +48,7 @@ module.exports = function (app, route_dev, auth_activated) {
      */
 
     app.route("/road")
-        .post(LocalisationApi.road);
+        .post(LocalisationApi.road); //API_PAYLOADS_ROADPOST
 
 
     /*
@@ -71,20 +57,16 @@ module.exports = function (app, route_dev, auth_activated) {
     * -------------------------
      */
 
-    app.route('/callback')
-        .post(payApi.create_payload); //new route
-
     app.route('/payloads')
-        .get(payApi.list_payload)   // OK
+        .get(payApi.list_payload)   // API_PAYLOADS_GET -- API_PAYLOADS_GET_BYPASS
+        .delete(payApi.delete_all_payloads); // API_PAYLOADS_DELALL
 
     app.route('/payloads/id/:appId')
-        .get(payApi.read_payload) //OK ---> must be the ID of the payload
-        .delete(payApi.delete_payload); //OK --> must be the ID of the payload
+        .get(payApi.read_payload) //API_PAYLOADS_GETID
+        .delete(payApi.delete_payload); //API_PAYLOADS_DELETEID
 
     app.route('/payloads/deviceId/:DeviceId')
-        .get(payApi.get_paybydevice); //OK ---> must be the DEVICE ID of the paylaod
-
-
+        .get(payApi.get_paybydevice); //API_PAYLOADS_GETDEVICE
 
     /*
     *--------------------------
@@ -92,22 +74,23 @@ module.exports = function (app, route_dev, auth_activated) {
     * -------------------------
      */
     app.route('/devices')
-        .get(deviceApi.list_device) // OK
-        .post(deviceApi.create_device); // OK --> fonctionne mais besoin de drop la database au préalable sous risque de conflit de Index Access_ID
+        .get(deviceApi.list_device) //API_DEVICES_GET - API_DEVICES_GET_BYPASS
+        .post(deviceApi.create_device) //API_DEVICES_POST
+        .delete(deviceApi.delete_all_devices); //API_DEVICES_DELALL
 
     app.route('/devices/id/:appId')
-        .get(deviceApi.read_device)  // OK ---> must be the ID of the device
-        .put(deviceApi.update_device) //OK --> used to update a specified device
-        .delete(deviceApi.delete_device); //OK --> used to delete a specified device
+        .get(deviceApi.read_device)  //API_DEVICES_GETID
+        .put(deviceApi.update_device) //API_DEVICES_PUTID
+        .delete(deviceApi.delete_device); //API_DEVICES_DELETEID
 
     app.route('/devices/group/:GroupId')
-        .get(deviceApi.list_group_devices); // OK --> must be the group ID of the device
+        .get(deviceApi.list_group_devices); //API_DEVICES_GETGRP
 
     app.route('/devices/user/:UID')
-        .get(deviceApi.list_user_devices);
+        .get(deviceApi.list_user_devices); //API_DEVICES_GETUSR
 
     app.route('/devices/type/:DeviceType')
-        .get(deviceApi.list_bytype); // OK --> must be the device type of the device
+        .get(deviceApi.list_bytype); //API_DEVICES_GETTYPE
 
 
     /*
@@ -116,14 +99,15 @@ module.exports = function (app, route_dev, auth_activated) {
     * -------------------------
      */
     app.route('/devicesgroups')
-        .get(groupApi.list_group) // OK --> list of groups
-        .post(groupApi.create_group); //OK --> create a group -- group id must be unique
+        .get(groupApi.list_group) //API_DEVICESGRP_GET - API_DEVICESGRP_GET_BYPASS
+        .post(groupApi.create_group) //API_DEVICESGRP_POST
+        .delete(groupApi.delete_all_groups); //API_DEVICESGRP_DELALL
 
 
     app.route('/devicesgroups/id/:appId')
-        .delete(groupApi.delete_group) // OK --> must be a _id of the named group
-        .get(groupApi.read_group) // OK --> return properties of a group
-        .put (groupApi.update_group); //OK
+        .delete(groupApi.delete_group) //API_DEVICESGRP_DELID
+        .get(groupApi.read_group) //API_DEVICESGRP_GETID
+        .put (groupApi.update_group); //API_DEVICESGRP_PUTID
 
 
     /*
@@ -132,13 +116,14 @@ module.exports = function (app, route_dev, auth_activated) {
     * -------------------------
      */
     app.route('/organisations')
-        .get(orgApi.list_organisation) // OK --> list of all organisations
-        .post(orgApi.create_organisation); //OK --> create an organisation
+        .get(orgApi.list_organisation) //API_ORGANISATIONS_GET - API_ORGANISATIONS_GET_BYPASS
+        .post(orgApi.create_organisation) //API_ORGANISATIONS_POST
+        .delete(orgApi.delete_all_organisations); //API_ORGANISATIONS_DELALL
 
     app.route('/organisations/id/:appId')
-        .put(orgApi.update_organisation) //OK --> used to update an organisation information
-        .get(orgApi.get_organisation) //OK --> get information about a group
-        .delete(orgApi.delete_organisation); //OK --> used to delete an specified organisation
+        .put(orgApi.update_organisation) //API_ORGANISATIONS_PUTID
+        .get(orgApi.get_organisation) //API_ORGANISATIONS_GETID
+        .delete(orgApi.delete_organisation); //API_ORGANISATIONS_DELID
 
     /*
     *--------------------------
@@ -146,18 +131,19 @@ module.exports = function (app, route_dev, auth_activated) {
     * -------------------------
      */
     app.route('/devicestypes')
-        .get(typeApi.list_devicetypes) // OK --> list of devices types
-        .post(typeApi.create_devicetypes); //OK --> create a device type
+        .get(typeApi.list_devicetypes) //API_DEVICESTYPES_GET - API_DEVICESTYPES_GET_BYPASS
+        .post(typeApi.create_devicetypes) //API_DEVICESTYPES_POST
+        .delete(typeApi.delete_all_devicestypes); //API_DEVICESTYPES_DELALL
 
     app.route('/devicestypes/name/:Name')
-        .delete(typeApi.delete_devicestypes) //OK --> delete a specified device types
-        .get(typeApi.information_devicestypes) //OK --> get information about a specified device type
-        .put(typeApi.update_devicestypes); // OK --> update information about a device type
+        .delete(typeApi.delete_devicestypes) //API_DEVICESTYPES_DELNAME
+        .get(typeApi.information_devicestypes) //API_DEVICESTYPES_GETNAME
+        .put(typeApi.update_devicestypes); //API_DEVICESTYPES_PUTNAME
 
     app.route('/devicestypes/id/:id')
-        .delete(typeApi.delete_devicestypesid) // OK --> delete a devicestypes by ID
-        .get(typeApi.information_devicestypesid) //OK --> get information of devicestypes by ID
-        .put(typeApi.update_devicestypesid); //OK --> update information about a device type by ID
+        .delete(typeApi.delete_devicestypesid) //API_DEVICESTYPES_DELID
+        .get(typeApi.information_devicestypesid) //API_DEVICESTYPES_GETID
+        .put(typeApi.update_devicestypesid); //API_DEVICESTYPES_PUTID
 
     /*
     *-----------------------
@@ -166,13 +152,14 @@ module.exports = function (app, route_dev, auth_activated) {
      */
 
     app.route('/users')
-        .get(userApi.list_users) // OK --> list of all users
-        .post(userApi.create_user); // OK --> create a user
+        .get(userApi.list_users) //API_USERS_GET - API_USERS_GET_BYPASS
+        .post(userApi.create_user) //API_USERS_POST
+        .delete(userApi.delete_all_users); //API_USERS_DELALL
 
     app.route('/users/id/:UserId')
-        .get(userApi.user_info) //OK --> get information of user
-        .delete(userApi.delete_user) //OK --> delete a user
-        .put(userApi.update_user); //OK --> update a user
+        .get(userApi.user_info) //API_USERS_GETID
+        .delete(userApi.delete_user) //API_USERS_DELID
+        .put(userApi.update_user); //API_USERS_PUTID
 
     /*
     *----------------------
@@ -181,20 +168,21 @@ module.exports = function (app, route_dev, auth_activated) {
      */
 
     app.route('/usersgroups')
-        .get(userGroupApi.list_groups) // OK
-        .post(userGroupApi.create_group); // OK
+        .get(userGroupApi.list_groups) //API_USERSGRP_GET - API_USERSGRP_GET_BYPASS
+        .post(userGroupApi.create_group) //API_USERSGRP_POST
+        .delete(userGroupApi.delete_all_usergroups); //API_USERSGRP_DELALL
 
     app.route('/usersgroups/id/:Gid')
-        .get(userGroupApi.get_info) // OK
-        .delete(userGroupApi.delete_group) // OK
-        .put(userGroupApi.update_group);
+        .get(userGroupApi.get_info) //API_USERSGRP_GETID
+        .delete(userGroupApi.delete_group) //API_USERSGRP_DELID
+        .put(userGroupApi.update_group); //API_USERSGRP_PUTID
 
     app.route('/usersgroups/user/:Uid')
-        .get(userGroupApi.get_infoU)
-        .delete(userGroupApi.delete_infoU);
+        .get(userGroupApi.get_infoU) //API_USERSGRP_GETUSR
+        .delete(userGroupApi.delete_infoU); //API_USERSGRP_DELUSER
 
     app.route('/usersgroups/group/:Gid')
-        .delete(userGroupApi.delete_infoG);
+        .delete(userGroupApi.delete_infoG); //API_USERSGRP_GETGRP
 
 
     /*
@@ -204,18 +192,8 @@ module.exports = function (app, route_dev, auth_activated) {
      */
 
     app.route('/localisation/crypted')
-        .post(LocalisationApi.crypted);
+        .post(LocalisationApi.crypted); //API_LOCALISATION_POSTCRYPTED
 
     app.route('/localisation/uncrypted')
-        .post(LocalisationApi.uncrypted);
-
-    /*
-    *-----------------------
-    * AUTH ROUTE
-    * ----------------------
-    */
-
-    app.route('/auth/:user/:password')
-        .get(jwt_auth.submit_auth);
-
+        .post(LocalisationApi.uncrypted); //API_LOCALISATION_POSTUNCRYPTED
 };

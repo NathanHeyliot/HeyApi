@@ -32,20 +32,8 @@ app.use(express.static('public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
-
-/*
-* SET ROUTER IN DEV MODE
- */
-
-let route_dev = false;
-
-/*
-* SET AUTH TOKEN TO ON
- */
-let auth_activated = true;
-
 let routes = require('./api/routes/ApiRoute');
-routes(app, route_dev, auth_activated);
+routes(app);
 
 app.listen(port);
 
@@ -82,5 +70,4 @@ app.use(function (req, res)
 });
 
 console.log('Server started on: ' + port);
-console.log("Route loaded in developpement mode : " + route_dev);
-console.log("Auth Token activated : " + auth_activated);
+console.log("Auth Token activated : true");
