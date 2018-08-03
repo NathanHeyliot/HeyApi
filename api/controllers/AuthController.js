@@ -15,7 +15,7 @@ exports.submit_auth = function (req, res)
             var token = jwt.sign({
                 user_id: user._id, user: req.params.user, password: md5(req.params.password)
             }, secret_encrypt, { expiresIn: expiration_time});
-            console.log("AUTH : [user : " + req.params.user + ", token : " + token + "]");
+            console.log("AUTH : [user_id : " + user._id + ", user : " + req.params.user + ", token : " + token + "]");
             res.json({messages: token, admin: user[0].AdminLevel, user_id: user[0]._id});
             res.end();
         } else {
