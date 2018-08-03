@@ -6,24 +6,23 @@ let mongoose = require('mongoose'),
     Ranks = mongoose.model('Ranks');
 
 exports.getRanks = function (req, res) {
-    var bypass = req.headers.Bypass;
     var user_entity = Auth.check_token(req);
 
     console.log(bypass);
 
-    if(bypass === true) {
-        console.log("Bypass");
-        Ranks.find({}, function (err, ranks) {
-            if (err)
-            {
-                console.log("Error at : " + err);
-                res.send(err);
-            }
-            console.log(ranks);
-            res.json(ranks);
-        });
-    } else {
-        user_entity.then(user_entity => {
+    user_entity.then(user_entity => {
+        if(user_entity.Bypass === true) {
+            console.log("Bypass");
+            Ranks.find({}, function (err, ranks) {
+                if (err)
+                {
+                    console.log("Error at : " + err);
+                    res.send(err);
+                }
+                console.log(ranks);
+                res.json(ranks);
+            });
+        } else {
             User.findOne({_id: user_entity.user_id}, function (err, User) {
                 if(User !== null && User !== undefined) {
                     Ranks.findOne({_id: User.RankId}, function (err, rank) {
@@ -39,8 +38,8 @@ exports.getRanks = function (req, res) {
                     res.json({error: "User not found !"});
                 }
             });
-        });
-    }
+        }
+    });
 };
 
 exports.createRanks = function (req, res) {
