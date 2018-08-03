@@ -4,6 +4,7 @@ let mongoose = require('mongoose'),
     User = mongoose.model('User'),
     Ranks = mongoose.model('Ranks'),
     Auth = require('./AuthController'),
+    Permission = require('./PermissionsController'),
     Permissions = mongoose.model('Permissions');
 
 
@@ -65,7 +66,7 @@ exports.getPermissions = function (req, res)
                                 console.log("Error at : " + err);
                                 res.send(err);
                             }
-                            console.log("Permission : API_PAYLOADS_GET : " + this.hasPermission("API_PAYLOADS_GET", req));
+                            console.log("Permission : API_PAYLOADS_GET : " + Permission.hasPermission("API_PAYLOADS_GET", req));
 
                             res.json(permissions);
                         });
