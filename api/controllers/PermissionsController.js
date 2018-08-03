@@ -27,11 +27,7 @@ exports.hasPermission = async function (perm, req)
                                 if (err)
                                     resolve(false);
 
-                                console.log(permissions);
-
-                                console.log(permissions.hasAttribute(perm));
-
-                                if(permissions.hasOwnProperty(perm)) {
+                                if(permissions.perm === true) {
                                     console.log("Found");
                                     resolve(true);
                                 } else {
