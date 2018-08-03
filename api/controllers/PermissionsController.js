@@ -25,7 +25,7 @@ exports.hasPermission = async function (perm, req)
                         Permissions.findOne({RankId: Rank._id}, function (err, permissions) {
                             if (err)
                                 return false;
-                            if(permissions.contains(perm))
+                            if(permissions.hasOwnProperty(perm))
                                 return true;
                         });
                     } else {
