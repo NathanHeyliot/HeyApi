@@ -12,29 +12,31 @@ exports.hasPermission = async function (perm, req)
 {
     var user_entity = Auth.check_token(req);
 
-    await user_entity.then(user_entity => {
-        User.findOne({_id: user_entity.user_id}, function (err, User)
-        {
-            if (err)
-                return false;
-            if(User !== null && User !== undefined) {
-                Ranks.findOne({_id: User.RankId}, function (err, Rank) {
-                    if (err)
-                        return false;
-                    if(Rank !== null && Rank !== undefined) {
-                        Permissions.findOne({RankId: Rank._id}, function (err, permissions) {
-                            if (err)
-                                return false;
-                            if(permissions.hasOwnProperty(perm))
-                                return true;
-                        });
-                    } else {
-                        return false;
-                    }
-                });
-            } else {
-                return false;
-            }
+    return new Promise((resolve, reject) => {
+        user_entity.then(user_entity => {
+            User.findOne({_id: user_entity.user_id}, function (err, User)
+            {
+                if (err)
+                    reject(false);
+                if(User !== null && User !== undefined) {
+                    Ranks.findOne({_id: User.RankId}, function (err, Rank) {
+                        if (err)
+                            reject(false);
+                        if(Rank !== null && Rank !== undefined) {
+                            Permissions.findOne({RankId: Rank._id}, function (err, permissions) {
+                                if (err)
+                                    reject(false);
+                                if(permissions.hasOwnProperty(perm))
+                                    resolve(true);
+                            });
+                        } else {
+                            reject(false);
+                        }
+                    });
+                } else {
+                    reject(false);
+                }
+            });
         });
     });
 };
