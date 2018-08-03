@@ -27,6 +27,7 @@ exports.hasPermission = async function (perm, req)
                                 if (err)
                                     resolve(false);
 
+                                permissions = JSON.parse(permissions);
                                 console.log(permissions);
                                 for (var key in permissions) {
                                     if (permissions.hasOwnProperty(key)) {
