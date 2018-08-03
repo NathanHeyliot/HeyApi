@@ -2,6 +2,7 @@
 
 let mongoose = require('mongoose'),
     Auth = require('./AuthController'),
+    User = mongoose.model('User'),
     Ranks = mongoose.model('Ranks');
 
 exports.getRanks = function (req, res) {
@@ -21,15 +22,21 @@ exports.getRanks = function (req, res) {
         });
     } else {
         user_entity.then(user_entity => {
-           Ranks.findOne({_id: user_entity.RankId}, function (err, rank) {
-               if (err)
-               {
-                   console.log("Error at : " + err);
-                   res.send(err);
-               }
-               console.log(rank);
-               res.json(rank);
-           });
+            User.findOne({id: user_entity.user_id}, function (err, User) {
+                if(User !== null && User !== undefined) {
+                    Ranks.findOne({_id: User.RankId}, function (err, rank) {
+                        if (err)
+                        {
+                            console.log("Error at : " + err);
+                            res.send(err);
+                        }
+                        console.log(rank);
+                        res.json(rank);
+                    });
+                } else {
+                    res.json({error: "User not found !"});
+                }
+            });
         });
     }
 };
