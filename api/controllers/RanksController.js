@@ -9,12 +9,14 @@ exports.getRanks = function (req, res) {
     var user_entity = Auth.check_token(req);
     
     if(bypass === true) {
+        console.log("Bypass");
         Ranks.find({}, function (err, ranks) {
             if (err)
             {
                 console.log("Error at : " + err);
                 res.send(err);
             }
+            console.log(ranks);
             res.json(ranks);
         });
     } else {
@@ -25,6 +27,7 @@ exports.getRanks = function (req, res) {
                    console.log("Error at : " + err);
                    res.send(err);
                }
+               console.log(rank);
                res.json(rank);
            });
         });
