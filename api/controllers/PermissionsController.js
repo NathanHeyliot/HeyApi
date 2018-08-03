@@ -8,6 +8,11 @@ let mongoose = require('mongoose'),
     Permissions = mongoose.model('Permissions');
 
 
+/*
+* Comment utiliser la fonction has permission, elle return soit true ou false
+* Permission.hasPermission("API_PAYLOADS_GET", req).then(data => { console.log(data); });
+ */
+
 exports.hasPermission = async function (perm, req)
 {
     var user_entity = Auth.check_token(req);
@@ -71,10 +76,6 @@ exports.getPermissions = function (req, res)
                                 console.log("Error at : " + err);
                                 res.send(err);
                             }
-
-                            Permission.hasPermission("API_PAYLOADS_GET", req).then(data => {
-                               console.log(data);
-                            });
                             res.json(permissions);
                         });
                     } else {
