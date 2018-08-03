@@ -11,6 +11,8 @@ var express = require('express'),
     Organisation = require('./api/models/OrganisationModel'),
     User = require("./api/models/UserModel");
     DeviceTypes = require('./api/models/TypeModel'),
+    Ranks = require('./api/models/RanksModel'),
+    Permissions = require('./api/models/PermissionsModel'),
     UserGroup = require("./api/models/UserGroupModel");
 
 
