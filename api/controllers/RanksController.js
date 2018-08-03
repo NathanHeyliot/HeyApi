@@ -22,7 +22,12 @@ exports.getRanks = function (req, res) {
         });
     } else {
         user_entity.then(user_entity => {
+            console.log(user_entity);
+
             User.findOne({id: user_entity.user_id}, function (err, User) {
+
+                console.log(User);
+
                 if(User !== null && User !== undefined) {
                     Ranks.findOne({_id: User.RankId}, function (err, rank) {
                         if (err)
