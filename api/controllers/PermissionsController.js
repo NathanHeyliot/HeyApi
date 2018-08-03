@@ -18,6 +18,9 @@ exports.getPermissions = function (req, res)
             console.log("Error at : " + err);
             res.send(err);
         }
+
+        console.log(User);
+
             Ranks.findOne({_id: User.RankId}, function (err, Rank) {
                 if (err)
                 {
