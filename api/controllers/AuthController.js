@@ -49,11 +49,12 @@ exports.check_token = async function ResolveToken(req) {
     var token = req.headers['x-access-token'];
     var bypass = req.headers['bypass'];
 
-    console.log("Found : " + bypass);
-
     return new Promise((resolve, reject) => {
         jwt.verify(token, secret_encrypt, function (err, decoded) {
-            decoded.bypass = bypass;
+            if (bypass === 'true')
+                decoded.bypass = true;
+            else
+                decoded.bypass = false;
             resolve(decoded);
             reject(err);
         });
