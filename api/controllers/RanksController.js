@@ -6,9 +6,11 @@ let mongoose = require('mongoose'),
     Ranks = mongoose.model('Ranks');
 
 exports.getRanks = function (req, res) {
-    var bypass = req.headers.bypass;
+    var bypass = req.headers.Bypass;
     var user_entity = Auth.check_token(req);
-    
+
+    console.log(bypass);
+
     if(bypass === true) {
         console.log("Bypass");
         Ranks.find({}, function (err, ranks) {
