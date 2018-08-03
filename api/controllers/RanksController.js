@@ -1,24 +1,73 @@
 'use strict';
 
 let mongoose = require('mongoose'),
+    Auth = require('./AuthController'),
     Ranks = mongoose.model('Ranks');
 
 exports.getRanks = function (req, res) {
+    var bypass = req.headers.bypass;
+    var user_entity = Auth.check_token(req);
     
+    if(bypass === true) {
+        Ranks.find({}, function (err, ranks) {
+            if (err)
+            {
+                console.log("Error at : " + err);
+                res.send(err);
+            }
+            res.json(ranks);
+        });
+    } else {
+        user_entity.then(user_entity => {
+           Ranks.findOne({_id: user_entity.RankId}, function (err, rank) {
+               if (err)
+               {
+                   console.log("Error at : " + err);
+                   res.send(err);
+               }
+               res.json(rank);
+           });
+        });
+    }
 };
 
 exports.createRanks = function (req, res) {
+    console.log("Submitting a new Rank");
 
+    let newRank = new Ranks(req.body);
+    newRank.save(function (err, ranks)
+    {
+        if(err)
+            return(res.send(err));
+        res.json(ranks);
+    });
 };
 
 exports.delete_allRanks = function (req, res) {
-
+    console.log("Deleting all ranks....");
+    Ranks.collection.remove({});
+    res.end();
+    console.log("Success");
 };
 
 exports.removeRanks = function (req, res) {
+    console.log("Deleting of specified information, ID : " + req.params.id);
 
+    Ranks.remove({_id: req.params.id}, function(err, ranks)
+    {
+        if(err)
+            res.send(err);
+        res.json({message: "Rank deleted succefully !"});
+    });
 };
 
 exports.updateRanks = function (req, res) {
+    console.log("Updating rank, ID : " + req.params.id);
 
+    Ranks.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, function (err, ranks)
+    {
+        if(err)
+            res.send(err);
+        res.json(ranks);
+    });
 };
