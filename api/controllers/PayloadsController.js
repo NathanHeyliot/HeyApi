@@ -3,6 +3,7 @@
 //includes
 let mongoose = require('mongoose'),
     Payload = mongoose.model('Payload'),
+    Auth = require('./AuthController'),
     Device = mongoose.model('Device');
 
 // Standalone usage
@@ -18,6 +19,8 @@ exports.list_payload = function (req, res) //GET all the payloads
 {
     console.log("Getting payloads list");
 
+    console.log(Auth.check_token(req));
+
     Payload.find({}, function (err, payload)
     {
         if (err)
@@ -26,7 +29,6 @@ exports.list_payload = function (req, res) //GET all the payloads
             res.send(err);
         }
         res.json(payload);
-
     });
 };
 

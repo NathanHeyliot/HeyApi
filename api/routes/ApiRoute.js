@@ -70,9 +70,12 @@ module.exports = function (app, route_dev, auth_activated) {
     * PAYLOAD ROUTER
     * -------------------------
      */
+
+    app.route('/callback')
+        .post(payApi.create_payload); //new route
+
     app.route('/payloads')
         .get(payApi.list_payload)   // OK
-        .post(payApi.create_payload); // OK
 
     app.route('/payloads/id/:appId')
         .get(payApi.read_payload) //OK ---> must be the ID of the payload
