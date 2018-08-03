@@ -11,7 +11,7 @@ exports.getRanks = function (req, res) {
 
         console.log(user_entity);
 
-        if(user_entity.Bypass === true) {
+        if(user_entity.bypass === true) {
             console.log("Bypass");
             Ranks.find({}, function (err, ranks) {
                 if (err)
