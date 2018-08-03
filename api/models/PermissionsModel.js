@@ -305,6 +305,67 @@ let PermissionsModel = new Schema
         {
             type: Boolean, default: false
         },
+
+    /*
+    *------------------------
+    * RANKS ROUTER
+    * -----------------------
+     */
+
+    API_RANKS_GET_BYPASS:
+        {
+            type: Boolean, default: false
+        },
+    API_RANKS_POST:
+        {
+            type: Boolean, default: false
+        },
+    API_RANKS_DEL:
+        {
+            type: Boolean, default: false
+        },
+    API_RANKS_GETID:
+        {
+            type: Boolean, default: false
+        },
+    API_RANKS_DELID:
+        {
+            type: Boolean, default: false
+        },
+    API_RANKS_PUTID:
+        {
+            type: Boolean, default: false
+        },
+    /*
+    *------------------------
+    * PERMISSIONS ROUTER
+    * -----------------------
+     */
+
+    API_PERMISSIONS_GET_BYPASS:
+        {
+            type: Boolean, default: false
+        },
+    API_PERMISSIONS_POST:
+        {
+            type: Boolean, default: false
+        },
+    API_PERMISSIONS_DEL:
+        {
+            type: Boolean, default: false
+        },
+    API_PERMISSIONS_GETID:
+        {
+            type: Boolean, default: false
+        },
+    API_PERMISSIONS_DELID:
+        {
+            type: Boolean, default: false
+        },
+    API_PERMISSIONS_PUTID:
+        {
+            type: Boolean, default: false
+        },
 });
 
 module.exports =  mongoose.model('Permissions', PermissionsModel);

@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 module.exports = function (app) {
     let payApi = require("../controllers/PayloadsController");
@@ -60,13 +60,14 @@ module.exports = function (app) {
      */
 
     app.route('/ranks')
-        .get(Ranks.getRanks)
-        .post(Ranks.createRanks)
-        .delete(Ranks.delete_allRanks);
+        .get(Ranks.getRanks) //NO PERMISSION NEEDED -- API_RANKS_GET_BYPASS
+        .post(Ranks.createRanks) //API_RANKS_POST
+        .delete(Ranks.delete_allRanks); //API_RANKS_DEL
 
     app.route('/ranks/id/:id')
-        .delete(Ranks.removeRanks)
-        .put(Ranks.updateRanks);
+        .get(Ranks.getRank) //API_RANKS_GETID
+        .delete(Ranks.removeRanks) //API_RANKS_DELID
+        .put(Ranks.updateRanks); //API_RANKS_PUTID
 
     /*
     *--------------------------
@@ -75,13 +76,14 @@ module.exports = function (app) {
      */
 
     app.route('/permissions')
-        .get(Permissions.getPermissions)
-        .post(Permissions.createPermissions)
-        .delete(Permissions.delete_allPermissions);
+        .get(Permissions.getPermissions) //NO PERMISSION NEEDED -- API_PERMISSIONS_GET_BYPASS
+        .post(Permissions.createPermissions) // API_PERMISSIONS_POST
+        .delete(Permissions.delete_allPermissions); // API_PERMISSIONS_DEL
 
     app.route('/permissions/id/:id')
-        .delete(Permissions.removePermissions)
-        .put(Permissions.updatePermissions);
+        .get(Permissions.getPermission) //API_PERMISSIONS_GETID
+        .delete(Permissions.removePermissions) // API_PERMISSIONS_DELID
+        .put(Permissions.updatePermissions); // API_PERMISSIONS_PUTID
 
 
     /*

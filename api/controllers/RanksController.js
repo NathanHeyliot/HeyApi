@@ -57,6 +57,16 @@ exports.delete_allRanks = function (req, res) {
     console.log("Success");
 };
 
+exports.getRank = function (req, res) {
+    Ranks.findOne({_id: req.params.id}, function (err, rank) {
+        if(err) {
+            console.log("Error at : " + err);
+            res.send(err);
+        }
+        res.json(rank);
+    });
+};
+
 exports.removeRanks = function (req, res) {
     console.log("Deleting of specified information, ID : " + req.params.id);
 
