@@ -47,7 +47,7 @@ exports.middle_token = function (req, res, next) {
 
 exports.check_token = async function ResolveToken(req) {
     var token = req.headers['x-access-token'];
-    var Bypass = req.headers['bypass'];
+    var bypass = req.headers['bypass'];
 
     console.log("Found : " + bypass);
 
