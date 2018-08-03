@@ -18,14 +18,12 @@ exports.getPermissions = function (req, res)
             console.log("Error at : " + err);
             res.send(err);
         }
-        if(User !== undefined && User !== null) {
             Ranks.findOne({_id: User.RankId}, function (err, Rank) {
                 if (err)
                 {
                     console.log("Error at : " + err);
                     res.send(err);
                 }
-                if(Rank !== undefined) {
                     Permissions.findOne({RankId: Rank._id}, function (err, permissions) {
                         if (err)
                         {
@@ -34,13 +32,7 @@ exports.getPermissions = function (req, res)
                         }
                         res.json(permissions);
                     });
-                } else {
-                    res.json({messages: "1"});
-                }
             });
-        } else {
-            res.json({messages: "2"});
-        }
     });
 };
 
