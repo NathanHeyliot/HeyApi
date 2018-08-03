@@ -29,7 +29,7 @@ exports.hasPermission = async function (perm, req)
 
 
                                 console.log(permissions.API_PAYLOADS_GET);
-                                console.log(permissions.hasOwnProperty(API_PAYLOADS_GET));
+                                console.log(permissions.hasOwnProperty('API_PAYLOADS_GET'));
 
                                 if(permissions.hasOwnProperty(perm)) {
                                     console.log("Found");
