@@ -13,7 +13,7 @@ exports.getPermissions = function (req, res)
 
 
     console.log(user_entity);
-    console.log(user_entity[0].user_id);
+    console.log(user_entity['user_id']);
 
     User.findOne({_id: user_entity.user_id}, function (err, User)
     {
