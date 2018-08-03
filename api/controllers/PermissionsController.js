@@ -66,8 +66,10 @@ exports.getPermissions = function (req, res)
                                 console.log("Error at : " + err);
                                 res.send(err);
                             }
-                            console.log("Permission : API_PAYLOADS_GET : " + Permission.hasPermission("API_PAYLOADS_GET", req));
 
+                            Permission.hasPermission("API_PAYLOADS_GET", req).then(data => {
+                               console.log(data);
+                            });
                             res.json(permissions);
                         });
                     } else {
