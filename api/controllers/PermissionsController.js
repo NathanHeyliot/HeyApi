@@ -28,7 +28,7 @@ exports.hasPermission = async function (perm, req)
                                     resolve(false);
 
                                 console.log(permissions);
-                                var keys = Object.keys(permissions);
+                                var keys = Array.keys(permissions);
 
                                 console.log(keys);
 
