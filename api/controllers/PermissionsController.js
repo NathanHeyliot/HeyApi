@@ -28,9 +28,11 @@ exports.hasPermission = async function (perm, req)
                                     resolve(false);
 
                                 console.log(permissions);
-                                var keys = Array.keys(permissions);
-
-                                console.log(keys);
+                                for (var key in permissions) {
+                                    if (permissions.hasOwnProperty(key)) {
+                                        console.log(key);
+                                    }
+                                }
 
                                 if(permissions.hasOwnProperty(perm)) {
                                     console.log("Found");
