@@ -27,8 +27,7 @@ exports.hasPermission = async function (perm, req)
                                 if (err)
                                     resolve(false);
 
-
-                                console.log(permissions.API_PAYLOADS_GET);
+                                permissions = JSON.stringify(permissions);
                                 console.log(permissions.hasOwnProperty('API_PAYLOADS_GET'));
 
                                 if(permissions.hasOwnProperty(perm)) {
