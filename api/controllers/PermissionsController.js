@@ -27,7 +27,10 @@ exports.hasPermission = async function (perm, req)
                                 if (err)
                                     resolve(false);
 
-                                if(permissions.include(perm)) {
+
+                                console.log(permissions.API_PAYLOADS_GET);
+
+                                if(permissions.hasOwnProperty(perm)) {
                                     console.log("Found");
                                     resolve(true);
                                 } else {
@@ -75,7 +78,7 @@ exports.getPermissions = function (req, res)
                                 res.send(err);
                             }
 
-                            Permission.hasPermission("API_PAYLOADS_GET", req).then(data => {
+                            Permission.hasPermission(API_PAYLOADS_GET, req).then(data => {
                                console.log(data);
                             });
                             res.json(permissions);
