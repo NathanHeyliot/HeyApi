@@ -119,20 +119,6 @@ exports.create_device = function (req, res)
     });
 };
 
-
-
-exports.render_detail = function (req, res) //recupere les details d'un capteur et render la page avec les infos du capteur
-{
-    Device.find({_id: req.params.appId},  function (err, device)
-    {
-        if (err)
-            res.send(err);
-        Payload.find({DeviceId: device.SigfoxId}, function (err, payloads) {
-            res.render( globals.path + '/Detail.ejs', {dev: device, pay: payloads});
-         });
-    });
-};
-
 exports.read_device = function(req, res) //recupere les details d'un capteur et renvoie sous forme de JSON
 {
     Device.find({_id: req.params.appId}, function (err, device)

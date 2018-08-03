@@ -10,6 +10,8 @@ module.exports = function (app) {
     let userApi = require("../controllers/UserController");
     let userGroupApi = require("../controllers/UserGroupController");
     let LocalisationApi = require("../controllers/LocalisationController");
+    let Ranks = require("../controllers/RanksController");
+    let Permissions = require('../controllers/PermissionsController');
 
     var cors = require('cors');
 
@@ -53,12 +55,43 @@ module.exports = function (app) {
 
     /*
     *--------------------------
+    * RANKS ROUTER
+    * -------------------------
+     */
+
+    app.route('/ranks')
+        .get(Ranks.getRanks)
+        .post(Ranks.createRanks)
+        .delete(Ranks.delete_allRanks);
+
+    app.route('/ranks/id/:id')
+        .delete(Ranks.removeRanks)
+        .put(Ranks.updateRanks);
+
+    /*
+    *--------------------------
+    * PERMISSIONS ROUTER
+    * -------------------------
+     */
+
+    app.route('/permissions')
+        .get(Permissions.getPermissions)
+        .post(Permissions.createPermissions)
+        .delete(Permissions.delete_allPermissions);
+
+    app.route('/permissions/id/:id')
+        .delete(Permissions.removePermissions)
+        .put(Permissions.updatePermissions);
+
+
+    /*
+    *--------------------------
     * PAYLOAD ROUTER
     * -------------------------
      */
 
     app.route('/payloads')
-        .get(payApi.list_payload)   // API_PAYLOADS_GET -- API_PAYLOADS_GET_BYPASS
+        .get(payApi.list_payload) // API_PAYLOADS_GET - API_PAYLOADS_GET_BYPASS
         .delete(payApi.delete_all_payloads); // API_PAYLOADS_DELALL
 
     app.route('/payloads/id/:appId')
