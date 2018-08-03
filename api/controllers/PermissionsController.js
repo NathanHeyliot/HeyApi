@@ -12,8 +12,9 @@ exports.getPermissions = function (req, res)
     var user_entity = Auth.check_token(req);
 
 
-    console.log(user_entity);
-    console.log(user_entity['user_id']);
+    user_entity.then(data => {
+        console.log(data);
+    });
 
     User.findOne({_id: user_entity.user_id}, function (err, User)
     {
