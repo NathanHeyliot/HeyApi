@@ -17,24 +17,24 @@ exports.hasPermission = async function (perm, req)
             User.findOne({_id: user_entity.user_id}, function (err, User)
             {
                 if (err)
-                    reject(false);
+                    resolve(false);
                 if(User !== null && User !== undefined) {
                     Ranks.findOne({_id: User.RankId}, function (err, Rank) {
                         if (err)
-                            reject(false);
+                            resolve(false);
                         if(Rank !== null && Rank !== undefined) {
                             Permissions.findOne({RankId: Rank._id}, function (err, permissions) {
                                 if (err)
-                                    reject(false);
+                                    resolve(false);
                                 if(permissions.hasOwnProperty(perm))
                                     resolve(true);
                             });
                         } else {
-                            reject(false);
+                            resolve(false);
                         }
                     });
                 } else {
-                    reject(false);
+                    resolve(false);
                 }
             });
         });
