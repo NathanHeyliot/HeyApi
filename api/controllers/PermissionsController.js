@@ -27,9 +27,9 @@ exports.hasPermission = async function (perm, req)
                                 if (err)
                                     resolve(false);
 
-                                Object.keys(permissions).some(key => {
-                                   console.log(key);
-                                });
+                                var keys = Object.keys(permissions);
+
+                                console.log(keys);
 
                                 if(permissions.hasOwnProperty(perm)) {
                                     console.log("Found");
