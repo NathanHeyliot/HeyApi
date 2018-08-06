@@ -53,6 +53,26 @@ exports.hasPermission = async function (perm, req)
 };
 
 exports.middlewarePermissions = function (req, res, next) {
+
+    var route_protect = [
+        {
+            url: "/permissions",
+            method: "GET",
+            permission: "API_BYPASS_GET",
+        },
+        {
+            url: "/test",
+            method: "GET",
+            permission: "API_BYPASS_TEST",
+        }
+    ];
+
+    route_protect.forEach(data => {
+        console.log(data);
+        console.log(data.url);
+    });
+
+
     console.log(req.url);
     console.log(req.method);
     next();
