@@ -52,11 +52,9 @@ exports.hasPermission = async function (perm, req)
     });
 };
 
-exports.middlewarePermissions = function (req, res, next) {
-
-    let passed = false;
-
-    let route_protect = [
+function route_protected()
+{
+    let route = [
         {
             url: "/permissions",
             method: "GET",
@@ -64,54 +62,37 @@ exports.middlewarePermissions = function (req, res, next) {
             type: "FULL",
         }
     ];
+    return route;
+}
+
+exports.middlewarePermissions = function (req, res, next) {
+
+    let route_protect = route_protected();
 
     route_protect.forEach(data => {
-
         Promise.all([
             data,
             req,
             res,
             next,
-            Permission.hasPermission(data.permission, req),
-            passed
+            Permission.hasPermission(data.permission, req)
         ]).then(response => {
-            console.log((response[1].method.toUpperCase() === response[0].method.toUpperCase()));
-            console.log(response[4]);
-
             if(response[1].method.toUpperCase() === response[0].method.toUpperCase() && response[4] === true) {
-
-                console.log("Methode et permission OK");
-
                 if(response[0].type.toUpperCase() === "PARTIAL") {
-
-                    console.log("Url PARTIAL");
-                    console.log(response[0].url);
-                    console.log(response[1].url);
-
                     if(response[1].url.startsWith(response[0].url, 0)) {
-                        response[5] = true;
                         next();
                     }
                 } else if (response[0].type.toUpperCase() === "FULL") {
-
-                    console.log("Url FULL");
-                    console.log(response[0].url);
-                    console.log(response[1].url);
-
                     if(response[1].url === response[0].url) {
-                        response[5] = true;
                         next();
                     }
                 } else {
                     console.log("Route type undefined for : " + response[0]);
-                    response[5] = true;
                     response[2].end();
                 }
             }
         });
     });
-    if(passed === false)
-        res.end();
 };
 
 exports.getPermissions = function (req, res)
