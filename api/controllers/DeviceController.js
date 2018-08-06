@@ -3,24 +3,7 @@
 let mongoose = require('mongoose'),
     Device = mongoose.model('Device'),
     Payload = mongoose.model('Payload'),
-    UserGroup = mongoose.model('UserGroup'),
-    jwt_auth = require("../controllers/AuthController"),
-
-    globals = require('../../globals');
-
-
-exports.render_device = function (req, res) //GET recupere les infos des devices et les envoie vers la page web pour affichage
-{
-    Device.find({}, function (err, device)
-    {
-        if (err)
-        {
-            console.log("Error at : " + err);
-            res.send(err);
-        }
-        res.render( globals.path + '/Devices.ejs', {dev: device});
-    });
-};
+    UserGroup = mongoose.model('UserGroup');
 
 exports.list_device = function(req, res) // GET recupere les infos des devices et les retournes en format JSON
 {
@@ -39,16 +22,19 @@ exports.list_device = function(req, res) // GET recupere les infos des devices e
 
 exports.update_device = function (req, res) //PUT Edit the specified payload
 {
-    console.log("Update a device");
-    console.log(req.body);
+    if(mongoose.Types.ObjectId.isValid(req.params.appId)) {
+        console.log("Update a device");
+        console.log(req.body);
 
-    Device.findOneAndUpdate({_id: req.params.appId}, (req.body), {new: true}, function (err, device)
-    {
-        if (err)
-            res.send(err);
-        res.json(device);
-    });
-
+        Device.findOneAndUpdate({_id: req.params.appId}, (req.body), {new: true}, function (err, device)
+        {
+            if (err)
+                res.send(err);
+            res.json(device);
+        });
+    } else {
+        res.json({error: "Invalid mongoose ID !"});
+    }
 };
 
 
@@ -121,24 +107,32 @@ exports.create_device = function (req, res)
 
 exports.read_device = function(req, res) //recupere les details d'un capteur et renvoie sous forme de JSON
 {
-    Device.find({_id: req.params.appId}, function (err, device)
-    {
-        if(err)
-            res.send(err);
-        res.json(device);
-    })
+    if(mongoose.Types.ObjectId.isValid(req.params.appId)) {
+        Device.find({_id: req.params.appId}, function (err, device)
+        {
+            if(err)
+                res.send(err);
+            res.json(device);
+        })
+    } else {
+        res.json({error: "Invalid mongoose ID !"});
+    }
 };
 
 exports.delete_device = function (req, res) //supprime le device séléctionné
 {
-    console.log("Deleting a device, ID : " + req.params.appId);
+    if(mongoose.Types.ObjectId.isValid(req.params.appId)) {
+        console.log("Deleting a device, ID : " + req.params.appId);
 
-    Device.remove({_id: req.params.appId}, function (err, device)
-    {
-        if (err)
-            res.send(err);
-        res.json({message: "Device successfully  deleted"});
-    });
+        Device.remove({_id: req.params.appId}, function (err, device)
+        {
+            if (err)
+                res.send(err);
+            res.json({message: "Device successfully  deleted"});
+        });
+    } else {
+        res.json({error: "Invalid mongoose ID !"});
+    }
 };
 
 

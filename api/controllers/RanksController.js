@@ -61,35 +61,47 @@ exports.delete_allRanks = function (req, res) {
 
 exports.getRank = function (req, res) {
 
-    console.log("Searching for rank : " + req.params.id);
+    if(mongoose.Types.ObjectId.isValid(req.params.id)) {
+        console.log("Searching for rank : " + req.params.id);
 
-    Ranks.findOne({_id: req.params.id}, function (err, rank) {
-        if(err) {
-            console.log("Error at : " + err);
-            res.send(err);
-        }
-        res.json(rank);
-    });
+        Ranks.findOne({_id: req.params.id}, function (err, rank) {
+            if(err) {
+                console.log("Error at : " + err);
+                res.send(err);
+            }
+            res.json(rank);
+        });
+    } else {
+        res.json({error: "Invalid mongoose ID !"});
+    }
 };
 
 exports.removeRanks = function (req, res) {
-    console.log("Deleting of specified information, ID : " + req.params.id);
+    if(mongoose.Types.ObjectId.isValid(req.params.id)) {
+        console.log("Deleting of specified information, ID : " + req.params.id);
 
-    Ranks.remove({_id: req.params.id}, function(err, ranks)
-    {
-        if(err)
-            res.send(err);
-        res.json({message: "Rank deleted succefully !"});
-    });
+        Ranks.remove({_id: req.params.id}, function(err, ranks)
+        {
+            if(err)
+                res.send(err);
+            res.json({message: "Rank deleted succefully !"});
+        });
+    } else {
+        res.json({error: "Invalid mongoose ID !"});
+    }
 };
 
 exports.updateRanks = function (req, res) {
-    console.log("Updating rank, ID : " + req.params.id);
+    if(mongoose.Types.ObjectId.isValid(req.params.id)) {
+        console.log("Updating rank, ID : " + req.params.id);
 
-    Ranks.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, function (err, ranks)
-    {
-        if(err)
-            res.send(err);
-        res.json(ranks);
-    });
+        Ranks.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, function (err, ranks)
+        {
+            if(err)
+                res.send(err);
+            res.json(ranks);
+        });
+    } else {
+        res.json({error: "Invalid mongoose ID !"});
+    }
 };

@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 //include
 let mongoose = require('mongoose'),
     User = mongoose.model('User'),
@@ -23,33 +23,41 @@ exports.list_users = function (req, res)
 
 exports.user_info = function (req, res)
 {
-    console.log("user Info about : " + req.params.UserId)
+    if(mongoose.Types.ObjectId.isValid(req.params.UserId)) {
+        console.log("user Info about : " + req.params.UserId)
 
-    User.find({_id: req.params.UserId}, function(err, user)
-    {
-        if(err)
+        User.find({_id: req.params.UserId}, function(err, user)
         {
-            error("Error at: " + err);
-            res.send(err);
-        }
-        res.json(user);
-    })
-}
+            if(err)
+            {
+                error("Error at: " + err);
+                res.send(err);
+            }
+            res.json(user);
+        })
+    } else {
+        res.json({error: "Invalid mongoose ID !"});
+    }
+};
 
 exports.update_user = function (req, res)
 {
-    console.log("Updating a user : " + req.params.UserId)
-    console.log(req.body);
+    if(mongoose.Types.ObjectId.isValid(req.params.UserId)) {
+        console.log("Updating a user : " + req.params.UserId)
+        console.log(req.body);
 
-    if(req.body.Password)
-        req.body.Password = md5(req.body.Password);
+        if(req.body.Password)
+            req.body.Password = md5(req.body.Password);
 
-    User.findOneAndUpdate({_id: req.params.UserId}, (req.body), {new: true}, function (err, device)
-    {
-        if (err)
-            res.send(err);
-        res.json(device);
-    });
+        User.findOneAndUpdate({_id: req.params.UserId}, (req.body), {new: true}, function (err, device)
+        {
+            if (err)
+                res.send(err);
+            res.json(device);
+        });
+    } else {
+        res.json({error: "Invalid mongoose ID !"});
+    }
 };
 
 exports.delete_all_users = function (req, res)
@@ -58,18 +66,22 @@ exports.delete_all_users = function (req, res)
     User.collection.remove({});
     res.end();
     console.log("Success");
-}
+};
 
 exports.delete_user = function (req, res)
 {
-    console.log("Deleting an user : " + req.params.UserId)
+    if(mongoose.Types.ObjectId.isValid(req.params.UserId)) {
+        console.log("Deleting an user : " + req.params.UserId)
 
-    User.remove({_id: req.params.UserId}, function (err, user)
-    {
-        if (err)
-            res.send(err);
-        res.json({message: "User successfully  deleted"});
-    });
+        User.remove({_id: req.params.UserId}, function (err, user)
+        {
+            if (err)
+                res.send(err);
+            res.json({message: "User successfully  deleted"});
+        });
+    } else {
+        res.json({error: "Invalid mongoose ID !"});
+    }
 };
 
 exports.create_user = function (req, res)

@@ -202,24 +202,32 @@ exports.getPermission = function (req, res) {
 
 exports.removePermissions = function (req, res) {
 
-    console.log("Deleting of specified information, ID : " + req.params.id);
+    if(mongoose.Types.ObjectId.isValid(req.params.id)) {
+        console.log("Deleting of specified information, ID : " + req.params.id);
 
-    Permissions.remove({_id: req.params.id}, function(err, permissions)
-    {
-        if(err)
-            res.send(err);
-        res.json({message: "Permissions deleted succefully !"});
-    });
+        Permissions.remove({_id: req.params.id}, function(err, permissions)
+        {
+            if(err)
+                res.send(err);
+            res.json({message: "Permissions deleted succefully !"});
+        });
+    } else {
+        res.json({error: "Invalid mongoose ID !"});
+    }
 };
 
 exports.updatePermissions = function (req, res) {
 
-    console.log("Updating permissions, ID : " + req.params.id);
+    if(mongoose.Types.ObjectId.isValid(req.params.id)) {
+        console.log("Updating permissions, ID : " + req.params.id);
 
-    Permissions.findOneAndUpdate({_id: res.params.id}, req.body, {new: true}, function (err, permissions)
-    {
-        if(err)
-            res.send(err);
-        res.json(permissions);
-    });
+        Permissions.findOneAndUpdate({_id: res.params.id}, req.body, {new: true}, function (err, permissions)
+        {
+            if(err)
+                res.send(err);
+            res.json(permissions);
+        });
+    } else {
+        res.json({error: "Invalid mongoose ID !"});
+    }
 };

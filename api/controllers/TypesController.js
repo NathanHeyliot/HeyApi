@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 let mongoose = require('mongoose'),
     DeviceType = mongoose.model('DeviceTypes');
@@ -63,43 +63,55 @@ exports.information_devicestypes = function (req, res)
         else
             res.json(devicestypes);
     });
-}
+};
 
 exports.delete_devicestypesid = function (req, res)
 {
-    console.log("Delete a specified device, ID : " + req.params.id);
+    if(mongoose.Types.ObjectId.isValid(req.params.id)) {
+        console.log("Delete a specified device, ID : " + req.params.id);
 
-    DeviceType.remove({_id: req.params.id}, function (err, devicetypes)
-    {
-        if(err)
-            res.send(err);
-        res.json({message: "Device Type succefully deleted !"});
-    });
+        DeviceType.remove({_id: req.params.id}, function (err, devicetypes)
+        {
+            if(err)
+                res.send(err);
+            res.json({message: "Device Type succefully deleted !"});
+        });
+    } else {
+        res.json({error: "Invalid mongoose ID !"});
+    }
+
 };
 
 exports.update_devicestypesid = function (req, res)
 {
+    if(mongoose.Types.ObjectId.isValid(req.params.id)) {
+        console.log("Update device types id : " + req.params.id);
 
-    console.log("Update device types id : " + req.params.id)
-
-    DeviceType.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, function (err, devicestypes)
-    {
-        if(err)
-            res.send(err);
-        res.json(devicestypes);
-    });
+        DeviceType.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, function (err, devicestypes)
+        {
+            if(err)
+                res.send(err);
+            res.json(devicestypes);
+        });
+        } else {
+        res.json({error: "Invalid mongoose ID !"});
+    }
 };
 
 exports.information_devicestypesid = function (req, res)
 {
-    console.log("Retrieve information for device types, ID : " + req.params.id);
+    if(mongoose.Types.ObjectId.isValid(req.params.id)) {
+        console.log("Retrieve information for device types, ID : " + req.params.id);
 
-    DeviceType.find({_id: req.params.id}, function (err, devicestypes) {
-        if(err)
-            res.send(err);
-        else
-            res.json(devicestypes);
-    });
+        DeviceType.find({_id: req.params.id}, function (err, devicestypes) {
+            if(err)
+                res.send(err);
+            else
+                res.json(devicestypes);
+        });
+    } else {
+        res.json({error: "Invalid mongoose ID !"});
+    }
 }
 
 
