@@ -60,7 +60,7 @@ exports.middlewarePermissions = function (req, res, next) {
         {
             url: "/permissions",
             method: "GET",
-            permission: "API_BYPASS_GET2",
+            permission: "API_BYPASS_GET",
             type: "FULL",
         }
     ];
