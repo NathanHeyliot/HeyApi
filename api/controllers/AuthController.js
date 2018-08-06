@@ -51,6 +51,8 @@ exports.check_token = async function ResolveToken(req) {
 
     return new Promise((resolve, reject) => {
         jwt.verify(token, secret_encrypt, function (err, decoded) {
+            if(decoded === undefined)
+                reject(err);
             if (bypass === 'true')
                 decoded.bypass = true;
             else
