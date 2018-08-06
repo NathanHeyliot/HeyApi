@@ -251,6 +251,178 @@ exports.route_config = function () {
          * ORGANISATIONS ROUTER
          */
 
+        {
+            url: "/organisations",
+            method: "GET",
+            permission: "API_ORGANISATIONS_GET",
+            type: "FULL",
+        },
+        {
+            url: "/organisations",
+            method: "POST",
+            permission: "API_ORGANISATIONS_POST",
+            type: "FULL",
+        },
+        {
+            url: "/organisations",
+            method: "DELETE",
+            permission: "API_ORGANISATIONS_DELALL",
+            type: "FULL",
+        },
+        {
+            url: "/organisations/id/",
+            method: "GET",
+            permission: "API_ORGANISATIONS_GET",
+            type: "PARTIAL",
+        },
+        {
+            url: "/organisations/id/",
+            method: "DELETE",
+            permission: "API_ORGANISATIONS_DEL",
+            type: "PARTIAL",
+        },
+        {
+            url: "/organisations/id/",
+            method: "PUT",
+            permission: "API_ORGANISATIONS_PUT",
+            type: "PARTIAL",
+        },
+
+        /*
+         * GROUPS ROUTER
+         */
+
+        {
+            url: "/devicesgroups",
+            method: "GET",
+            permission: "API_DEVICESGRP_GET",
+            type: "FULL",
+        },
+        {
+            url: "/devicesgroups",
+            method: "POST",
+            permission: "API_DEVICESGRP_POST",
+            type: "FULL",
+        },
+        {
+            url: "/devicesgroups",
+            method: "DELETE",
+            permission: "API_DEVICESGRP_DELALL",
+            type: "FULL",
+        },
+        {
+            url: "/devicesgroups/id/",
+            method: "GET",
+            permission: "API_DEVICESGRP_GET",
+            type: "PARTIAL",
+        },
+        {
+            url: "/devicesgroups/id/",
+            method: "DELETE",
+            permission: "API_DEVICESGRP_DEL",
+            type: "PARTIAL",
+        },
+        {
+            url: "/devicesgroups/id/",
+            method: "PUT",
+            permission: "API_DEVICESGRP_PUT",
+            type: "PARTIAL",
+        },
+
+        /*
+         * DEVICE ROUTER
+         */
+
+        {
+            url: "/devices",
+            method: "GET",
+            permission: "API_DEVICES_GET",
+            type: "FULL",
+        },
+        {
+            url: "/devices",
+            method: "POST",
+            permission: "API_DEVICES_POST",
+            type: "FULL",
+        },
+        {
+            url: "/devices",
+            method: "DELETE",
+            permission: "API_DEVICES_DELALL",
+            type: "FULL",
+        },
+        {
+            url: "/devices/id/",
+            method: "GET",
+            permission: "API_DEVICES_GET",
+            type: "PARTIAL",
+        },
+        {
+            url: "/devices/id/",
+            method: "DELETE",
+            permission: "API_DEVICES_DEL",
+            type: "PARTIAL",
+        },
+        {
+            url: "/devices/id/",
+            method: "PUT",
+            permission: "API_DEVICES_PUT",
+            type: "PARTIAL",
+        },
+        {
+            url: "/devices/group/",
+            method: "GET",
+            permission: "API_DEVICES_GET",
+            type: "PARTIAL",
+        },
+        {
+            url: "/devices/user/",
+            method: "GET",
+            permission: "API_DEVICES_GET",
+            type: "PARTIAL",
+        },
+        {
+            url: "/devices/type/",
+            method: "GET",
+            permission: "API_DEVICES_GET",
+            type: "PARTIAL",
+        },
+
+        /*
+         * PAYLOADS ROUTER
+         */
+
+        {
+            url: "/payloads",
+            method: "GET",
+            permission: "API_PAYLOADS_GET",
+            type: "FULL",
+        },
+        {
+            url: "/payloads",
+            method: "DELETE",
+            permission: "API_PAYLOADS_DELALL",
+            type: "FULL",
+        },
+        {
+            url: "/payloads/id/",
+            method: "DELETE",
+            permission: "API_PAYLOADS_DEL",
+            type: "FULL",
+        },
+        {
+            url: "/payloads/id/",
+            method: "GET",
+            permission: "API_PAYLOADS_GET",
+            type: "PARTIAL",
+        },
+        {
+            url: "/payloads/deviceId/",
+            method: "GET",
+            permission: "API_PAYLOADS_GET",
+            type: "PARTIAL",
+        },
+
         /*
          * ROAD ROUTER
          */

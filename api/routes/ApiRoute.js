@@ -92,15 +92,15 @@ module.exports = function (app) {
      */
 
     app.route('/payloads')
-        .get(payApi.list_payload) // API_PAYLOADS_GET
-        .delete(payApi.delete_all_payloads); // API_PAYLOADS_DELALL
+        .get(payApi.list_payload) // API_PAYLOADS_GET   OK
+        .delete(payApi.delete_all_payloads); // API_PAYLOADS_DELALL   OK
 
     app.route('/payloads/id/:appId')
-        .get(payApi.read_payload) //API_PAYLOADS_GET
-        .delete(payApi.delete_payload); //API_PAYLOADS_DEL
+        .get(payApi.read_payload) //API_PAYLOADS_GET    OK
+        .delete(payApi.delete_payload); //API_PAYLOADS_DEL   OK
 
     app.route('/payloads/deviceId/:DeviceId')
-        .get(payApi.get_paybydevice); //API_PAYLOADS_GET
+        .get(payApi.get_paybydevice); //API_PAYLOADS_GET   OK
 
     /*
     *--------------------------
@@ -108,23 +108,23 @@ module.exports = function (app) {
     * -------------------------
      */
     app.route('/devices')
-        .get(deviceApi.list_device) //API_DEVICES_GET
-        .post(deviceApi.create_device) //API_DEVICES_POST
-        .delete(deviceApi.delete_all_devices); //API_DEVICES_DELALL
+        .get(deviceApi.list_device) //API_DEVICES_GET    OK
+        .post(deviceApi.create_device) //API_DEVICES_POST    OK
+        .delete(deviceApi.delete_all_devices); //API_DEVICES_DELALL   OK
 
     app.route('/devices/id/:appId')
-        .get(deviceApi.read_device)  //API_DEVICES_GET
-        .put(deviceApi.update_device) //API_DEVICES_PUT
-        .delete(deviceApi.delete_device); //API_DEVICES_DEL
+        .get(deviceApi.read_device)  //API_DEVICES_GET   OK
+        .put(deviceApi.update_device) //API_DEVICES_PUT    OK
+        .delete(deviceApi.delete_device); //API_DEVICES_DEL     OK
 
     app.route('/devices/group/:GroupId')
-        .get(deviceApi.list_group_devices); //API_DEVICES_GET
+        .get(deviceApi.list_group_devices); //API_DEVICES_GET    OK
 
     app.route('/devices/user/:UID')
-        .get(deviceApi.list_user_devices); //API_DEVICES_GET
+        .get(deviceApi.list_user_devices); //API_DEVICES_GET   OK
 
     app.route('/devices/type/:DeviceType')
-        .get(deviceApi.list_bytype); //API_DEVICES_GET
+        .get(deviceApi.list_bytype); //API_DEVICES_GET   OK
 
 
     /*
@@ -133,15 +133,15 @@ module.exports = function (app) {
     * -------------------------
      */
     app.route('/devicesgroups')
-        .get(groupApi.list_group) //API_DEVICESGRP_GET
-        .post(groupApi.create_group) //API_DEVICESGRP_POST
-        .delete(groupApi.delete_all_groups); //API_DEVICESGRP_DELALL
+        .get(groupApi.list_group) //API_DEVICESGRP_GET    OK
+        .post(groupApi.create_group) //API_DEVICESGRP_POST    OK
+        .delete(groupApi.delete_all_groups); //API_DEVICESGRP_DELALL   OK
 
 
     app.route('/devicesgroups/id/:appId')
-        .delete(groupApi.delete_group) //API_DEVICESGRP_DEL
-        .get(groupApi.read_group) //API_DEVICESGRP_GET
-        .put (groupApi.update_group); //API_DEVICESGRP_PUT
+        .delete(groupApi.delete_group) //API_DEVICESGRP_DEL   OK
+        .get(groupApi.read_group) //API_DEVICESGRP_GET   OK
+        .put (groupApi.update_group); //API_DEVICESGRP_PUT    OK
 
 
     /*
@@ -150,14 +150,14 @@ module.exports = function (app) {
     * -------------------------
      */
     app.route('/organisations')
-        .get(orgApi.list_organisation) //API_ORGANISATIONS_GET
-        .post(orgApi.create_organisation) //API_ORGANISATIONS_POST
-        .delete(orgApi.delete_all_organisations); //API_ORGANISATIONS_DELALL
+        .get(orgApi.list_organisation) //API_ORGANISATIONS_GET   OK
+        .post(orgApi.create_organisation) //API_ORGANISATIONS_POST    OK
+        .delete(orgApi.delete_all_organisations); //API_ORGANISATIONS_DELALL   OK
 
     app.route('/organisations/id/:appId')
-        .put(orgApi.update_organisation) //API_ORGANISATIONS_PUT
-        .get(orgApi.get_organisation) //API_ORGANISATIONS_GET
-        .delete(orgApi.delete_organisation); //API_ORGANISATIONS_DEL
+        .put(orgApi.update_organisation) //API_ORGANISATIONS_PUT    OK
+        .get(orgApi.get_organisation) //API_ORGANISATIONS_GET    OK
+        .delete(orgApi.delete_organisation); //API_ORGANISATIONS_DEL   OK
 
     /*
     *--------------------------
