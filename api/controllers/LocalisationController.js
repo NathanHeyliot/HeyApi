@@ -7,7 +7,7 @@ exports.crypted = function (req, res)
     Promise.all([req, Permission.hasPermission("API_LOCALISATION_POSTCRYPTED", req)]).then(data => {
         if(data[1] === true) {
             console.log("Decrypt a location, CODE : " + data[0].body.PositionCode);
-            var PositionCode = String(req.body.PositionCode);
+            var PositionCode = String(data[0].body.PositionCode);
             var req = new XMLHttpRequest();
             req.addEventListener('load', function() {
                 var parsed_info = JSON.parse(data[0].response);
