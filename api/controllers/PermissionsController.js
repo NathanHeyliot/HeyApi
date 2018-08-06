@@ -120,39 +120,44 @@ exports.middlewarePermissions = function (req, res, next) {
             if(data.type.toUpperCase() === "PARTIAL") {
                 if(req.url.startsWith(data.url, 0)) {
                     found = true;
-                    Promise.all([
-                        data,
-                        Permission.hasPermission(data.permission, req),
-                        Permission.hasPermission("API_BYPASS_" + data.method, req)
-                    ]).then(response => {
-
-                        console.log(response);
-
-                        if(response[1] === true || response[0].permission.toLowerCase() === "none".toLowerCase() || response[2] === true) {
-                            req.hasPermissionBypass = response[2];
-                            next();
-                        } else {
-                            res.json({error: "No permission to do that !"});
-                        }
-                    });
+                    if(data.permission.toLowerCase() === "none".toLowerCase()) {
+                        req.hasPermissionBypass = false;
+                        next();
+                    } else {
+                        Promise.all([
+                            data,
+                            Permission.hasPermission(data.permission, req),
+                            Permission.hasPermission("API_BYPASS_" + data.method, req)
+                        ]).then(response => {
+                            if(response[1] === true || response[2] === true) {
+                                req.hasPermissionBypass = response[2];
+                                next();
+                            } else {
+                                res.json({error: "No permission to do that !"});
+                            }
+                        });
+                    }
                 }
             } else if (data.type.toUpperCase() === "FULL") {
                 if(req.url === data.url || req.url === data.url + "/") {
                     found = true;
-                    Promise.all([
-                        data,
-                        Permission.hasPermission(data.permission, req),
-                        Permission.hasPermission("API_BYPASS_" + data.method, req)
-                    ]).then(response => {
-                        console.log(response);
-
-                        if(response[1] === true || response[0].permission.toLowerCase() === "none".toLowerCase() || response[2] === true) {
-                            req.hasPermissionBypass = response[2];
-                            next();
-                        } else {
-                            res.json({error: "No permission to do that !"});
-                        }
-                    });
+                    if(data.permission.toLowerCase() === "none".toLowerCase()) {
+                        req.hasPermissionBypass = false;
+                        next();
+                    } else {
+                        Promise.all([
+                            data,
+                            Permission.hasPermission(data.permission, req),
+                            Permission.hasPermission("API_BYPASS_" + data.method, req)
+                        ]).then(response => {
+                            if(response[1] === true || response[2] === true) {
+                                req.hasPermissionBypass = response[2];
+                                next();
+                            } else {
+                                res.json({error: "No permission to do that !"});
+                            }
+                        });
+                    }
                 }
             } else {
                 console.log("Route type undefined for : " + response[0]);
