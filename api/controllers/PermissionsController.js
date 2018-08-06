@@ -73,9 +73,9 @@ exports.middlewarePermissions = function (req, res, next) {
             Permission.hasPermission(data.permission, req)
         ]).then(response => {
             console.log((response[1].method.toUpperCase() === response[0].method.toUpperCase()));
-            console.log(response[3]);
+            console.log(response[4]);
 
-            if(response[1].method.toUpperCase() === response[0].method.toUpperCase() && response[3] === true) {
+            if(response[1].method.toUpperCase() === response[0].method.toUpperCase() && response[4] === true) {
 
                 console.log("Methode et permission OK");
 
