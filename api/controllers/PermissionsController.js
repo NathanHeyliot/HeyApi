@@ -58,8 +58,14 @@ function route_protected()
         {
             url: "/permissions",
             method: "GET",
-            permission: "API_BYPASS_GET",
+            permission: "none",
             type: "FULL",
+        },
+        {
+            url: "/permissions/id/",
+            method: "GET",
+            permission: "API_BYPASS_GET",
+            type: "PARTIAL"
         }
     ];
     return route;
@@ -77,7 +83,7 @@ exports.middlewarePermissions = function (req, res, next) {
             next,
             Permission.hasPermission(data.permission, req)
         ]).then(response => {
-            if(response[1].method.toUpperCase() === response[0].method.toUpperCase() && response[4] === true) {
+            if(response[1].method.toUpperCase() === response[0].method.toUpperCase() && (response[4] === true || data.permission === 'none')) {
                 if(response[0].type.toUpperCase() === "PARTIAL") {
                     if(response[1].url.startsWith(response[0].url, 0)) {
                         next();
