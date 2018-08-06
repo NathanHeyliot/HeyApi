@@ -449,7 +449,20 @@ exports.route_config = function () {
             type: "FULL",
         },
 
+        /*
+         * Auth
+         */
 
+        {
+            url: "/auth",
+            method: "GET",
+            permission: "none",
+            type: "PARTIAL"
+        },
+
+        /*
+         * Callback
+         */
 
         {
             url: "/callback",
