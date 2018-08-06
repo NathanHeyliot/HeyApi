@@ -60,6 +60,9 @@ exports.delete_allRanks = function (req, res) {
 };
 
 exports.getRank = function (req, res) {
+
+    console.log("Searching for rank : " + req.params.id);
+
     Ranks.findOne({_id: req.params.id}, function (err, rank) {
         if(err) {
             console.log("Error at : " + err);
