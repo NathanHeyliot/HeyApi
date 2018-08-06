@@ -86,7 +86,7 @@ function route_protected()
         },
         {
             url: "/permissions/id/",
-            method: "GET",
+            method: "DELETE",
             permission: "API_PERMISSIONS_DEL",
             type: "PARTIAL"
         },
@@ -247,6 +247,8 @@ exports.getPermission = function (req, res) {
             }
             res.json(perm);
         });
+    } else {
+        res.json({error: "Invalid mongoose ID !"});
     }
 };
 
