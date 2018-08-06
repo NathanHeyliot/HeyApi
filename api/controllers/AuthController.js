@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 let jwt = require('jsonwebtoken'),
     mongoose = require('mongoose'),
@@ -49,16 +49,22 @@ exports.check_token = async function ResolveToken(req) {
     var token = req.headers['x-access-token'];
     var bypass = req.headers['bypass'];
 
-    return new Promise((resolve, reject) => {
-        jwt.verify(token, secret_encrypt, function (err, decoded) {
-            if(decoded === undefined)
+    console.log("Check token for : " + req.url);
+
+    if(token !== null && token !== undefined) {
+        return new Promise((resolve, reject) => {
+            jwt.verify(token, secret_encrypt, function (err, decoded) {
+                if(decoded === undefined)
+                    reject(err);
+                if (bypass === null || bypass === undefined || bypass === 'false')
+                    decoded.bypass = false;
+                else
+                    decoded.bypass = true;
+                resolve(decoded);
                 reject(err);
-            if (bypass === null || bypass === undefined || bypass === 'false')
-                decoded.bypass = false;
-            else
-                decoded.bypass = true;
-            resolve(decoded);
-            reject(err);
+            });
         });
-    });
-}
+    } else {
+        return null;
+    }
+};

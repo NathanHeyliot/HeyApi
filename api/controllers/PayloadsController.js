@@ -19,8 +19,6 @@ exports.list_payload = function (req, res) //GET all the payloads
 {
     console.log("Getting payloads list");
 
-    //console.log(Auth.check_token(req));
-
     Payload.find({}, function (err, payload)
     {
         if (err)
