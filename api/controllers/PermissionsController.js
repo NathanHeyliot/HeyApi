@@ -74,11 +74,13 @@ function route_protected()
 exports.middlewarePermissions = function (req, res, next) {
 
     let route_protect = route_protected();
+    let found = false;
 
     route_protect.forEach(data => {
         if(req.method.toUpperCase() === data.method.toUpperCase()) {
             if(data.type.toUpperCase() === "PARTIAL") {
                 if(req.url.startsWith(data.url, 0)) {
+                    found = true;
                     Promise.all([
                         data,
                         Permission.hasPermission(data.permission, req)
@@ -91,7 +93,8 @@ exports.middlewarePermissions = function (req, res, next) {
                     });
                 }
             } else if (data.type.toUpperCase() === "FULL") {
-                if(req.url === data.url) {
+                if(req.url === data.url || req.url === data.url + "/") {
+                    found = true;
                     Promise.all([
                         data,
                         Permission.hasPermission(data.permission, req)
@@ -109,6 +112,9 @@ exports.middlewarePermissions = function (req, res, next) {
             }
         }
     });
+
+    if(found === false)
+        res.end();
 };
 
 exports.getPermissions = function (req, res)
