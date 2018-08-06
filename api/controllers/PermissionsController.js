@@ -58,24 +58,31 @@ exports.middlewarePermissions = function (req, res, next) {
         {
             url: "/permissions",
             method: "GET",
-            permission: "API_BYPASS_GET",
-        },
-        {
-            url: "/test",
-            method: "GET",
-            permission: "API_BYPASS_TEST",
+            permission: "qdqzukdqq",
+            type: "FULL",
         }
     ];
 
     route_protect.forEach(data => {
-        console.log(data);
-        console.log(data.url);
+
+        if(data.type.toUpperCase() === "PARTIAL") {
+            if(req.url.startsWith(data.url, 0) &&
+                req.method.toUpperCase() === data.method.toUpperCase() &&
+                this.hasPermission(data.permission, req) === true) {
+                    next();
+                }
+        } else if (data.type.toUpperCase() === "FULL") {
+            if(req.url === data.url &&
+                req.method.toUpperCase() === data.method.toUpperCase() &&
+                this.hasPermission(data.permission, req) === true) {
+                next();
+            }
+        } else {
+            console.log("Route type undefined for : " + data);
+            res.end();
+        }
     });
-
-
-    console.log(req.url);
-    console.log(req.method);
-    next();
+    res.end();
 };
 
 exports.getPermissions = function (req, res)
