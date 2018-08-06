@@ -4,17 +4,13 @@ let Permission = require('./PermissionsController');
 
 exports.crypted = function (req, res)
 {
-
     Promise.all([req, Permission.hasPermission("API_LOCALISATION_POSTCRYPTED", req)]).then(data => {
         if(data[1] === true) {
             console.log("Decrypt a location, CODE : " + data[0].body.PositionCode);
-
             var PositionCode = String(req.body.PositionCode);
-
             var req = new XMLHttpRequest();
-
             req.addEventListener('load', function() {
-                var parsed_info = JSON.parse(req.response);
+                var parsed_info = JSON.parse(data[0].response);
                 if(parsed_info.code === "TECHNICAL") {
                     console.log("Could not retrieve lat / long !");
                     console.log(parsed_info);
@@ -23,7 +19,7 @@ exports.crypted = function (req, res)
                     req = new XMLHttpRequest();
 
                     req.addEventListener('load', function() {
-                        var parsed_get = JSON.parse(req.response);
+                        var parsed_get = JSON.parse(data[0].response);
                         res.json({lat: parsed_info.lat, long: parsed_info.lng, accuracy: parsed_info.accuracy, city: parsed_get.address.village, address: parsed_get.address.road, postcode: parsed_get.address.postcode});
                     });
                     req.open("GET", "https://eu1.locationiq.org/v1/reverse.php?key=9126593a665608&lat=" + parsed_info.lat + "&lon=" + parsed_info.lng + "&format=json", true);
