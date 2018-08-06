@@ -65,44 +65,51 @@ exports.middlewarePermissions = function (req, res, next) {
 
     route_protect.forEach(data => {
 
-        console.log(req.method.toUpperCase());
-        console.log(data.method.toUpperCase());
+        Promise.all([
+            data,
+            req,
+            res,
+            next,
+            Permission.hasPermission(data.permission, req)
+        ]).then(response => {
+            console.log(response[1].method.toUpperCase());
+            console.log(response[0].method.toUpperCase());
 
-        console.log(Permission.hasPermission(data.permission, req));
+            console.log(Permission.hasPermission(response[0].permission, response[1]));
 
-        if(req.method.toUpperCase() === data.method.toUpperCase() && Permission.hasPermission(data.permission, req) === true) {
+            if(response[1].method.toUpperCase() === response[0].method.toUpperCase() && response[3] === true) {
 
-            console.log("Methode et permission OK");
+                console.log("Methode et permission OK");
 
-            if(data.type.toUpperCase() === "PARTIAL") {
+                if(response[0].type.toUpperCase() === "PARTIAL") {
 
-                console.log("Url PARTIAL");
-                console.log(data.url);
-                console.log(req.url);
+                    console.log("Url PARTIAL");
+                    console.log(response[0].url);
+                    console.log(response[1].url);
 
-                if(req.url.startsWith(data.url, 0)) {
-                    next();
+                    if(response[1].url.startsWith(response[0].url, 0)) {
+                        next();
+                    }
+                } else if (response[0].type.toUpperCase() === "FULL") {
+
+                    console.log("Url FULL");
+                    console.log(response[0].url);
+                    console.log(response[1].url);
+
+                    if(response[1].url === response[0].url) {
+                        next();
+                    }
+                } else {
+                    console.log("Route type undefined for : " + response[0]);
+                    response[2].end();
                 }
-            } else if (data.type.toUpperCase() === "FULL") {
-
-                console.log("Url FULL");
-                console.log(data.url);
-                console.log(req.url);
-
-                if(req.url === data.url) {
-                    next();
-                }
-            } else {
-                console.log("Route type undefined for : " + data);
-                res.end();
             }
-        }
-        console.log("A la fin, res end");
-        res.end();
-
-
-
+        });
     });
+
+
+
+
     res.end();
 };
 
