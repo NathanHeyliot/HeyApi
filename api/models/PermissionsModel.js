@@ -25,7 +25,7 @@ let PermissionsModel = new Schema
         {
             type: Boolean, default: false
         },
-    API_BYPASS_UPDATE:
+    API_BYPASS_PUT:
         {
             type: Boolean, default: false
         },
@@ -44,15 +44,7 @@ let PermissionsModel = new Schema
         {
             type: Boolean, default: false
         },
-    API_PAYLOADS_GETID:
-        {
-            type: Boolean, default: false
-        },
-    API_PAYLOADS_DELETEID:
-        {
-            type: Boolean, default: false
-        },
-    API_PAYLOADS_GETDEVICE:
+    API_PAYLOADS_DEL:
         {
             type: Boolean, default: false
         },
@@ -83,30 +75,15 @@ let PermissionsModel = new Schema
         {
             type: Boolean, default: false
         },
-    API_DEVICES_GETID:
+    API_DEVICES_PUT:
         {
             type: Boolean, default: false
         },
-    API_DEVICES_PUTID:
+    API_DEVICES_DEL:
         {
             type: Boolean, default: false
         },
-    API_DEVICES_DELETEID:
-        {
-            type: Boolean, default: false
-        },
-    API_DEVICES_GETGRP:
-        {
-            type: Boolean, default: false
-        },
-    API_DEVICES_GETTYPE:
-        {
-            type: Boolean, default: false
-        },
-    API_DEVICES_GETUSR:
-        {
-            type: Boolean, default: false
-        },
+
 
     /*
    *--------------------------
@@ -126,15 +103,11 @@ let PermissionsModel = new Schema
         {
             type: Boolean, default: false
         },
-    API_DEVICESGRP_GETID:
+    API_DEVICESGRP_DEL:
         {
             type: Boolean, default: false
         },
-    API_DEVICESGRP_DELID:
-        {
-            type: Boolean, default: false
-        },
-    API_DEVICESGRP_PUTID:
+    API_DEVICESGRP_PUT:
         {
             type: Boolean, default: false
         },
@@ -157,15 +130,11 @@ let PermissionsModel = new Schema
         {
             type: Boolean, default: false
         },
-    API_ORGANISATIONS_GETID:
+    API_ORGANISATIONS_PUT:
         {
             type: Boolean, default: false
         },
-    API_ORGANISATIONS_PUTID:
-        {
-            type: Boolean, default: false
-        },
-    API_ORGANISATIONS_DELID:
+    API_ORGANISATIONS_DEL:
         {
             type: Boolean, default: false
         },
@@ -188,27 +157,11 @@ let PermissionsModel = new Schema
         {
             type: Boolean, default: false
         },
-    API_DEVICESTYPES_GETNAME:
+    API_DEVICESTYPES_DEL:
         {
             type: Boolean, default: false
         },
-    API_DEVICESTYPES_DELNAME:
-        {
-            type: Boolean, default: false
-        },
-    API_DEVICESTYPES_PUTNAME:
-        {
-            type: Boolean, default: false
-        },
-    API_DEVICESTYPES_DELID:
-        {
-            type: Boolean, default: false
-        },
-    API_DEVICESTYPES_GETID:
-        {
-            type: Boolean, default: false
-        },
-    API_DEVICESTYPES_PUTID:
+    API_DEVICESTYPES_PUT:
         {
             type: Boolean, default: false
         },
@@ -231,15 +184,11 @@ let PermissionsModel = new Schema
         {
             type: Boolean, default: false
         },
-    API_USERS_GETID:
+    API_USERS_DEL:
         {
             type: Boolean, default: false
         },
-    API_USERS_DELID:
-        {
-            type: Boolean, default: false
-        },
-    API_USERS_PUTID:
+    API_USERS_PUT:
         {
             type: Boolean, default: false
         },
@@ -262,27 +211,11 @@ let PermissionsModel = new Schema
         {
             type: Boolean, default: false
         },
-    API_USERSGRP_GETID:
+    API_USERSGRP_DEL:
         {
             type: Boolean, default: false
         },
-    API_USERSGRP_DELID:
-        {
-            type: Boolean, default: false
-        },
-    API_USERSGRP_PUTID:
-        {
-            type: Boolean, default: false
-        },
-    API_USERSGRP_GETUSR:
-        {
-            type: Boolean, default: false
-        },
-    API_USERSGRP_DELUSER:
-        {
-            type: Boolean, default: false
-        },
-    API_USERSGRP_GETGRP:
+    API_USERSGRP_PUT:
         {
             type: Boolean, default: false
         },
@@ -313,6 +246,10 @@ let PermissionsModel = new Schema
             type: Boolean, default: false
         },
     API_RANKS_DEL:
+        {
+            type: Boolean, default: false
+        },
+    API_RANKS_DELALL:
         {
             type: Boolean, default: false
         },

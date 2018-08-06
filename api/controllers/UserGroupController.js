@@ -7,6 +7,18 @@ let mongoose = require('mongoose'),
 
 exports.list_groups = function(req, res)
 {
+
+    Promise.all([
+        req,
+        Permission.hasPermission("API_LOCALISATION_POSTCRYPTED", req),
+        Permission.hasPermission("API_BYPASS_POST", req)
+    ]).then(data => {
+        if (data[1] === true || data[2] == true) {
+
+
+        }
+    });
+
     console.log("List of users group");
 
     var user_entity = Auth.check_token(req);
@@ -32,9 +44,7 @@ exports.list_groups = function(req, res)
             });
         }
     });
-
-
-}
+};
 
 exports.create_group = function (req, res)
 {
