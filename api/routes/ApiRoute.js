@@ -75,7 +75,7 @@ module.exports = function (app) {
      */
 
     app.route('/permissions')
-        .get(Permissions.getPermissions) //NO PERMISSION NEEDED
+        .get(Permissions.getPermissions) //NO PERMISSION NEEDED --> OK
         .post(Permissions.createPermissions) // API_PERMISSIONS_POST --> OK
         .delete(Permissions.delete_allPermissions); // API_PERMISSIONS_DEL --> OK
 

@@ -54,6 +54,7 @@ exports.hasPermission = async function (perm, req)
 
 exports.middlewarePermissions = function (req, res, next) {
     console.log(req, res, next);
+    next();
 };
 
 exports.getPermissions = function (req, res)
