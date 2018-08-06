@@ -66,6 +66,12 @@ function route_protected()
             method: "GET",
             permission: "API_BYPASS_GET",
             type: "PARTIAL"
+        },
+        {
+            url: "/callback",
+            method: "POST",
+            permission: "none",
+            type: "FULL"
         }
     ];
     return route;
