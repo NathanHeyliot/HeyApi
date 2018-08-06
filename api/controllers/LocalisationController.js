@@ -8,6 +8,8 @@ exports.crypted = function (req, res) {
 
     Permission.hasPermission("API_LOCALISATION_POSTCRYPTED", req).then(data => {
         if(data === true) {
+
+            console.log(scope);
             console.log("Decrypt a location, CODE : " + scope.req.body.PositionCode);
 
             var PositionCode = String(req.body.PositionCode);
