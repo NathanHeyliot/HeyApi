@@ -5,7 +5,7 @@ let Permission = require('./PermissionsController');
 exports.crypted = function (req, res)
 {
     Promise.all([Permission.hasPermission("API_LOCALISATION_POSTCRYPTED", req)]).then(data => {
-        if(data[1] === true) {
+        if(data[0] === true) {
             console.log("Decrypt a location, CODE : " + req.body.PositionCode);
             var PositionCode = String(req.body.PositionCode);
             var req = new XMLHttpRequest();
