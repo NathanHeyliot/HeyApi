@@ -12,7 +12,14 @@ let mongoose = require('mongoose'),
 * Permission.hasPermission("API_PAYLOADS_GET", req).then(data => { console.log(data); });
  */
 
-exports.hasPermission = async function (perm, req)
+exports.hasPermission = async function(perm, req)
+{
+    await this.hasPermission2(perm, req).then(data => {
+        return (data);
+    });
+};
+
+exports.hasPermission2 = async function (perm, req)
 {
     var user_entity = Auth.check_token(req);
 
