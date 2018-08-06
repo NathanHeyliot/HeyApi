@@ -135,7 +135,7 @@ exports.getPermissions = function (req, res)
                             console.log("Error at : " + err);
                             res.send(err);
                         }
-                        if(User !== null && User !== undefined) {
+                        if(User !== null && User !== undefined && mongoose.Types.ObjectId.isValid(User.RankId)) {
                             Ranks.findOne({_id: User.RankId}, function (err, Rank) {
                                 if (err)
                                 {
@@ -152,12 +152,8 @@ exports.getPermissions = function (req, res)
                                         }
                                         res.json(permissions);
                                     });
-                                } else {
-                                    res.json({error: "Assigned Rank not found !"});
                                 }
                             });
-                        } else {
-                            res.json({error: "Assigned User not found !"});
                         }
                     });
                 }
