@@ -65,6 +65,11 @@ exports.middlewarePermissions = function (req, res, next) {
 
     route_protect.forEach(data => {
 
+        console.log(req.method.toUpperCase());
+        console.log(data.method.toUpperCase());
+
+        console.log(Permission.hasPermission(data.permission, req));
+
         if(req.method.toUpperCase() === data.method.toUpperCase() && Permission.hasPermission(data.permission, req) === true) {
 
             console.log("Methode et permission OK");
@@ -94,6 +99,9 @@ exports.middlewarePermissions = function (req, res, next) {
         }
         console.log("A la fin, res end");
         res.end();
+
+
+
     });
     res.end();
 };
