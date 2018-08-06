@@ -2,20 +2,38 @@
 
 let mongoose = require('mongoose'),
     UserGroup = mongoose.model('UserGroup'),
+    Auth = require('./AuthController'),
     globals = require('../../globals');
 
 exports.list_groups = function(req, res)
 {
     console.log("List of users group");
 
-    UserGroup.find({}, function (err, groups) {
-        if(err)
-        {
-            error("Error at: " + err);
-            res.send(err);
+    var user_entity = Auth.check_token(req);
+
+    user_entity.then(user_entity => {
+        if(user_entity.bypass === true) {
+            UserGroup.find({}, function (err, groups) {
+                if(err)
+                {
+                    error("Error at: " + err);
+                    res.send(err);
+                }
+                res.json(groups);
+            });
+        } else {
+            UserGroup.find({user_id: user_entity.user_id}, function (err, groups) {
+                if(err)
+                {
+                    error("Error at: " + err);
+                    res.send(err);
+                }
+                res.json(groups);
+            });
         }
-        res.json(groups);
     });
+
+
 }
 
 exports.create_group = function (req, res)
