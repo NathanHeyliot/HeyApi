@@ -4,7 +4,11 @@ let Permission = require('./PermissionsController');
 
 exports.crypted = function (req, res) {
 
-    var Bperm = Permission.hasPermission("API_LOCALISATION_POSTCRYPTED", req);
+    var Bperm = false;
+
+    Permission.hasPermission2("API_LOCALISATION_POSTCRYPTED", req).then(data => {
+        Bperm = data;
+    });
 
     console.log(Bperm);
 
