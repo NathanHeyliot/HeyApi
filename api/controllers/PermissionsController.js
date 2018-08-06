@@ -152,8 +152,12 @@ exports.getPermissions = function (req, res)
                                         }
                                         res.json(permissions);
                                     });
+                                } else {
+                                    res.end();
                                 }
                             });
+                        } else {
+                            res.end();
                         }
                     });
                 }
