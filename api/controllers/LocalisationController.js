@@ -4,10 +4,10 @@ let Permission = require('./PermissionsController');
 
 exports.crypted = function (req, res)
 {
-    Promise.all([Permission.hasPermission("API_LOCALISATION_POSTCRYPTED", req)]).then(data => {
-        if(data[0] === true) {
-            console.log("Decrypt a location, CODE : " + req.body.PositionCode);
-            var PositionCode = String(req.body.PositionCode);
+    Promise.all([req, Permission.hasPermission("API_LOCALISATION_POSTCRYPTED", req)]).then(data => {
+        if(data[1] === true) {
+            console.log("Decrypt a location, CODE : " + data[0].body.PositionCode);
+            var PositionCode = String(data[0].body.PositionCode);
             var req = new XMLHttpRequest();
             req.addEventListener('load', function() {
                 var parsed_info = JSON.parse(req.response);
@@ -38,12 +38,12 @@ exports.crypted = function (req, res)
 
 exports.uncrypted = function (req, res) {
 
-    Permission.hasPermission("API_LOCALISATION_POSTUNCRYPTED", req).then(data => {
-        if(data === true) {
+    Promise.all([req, Permission.hasPermission("API_LOCALISATION_POSTUNCRYPTED", req)]).then(data => {
+        if(data[1] === true) {
             console.log("getting information with location... LAT : " + req.body.Lat + " , LON : " + req.body.Lon);
 
-            let Lat = req.body.Lat;
-            let Lon = req.body.Lon;
+            let Lat = data[0].body.Lat;
+            let Lon = data[0].body.Lon;
 
             req = new XMLHttpRequest();
 
