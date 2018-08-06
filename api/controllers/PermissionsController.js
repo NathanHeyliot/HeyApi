@@ -123,15 +123,10 @@ exports.middlewarePermissions = function (req, res, next) {
 
 exports.getPermissions = function (req, res)
 {
-
-    Promise.all([
-        req,
-        Permission.hasPermission("API_BYPASS_GET", req)
-    ]).then(data => {
             var user_entity = Auth.check_token(req);
 
             user_entity.then(user_entity => {
-                if(user_entity.bypass === true && data[1] === true) {
+                if(user_entity.bypass === true && req.hasPermissionBypass === true) {
                     Permissions.find({}, function (err, permissions) {
                         if (err)
                         {
@@ -175,51 +170,27 @@ exports.getPermissions = function (req, res)
                     });
                 }
             });
-    });
 };
 
+
 exports.createPermissions = function (req, res) {
+    console.log("Submitting a new Permissions");
 
-    Promise.all([
-        req,
-        Permission.hasPermission("API_PERMISSIONS_POST", req),
-        Permission.hasPermission("API_BYPASS_POST", req)
-    ]).then(data => {
-        if (data[1] === true || data[2] === true) {
-
-
-            console.log("Submitting a new Permissions");
-
-            let newPermissions = new Permissions(data[0].body);
-            newPermissions.save(function (err, permissions)
-            {
-                if(err)
-                    return(res.send(err));
-                res.json(permissions);
-            });
-
-        }else {
-            res.json({error: "You don't have permission to do that !"});
-        }
+    let newPermissions = new Permissions(req.body);
+    newPermissions.save(function (err, permissions)
+    {
+        if(err)
+            return(res.send(err));
+        res.json(permissions);
     });
 };
 
 exports.delete_allPermissions = function (req, res) {
+    console.log("Deleting all permissions....");
+    Permissions.collection.remove({});
+    res.end();
+    console.log("Success");
 
-    Promise.all([
-        req,
-        Permission.hasPermission("API_PERMISSIONS_DELALL", req),
-        Permission.hasPermission("API_BYPASS_DEL", req)
-    ]).then(data => {
-        if (data[1] === true || data[2] === true) {
-            console.log("Deleting all permissions....");
-            Permissions.collection.remove({});
-            res.end();
-            console.log("Success");
-        }else {
-            res.json({error: "You don't have permission to do that !"});
-        }
-    });
 };
 
 exports.getPermission = function (req, res) {
@@ -234,44 +205,24 @@ exports.getPermission = function (req, res) {
 
 exports.removePermissions = function (req, res) {
 
-    Promise.all([
-        req,
-        Permission.hasPermission("API_PERMISSIONS_DEL", req),
-        Permission.hasPermission("API_BYPASS_DEL", req)
-    ]).then(data => {
-        if (data[1] === true || data[2] === true) {
-            console.log("Deleting of specified information, ID : " + data[0].params.id);
+    console.log("Deleting of specified information, ID : " + req.params.id);
 
-            Permissions.remove({_id: data[0].params.id}, function(err, permissions)
-            {
-                if(err)
-                    res.send(err);
-                res.json({message: "Permissions deleted succefully !"});
-            });
-        }else {
-            res.json({error: "You don't have permission to do that !"});
-        }
+    Permissions.remove({_id: req.params.id}, function(err, permissions)
+    {
+        if(err)
+            res.send(err);
+        res.json({message: "Permissions deleted succefully !"});
     });
 };
 
 exports.updatePermissions = function (req, res) {
 
-    Promise.all([
-        req,
-        Permission.hasPermission("API_PERMISSIONS_PUT", req),
-        Permission.hasPermission("API_BYPASS_PUT", req)
-    ]).then(data => {
-        if (data[1] === true || data[2] === true) {
-            console.log("Updating permissions, ID : " + data[0].params.id);
+    console.log("Updating permissions, ID : " + req.params.id);
 
-            Permissions.findOneAndUpdate({_id: data[0].params.id}, data[0].body, {new: true}, function (err, permissions)
-            {
-                if(err)
-                    res.send(err);
-                res.json(permissions);
-            });
-        }else {
-            res.json({error: "You don't have permission to do that !"});
-        }
+    Permissions.findOneAndUpdate({_id: res.params.id}, req.body, {new: true}, function (err, permissions)
+    {
+        if(err)
+            res.send(err);
+        res.json(permissions);
     });
 };

@@ -4,14 +4,9 @@ let Permission = require('./PermissionsController');
 
 exports.crypted = function (req, res)
 {
-    Promise.all([
-        req,
-        Permission.hasPermission("API_LOCALISATION_POSTCRYPTED", req),
-        Permission.hasPermission("API_BYPASS_POST", req)
-    ]).then(data => {
-        if(data[1] === true || data[2] == true) {
-            console.log("Decrypt a location, CODE : " + data[0].body.PositionCode);
-            var PositionCode = String(data[0].body.PositionCode);
+
+    console.log("Decrypt a location, CODE : " + req.body.PositionCode);
+    var PositionCode = String(req.body.PositionCode);
             var req = new XMLHttpRequest();
             req.addEventListener('load', function() {
                 var parsed_info = JSON.parse(req.response);
@@ -34,24 +29,13 @@ exports.crypted = function (req, res)
             req.setRequestHeader("Content-Type", "application/json");
             req.setRequestHeader("Authorization", "Basic aGV5bGlvdF9ldmFsOlJ3ZGpkOnR5MUMyfg==");
             req.send(JSON.stringify({type: "ubiwifi", device: "NoDeviceSpecified", data: PositionCode}));
-        } else {
-            res.json({error: "No Permission to do that !"});
-        }
-    });
 };
 
 exports.uncrypted = function (req, res) {
-
-    Promise.all([
-        req,
-        Permission.hasPermission("API_LOCALISATION_POSTUNCRYPTED", req),
-        Permission.hasPermission("API_BYPASS_POST", req)
-    ]).then(data => {
-        if(data[1] === true || data[2] === true) {
             console.log("getting information with location... LAT : " + req.body.Lat + " , LON : " + req.body.Lon);
 
-            let Lat = data[0].body.Lat;
-            let Lon = data[0].body.Lon;
+            let Lat = req.body.Lat;
+            let Lon = req.body.Lon;
 
             req = new XMLHttpRequest();
 
@@ -62,25 +46,14 @@ exports.uncrypted = function (req, res) {
 
             req.open("GET", "https://eu1.locationiq.org/v1/reverse.php?key=9126593a665608&lat=" + Lat + "&lon=" + Lon + "&format=json", true);
             req.send(null);
-        } else {
-            res.json({error: "No Permission to do that !"});
-        }
-    });
 };
 
 exports.road = function (req, res) {
-
-    Promise.all([
-        req,
-        Permission.hasPermission("API_PAYLOADS_ROADPOST", req),
-        Permission.hasPermission("API_BYPASS_POST", req)
-    ]).then(data => {
-        if(data[1] === true || data[2] === true) {
             console.log("useing API for road");
 
-            if(data[0].body.locations) {
+            if(req.body.locations) {
                 const exec = require('child_process').exec;
-                const child = exec(__dirname + '\\RoadAPI.py "' + data[0].body.locations + '"',
+                const child = exec(__dirname + '\\RoadAPI.py "' + req.body.locations + '"',
                     (error, stdout, stderr) => {
                         if(stdout) {
                             console.log(`Sortie du script : ${stdout}`);
@@ -95,8 +68,4 @@ exports.road = function (req, res) {
             } else {
                 console.log("No location give :/");
             }
-        } else {
-            res.json({error: "No Permission to do that !"});
-        }
-    });
 };

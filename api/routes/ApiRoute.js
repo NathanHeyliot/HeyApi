@@ -49,7 +49,7 @@ module.exports = function (app) {
      */
 
     app.route("/road")
-        .post(LocalisationApi.road); //API_PAYLOADS_ROADPOST --> OK
+        .post(LocalisationApi.road); //API_PAYLOADS_ROADPOST
 
 
     /*
@@ -59,14 +59,14 @@ module.exports = function (app) {
      */
 
     app.route('/ranks')
-        .get(Ranks.getRanks) //NO PERMISSION NEEDED --> OK
-        .post(Ranks.createRanks) //API_RANKS_POST --> OK
-        .delete(Ranks.delete_allRanks); //API_RANKS_DELALL --> OK
+        .get(Ranks.getRanks) //NO PERMISSION NEEDED
+        .post(Ranks.createRanks) //API_RANKS_POST
+        .delete(Ranks.delete_allRanks); //API_RANKS_DELALL
 
     app.route('/ranks/id/:id')
-        .get(Ranks.getRank) //NO PERMISSION NEEDED --> OK
-        .delete(Ranks.removeRanks) //API_RANKS_DEL --> OK
-        .put(Ranks.updateRanks); //API_RANKS_PUT --> OK
+        .get(Ranks.getRank) //NO PERMISSION NEEDED
+        .delete(Ranks.removeRanks) //API_RANKS_DEL
+        .put(Ranks.updateRanks); //API_RANKS_PUT
 
     /*
     *--------------------------
@@ -226,8 +226,8 @@ module.exports = function (app) {
      */
 
     app.route('/localisation/crypted')
-        .post(LocalisationApi.crypted); //API_LOCALISATION_POSTCRYPTED  --> OK
+        .post(LocalisationApi.crypted); //API_LOCALISATION_POSTCRYPTED
 
     app.route('/localisation/uncrypted')
-        .post(LocalisationApi.uncrypted); //API_LOCALISATION_POSTUNCRYPTED --> OK
+        .post(LocalisationApi.uncrypted); //API_LOCALISATION_POSTUNCRYPTED
 };

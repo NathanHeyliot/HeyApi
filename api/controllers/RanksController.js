@@ -6,15 +6,11 @@ let mongoose = require('mongoose'),
     Permission = require("./PermissionsController"),
     Ranks = mongoose.model('Ranks');
 
-exports.getRanks = function (req, res) {
-    Promise.all([
-        req,
-        Permission.hasPermission("API_BYPASS_GET", req)
-    ]).then(data => {
-        if (data[1] === true) {
-            var user_entity = Auth.check_token(data[0]);
+exports.getRanks = function (req, res)
+{
+            var user_entity = Auth.check_token(req);
             user_entity.then(user_entity => {
-                if(user_entity.bypass === true && data[1] === true) {
+                if(user_entity.bypass === true && req.hasPermissionBypass === true) {
                     Ranks.find({}, function (err, ranks) {
                         if (err)
                         {
@@ -42,50 +38,25 @@ exports.getRanks = function (req, res) {
                     });
                 }
             });
-        } else {
-            res.json({error: "You don't have permission to do that !"});
-        }
-    });
 };
 
 exports.createRanks = function (req, res) {
-    Promise.all([
-        req,
-        Permission.hasPermission("API_RANKS_POST", req),
-        Permission.hasPermission("API_BYPASS_POST", req)
-    ]).then(data => {
-        if (data[1] === true || data[2] === true) {
             console.log("Submitting a new Rank");
 
-            let newRank = new Ranks(data[0].body);
+            let newRank = new Ranks(req.body);
             newRank.save(function (err, ranks)
             {
                 if(err)
                     return(res.send(err));
                 res.json(ranks);
             });
-        } else {
-            res.json({error: "You don't have permission to do that !"});
-        }
-    });
 };
 
 exports.delete_allRanks = function (req, res) {
-
-    Promise.all([
-        req,
-        Permission.hasPermission("API_RANKS_DELALL", req),
-        Permission.hasPermission("API_BYPASS_DEL", req)
-    ]).then(data => {
-        if(data[1] === true || data[2] === true) {
             console.log("Deleting all ranks....");
             Ranks.collection.remove({});
             res.end();
             console.log("Success");
-        } else {
-            res.json({error: "You don't have permission to do that !"});
-        }
-    });
 };
 
 exports.getRank = function (req, res) {
@@ -99,44 +70,23 @@ exports.getRank = function (req, res) {
 };
 
 exports.removeRanks = function (req, res) {
+    console.log("Deleting of specified information, ID : " + req.params.id);
 
-    Promise.all([
-        req,
-        Permission.hasPermission("API_RANKS_DEL", req),
-        Permission.hasPermission("API_BYPASS_DEL", req)
-    ]).then(data => {
-        if(data[1] === true || data[2] === true) {
-            console.log("Deleting of specified information, ID : " + data[0].params.id);
-
-            Ranks.remove({_id: data[0].params.id}, function (err, ranks) {
-                if (err)
-                    res.send(err);
-                res.json({message: "Rank deleted succefully !"});
-            });
-        } else {
-            res.json({error: "You don't have permission to do that !"});
-        }
+    Ranks.remove({_id: req.params.id}, function(err, ranks)
+    {
+        if(err)
+            res.send(err);
+        res.json({message: "Rank deleted succefully !"});
     });
 };
 
 exports.updateRanks = function (req, res) {
+    console.log("Updating rank, ID : " + req.params.id);
 
-    Promise.all([
-        req,
-        Permission.hasPermission("API_RANKS_PUT", req),
-        Permission.hasPermission("API_BYPASS_PUT", req)
-    ]).then(data => {
-        if (data[1] === true || data[2] === true) {
-            console.log("Updating rank, ID : " + req.params.id);
-
-            Ranks.findOneAndUpdate({_id: data[0].params.id}, data[0].body, {new: true}, function (err, ranks)
-            {
-                if(err)
-                    res.send(err);
-                res.json(ranks);
-            });
-        } else {
-            res.json({error: "You don't have permission to do that !"});
-        }
+    Ranks.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, function (err, ranks)
+    {
+        if(err)
+            res.send(err);
+        res.json(ranks);
     });
 };
