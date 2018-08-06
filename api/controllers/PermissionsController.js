@@ -55,6 +55,11 @@ exports.hasPermission = async function (perm, req)
 function route_protected()
 {
     let route = [
+
+        /*
+         * PERMISSIONS ROUTER
+         */
+
         {
             url: "/permissions",
             method: "GET",
@@ -62,11 +67,39 @@ function route_protected()
             type: "FULL",
         },
         {
+            url: "/permissions",
+            method: "POST",
+            permission: "API_PERMISSIONS_POST",
+            type: "FULL",
+        },
+        {
+            url: "/permissions",
+            method: "DELETE",
+            permission: "API_PERMISSIONS_DEL",
+            type: "FULL",
+        },
+        {
             url: "/permissions/id/",
             method: "GET",
-            permission: "API_BYPASS_GET",
+            permission: "none",
             type: "PARTIAL"
         },
+        {
+            url: "/permissions/id/",
+            method: "GET",
+            permission: "API_PERMISSIONS_DEL",
+            type: "PARTIAL"
+        },
+        {
+            url: "/permissions/id/",
+            method: "PUT",
+            permission: "API_PERMISSIONS_PUT",
+            type: "PARTIAL"
+        },
+
+
+
+
         {
             url: "/callback",
             method: "POST",
