@@ -58,54 +58,58 @@ exports.middlewarePermissions = function (req, res, next) {
 
 exports.getPermissions = function (req, res)
 {
-    var user_entity = Auth.check_token(req);
 
-    user_entity.then(user_entity => {
-        if(user_entity.bypass === true) {
-            Permissions.find({}, function (err, permissions) {
-                if (err)
-                {
-                    console.log("Error at : " + err);
-                    res.send(err);
-                }
-                res.json(permissions);
-            });
-        } else {
-            User.findOne({_id: user_entity.user_id}, function (err, User)
-            {
-                if (err)
-                {
-                    console.log("Error at : " + err);
-                    res.send(err);
-                }
-                if(User !== null && User !== undefined) {
-                    Ranks.findOne({_id: User.RankId}, function (err, Rank) {
+    Promise.all([
+        req,
+        Permission.hasPermission("API_BYPASS_GET", req)
+    ]).then(data => {
+            var user_entity = Auth.check_token(req);
+
+            user_entity.then(user_entity => {
+                if(user_entity.bypass === true && data[1] === true) {
+                    Permissions.find({}, function (err, permissions) {
                         if (err)
                         {
                             console.log("Error at : " + err);
                             res.send(err);
                         }
-
-                        if(Rank !== null && Rank !== undefined) {
-                            Permissions.findOne({RankId: Rank._id}, function (err, permissions) {
+                        res.json(permissions);
+                    });
+                } else {
+                    User.findOne({_id: user_entity.user_id}, function (err, User)
+                    {
+                        if (err)
+                        {
+                            console.log("Error at : " + err);
+                            res.send(err);
+                        }
+                        if(User !== null && User !== undefined) {
+                            Ranks.findOne({_id: User.RankId}, function (err, Rank) {
                                 if (err)
                                 {
                                     console.log("Error at : " + err);
                                     res.send(err);
                                 }
-                                res.json(permissions);
+
+                                if(Rank !== null && Rank !== undefined) {
+                                    Permissions.findOne({RankId: Rank._id}, function (err, permissions) {
+                                        if (err)
+                                        {
+                                            console.log("Error at : " + err);
+                                            res.send(err);
+                                        }
+                                        res.json(permissions);
+                                    });
+                                } else {
+                                    res.json({error: "Assigned Rank not found !"});
+                                }
                             });
                         } else {
-                            res.json({error: "Assigned Rank not found !"});
+                            res.json({error: "Assigned User not found !"});
                         }
                     });
-                } else {
-                    res.json({error: "Assigned User not found !"});
                 }
             });
-        }
-
-
     });
 };
 
