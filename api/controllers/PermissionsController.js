@@ -125,7 +125,7 @@ exports.middlewarePermissions = function (req, res, next) {
                         Permission.hasPermission(data.permission, req),
                         Permission.hasPermission("API_BYPASS_" + data.method, req)
                     ]).then(response => {
-                        if((response[1] === true || response[0].permission === 'none') || response[2] === true) {
+                        if(response[1] === true || response[0].permission.toLowerCase() === "none".toLowerCase() || response[2] === true) {
                             req.hasPermissionBypass = response[2];
                             next();
                         } else {
@@ -141,7 +141,7 @@ exports.middlewarePermissions = function (req, res, next) {
                         Permission.hasPermission(data.permission, req),
                         Permission.hasPermission("API_BYPASS_" + data.method, req)
                     ]).then(response => {
-                        if((response[1] === true || response[0].permission === 'none') || response[2] === true) {
+                        if(response[1] === true || response[0].permission.toLowerCase() === "none".toLowerCase() || response[2] === true) {
                             req.hasPermissionBypass = response[2];
                             next();
                         } else {
