@@ -5,6 +5,7 @@ let mongoose = require('mongoose'),
     Ranks = mongoose.model('Ranks'),
     Auth = require('./AuthController'),
     Permission = require("./PermissionsController"),
+    PermissionConfig = require("./PermissionConfig"),
     Permissions = mongoose.model('Permissions');
 
 
@@ -52,67 +53,9 @@ exports.hasPermission = async function (perm, req)
     });
 };
 
-function route_protected()
-{
-    let route = [
-
-        /*
-         * PERMISSIONS ROUTER
-         */
-
-        {
-            url: "/permissions",
-            method: "GET",
-            permission: "none",
-            type: "FULL",
-        },
-        {
-            url: "/permissions",
-            method: "POST",
-            permission: "API_PERMISSIONS_POST",
-            type: "FULL",
-        },
-        {
-            url: "/permissions",
-            method: "DELETE",
-            permission: "API_PERMISSIONS_DEL",
-            type: "FULL",
-        },
-        {
-            url: "/permissions/id/",
-            method: "GET",
-            permission: "none",
-            type: "PARTIAL"
-        },
-        {
-            url: "/permissions/id/",
-            method: "DELETE",
-            permission: "API_PERMISSIONS_DEL",
-            type: "PARTIAL"
-        },
-        {
-            url: "/permissions/id/",
-            method: "PUT",
-            permission: "API_PERMISSIONS_PUT",
-            type: "PARTIAL"
-        },
-
-
-
-
-        {
-            url: "/callback",
-            method: "POST",
-            permission: "none",
-            type: "FULL"
-        }
-    ];
-    return route;
-}
-
 exports.middlewarePermissions = function (req, res, next) {
 
-    let route_protect = route_protected();
+    let route_protect = PermissionConfig.route_config();
     let found = false;
 
     route_protect.forEach(data => {

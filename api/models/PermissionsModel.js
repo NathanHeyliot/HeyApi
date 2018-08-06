@@ -52,10 +52,6 @@ let PermissionsModel = new Schema
         {
             type: Boolean, default: false
         },
-    API_PAYLOADS_ROADPOST:
-        {
-          type: Boolean, default: false
-        },
 
     /*
     *--------------------------
@@ -226,11 +222,7 @@ let PermissionsModel = new Schema
     * -----------------------
      */
 
-    API_LOCALISATION_POSTCRYPTED:
-        {
-            type: Boolean, default: false
-        },
-    API_LOCALISATION_POSTUNCRYPTED:
+    API_LOCALISATION_POST:
         {
             type: Boolean, default: false
         },
@@ -290,6 +282,17 @@ let PermissionsModel = new Schema
     API_PERMISSIONS_PUTID:
         {
             type: Boolean, default: false
+        },
+
+    /*
+    *------------------------
+    * ROAD ROUTER
+    * -----------------------
+     */
+
+    API_ROAD_POST:
+        {
+          type: Boolean, default: false
         },
 });
 

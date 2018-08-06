@@ -31,7 +31,7 @@ module.exports = function (app) {
      */
 
     app.route('/callback')
-        .post(payApi.create_payload); //ROUTE FOR SIGFOX NO PERMISSION NEEDED
+        .post(payApi.create_payload); //ROUTE FOR SIGFOX NO PERMISSION NEEDED      OK
 
     /*
     *-----------------------
@@ -40,7 +40,7 @@ module.exports = function (app) {
     */
 
     app.route('/auth/:user/:password')
-        .get(jwt_auth.submit_auth); //NO PERMISSION NEEDED
+        .get(jwt_auth.submit_auth); //NO PERMISSION NEEDED      OK
 
     /*
     *---------------------
@@ -49,7 +49,7 @@ module.exports = function (app) {
      */
 
     app.route("/road")
-        .post(LocalisationApi.road); //API_PAYLOADS_ROADPOST
+        .post(LocalisationApi.road); //API_ROAD_POST     OK
 
 
     /*
@@ -59,14 +59,14 @@ module.exports = function (app) {
      */
 
     app.route('/ranks')
-        .get(Ranks.getRanks) //NO PERMISSION NEEDED
-        .post(Ranks.createRanks) //API_RANKS_POST
-        .delete(Ranks.delete_allRanks); //API_RANKS_DELALL
+        .get(Ranks.getRanks) //NO PERMISSION NEEDED     OK
+        .post(Ranks.createRanks) //API_RANKS_POST     OK
+        .delete(Ranks.delete_allRanks); //API_RANKS_DELALL    OK
 
     app.route('/ranks/id/:id')
-        .get(Ranks.getRank) //NO PERMISSION NEEDED
-        .delete(Ranks.removeRanks) //API_RANKS_DEL
-        .put(Ranks.updateRanks); //API_RANKS_PUT
+        .get(Ranks.getRank) //NO PERMISSION NEEDED    OK
+        .delete(Ranks.removeRanks) //API_RANKS_DEL     OK
+        .put(Ranks.updateRanks); //API_RANKS_PUT      OK
 
     /*
     *--------------------------
@@ -226,8 +226,8 @@ module.exports = function (app) {
      */
 
     app.route('/localisation/crypted')
-        .post(LocalisationApi.crypted); //API_LOCALISATION_POSTCRYPTED
+        .post(LocalisationApi.crypted); //API_LOCALISATION_POST      OK
 
     app.route('/localisation/uncrypted')
-        .post(LocalisationApi.uncrypted); //API_LOCALISATION_POSTUNCRYPTED
+        .post(LocalisationApi.uncrypted); //API_LOCALISATION_POST        OK
 };
