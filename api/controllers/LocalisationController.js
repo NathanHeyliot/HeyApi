@@ -4,13 +4,11 @@ let Permission = require('./PermissionsController');
 
 exports.crypted = function (req, res) {
 
-    var scope = this;
-
     Permission.hasPermission("API_LOCALISATION_POSTCRYPTED", req).then(data => {
         if(data === true) {
 
             console.log(scope);
-            console.log("Decrypt a location, CODE : " + scope.req.body.PositionCode);
+            console.log("Decrypt a location, CODE : " + this.req.body.PositionCode);
 
             var PositionCode = String(req.body.PositionCode);
 
