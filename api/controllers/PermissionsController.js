@@ -68,7 +68,7 @@ exports.middlewarePermissions = function (req, res, next) {
         if(data.type.toUpperCase() === "PARTIAL") {
             if(req.url.startsWith(data.url, 0) &&
                 req.method.toUpperCase() === data.method.toUpperCase() &&
-                this.hasPermission(data.permission, req) === true) {
+                Permission.hasPermission(data.permission, req) === true) {
                     next();
                 }
         } else if (data.type.toUpperCase() === "FULL") {
