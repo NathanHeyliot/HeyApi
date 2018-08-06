@@ -53,10 +53,10 @@ exports.check_token = async function ResolveToken(req) {
         jwt.verify(token, secret_encrypt, function (err, decoded) {
             if(decoded === undefined)
                 reject(err);
-            if (bypass === 'true')
-                decoded.bypass = true;
-            else
+            if (bypass === null || bypass === undefined || bypass === 'false')
                 decoded.bypass = false;
+            else
+                decoded.bypass = true;
             resolve(decoded);
             reject(err);
         });
