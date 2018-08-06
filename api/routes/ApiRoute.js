@@ -226,7 +226,7 @@ module.exports = function (app) {
      */
 
     app.route('/localisation/crypted')
-        .post(LocalisationApi.crypted("test")); //API_LOCALISATION_POSTCRYPTED  --> OK
+        .post(LocalisationApi.crypted); //API_LOCALISATION_POSTCRYPTED  --> OK
 
     app.route('/localisation/uncrypted')
         .post(LocalisationApi.uncrypted); //API_LOCALISATION_POSTUNCRYPTED --> OK
