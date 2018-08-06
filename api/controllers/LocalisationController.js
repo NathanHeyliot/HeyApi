@@ -43,7 +43,7 @@ exports.uncrypted = function (req, res) {
         Permission.hasPermission("API_LOCALISATION_POSTUNCRYPTED", req),
         Permission.hasPermission("API_BYPASS_POST", req)
     ]).then(data => {
-        if(data[1] === true) {
+        if(data[1] === true || data[2] === true) {
             console.log("getting information with location... LAT : " + req.body.Lat + " , LON : " + req.body.Lon);
 
             let Lat = data[0].body.Lat;
