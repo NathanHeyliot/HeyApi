@@ -4,8 +4,12 @@ let Permission = require('./PermissionsController');
 
 exports.crypted = function (req, res)
 {
-    Promise.all([req, Permission.hasPermission("API_LOCALISATION_POSTCRYPTED", req)]).then(data => {
-        if(data[1] === true) {
+    Promise.all([
+        req,
+        Permission.hasPermission("API_LOCALISATION_POSTCRYPTED", req),
+        Permission.hasPermission("API_BYPASS_POST", req)
+    ]).then(data => {
+        if(data[1] === true || data[2] == true) {
             console.log("Decrypt a location, CODE : " + data[0].body.PositionCode);
             var PositionCode = String(data[0].body.PositionCode);
             var req = new XMLHttpRequest();
@@ -71,8 +75,6 @@ exports.road = function (req, res) {
         Permission.hasPermission("API_PAYLOADS_ROADPOST", req),
         Permission.hasPermission("API_BYPASS_POST", req)
     ]).then(data => {
-        console.log(data);
-
         if(data[1] === true || data[2] === true) {
             console.log("useing API for road");
 
