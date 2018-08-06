@@ -4,7 +4,7 @@ let Permission = require('./PermissionsController');
 
 exports.crypted = function (req, res) {
 
-    var Bperm = Permission.hasPermission(req, res);
+    var Bperm = Permission.hasPermission("API_LOCALISATION_POSTCRYPTED", req);
 
     console.log(Bperm);
 
