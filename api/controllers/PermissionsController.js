@@ -61,9 +61,7 @@ exports.middlewarePermissions = function (req, res, next) {
     route_protect.forEach(data => {
         if(req.method.toUpperCase() === data.method.toUpperCase()) {
             if(data.type.toUpperCase() === "PARTIAL") {
-                if(req.url.startsWith(data.url, 0)) {
-                    found = true;
-                    if(req.url.startWith(data.url, 0)) {
+                    if(req.url.startsWith(data.url, 0)) {
                         found = true;
                         if(data.permission.toLowerCase() === "none".toLowerCase() && (req.headers['x-access-token'] === null || req.headers['x-access-token'] === undefined)) {
                             req.hasPermissionBypass = false;
@@ -83,7 +81,6 @@ exports.middlewarePermissions = function (req, res, next) {
                             });
                         }
                     }
-                }
             } else if (data.type.toUpperCase() === "FULL") {
                 if(req.url === data.url || req.url === data.url + "/") {
                     found = true;
