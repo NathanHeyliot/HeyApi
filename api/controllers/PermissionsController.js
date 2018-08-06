@@ -65,22 +65,21 @@ exports.middlewarePermissions = function (req, res, next) {
 
     route_protect.forEach(data => {
 
-        if(data.type.toUpperCase() === "PARTIAL") {
-            if(req.url.startsWith(data.url, 0) &&
-                req.method.toUpperCase() === data.method.toUpperCase() &&
-                Permission.hasPermission(data.permission, req) === true) {
+        if(req.method.toUpperCase() === data.method.toUpperCase() && Permission.hasPermission(data.permission, req) === true) {
+            if(data.type.toUpperCase() === "PARTIAL") {
+                if(req.url.startsWith(data.url, 0)) {
                     next();
                 }
-        } else if (data.type.toUpperCase() === "FULL") {
-            if(req.url === data.url &&
-                req.method.toUpperCase() === data.method.toUpperCase() &&
-                this.hasPermission(data.permission, req) === true) {
-                next();
+            } else if (data.type.toUpperCase() === "FULL") {
+                if(req.url === data.url) {
+                    next();
+                }
+            } else {
+                console.log("Route type undefined for : " + data);
+                res.end();
             }
-        } else {
-            console.log("Route type undefined for : " + data);
-            res.end();
         }
+        res.end();
     });
     res.end();
 };
