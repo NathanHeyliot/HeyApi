@@ -104,11 +104,6 @@ exports.middlewarePermissions = function (req, res, next) {
             }
         });
     });
-
-
-
-
-    res.end();
 };
 
 exports.getPermissions = function (req, res)
