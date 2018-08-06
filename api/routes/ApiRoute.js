@@ -165,19 +165,19 @@ module.exports = function (app) {
     * -------------------------
      */
     app.route('/devicestypes')
-        .get(typeApi.list_devicetypes) //API_DEVICESTYPES_GET
-        .post(typeApi.create_devicetypes) //API_DEVICESTYPES_POST
-        .delete(typeApi.delete_all_devicestypes); //API_DEVICESTYPES_DELALL
+        .get(typeApi.list_devicetypes) //API_DEVICESTYPES_GET     OK
+        .post(typeApi.create_devicetypes) //API_DEVICESTYPES_POST      OK
+        .delete(typeApi.delete_all_devicestypes); //API_DEVICESTYPES_DELALL    OK
 
     app.route('/devicestypes/name/:Name')
-        .delete(typeApi.delete_devicestypes) //API_DEVICESTYPES_DEL
-        .get(typeApi.information_devicestypes) //API_DEVICESTYPES_GET
-        .put(typeApi.update_devicestypes); //API_DEVICESTYPES_PUT
+        .delete(typeApi.delete_devicestypes) //API_DEVICESTYPES_DEL     OK
+        .get(typeApi.information_devicestypes) //API_DEVICESTYPES_GET     OK
+        .put(typeApi.update_devicestypes); //API_DEVICESTYPES_PUT      OK
 
     app.route('/devicestypes/id/:id')
-        .delete(typeApi.delete_devicestypesid) //API_DEVICESTYPES_DEL
-        .get(typeApi.information_devicestypesid) //API_DEVICESTYPES_GET
-        .put(typeApi.update_devicestypesid); //API_DEVICESTYPES_PUT
+        .delete(typeApi.delete_devicestypesid) //API_DEVICESTYPES_DEL     OK
+        .get(typeApi.information_devicestypesid) //API_DEVICESTYPES_GET      OK
+        .put(typeApi.update_devicestypesid); //API_DEVICESTYPES_PUT     OK
 
     /*
     *-----------------------
@@ -186,14 +186,14 @@ module.exports = function (app) {
      */
 
     app.route('/users')
-        .get(userApi.list_users) //API_USERS_GET
-        .post(userApi.create_user) //API_USERS_POST
-        .delete(userApi.delete_all_users); //API_USERS_DELALL
+        .get(userApi.list_users) //API_USERS_GET       OK
+        .post(userApi.create_user) //API_USERS_POST         OK
+        .delete(userApi.delete_all_users); //API_USERS_DELALL       OK
 
     app.route('/users/id/:UserId')
-        .get(userApi.user_info) //API_USERS_GET
-        .delete(userApi.delete_user) //API_USERS_DEL
-        .put(userApi.update_user); //API_USERS_PUT
+        .get(userApi.user_info) //API_USERS_GET       OK
+        .delete(userApi.delete_user) //API_USERS_DEL       OK
+        .put(userApi.update_user); //API_USERS_PUT      OK
 
     /*
     *----------------------
@@ -202,21 +202,21 @@ module.exports = function (app) {
      */
 
     app.route('/usersgroups')
-        .get(userGroupApi.list_groups) //API_USERSGRP_GET
-        .post(userGroupApi.create_group) //API_USERSGRP_POST
-        .delete(userGroupApi.delete_all_usergroups); //API_USERSGRP_DELALL
+        .get(userGroupApi.list_groups) //API_USERSGRP_GET      OK
+        .post(userGroupApi.create_group) //API_USERSGRP_POST        OK
+        .delete(userGroupApi.delete_all_usergroups); //API_USERSGRP_DELALL      OK
 
     app.route('/usersgroups/id/:Gid')
-        .get(userGroupApi.get_info) //API_USERSGRP_GET
-        .delete(userGroupApi.delete_group) //API_USERSGRP_DEL
-        .put(userGroupApi.update_group); //API_USERSGRP_PUT
+        .get(userGroupApi.get_info) //API_USERSGRP_GET      OK
+        .delete(userGroupApi.delete_group) //API_USERSGRP_DEL        OK
+        .put(userGroupApi.update_group); //API_USERSGRP_PUT       OK
 
     app.route('/usersgroups/user/:Uid')
-        .get(userGroupApi.get_infoU) //API_USERSGRP_GET
-        .delete(userGroupApi.delete_infoU); //API_USERSGRP_DEL
+        .get(userGroupApi.get_infoU) //API_USERSGRP_GET       OK
+        .delete(userGroupApi.delete_infoU); //API_USERSGRP_DEL     OK
 
     app.route('/usersgroups/group/:Gid')
-        .delete(userGroupApi.delete_infoG); //API_USERSGRP_GET
+        .delete(userGroupApi.delete_infoG); //API_USERSGRP_GET     OK
 
 
     /*
