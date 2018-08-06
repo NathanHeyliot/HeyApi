@@ -76,28 +76,34 @@ exports.middlewarePermissions = function (req, res, next) {
     let route_protect = route_protected();
 
     route_protect.forEach(data => {
-        Promise.all([
-            data,
-            req,
-            res,
-            next,
-            Permission.hasPermission(data.permission, req)
-        ]).then(response => {
-            if(response[1].method.toUpperCase() === response[0].method.toUpperCase() && (response[4] === true || data.permission === 'none')) {
-                if(response[0].type.toUpperCase() === "PARTIAL") {
-                    if(response[1].url.startsWith(response[0].url, 0)) {
-                        next();
-                    }
-                } else if (response[0].type.toUpperCase() === "FULL") {
-                    if(response[1].url === response[0].url) {
-                        next();
-                    }
-                } else {
-                    console.log("Route type undefined for : " + response[0]);
-                    response[2].end();
+        if(req.method.toUpperCase() === data.method.toUpperCase()) {
+            if(data.type.toUpperCase() === "PARTIAL") {
+                if(req.url.startsWith(data.url, 0)) {
+                    Promise.all([
+                        data,
+                        Permission.hasPermission(data.permission, req)
+                    ]).then(response => {
+                        if((response[1] === true || response[0].permission === 'none')) {
+                            next();
+                        }
+                    });
                 }
+            } else if (data.type.toUpperCase() === "FULL") {
+                if(req.url === data.url) {
+                    Promise.all([
+                        data,
+                        Permission.hasPermission(data.permission, req)
+                    ]).then(response => {
+                        if((response[1] === true || response[0].permission === 'none')) {
+                            next();
+                        }
+                    });
+                }
+            } else {
+                console.log("Route type undefined for : " + response[0]);
+                res.end();
             }
-        });
+        }
     });
 };
 
