@@ -54,7 +54,9 @@ exports.hasPermission = async function (perm, req)
 
 exports.middlewarePermissions = function (req, res, next) {
 
-    var route_protect = [
+    let passed = false;
+
+    let route_protect = [
         {
             url: "/permissions",
             method: "GET",
@@ -70,7 +72,8 @@ exports.middlewarePermissions = function (req, res, next) {
             req,
             res,
             next,
-            Permission.hasPermission(data.permission, req)
+            Permission.hasPermission(data.permission, req),
+            passed
         ]).then(response => {
             console.log((response[1].method.toUpperCase() === response[0].method.toUpperCase()));
             console.log(response[4]);
@@ -86,6 +89,7 @@ exports.middlewarePermissions = function (req, res, next) {
                     console.log(response[1].url);
 
                     if(response[1].url.startsWith(response[0].url, 0)) {
+                        response[5] = true;
                         next();
                     }
                 } else if (response[0].type.toUpperCase() === "FULL") {
@@ -95,15 +99,19 @@ exports.middlewarePermissions = function (req, res, next) {
                     console.log(response[1].url);
 
                     if(response[1].url === response[0].url) {
+                        response[5] = true;
                         next();
                     }
                 } else {
                     console.log("Route type undefined for : " + response[0]);
+                    response[5] = true;
                     response[2].end();
                 }
             }
         });
     });
+    if(passed === false)
+        res.end();
 };
 
 exports.getPermissions = function (req, res)
