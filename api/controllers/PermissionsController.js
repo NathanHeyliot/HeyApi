@@ -125,6 +125,9 @@ exports.middlewarePermissions = function (req, res, next) {
                         Permission.hasPermission(data.permission, req),
                         Permission.hasPermission("API_BYPASS_" + data.method, req)
                     ]).then(response => {
+
+                        console.log(response);
+
                         if(response[1] === true || response[0].permission.toLowerCase() === "none".toLowerCase() || response[2] === true) {
                             req.hasPermissionBypass = response[2];
                             next();
@@ -141,6 +144,8 @@ exports.middlewarePermissions = function (req, res, next) {
                         Permission.hasPermission(data.permission, req),
                         Permission.hasPermission("API_BYPASS_" + data.method, req)
                     ]).then(response => {
+                        console.log(response);
+
                         if(response[1] === true || response[0].permission.toLowerCase() === "none".toLowerCase() || response[2] === true) {
                             req.hasPermissionBypass = response[2];
                             next();
@@ -233,13 +238,16 @@ exports.delete_allPermissions = function (req, res) {
 };
 
 exports.getPermission = function (req, res) {
-    Permissions.findOne({_id: req.params.id}, function (err, perm) {
-        if(err) {
-            console.log("Error at : " + err);
-            res.send(err);
-        }
-        res.json(perm);
-    });
+
+    if(mongoose.Types.ObjectId.isValid(req.params.id)) {
+        Permissions.findOne({_id: req.params.id}, function (err, perm) {
+            if (err) {
+                console.log("Error at : " + err);
+                res.send(err);
+            }
+            res.json(perm);
+        });
+    }
 };
 
 exports.removePermissions = function (req, res) {
