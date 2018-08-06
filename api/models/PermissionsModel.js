@@ -10,6 +10,30 @@ let PermissionsModel = new Schema
             type: String, required: true
         },
 
+
+    /*
+    *--------------------------
+    * GLOBAL PERMISSION  --> These permissions overwrite others ones
+    * -------------------------
+     */
+
+    API_BYPASS_GET:
+        {
+            type: Boolean, default: false
+        },
+    API_BYPASS_POST:
+        {
+            type: Boolean, default: false
+        },
+    API_BYPASS_UPDATE:
+        {
+            type: Boolean, default: false
+        },
+    API_BYPASS_DELETE:
+        {
+            type: Boolean, default: false
+        },
+
     /*
    *--------------------------
    * PAYLOAD ROUTER
@@ -17,10 +41,6 @@ let PermissionsModel = new Schema
     */
 
     API_PAYLOADS_GET:
-        {
-            type: Boolean, default: false
-        },
-    API_PAYLOADS_GET_BYPASS:
         {
             type: Boolean, default: false
         },
@@ -52,10 +72,6 @@ let PermissionsModel = new Schema
      */
 
     API_DEVICES_GET:
-        {
-            type: Boolean, default: false
-        },
-    API_DEVICES_GET_BYPASS:
         {
             type: Boolean, default: false
         },
@@ -102,10 +118,6 @@ let PermissionsModel = new Schema
         {
             type: Boolean, default: false
         },
-    API_DEVICESGRP_GET_BYPASS:
-        {
-            type: Boolean, default: false
-        },
     API_DEVICESGRP_POST:
         {
             type: Boolean, default: false
@@ -137,10 +149,6 @@ let PermissionsModel = new Schema
         {
             type: Boolean, default: false
         },
-    API_ORGANISATIONS_GET_BYPASS:
-        {
-            type: Boolean, default: false
-        },
     API_ORGANISATIONS_POST:
         {
             type: Boolean, default: false
@@ -169,10 +177,6 @@ let PermissionsModel = new Schema
     */
 
     API_DEVICESTYPES_GET:
-        {
-            type: Boolean, default: false
-        },
-    API_DEVICESTYPES_GET_BYPASS:
         {
             type: Boolean, default: false
         },
@@ -219,10 +223,6 @@ let PermissionsModel = new Schema
         {
             type: Boolean, default: false
         },
-    API_USERS_GET_BYPASS:
-        {
-            type: Boolean, default: false
-        },
     API_USERS_POST:
         {
             type: Boolean, default: false
@@ -251,10 +251,6 @@ let PermissionsModel = new Schema
      */
 
     API_USERSGRP_GET:
-        {
-            type: Boolean, default: false
-        },
-    API_USERSGRP_GET_BYPASS:
         {
             type: Boolean, default: false
         },
@@ -312,10 +308,6 @@ let PermissionsModel = new Schema
     * -----------------------
      */
 
-    API_RANKS_GET_BYPASS:
-        {
-            type: Boolean, default: false
-        },
     API_RANKS_POST:
         {
             type: Boolean, default: false
@@ -342,10 +334,6 @@ let PermissionsModel = new Schema
     * -----------------------
      */
 
-    API_PERMISSIONS_GET_BYPASS:
-        {
-            type: Boolean, default: false
-        },
     API_PERMISSIONS_POST:
         {
             type: Boolean, default: false

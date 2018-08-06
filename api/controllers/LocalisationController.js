@@ -38,7 +38,11 @@ exports.crypted = function (req, res)
 
 exports.uncrypted = function (req, res) {
 
-    Promise.all([req, Permission.hasPermission("API_LOCALISATION_POSTUNCRYPTED", req)]).then(data => {
+    Promise.all([
+        req,
+        Permission.hasPermission("API_LOCALISATION_POSTUNCRYPTED", req),
+        Permission.hasPermission("API_BYPASS_POST", req)
+    ]).then(data => {
         if(data[1] === true) {
             console.log("getting information with location... LAT : " + req.body.Lat + " , LON : " + req.body.Lon);
 
@@ -61,23 +65,34 @@ exports.uncrypted = function (req, res) {
 };
 
 exports.road = function (req, res) {
-    console.log("useing API for road");
 
-    if(req.body.locations) {
-        const exec = require('child_process').exec;
-        const child = exec(__dirname + '\\RoadAPI.py "' + req.body.locations + '"',
-            (error, stdout, stderr) => {
-                if(stdout) {
-                    console.log(`Sortie du script : ${stdout}`);
-                    res.json(JSON.parse(stdout));
-                }
-                if(stderr)
-                    console.log(`Erreur trouvée : ${stderr}`);
-                if (error !== null) {
-                    console.log(`exec error: ${error}`);
-                }
-            });
-    } else {
-        console.log("No location give :/");
-    }
+    Promise.all([
+        req,
+        Permission.hasPermission("API_PAYLOADS_ROADPOST", req),
+        Permission.hasPermission("API_BYPASS_POST", req)
+    ]).then(data => {
+        if(data[1] === true || data[2] === true) {
+            console.log("useing API for road");
+
+            if(data[0].body.locations) {
+                const exec = require('child_process').exec;
+                const child = exec(__dirname + '\\RoadAPI.py "' + data[0].body.locations + '"',
+                    (error, stdout, stderr) => {
+                        if(stdout) {
+                            console.log(`Sortie du script : ${stdout}`);
+                            res.json(JSON.parse(stdout));
+                        }
+                        if(stderr)
+                            console.log(`Erreur trouvée : ${stderr}`);
+                        if (error !== null) {
+                            console.log(`exec error: ${error}`);
+                        }
+                    });
+            } else {
+                console.log("No location give :/");
+            }
+        } else {
+            res.json({error: "No Permission to do that !"});
+        }
+    });
 };
