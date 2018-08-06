@@ -85,6 +85,8 @@ exports.middlewarePermissions = function (req, res, next) {
                     ]).then(response => {
                         if((response[1] === true || response[0].permission === 'none')) {
                             next();
+                        } else {
+                            res.json({error: "No permission to do that !"});
                         }
                     });
                 }
@@ -96,6 +98,8 @@ exports.middlewarePermissions = function (req, res, next) {
                     ]).then(response => {
                         if((response[1] === true || response[0].permission === 'none')) {
                             next();
+                        } else {
+                            res.json({error: "No permission to do that !"});
                         }
                     });
                 }
