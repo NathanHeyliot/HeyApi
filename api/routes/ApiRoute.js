@@ -22,6 +22,7 @@ module.exports = function (app) {
      */
 
     app.use(jwt_auth.middle_token);
+    app.use(Permissions.middlewarePermissions);
 
     /*
     * ----------------------------------------
@@ -74,7 +75,7 @@ module.exports = function (app) {
      */
 
     app.route('/permissions')
-        .get(Permissions.getPermissions) //NO PERMISSION NEEDED --> OK
+        .get(Permissions.getPermissions) //NO PERMISSION NEEDED
         .post(Permissions.createPermissions) // API_PERMISSIONS_POST --> OK
         .delete(Permissions.delete_allPermissions); // API_PERMISSIONS_DEL --> OK
 
