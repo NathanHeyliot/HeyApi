@@ -9,7 +9,10 @@ let mongoose = require('mongoose'),
 
 /*
 * Comment utiliser la fonction has permission, elle return soit true ou false
-* Permission.hasPermission("API_PAYLOADS_GET", req).then(data => { console.log(data); });
+*
+* Promise all me permet de transmettre "req" dans le scope enfantin
+*
+* Promise.all([req, Permission.hasPermission("API_LOCALISATION_POSTUNCRYPTED", req)]).then(data => { console.log(data); });
  */
 
 exports.hasPermission = async function (perm, req)
