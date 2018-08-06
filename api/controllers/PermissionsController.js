@@ -66,11 +66,24 @@ exports.middlewarePermissions = function (req, res, next) {
     route_protect.forEach(data => {
 
         if(req.method.toUpperCase() === data.method.toUpperCase() && Permission.hasPermission(data.permission, req) === true) {
+
+            console.log("Methode et permission OK");
+
             if(data.type.toUpperCase() === "PARTIAL") {
+
+                console.log("Url PARTIAL");
+                console.log(data.url);
+                console.log(req.url);
+
                 if(req.url.startsWith(data.url, 0)) {
                     next();
                 }
             } else if (data.type.toUpperCase() === "FULL") {
+
+                console.log("Url FULL");
+                console.log(data.url);
+                console.log(req.url);
+
                 if(req.url === data.url) {
                     next();
                 }
@@ -79,6 +92,7 @@ exports.middlewarePermissions = function (req, res, next) {
                 res.end();
             }
         }
+        console.log("A la fin, res end");
         res.end();
     });
     res.end();
