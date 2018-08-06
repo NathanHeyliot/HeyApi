@@ -28,7 +28,10 @@ exports.submit_auth = function (req, res)
 
 exports.middle_token = function (req, res, next) {
     var token = req.headers['x-access-token'];
-    if(token) {
+
+    if (req.url.startsWith("/auth", 0) || req.url.startsWith("/callback", 0)) {
+        next();
+    } else if(token) {
         jwt.verify(token, secret_encrypt, function (err, decoded) {
             if (decoded === undefined) {
                 res.json({message: "Bad Token"});
@@ -37,8 +40,6 @@ exports.middle_token = function (req, res, next) {
                 next();
             }
         });
-    } else if (req.url.startsWith("/auth", 0) || req.url.startsWith("/callback", 0)) {
-            next();
     } else {
         res.json({message: "No token !"});
         res.end();
@@ -49,9 +50,6 @@ exports.check_token = async function ResolveToken(req) {
     var token = req.headers['x-access-token'];
     var bypass = req.headers['bypass'];
 
-    console.log("Check token for : " + req.url);
-
-    if(token !== null && token !== undefined) {
         return new Promise((resolve, reject) => {
             jwt.verify(token, secret_encrypt, function (err, decoded) {
                 if(decoded === undefined)
@@ -64,7 +62,4 @@ exports.check_token = async function ResolveToken(req) {
                 reject(err);
             });
         });
-    } else {
-        return null;
-    }
 };
