@@ -294,6 +294,16 @@ let PermissionsModel = new Schema
         {
           type: Boolean, default: false
         },
+
+
+    //-------------------------------------------------------------------------
+    // PANEL PERMISSIONS !!!!! /!\
+    //-------------------------------------------------------------------------
+
+    PANEL_SHOW_ADVANCED:
+        {
+          type Boolean, default: false
+        },
 });
 
 module.exports =  mongoose.model('Permissions', PermissionsModel);
