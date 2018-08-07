@@ -302,7 +302,7 @@ let PermissionsModel = new Schema
 
     PANEL_SHOW_ADVANCED:
         {
-          type Boolean, default: false
+          type: Boolean, default: false
         },
 });
 
