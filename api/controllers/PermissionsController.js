@@ -118,7 +118,7 @@ exports.getPermissions = function (req, res)
             var user_entity = Auth.check_token(req);
 
             user_entity.then(user_entity => {
-                if(user_entity.bypass === true && req.hasPermissionBypass === true) {
+                if(user_entity.bypass === true) {
                     Permissions.find({}, function (err, permissions) {
                         if (err)
                         {

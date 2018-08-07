@@ -8,7 +8,7 @@ exports.route_config = function () {
          */
 
         {
-            url: "/permissions",
+            url: "/permissions", //bypass tag is not checked here !
             method: "GET",
             permission: "none",
             type: "FULL",
@@ -49,7 +49,7 @@ exports.route_config = function () {
          */
 
         {
-            url: "/ranks",
+            url: "/ranks",  //bypass tag is not checked here !
             method: "GET",
             permission: "none",
             type: "FULL",
