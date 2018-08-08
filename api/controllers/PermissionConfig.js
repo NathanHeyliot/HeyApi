@@ -92,19 +92,19 @@ exports.route_config = function () {
          */
 
         {
-            url: "/usersgroups/",
+            url: "/usersgroups",
             method: "GET",
             permission: "API_USERSGRP_GET",
             type: "FULL",
         },
         {
-            url: "/usersgroups/",
+            url: "/usersgroups",
             method: "POST",
             permission: "API_USERSGRP_POST",
             type: "FULL",
         },
         {
-            url: "/usersgroups/",
+            url: "/usersgroups",
             method: "DELETE",
             permission: "API_USERSGRP_DELALL",
             type: "FULL",
