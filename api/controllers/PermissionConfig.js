@@ -94,7 +94,7 @@ exports.route_config = function () {
         {
             url: "/usersgroups",
             method: "GET",
-            permission: "API_USERSGRP_GET",
+            permission: "none",
             type: "FULL",
         },
         {
@@ -112,7 +112,7 @@ exports.route_config = function () {
         {
             url: "/usersgroups/id/",
             method: "GET",
-            permission: "API_USERSGRP_GET",
+            permission: "none",
             type: "PARTIAL",
         },
         {
@@ -130,7 +130,7 @@ exports.route_config = function () {
         {
             url: "/usersgroups/user/",
             method: "GET",
-            permission: "API_USERSGRP_GET",
+            permission: "none",
             type: "PARTIAL",
         },
         {
@@ -153,7 +153,7 @@ exports.route_config = function () {
         {
             url: "/users",
             method: "GET",
-            permission: "API_USERS_GET",
+            permission: "none",
             type: "FULL",
         },
         {
@@ -171,7 +171,7 @@ exports.route_config = function () {
         {
             url: "/users/id/",
             method: "GET",
-            permission: "API_USERS_GET",
+            permission: "none",
             type: "PARTIAL",
         },
         {
@@ -194,7 +194,7 @@ exports.route_config = function () {
         {
             url: "/devicestypes",
             method: "GET",
-            permission: "API_DEVICESTYPES_GET",
+            permission: "none",
             type: "FULL",
         },
         {
@@ -212,7 +212,7 @@ exports.route_config = function () {
         {
             url: "/devicestypes/name/",
             method: "GET",
-            permission: "API_DEVICESTYPES_GET",
+            permission: "none",
             type: "PARTIAL",
         },
         {
@@ -230,7 +230,7 @@ exports.route_config = function () {
         {
             url: "/devicestypes/id/",
             method: "GET",
-            permission: "API_DEVICESTYPES_GET",
+            permission: "none",
             type: "PARTIAL",
         },
         {
@@ -254,7 +254,7 @@ exports.route_config = function () {
         {
             url: "/organisations",
             method: "GET",
-            permission: "API_ORGANISATIONS_GET",
+            permission: "none",
             type: "FULL",
         },
         {
@@ -272,7 +272,7 @@ exports.route_config = function () {
         {
             url: "/organisations/id/",
             method: "GET",
-            permission: "API_ORGANISATIONS_GET",
+            permission: "none",
             type: "PARTIAL",
         },
         {
@@ -295,7 +295,7 @@ exports.route_config = function () {
         {
             url: "/devicesgroups",
             method: "GET",
-            permission: "API_DEVICESGRP_GET",
+            permission: "none",
             type: "FULL",
         },
         {
@@ -313,7 +313,7 @@ exports.route_config = function () {
         {
             url: "/devicesgroups/id/",
             method: "GET",
-            permission: "API_DEVICESGRP_GET",
+            permission: "none",
             type: "PARTIAL",
         },
         {
@@ -336,7 +336,7 @@ exports.route_config = function () {
         {
             url: "/devices",
             method: "GET",
-            permission: "API_DEVICES_GET",
+            permission: "none",
             type: "FULL",
         },
         {
@@ -354,7 +354,7 @@ exports.route_config = function () {
         {
             url: "/devices/id/",
             method: "GET",
-            permission: "API_DEVICES_GET",
+            permission: "none",
             type: "PARTIAL",
         },
         {
@@ -372,19 +372,19 @@ exports.route_config = function () {
         {
             url: "/devices/group/",
             method: "GET",
-            permission: "API_DEVICES_GET",
+            permission: "none",
             type: "PARTIAL",
         },
         {
             url: "/devices/user/",
             method: "GET",
-            permission: "API_DEVICES_GET",
+            permission: "none",
             type: "PARTIAL",
         },
         {
             url: "/devices/type/",
             method: "GET",
-            permission: "API_DEVICES_GET",
+            permission: "none",
             type: "PARTIAL",
         },
 
