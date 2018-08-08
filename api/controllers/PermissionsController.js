@@ -221,7 +221,7 @@ exports.updatePermissions = function (req, res) {
     if(mongoose.Types.ObjectId.isValid(req.params.id)) {
         console.log("Updating permissions, ID : " + req.params.id);
 
-        Permissions.findOneAndUpdate({_id: res.params.id}, req.body, {new: true}, function (err, permissions)
+        Permissions.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, function (err, permissions)
         {
             if(err)
                 res.send(err);
