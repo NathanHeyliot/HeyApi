@@ -188,7 +188,7 @@ exports.delete_allPermissions = function (req, res) {
 exports.getPermission = function (req, res) {
 
     if(mongoose.Types.ObjectId.isValid(req.params.id)) {
-        Permissions.findOne({_id: req.params.id}, function (err, perm) {
+        Permissions.findOne({RankId: req.params.id}, function (err, perm) {
             if (err) {
                 console.log("Error at : " + err);
                 res.send(err);
