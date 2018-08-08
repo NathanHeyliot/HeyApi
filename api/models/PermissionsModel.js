@@ -7,7 +7,7 @@ let PermissionsModel = new Schema
 ({
     RankId:
         {
-            type: String, required: true
+            type: String, required: true, unique: true
         },
 
 
@@ -303,10 +303,6 @@ let PermissionsModel = new Schema
     PANEL_SHOW_ADVANCED:
         {
           type: Boolean, default: false
-        },
-    PANEL_SHOW_PERMISSIONS:
-        {
-            type: Boolean, default: false
         },
     PANEL_SHOW_RANKS:
         {

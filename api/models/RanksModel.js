@@ -7,7 +7,7 @@ let RanksSchema = new Schema
 ({
     Name:
         {
-            type: String, required: true
+            type: String, required: true, unique: true
         },
 });
 
