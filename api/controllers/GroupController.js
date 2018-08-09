@@ -37,17 +37,12 @@ exports.create_group = function (req, res)//crée un nouveau groupe
 
 exports.update_group = function (req, res) //modifie les informations d'un groupe
 {
-    if(mongoose.Types.ObjectId.isValid(req.params.id)) {
         Group.findOneAndUpdate({_id: req.params.appId}, req.body, {new: true}, function (err, group)
         {
             if(err)
                 res.send(err);
             res.json(group);
         });
-    } else {
-        res.json({error: "Invalid mongoose ID !"});
-    }
-
 };
 
 exports.read_group = function(req, res)//renvoie les information d'un groupe
