@@ -16,7 +16,11 @@ let PayloadSchema = new Schema
         },
     Mesure:
         {
-            type: Number, required: true
+            type: Number, default: null
+        },
+    Localisation:
+        {
+            type: String, default: null
         },
     DateGot:
         {

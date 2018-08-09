@@ -13,6 +13,10 @@ let GroupsSchema = new Schema
         {
             type: String, default: ""
         },
+    Type:
+        {
+          type: Number, default: 0 // 0 == presentoire, 1 == poubelle
+        },
 });
 
 module.exports =  mongoose.model('Group', GroupsSchema);

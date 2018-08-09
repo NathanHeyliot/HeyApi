@@ -403,6 +403,14 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                     console.log("DATA : " + hh + min + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N + "0");
                                     res.json(data);
                                 }
+
+
+                                let newPayload = new Payload;
+                                newPayload.EventCode = event;
+                                newPayload.Localisation = parsed_get.address.road + " - " + parsed_get.address.village;
+                                newPayload.DeviceId = device.toObject().SigfoxId;
+                                newPayload.DateGot = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;
+
                                 return(res.end());
                             });
                         } else {
