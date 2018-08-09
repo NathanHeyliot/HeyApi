@@ -410,6 +410,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                 newPayload.Localisation = parsed_get.address.road + " - " + parsed_get.address.village;
                                 newPayload.DeviceId = device.toObject().SigfoxId;
                                 newPayload.DateGot = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;
+                                newPayload.save();
 
                                 return(res.end());
                             });
