@@ -7,7 +7,7 @@ let OrganisationsSchema = new Schema
 ({
     Name:
         {
-            type: String, unique: true
+            type: String, required: true
         },
 });
 
