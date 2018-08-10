@@ -32,7 +32,7 @@ exports.create_organisation = function (req, res)//crée un nouveau client
     console.log("Submitting a new organisation");
 
     let newOrganisation = new Organisation();
-    newOrganisation.Name = req.body.params.Name;
+    newOrganisation.Name = req.params.Name;
     newOrganisation.save(function (err, organisation)
     {
         if(err)
