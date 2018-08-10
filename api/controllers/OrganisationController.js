@@ -25,13 +25,14 @@ exports.delete_all_organisations = function (req, res)
     Organisation.collection.remove({});
     res.end();
     console.log("Success");
-}
+};
 
 exports.create_organisation = function (req, res)//crée un nouveau client
 {
     console.log("Submitting a new organisation");
 
-    let newOrganisation = new Organisation(req.body);
+    let newOrganisation = new Organisation();
+    newOrganisation.Name = req.body.params.Name;
     newOrganisation.save(function (err, organisation)
     {
         if(err)
