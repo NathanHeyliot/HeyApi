@@ -28,7 +28,7 @@ app.use(require('forest-express-mongoose').init({
 }));
 
 
-app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 app.use(express.static('public'));
 app.set('views', __dirname + '/views');
