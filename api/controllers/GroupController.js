@@ -22,7 +22,7 @@ exports.delete_all_groups = function (req, res)
     Group.collection.remove({});
     res.end();
     console.log("Success");
-}
+};
 
 exports.create_group = function (req, res)//crée un nouveau groupe
 {
