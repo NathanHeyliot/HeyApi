@@ -94,7 +94,7 @@ exports.create_user = function (req, res)
    newUser.Email = req.body.Email;
    newUser.Password = md5(req.body.Password);
    newUser.OrganisationID = req.body.OrganisationID;
-   newUser.AdminLevel = req.body.AdminLevel;
+   newUser.RankId = req.body.RankId;
 
    newUser.save(function (err, user)
    {
