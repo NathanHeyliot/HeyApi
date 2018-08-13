@@ -21,6 +21,10 @@ let DeviceTypesSchema = new Schema
         {
             type: String, default: null
         },
+    Type:
+        {
+            type: Number, default: 0 // 0 == presentoire, 1 == poubelle
+        },
 });
 
 module.export = mongoose.model('DeviceTypes', DeviceTypesSchema);
