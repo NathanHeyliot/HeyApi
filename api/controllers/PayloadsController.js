@@ -362,7 +362,17 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                     Device.find({SigfoxId: DeviceId}, function (err, obj) {
                         if(obj[0] !== undefined && obj[0] != null) { //check if device has been found in database
                             let needDownlink = obj[0].toObject().Downlink;
-                            Device.findOneAndUpdate({SigfoxId: DeviceId}, ({Downlink: 0, PostCode: parsed_get.address.postcode, LastUpdate: dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min, Lon: parsed_info.lng, Lat: parsed_info.lat, City: parsed_get.address.village, Address: parsed_get.address.road}), {new: true}, function (err, device)
+                            let City = "";
+                            if(parsed_get.address.village && parsed_get.address.village !== "" && parsed_get.address.village !== undefined && parsed_get.address.village !== null)
+                                City = parsed_get.address.village;
+                            else if (parsed_get.address.town && parsed_get.address.town !== "" && parsed_get.address.town !== undefined && parsed_get.address.town !== null)
+                                City = parsed_get.address.town;
+                            else
+                                City = parsed_get.address.city;
+
+
+
+                            Device.findOneAndUpdate({SigfoxId: DeviceId}, ({Downlink: 0, PostCode: parsed_get.address.postcode, LastUpdate: dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min, Lon: parsed_info.lng, Lat: parsed_info.lat, City: City, Address: parsed_get.address.road}), {new: true}, function (err, device)
                             {
                                 if (err)
                                     console.log(err);
@@ -407,7 +417,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
                                 let newPayload = new Payload;
                                 newPayload.EventCode = event;
-                                newPayload.Localisation = parsed_get.address.road + " - " + parsed_get.address.village;
+                                newPayload.Localisation = parsed_get.address.road + " - " + City;
                                 newPayload.DeviceId = device.toObject().SigfoxId;
                                 newPayload.DateGot = dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min;
                                 newPayload.save();
