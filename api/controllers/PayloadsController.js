@@ -488,14 +488,14 @@ exports.adv_read_payloads = function (req, res)
                 if (err)
                     res.send(err);
                 res.json(payload);
-            }).limit(nbr);
+            }).limit(Number(nbr));
         } else {
             Payload.find({DeviceId: id, EventCode: type}, function (err, payload)
             {
                 if (err)
                     res.send(err);
                 res.json(payload);
-            }).limit(nbr);
+            }).limit(Number(nbr));
         }
     }
 };
