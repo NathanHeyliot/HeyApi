@@ -483,14 +483,14 @@ exports.adv_read_payloads = function (req, res)
         }
     } else {
         if(type === "all") {
-            Payload.find({where :{DeviceId: id}, limit: nbr}, function (err, payload)
+            Payload.find({where :{DeviceId: id}, scope: {limit: nbr}}, function (err, payload)
             {
                 if (err)
                     res.send(err);
                 res.json(payload);
             });
         } else {
-            Payload.find({where :{DeviceId: id, EventCode: type}, limit: nbr}, function (err, payload)
+            Payload.find({where :{DeviceId: id, EventCode: type}, scope: {limit: nbr}}, function (err, payload)
             {
                 if (err)
                     res.send(err);
