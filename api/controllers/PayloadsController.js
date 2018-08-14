@@ -548,8 +548,8 @@ exports.get_last_com = function (req, res)
     var p_do = 0;
 
     DevicesList.forEach(function (element, index, array) {
-        console.log("Element :" + element);
-        Payload.find({DeviceId: element}, {__v: 0, Localisation: 0}, function (err, device)
+        console.log("Element :" + element.name);
+        Payload.find({DeviceId: element.name}, {__v: 0, Localisation: 0}, function (err, device)
         {
             p_do++;
             if (err)
