@@ -541,6 +541,30 @@ exports.advb_read_payloads = function (req, res)
     }
 };
 
+exports.get_last_com = function (req, res)
+{
+    let DevicesList = req.body.devices;
+    var list = [];
+    var p_do = 0;
+
+    DevicesList.forEach(function (element, index, array) {
+        Payload.find({DeviceID: element, EventCode: [1, 0]}, function (err, device)
+        {
+            p_do++;
+            if (err)
+            {
+                console.log("Error at : " + err);
+                res.send(err);
+            }
+            list.push(device);
+
+            if(p_do === array.length) {
+                res.json(list);
+            }
+        }).limit(1);
+    });
+};
+
 exports.read_payload = function (req, res) //GET payloads grace a leurs ID
 {
     console.log("Reading a paylaod");

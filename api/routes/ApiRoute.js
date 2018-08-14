@@ -105,6 +105,9 @@ module.exports = function (app) {
     app.route('/payloads/adv/:type/:nbr')
         .get(payApi.advb_read_payloads);
 
+    app.route('/payloads/adv')
+        .post(payApi.get_last_com);
+
     app.route('/payloads/deviceId/:DeviceId')
         .get(payApi.get_paybydevice); //API_PAYLOADS_GET   OK
 
