@@ -99,7 +99,7 @@ module.exports = function (app) {
         .get(payApi.read_payload) //API_PAYLOADS_GET    OK
         .delete(payApi.delete_payload); //API_PAYLOADS_DEL   OK
 
-    app.route('/payloads/id/:appId/:type/:nbr')
+    app.route('/payloads/id/:appId/:type/:start/:end')
         .get(payApi.adv_read_payloads);
 
     app.route('/payloads/adv/:type/:nbr')

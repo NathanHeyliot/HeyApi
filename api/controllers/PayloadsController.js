@@ -462,9 +462,10 @@ exports.adv_read_payloads = function (req, res)
 {
     let id = req.params.appId;
     let type = req.params.type;
-    let nbr = req.params.nbr;
+    let start = req.params.start;
+    let end = req.params.end;
 
-    if(nbr < 0)
+    if(start < 0 || end < 0)
     {
         if(type === "all") {
             Payload.find({DeviceId: id}, function (err, payload)
@@ -488,14 +489,14 @@ exports.adv_read_payloads = function (req, res)
                 if (err)
                     res.send(err);
                 res.json(payload);
-            }).limit(Number(nbr));
+            }).skip(Number(start)).limit(Number(end));
         } else {
             Payload.find({DeviceId: id, EventCode: type}, function (err, payload)
             {
                 if (err)
                     res.send(err);
                 res.json(payload);
-            }).limit(Number(nbr));
+            }).skip(Number(start)).limit(Number(end));
         }
     }
 };
