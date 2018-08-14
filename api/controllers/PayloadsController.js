@@ -544,9 +544,7 @@ exports.advb_read_payloads = function (req, res)
 exports.get_last_com = function (req, res)
 {
 
-    console.log(req.body);
     let DevicesList = JSON.parse(JSON.stringify(req.body));
-    console.log(DevicesList);
     var list = [];
     var p_do = 0;
 
@@ -558,8 +556,6 @@ exports.get_last_com = function (req, res)
 
     for (var p in DevicesList) {
         let element = DevicesList[p];
-
-        console.log("Element :" + element);
         Payload.find({DeviceId: element}, {__v: 0, Localisation: 0}, function (err, device)
         {
             p_do++;
