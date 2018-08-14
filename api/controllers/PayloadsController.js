@@ -544,7 +544,8 @@ exports.advb_read_payloads = function (req, res)
 exports.get_last_com = function (req, res)
 {
 
-    console.log(req.params.devices);
+    console.log(req.body);
+    console.log(req.body.devices);
 
     let DevicesList = JSON.parse(req.body.devices);
     var list = [];
