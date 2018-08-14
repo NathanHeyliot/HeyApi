@@ -550,9 +550,15 @@ exports.get_last_com = function (req, res)
     var list = [];
     var p_do = 0;
 
+    let i = 0;
+
+    for(var p in DevicesList) {
+        i++;
+    }
+
     for (var p in DevicesList) {
         let element = DevicesList[p];
-        
+
         console.log("Element :" + element);
         Payload.find({DeviceId: element}, {__v: 0, Localisation: 0}, function (err, device)
         {
@@ -565,7 +571,7 @@ exports.get_last_com = function (req, res)
             console.log(device);
             list.push(device);
 
-            if(p_do === array.length) {
+            if(p_do === i) {
                 res.json(list);
             }
         }).limit(1);
