@@ -500,6 +500,47 @@ exports.adv_read_payloads = function (req, res)
     }
 };
 
+exports.advb_read_payloads = function (req, res)
+{
+    let type = req.params.type;
+    let nbr = req.params.nbr;
+
+    if(nbr < 0)
+    {
+        if(type === "all") {
+            Payload.find({}, function (err, payload)
+            {
+                if (err)
+                    res.send(err);
+                res.json(payload);
+            });
+        } else {
+            Payload.find({EventCode: type}, function (err, payload)
+            {
+                if (err)
+                    res.send(err);
+                res.json(payload);
+            });
+        }
+    } else {
+        if(type === "all") {
+            Payload.find({}, function (err, payload)
+            {
+                if (err)
+                    res.send(err);
+                res.json(payload);
+            }).limit(Number(nbr));
+        } else {
+            Payload.find({EventCode: type}, function (err, payload)
+            {
+                if (err)
+                    res.send(err);
+                res.json(payload);
+            }).limit(Number(nbr));
+        }
+    }
+};
+
 exports.read_payload = function (req, res) //GET payloads grace a leurs ID
 {
     console.log("Reading a paylaod");
