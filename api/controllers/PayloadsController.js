@@ -483,19 +483,19 @@ exports.adv_read_payloads = function (req, res)
         }
     } else {
         if(type === "all") {
-            Payload.find({where :{DeviceId: id}, scope: {limit: nbr}}, function (err, payload)
+            Payload.find({DeviceId: id}, function (err, payload)
             {
                 if (err)
                     res.send(err);
                 res.json(payload);
-            });
+            }).limit(nbr);
         } else {
-            Payload.find({where :{DeviceId: id, EventCode: type}, scope: {limit: nbr}}, function (err, payload)
+            Payload.find({DeviceId: id, EventCode: type}, function (err, payload)
             {
                 if (err)
                     res.send(err);
                 res.json(payload);
-            });
+            }).limit(nbr);
         }
     }
 };
