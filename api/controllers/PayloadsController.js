@@ -543,7 +543,7 @@ exports.advb_read_payloads = function (req, res)
 
 exports.get_last_com = function (req, res)
 {
-    let DevicesList = req.body.devices;
+    let DevicesList = Array.from(req.body.devices);
     var list = [];
     var p_do = 0;
 
