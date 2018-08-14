@@ -548,7 +548,7 @@ exports.get_last_com = function (req, res)
     var p_do = 0;
 
     DevicesList.forEach(function (element, index, array) {
-        Payload.find({DeviceID: element, EventCode: [1, 0]}, function (err, device)
+        Payload.find({DeviceID: element}, function (err, device)
         {
             p_do++;
             if (err)
