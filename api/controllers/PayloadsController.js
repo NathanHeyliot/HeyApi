@@ -565,7 +565,6 @@ exports.get_last_com = function (req, res)
                 console.log("Error at : " + err);
                 res.send(err);
             }
-            console.log(device);
             list.push(device);
 
             if(p_do === i) {
