@@ -550,7 +550,12 @@ exports.get_last_com = function (req, res)
     var list = [];
     var p_do = 0;
 
-    DevicesList.forEach(function (element, index, array) {
+    for (var p in DevicesList) {
+        console.log(DevicesList[p]);
+    }
+
+
+   /* DevicesList.forEach(function (element, index, array) {
         console.log("Element :" + element.name);
         Payload.find({DeviceId: element.name}, {__v: 0, Localisation: 0}, function (err, device)
         {
@@ -567,7 +572,7 @@ exports.get_last_com = function (req, res)
                 res.json(list);
             }
         }).limit(1);
-    });
+    });*/
 };
 
 exports.read_payload = function (req, res) //GET payloads grace a leurs ID
