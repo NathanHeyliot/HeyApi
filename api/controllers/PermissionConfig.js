@@ -422,6 +422,12 @@ exports.route_config = function () {
             permission: "API_PAYLOADS_GET",
             type: "PARTIAL",
         },
+        {
+            url: "/payloads/adv/",
+            method: "GET",
+            permission: "API_PAYLOADS_GET",
+            type: "PARTIAL",
+        },
 
         /*
          * ROAD ROUTER
