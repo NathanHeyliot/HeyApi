@@ -545,7 +545,7 @@ exports.get_last_com = function (req, res)
 {
 
     console.log(req.body);
-    let DevicesList = JSON.parse(req.body);
+    let DevicesList = JSON.parse(JSON.stringify(req.body));
     console.log(DevicesList);
     var list = [];
     var p_do = 0;
