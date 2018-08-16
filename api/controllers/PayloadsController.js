@@ -473,14 +473,14 @@ exports.adv_read_payloads = function (req, res)
                 if (err)
                     console.log(err);
                 res.json(payload);
-            }).sort({DateGot: 'desc'});
+            }).sort('-DateGot');
         } else {
             Payload.find({DeviceId: id, EventCode: type}, function (err, payload)
             {
                 if (err)
                     console.log(err);
                 res.json(payload);
-            }).sort({DateGot: 'desc'});
+            }).sort('-DateGot');
         }
     } else {
         if(type === "all") {
@@ -489,14 +489,14 @@ exports.adv_read_payloads = function (req, res)
                 if (err)
                     console.log(err);
                 res.json(payload);
-            }).sort({DateGot: 'desc'}).skip(Number(start)).limit(Number(end));
+            }).sort('-DateGot').skip(Number(start)).limit(Number(end));
         } else {
             Payload.find({DeviceId: id, EventCode: type}, function (err, payload)
             {
                 if (err)
                     console.log(err);
                 res.json(payload);
-            }).sort({DateGot: 'desc'}).skip(Number(start)).limit(Number(end));
+            }).sort('-DateGot').skip(Number(start)).limit(Number(end));
         }
     }
 };
