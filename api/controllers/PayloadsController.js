@@ -489,14 +489,14 @@ exports.adv_read_payloads = function (req, res)
                 if (err)
                     console.log(err);
                 res.json(payload);
-            }).sort(['DateGot', -1]).skip(Number(start)).limit(Number(end));
+            }).sort([['DateGot', -1]]).skip(Number(start)).limit(Number(end));
         } else {
             Payload.find({DeviceId: id, EventCode: type}, function (err, payload)
             {
                 if (err)
                     console.log(err);
                 res.json(payload);
-            }).sort(['DateGot', -1]).skip(Number(start)).limit(Number(end));
+            }).sort([['DateGot', -1]]).skip(Number(start)).limit(Number(end));
         }
     }
 };
