@@ -455,7 +455,7 @@ exports.get_paybydevice = function(req, res) //GET les payload associés au devi
             res.send(err);
         }
         res.json(payload);
-    });
+    }).sort('-DateGot');
 };
 
 exports.adv_read_payloads = function (req, res)
@@ -514,14 +514,14 @@ exports.advb_read_payloads = function (req, res)
                 if (err)
                     res.send(err);
                 res.json(payload);
-            });
+            }).sort('-DateGot');
         } else {
             Payload.find({EventCode: type}, function (err, payload)
             {
                 if (err)
                     res.send(err);
                 res.json(payload);
-            });
+            }).sort('-DateGot');
         }
     } else {
         if(type === "all") {
@@ -530,14 +530,14 @@ exports.advb_read_payloads = function (req, res)
                 if (err)
                     res.send(err);
                 res.json(payload);
-            }).limit(Number(nbr));
+            }).sort('-DateGot').limit(Number(nbr));
         } else {
             Payload.find({EventCode: type}, function (err, payload)
             {
                 if (err)
                     res.send(err);
                 res.json(payload);
-            }).limit(Number(nbr));
+            }).sort('-DateGot').limit(Number(nbr));
         }
     }
 };
@@ -570,7 +570,7 @@ exports.get_last_com = function (req, res)
             if(p_do === i) {
                 res.json(list);
             }
-        }).limit(1);
+        }).sort('-DateGot').limit(1);
 
     }
 };
@@ -584,7 +584,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
         if (err)
             res.send(err);
         res.json(payload);
-    });
+    }).sort('-DateGot');
 
 };
 
