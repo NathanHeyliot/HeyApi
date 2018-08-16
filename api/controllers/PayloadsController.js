@@ -473,30 +473,30 @@ exports.adv_read_payloads = function (req, res)
                 if (err)
                     console.log(err);
                 res.json(payload);
-            }).sort(['DateGot', -1]);
+            }).sort({DateGot: -1});
         } else {
             Payload.find({DeviceId: id, EventCode: type}, function (err, payload)
             {
                 if (err)
                     console.log(err);
                 res.json(payload);
-            }).sort(['DateGot', -1]);
+            }).sort({DateGot: -1});
         }
     } else {
         if(type === "all") {
+        } else {
             Payload.find({DeviceId: id}, function (err, payload)
             {
                 if (err)
                     console.log(err);
                 res.json(payload);
-            }).sort([['DateGot', -1]]).skip(Number(start)).limit(Number(end));
-        } else {
+            }).sort({DateGot: -1}).skip(Number(start)).limit(Number(end));
             Payload.find({DeviceId: id, EventCode: type}, function (err, payload)
             {
                 if (err)
                     console.log(err);
                 res.json(payload);
-            }).sort([['DateGot', -1]]).skip(Number(start)).limit(Number(end));
+            }).sort({DateGot: -1}).skip(Number(start)).limit(Number(end));
         }
     }
 };
