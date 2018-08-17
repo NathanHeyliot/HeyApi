@@ -434,12 +434,6 @@ exports.route_config = function () {
             permission: "API_PAYLOADS_GET",
             type: "FULL",
         },
-        {
-            url: "/test",
-            method: "POST",
-            permission: "none",
-            type: "FULL",
-        },
 
         /*
          * ROAD ROUTER

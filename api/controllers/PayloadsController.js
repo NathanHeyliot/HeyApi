@@ -86,21 +86,6 @@ exports.delete_all_payloads = function (req, res)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 exports.test_payloads = function (req, res) //create a new payload and POST it
 {
     let event;
