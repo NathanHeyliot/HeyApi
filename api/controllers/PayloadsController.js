@@ -694,40 +694,18 @@ exports.get_paybydevice = function(req, res) //GET les payload associés au devi
 
 exports.count_payloads = function (req, res)
 {
-    /*Payload.find({}, function (err, payloads) {
-
-        payloads.forEach(function (element) {
-
-            if(element.DateGot.includes("/"))  {
-                var date = element.DateGot.split(" ");
-                var sub_date = date[0].split("/");
-
-                var new_Date = sub_date[2] + '-' + sub_date[1] + '-' + sub_date[0] + ' ' + date[1];
-                element.DateGot = new_Date;
-
-                //Payload.update({_id: element._id}, element);
-                
-                Payload.findOneAndUpdate({_id: element._id}, element, {new: true}, function (err, resultat) {
-                    if(err)
-                        console.log("Error : " + err);
-                    console.log("Old : " + element.DateGot + " , New : " + new_Date);
-                });
-            }
-        });
-
-    });*/
   let id = req.params.appId;
   let type = req.params.type;
 
   if(type === "all")
   {
-      Payload.count({}, function (err, payload) {
+      Payload.count({DeviceId: id}, function (err, payload) {
          if(err)
              console.log(err);
          res.json(payload);
       });
   } else {
-      Payload.count({EventCode: type}, function (err, payload) {
+      Payload.count({DeviceId: id, EventCode: type}, function (err, payload) {
           if(err)
               console.log(err);
           res.json(payload);
