@@ -22,7 +22,7 @@ module.exports = function (app) {
      */
 
     app.use(jwt_auth.middle_token);
-    app.use(Permissions.middlewarePermissions);
+    //app.use(Permissions.middlewarePermissions);
 
     /*
     * ----------------------------------------
