@@ -699,13 +699,13 @@ exports.count_payloads = function (req, res)
 
   if(type === "all")
   {
-      Payload.find({DeviceId: id}, function (err, payload) {
+      Payload.count({DeviceId: id}, function (err, payload) {
          if(err)
              console.log(err);
          res.json(payload);
       });
   } else {
-      Payload.find({DeviceId: id, EventCode: type}, function (err, payload) {
+      Payload.count({DeviceId: id, EventCode: type}, function (err, payload) {
           if(err)
               console.log(err);
           res.json(payload);
