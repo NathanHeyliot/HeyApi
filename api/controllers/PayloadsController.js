@@ -61,6 +61,257 @@ exports.delete_all_payloads = function (req, res)
     console.log("Success");
 };
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+exports.test_payloads = function (req, res) //create a new payload and POST it
+{
+    let event;
+
+    console.log("Event Code : " + checkEventCode(req.body));
+    console.log("Incomming HOST : " + req.ip);
+
+    console.log("Payloads informations....");
+    console.log(req.body);
+
+    //si event = 1 -> mesures on les stockes toutes une par une et on update le device associé
+    if ((event = checkEventCode(req.body)) === 1)
+    {
+        console.log("payload creation");
+        let nbmes = Number(req.body.Code.toString().substr(2,2));
+        let PayloadArray = new Array(nbmes);
+        let MyDate = req.body.Date;
+
+        Device.findOne({SigfoxId: req.body.DeviceId}, function (err, device)
+        {
+            if(device !== undefined && device !== null) {
+                //Calcul de l'heure de la mesure
+
+                var m_date = MyDate.split(" ");
+                var sub_date = m_date[0].split("-");
+                var hours = m_date[1].split(':');
+
+                var now = new Date(sub_date[0], sub_date[1], sub_date[2], hours[0], hours[1], 0, 0);
+                var heureActuelle = now.getHours();
+
+
+                for(let i = 0; i !== nbmes; i++)
+                {
+                    PayloadArray[i] = new Payload();
+                    PayloadArray[i].EventCode = event;
+                    PayloadArray[i].Mesure = Number(req.body.Code.toString().substr(4 + (i * 4), 4));
+                    PayloadArray[i].DeviceId = req.body.DeviceId;
+
+                    if (heureActuelle >= parseInt(device.Phase_start) && heureActuelle < parseInt(device.Phase_stop))
+                        var offset = (nbmes - (i+1)) * parseInt(device.Wake_in);
+                    else
+                        var offset = (nbmes - (i+1)) * parseInt(device.Wake_out);
+
+
+
+
+                    var MS_PER_MINUTE = 60000;
+                    var dateMeasure = new Date(now - (offset * MS_PER_MINUTE));
+
+                    let dd = dateMeasure.getDate();
+                    let mm = dateMeasure.getMonth()+1;
+                    let yyyy = dateMeasure.getFullYear();
+                    let hh = dateMeasure.getHours();
+                    let min = dateMeasure.getMinutes();
+
+                    if (dd.toString().length === 1)
+                        dd = "0" + dd;
+                    if (mm.toString().length === 1)
+                        mm = "0" + mm;
+                    if (hh.toString().length === 1)
+                        hh = "0" + hh;
+                    if (min.toString().length === 1)
+                        min = "0" + min;
+
+                    PayloadArray[i].DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min;
+                }
+
+                console.log("Payload Array : " + PayloadArray);
+                if(PayloadArray !== undefined) {
+                    for (let i = 0; i !== PayloadArray.length; i++) {
+                        PayloadArray[i].save(function (err, payload) {
+                            console.log("Saving Payload...");
+                        });
+                    }
+                }
+            }
+        });
+    }
+    //si event = 0 -> calibration On sauvegarde la mesure et on update le device
+    else if((event = checkEventCode(req.body)) === 0)
+    {
+        let Date = req.body.Date;
+
+        let newPayload = new Payload;
+        newPayload.EventCode = event;
+        newPayload.Mesure = Number(req.body.Code.toString().substr(2, 4));
+        newPayload.DeviceId = req.body.DeviceId;
+        newPayload.DateGot = Date;
+
+        console.log("Calibration ... Valeur :\n" + newPayload);
+        let newDevice = fill_device(newPayload, 0);
+
+        newPayload.save(function(err, payload)
+        {
+            if (err) {
+                console.log(err);
+                return(res.end());
+            }
+
+            Device.find({SigfoxId: newPayload.DeviceId}, function (err, obj) {
+                if (obj[0] !== undefined && obj[0] != null) { //check if device has been found in database
+                    Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},{Downlink: 0, FillLevel: 0, CalibrationMeasure: newPayload.Mesure, LastUpdate: newDevice.LastUpdate },
+                        {new: true}, function (err, device)
+                        {
+                            return(res.end());
+                        });
+                } else {
+                    return(res.end());
+                }
+            });
+        });
+    }
+
+
+    //Event 2 a test
+    else if((event = checkEventCode(req.body)) === 2)
+    {
+        //ici faut s'occuper de l'event 2 qui permet la récupération d'une localisation avec une info crypté
+        let PositionCode = String(req.body.Code.toString().substring(2,22));
+        let DeviceId = req.body.DeviceId;
+        let Date = req.body.Date;
+
+        var req = new XMLHttpRequest();
+
+        req.addEventListener('load', function() {
+            var parsed_info = JSON.parse(req.response);
+            if(parsed_info.code === "TECHNICAL") {
+                console.log("Could not retrieve lat / long of the payload !");
+                console.log(parsed_info);
+                return(res.end());
+            } else {
+                req = new XMLHttpRequest();
+
+                req.addEventListener('load', function() {
+                    var parsed_get = JSON.parse(req.response);
+
+                    Device.find({SigfoxId: DeviceId}, function (err, obj) {
+                        if(obj[0] !== undefined && obj[0] != null) { //check if device has been found in database
+                            let City = "";
+                            if(parsed_get.address.village && parsed_get.address.village !== "" && parsed_get.address.village !== undefined && parsed_get.address.village !== null)
+                                City = parsed_get.address.village;
+                            else if (parsed_get.address.town && parsed_get.address.town !== "" && parsed_get.address.town !== undefined && parsed_get.address.town !== null)
+                                City = parsed_get.address.town;
+                            else
+                                City = parsed_get.address.city;
+
+                            Device.findOneAndUpdate({SigfoxId: DeviceId}, ({Downlink: 0, PostCode: parsed_get.address.postcode, LastUpdate: Date, Lon: parsed_info.lng, Lat: parsed_info.lat, City: City, Address: parsed_get.address.road}), {new: true}, function (err, device)
+                            {
+                                if (err)
+                                    console.log(err);
+                                let newPayload = new Payload;
+                                newPayload.EventCode = event;
+                                newPayload.Localisation = parsed_get.address.road + " - " + City;
+                                newPayload.DeviceId = device.toObject().SigfoxId;
+                                newPayload.DateGot = Date;
+                                newPayload.save();
+
+                                return(res.end());
+                            });
+                        } else {
+                            return(res.end());
+                        }
+                    });
+                });
+
+                req.open("GET", "https://eu1.locationiq.org/v1/reverse.php?key=9126593a665608&lat=" + parsed_info.lat + "&lon=" + parsed_info.lng + "&format=json", true);
+                req.send(null);
+            }
+        });
+
+        req.open("POST", "https://api.ubignss.com/position", true);
+        req.setRequestHeader("Content-Type", "application/json");
+        req.setRequestHeader("Authorization", "Basic aGV5bGlvdF9ldmFsOlJ3ZGpkOnR5MUMyfg==");
+        req.send(JSON.stringify({type: "ubiwifi", device: DeviceId, data: PositionCode}));
+    }
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 exports.create_payload = function (req, res) //create a new payload and POST it
 {
     let event;
