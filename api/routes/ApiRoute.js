@@ -102,6 +102,9 @@ module.exports = function (app) {
     app.route('/payloads/id/:appId/:type/:start/:end')
         .get(payApi.adv_read_payloads);
 
+    app.route('/payloads/id/:appId/:type')
+        .get(payApi.count_payloads);
+
     app.route('/payloads/adv/:type/:nbr')
         .get(payApi.advb_read_payloads);
 

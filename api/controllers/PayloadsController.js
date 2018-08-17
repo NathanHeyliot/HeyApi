@@ -458,6 +458,27 @@ exports.get_paybydevice = function(req, res) //GET les payload associés au devi
     }).sort('-DateGot');
 };
 
+exports.count_payloads = function (req, res)
+{
+  let id = req.params.appId;
+  let type = req.params.type;
+
+  if(type === "all")
+  {
+      Payload.count({}, function (err, payload) {
+         if(err)
+             console.log(err);
+         res.json(payload);
+      });
+  } else {
+      Payload.count({EventCode: type}, function (err, payload) {
+          if(err)
+              console.log(err);
+          res.json(payload);
+      });
+  }
+};
+
 exports.adv_read_payloads = function (req, res)
 {
     let id = req.params.appId;
