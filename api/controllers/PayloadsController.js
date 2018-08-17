@@ -144,9 +144,6 @@ exports.test_payloads = function (req, res) //create a new payload and POST it
                     else
                         var offset = (nbmes - (i+1)) * parseInt(device.Wake_out);
 
-
-
-
                     var MS_PER_MINUTE = 60000;
                     var dateMeasure = new Date(now - (offset * MS_PER_MINUTE));
 
