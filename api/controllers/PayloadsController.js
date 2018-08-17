@@ -463,7 +463,15 @@ exports.count_payloads = function (req, res)
     Payload.find({}, function (err, payloads) {
 
         payloads.forEach(function (element) {
-            console.log(element);
+
+            if(element.DateGot.includes("/"))  {
+                var date = element.DateGot.split(" ");
+                var sub_date = date[0].split("/");
+
+                var new_Date = sub_date[2] + '-' + sub_date[1] + '-' + sub_date[0] + ' ' + date[1];
+                console.log(new_Date);
+
+            }
         });
 
     });
