@@ -151,7 +151,7 @@ exports.test_payloads = function (req, res) //create a new payload and POST it
                     var dateMeasure = new Date(now - (offset * MS_PER_MINUTE));
 
                     let dd = dateMeasure.getDate();
-                    let mm = dateMeasure.getMonth()+1;
+                    let mm = dateMeasure.getMonth();
                     let yyyy = dateMeasure.getFullYear();
                     let hh = dateMeasure.getHours();
                     let min = dateMeasure.getMinutes();
@@ -175,6 +175,7 @@ exports.test_payloads = function (req, res) //create a new payload and POST it
                             console.log("Saving Payload...");
                         });
                     }
+                    res.end();
                 }
             }
         });
