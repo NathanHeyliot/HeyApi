@@ -115,7 +115,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                     if (min.toString().length === 1)
                         min = "0" + min;
 
-                    PayloadArray[i].DateGot = yyyy + "/" + mm + "/" + dd + " " + hh + ":" + min;
+                    PayloadArray[i].DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min;
 
 
                     if(PayloadArray[i].Mesure === 9999)
@@ -150,7 +150,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
 
                         let newDevice = new Device;
-                        newDevice.LastUpdate = yyyy + "/" + mm + "/" + dd + " " + hh + ":" + min;
+                        newDevice.LastUpdate = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min;
                         newDevice.SigfoxId = PayloadArray[i].DeviceId;
 
                         PayloadArray[i].save(function (err, payload) {
@@ -257,7 +257,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
         newPayload.EventCode = event;
         newPayload.Mesure = Number(req.body.Code.toString().substr(2, 4));
         newPayload.DeviceId = req.body.DeviceId;
-        newPayload.DateGot = yyyy + "/" + mm + "/" + dd + " " + hh + ":" + min;
+        newPayload.DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min;
 
         console.log("Calibration ... Valeur :\n" + newPayload);
         let newDevice = fill_device(newPayload, 0);
@@ -419,7 +419,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                 newPayload.EventCode = event;
                                 newPayload.Localisation = parsed_get.address.road + " - " + City;
                                 newPayload.DeviceId = device.toObject().SigfoxId;
-                                newPayload.DateGot = yyyy + "/" + mm + "/" + dd + " " + hh + ":" + min;
+                                newPayload.DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min;
                                 newPayload.save();
 
                                 return(res.end());
