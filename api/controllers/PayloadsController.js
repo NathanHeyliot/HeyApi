@@ -469,12 +469,15 @@ exports.count_payloads = function (req, res)
                 var sub_date = date[0].split("/");
 
                 var new_Date = sub_date[2] + '-' + sub_date[1] + '-' + sub_date[0] + ' ' + date[1];
+                element.DateGot = new_Date;
+
+                Payload.update({_id: element._id}, element);
                 
-                Payload.findOneAndUpdate({DeviceId: element.DeviceId}, {$set:{DateGot:new_Date}}, {new: true}, function (err, resultat) {
-                    if(err)
-                        console.log("Error : " + err);
-                    console.log("Old : " + element.DateGot + " , New : " + new_Date);
-                });
+                //Payload.findOneAndUpdate({DeviceId: element.DeviceId}, {$set:{DateGot:new_Date}}, {new: true}, function (err, resultat) {
+                  //  if(err)
+                    //    console.log("Error : " + err);
+                    //console.log("Old : " + element.DateGot + " , New : " + new_Date);
+                //});
             }
         });
 
