@@ -469,8 +469,12 @@ exports.count_payloads = function (req, res)
                 var sub_date = date[0].split("/");
 
                 var new_Date = sub_date[2] + '-' + sub_date[1] + '-' + sub_date[0] + ' ' + date[1];
-                console.log(new_Date);
-
+                
+                Payload.findOneAndUpdate({DeviceId: element.DeviceId}, {DateGot: new_Date}, function (err, payload) {
+                    if(err)
+                        console.log("Error : " + err);
+                    console.log(payload);
+                });
             }
         });
 
