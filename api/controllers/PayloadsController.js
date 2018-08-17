@@ -470,7 +470,7 @@ exports.count_payloads = function (req, res)
 
                 var new_Date = sub_date[2] + '-' + sub_date[1] + '-' + sub_date[0] + ' ' + date[1];
                 
-                Payload.find({DeviceId: element.DeviceId}, {$set:{DateGot:new_Date}}, {new: true}, function (err, resultat) {
+                Payload.findOneAndUpdate({DeviceId: element.DeviceId}, {$set:{DateGot:new_Date}}, {new: true}, function (err, resultat) {
                     if(err)
                         console.log("Error : " + err);
                     console.log(resultat);
