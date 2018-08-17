@@ -460,6 +460,16 @@ exports.get_paybydevice = function(req, res) //GET les payload associés au devi
 
 exports.count_payloads = function (req, res)
 {
+    Payload.find({}, function (err, payloads) {
+
+        payloads.forEach(function (element) {
+            console.log(element);
+        });
+
+    });
+    
+    
+    /*
   let id = req.params.appId;
   let type = req.params.type;
 
@@ -477,6 +487,7 @@ exports.count_payloads = function (req, res)
           res.json(payload);
       });
   }
+  */
 };
 
 exports.adv_read_payloads = function (req, res)
