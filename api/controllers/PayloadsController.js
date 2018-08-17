@@ -473,7 +473,7 @@ exports.count_payloads = function (req, res)
                 Payload.findOneAndUpdate({DeviceId: element.DeviceId}, {$set:{DateGot:new_Date}}, {new: true}, function (err, resultat) {
                     if(err)
                         console.log("Error : " + err);
-                    console.log("Old : " + date + " , New : " + new_Date);
+                    console.log("Old : " + element.DateGot + " , New : " + new_Date);
                 });
             }
         });
