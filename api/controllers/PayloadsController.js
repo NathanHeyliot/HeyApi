@@ -128,7 +128,7 @@ exports.test_payloads = function (req, res) //create a new payload and POST it
                 var sub_date = m_date[0].split("-");
                 var hours = m_date[1].split(':');
 
-                var now = new Date(sub_date[0], sub_date[1], sub_date[2], hours[0], hours[1], 0, 0);
+                var now = new Date(sub_date[0], sub_date[1], sub_date[2], hours[0], hours[1], hours[2], 0);
                 var heureActuelle = now.getHours();
 
 
