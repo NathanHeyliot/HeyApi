@@ -460,11 +460,11 @@ exports.get_paybydevice = function(req, res) //GET les payload associés au devi
 
 exports.count_payloads = function (req, res)
 {
-    Payload.find({}, function (err, payloads) {
+    /*Payload.find({}, function (err, payloads) {
 
         payloads.forEach(function (element) {
 
-            //if(element.DateGot.includes("/"))  {
+            if(element.DateGot.includes("/"))  {
                 var date = element.DateGot.split(" ");
                 var sub_date = date[0].split("/");
 
@@ -478,13 +478,10 @@ exports.count_payloads = function (req, res)
                         console.log("Error : " + err);
                     console.log("Old : " + element.DateGot + " , New : " + new_Date);
                 });
-            //}
+            }
         });
 
-    });
-    
-    
-    /*
+    });*/
   let id = req.params.appId;
   let type = req.params.type;
 
@@ -502,7 +499,6 @@ exports.count_payloads = function (req, res)
           res.json(payload);
       });
   }
-  */
 };
 
 exports.adv_read_payloads = function (req, res)
