@@ -110,7 +110,22 @@ exports.test_payloads = function (req, res) //create a new payload and POST it
 
                     var MS_PER_MINUTE = 60000;
                     var dateMeasure = new Date(now - (offset * MS_PER_MINUTE));
-                    PayloadArray[i].DateGot = dateMeasure;
+
+                    let dd = dateMeasure.getDate();
+                    let mm = dateMeasure.getMonth();
+                    let yyyy = dateMeasure.getFullYear();
+                    let hh = dateMeasure.getHours();
+                    let min = dateMeasure.getMinutes();
+                    if (dd.toString().length === 1)
+                        dd = "0" + dd;
+                    if (mm.toString().length === 1)
+                        mm = "0" + mm;
+                    if (hh.toString().length === 1)
+                        hh = "0" + hh;
+                    if (min.toString().length === 1)
+                        min = "0" + min;
+
+                    PayloadArray[i].DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min;
                 }
 
                 console.log("Payload Array : " + PayloadArray);
