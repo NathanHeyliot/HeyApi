@@ -660,7 +660,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
                                     return(res.end());
 
-                                }).sort('-DateGot').limite(1);
+                                }).sort('-DateGot').limit(1);
                             });
                         } else {
                             return(res.end());
