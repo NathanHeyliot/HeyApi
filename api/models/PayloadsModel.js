@@ -2,8 +2,9 @@
 
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
-const moment = require('moment-timezone');
-const dateFrance = moment.tz(Date.now(), "Europe/Paris").add('2', 'hours');
+//const moment = require('moment-timezone');
+//const dateFrance = moment.tz(Date.now(), "Europe/Paris").add('2', 'hours');
+const timeZone = require('mongoose-timezone');
 
 let PayloadSchema = new Schema
 ({
@@ -34,9 +35,9 @@ let PayloadSchema = new Schema
         },
     DateGot:
         {
-            type: Date, default: dateFrance
+            type: Date
         },
 });
 
-
+Schema.plugin(timeZone, { paths: ['DateGot'] });
 module.exports = mongoose.model('Payload', PayloadSchema);
