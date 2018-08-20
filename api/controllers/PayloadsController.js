@@ -590,6 +590,29 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                 if (err)
                                     console.log(err);
 
+
+                                //check here lat / lng distance
+
+                                Payload.findOne({DeviceId: device.toObject().SigfoxId, EventCode: 2}, function (err, payload)
+                                {
+                                    if (err)
+                                        console.log(err);
+                                    if(payload !== undefined && payload !== null) {
+                                        if(payload.toObject().Latitude !== null && payload.toObject().Longitude !== null) {
+
+                                            console.log("Distance : " + Local.distance(payload.toObject().Latitude, payload.toObject().Longitude, parsed_info.lat, parsed_info.lng, "M"));
+
+                                            if(Local.distance(payload.toObject().Latitude, payload.toObject().Longitude, parsed_info.lat, parsed_info.lng, "M") > 500) {
+                                                let newPayload = new Payload;
+                                                newPayload.EventCode = 3;
+                                                newPayload.DeviceId = device.toObject().SigfoxId;
+                                                newPayload.DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min;
+                                                newPayload.save();
+                                            }
+                                        }
+                                    }
+                                }).sort('-DateGot');
+
                                 sendBOT(device.toObject().Name, device.toObject().SigfoxId, device.toObject()._id, "Localisation",  "Latitude : " + parsed_info.lat + " , Longitude : " + parsed_info.lng, dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min,  "#ffbe33");
 
                                 if(needDownlink === 1) {
@@ -644,30 +667,6 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                         }
                     });
                 });
-
-
-                //check here lat / lng distance
-
-                Payload.findOne({DeviceId: device.toObject().SigfoxId, EventCode: 2}, function (err, payload)
-                {
-                    if (err)
-                        res.send(err);
-                    if(payload !== undefined && payload !== null) {
-                        if(payload.toObject().Latitude !== null && payload.toObject().Longitude !== null) {
-
-                            console.log("Distance : " + Local.distance(payload.toObject().Latitude, payload.toObject().Longitude, parsed_info.lat, parsed_info.lng, "M"));
-
-                            if(Local.distance(payload.toObject().Latitude, payload.toObject().Longitude, parsed_info.lat, parsed_info.lng, "M") > 500) {
-                                let newPayload = new Payload;
-                                newPayload.EventCode = 3;
-                                newPayload.DeviceId = device.toObject().SigfoxId;
-                                newPayload.DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min;
-                                newPayload.save();
-                            }
-                        }
-                    }
-                }).sort('-DateGot');
-
 
                 req.open("GET", "https://eu1.locationiq.org/v1/reverse.php?key=9126593a665608&lat=" + parsed_info.lat + "&lon=" + parsed_info.lng + "&format=json", true);
                 req.send(null);
