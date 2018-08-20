@@ -4,6 +4,7 @@
 let mongoose = require('mongoose'),
     Payload = mongoose.model('Payload'),
     Auth = require('./AuthController'),
+    Local = require('./LocalisationController');
     Device = mongoose.model('Device');
 
 // Standalone usage
@@ -60,28 +61,6 @@ exports.delete_all_payloads = function (req, res)
     res.end();
     console.log("Success");
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -651,6 +630,8 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
                                 let newPayload = new Payload;
                                 newPayload.EventCode = event;
+                                newPayload.Latitude = parsed_info.lat;
+                                newPayload.Longitude = parsed_info.lng;
                                 newPayload.Localisation = parsed_get.address.road + " - " + City;
                                 newPayload.DeviceId = device.toObject().SigfoxId;
                                 newPayload.DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min;
@@ -664,11 +645,33 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                     });
                 });
 
+
+                //check here lat / lng distance
+
+                Payload.find({EventCode: 2}, function (err, payload)
+                {
+                    if (err)
+                        res.send(err);
+                    res.json(payload);
+                    if(payload !== undefined && payload !== null) {
+                        payload = payload.toObject();
+                        if(payload.Latitude !== null && payload.Longitude !== null) {
+                            if(Local.distance(payload.Latitude, payload.Longitude, parsed_info.lat, parsed_info.lng, "M") > 500) {
+                                let newPayload = new Payload;
+                                newPayload.EventCode = 3;
+                                newPayload.DeviceId = device.toObject().SigfoxId;
+                                newPayload.DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min;
+                                newPayload.save();
+                            }
+                        }
+                    }
+                }).sort('-DateGot').limit(1);
+
+
                 req.open("GET", "https://eu1.locationiq.org/v1/reverse.php?key=9126593a665608&lat=" + parsed_info.lat + "&lon=" + parsed_info.lng + "&format=json", true);
                 req.send(null);
             }
         });
-
         req.open("POST", "https://api.ubignss.com/position", true);
         req.setRequestHeader("Content-Type", "application/json");
         req.setRequestHeader("Authorization", "Basic aGV5bGlvdF9ldmFsOlJ3ZGpkOnR5MUMyfg==");
