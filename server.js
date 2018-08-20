@@ -27,9 +27,9 @@ app.use(require('forest-express-mongoose').init({
     mongoose: require('mongoose')
 }));
 
-//const moment = require('moment-timezone');
-//moment.tz.setDefault("Europe/Paris");
-
+const moment = require('moment-timezone');
+moment.tz.setDefault("Europe/Paris");
+moment.locale('fr');
 
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
