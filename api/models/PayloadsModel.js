@@ -22,6 +22,14 @@ let PayloadSchema = new Schema
         {
             type: String, default: null
         },
+    Latitude:
+        {
+            type: String, default: null
+        },
+    Longitude:
+        {
+            type: String, default: null
+        },
     DateGot:
         {
             type: String
