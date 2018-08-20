@@ -295,7 +295,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                     let yyyy = dateMeasure.getFullYear();
                     let hh = dateMeasure.getHours();
                     let min = dateMeasure.getMinutes();
-                    let sec = ActualTime.getSeconds();
+                    let sec = dateMeasure.getSeconds();
 
                     if (dd.toString().length === 1)
                         dd = "0" + dd;
