@@ -4,7 +4,7 @@
 let mongoose = require('mongoose'),
     Payload = mongoose.model('Payload'),
     Auth = require('./AuthController'),
-    Local = require('./LocalisationController');
+    Local = require('./LocalisationController'),
     Device = mongoose.model('Device');
 
 // Standalone usage
