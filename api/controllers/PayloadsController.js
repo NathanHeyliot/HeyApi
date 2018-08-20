@@ -215,6 +215,8 @@ exports.test_payloads = function (req, res) //create a new payload and POST it
                                     console.log(err);
                                 let newPayload = new Payload;
                                 newPayload.EventCode = event;
+                                newPayload.Latitude = parsed_info.lat;
+                                newPayload.Longitude = parsed_info.lng;
                                 newPayload.Localisation = parsed_get.address.road + " - " + City;
                                 newPayload.DeviceId = device.toObject().SigfoxId;
                                 newPayload.DateGot = Date;
