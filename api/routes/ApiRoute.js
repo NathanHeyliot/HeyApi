@@ -31,7 +31,7 @@ module.exports = function (app) {
      */
 
     app.route('/test')
-        .post(payapi.test_payloads);
+        .post(payApi.test_payloads);
 
     app.route('/callback')
         .post(payApi.create_payload); //ROUTE FOR SIGFOX NO PERMISSION NEEDED      OK
