@@ -655,6 +655,9 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                     res.json(payload);
                     if(payload !== undefined && payload !== null) {
                         if(payload.toObject().Latitude !== null && payload.toObject().Longitude !== null) {
+
+                            console.log("Distance : " + Local.distance(payload.toObject().Latitude, payload.toObject().Longitude, parsed_info.lat, parsed_info.lng, "M"));
+
                             if(Local.distance(payload.toObject().Latitude, payload.toObject().Longitude, parsed_info.lat, parsed_info.lng, "M") > 500) {
                                 let newPayload = new Payload;
                                 newPayload.EventCode = 3;
