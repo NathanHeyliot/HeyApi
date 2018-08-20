@@ -3,7 +3,7 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 const moment = require('moment-timezone');
-const dateFrance = moment.tz(Date.now() + "+02:00", "Europe/Paris");
+const dateFrance = moment.tz(Date.now(), "Europe/Paris");
 
 let PayloadSchema = new Schema
 ({
