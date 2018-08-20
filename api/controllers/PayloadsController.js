@@ -147,13 +147,13 @@ exports.test_payloads = function (req, res) //create a new payload and POST it
     //si event = 0 -> calibration On sauvegarde la mesure et on update le device
     else if((event = checkEventCode(req.body)) === 0)
     {
-        let Date = req.body.Date;
+        let Date = new Date(req.body.Date);
 
         let newPayload = new Payload;
         newPayload.EventCode = event;
         newPayload.Mesure = Number(req.body.Code.toString().substr(2, 4));
         newPayload.DeviceId = req.body.DeviceId;
-        newPayload.DateGot = Date;
+        newPayload.DateGot = Date.toUTCString();
 
         console.log("Calibration ... Valeur :\n" + newPayload);
         let newDevice = fill_device(newPayload, 0);
