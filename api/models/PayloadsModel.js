@@ -12,7 +12,7 @@ let PayloadSchema = new Schema
         },
     EventCode:
         {
-            type: String, required: true
+            type: Number, required: true
         },
     Mesure:
         {
