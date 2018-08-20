@@ -590,87 +590,85 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                 if (err)
                                     console.log(err);
 
-                                //check here lat / lng distance
+                                sendBOT(device.toObject().Name, device.toObject().SigfoxId, device.toObject()._id, "Localisation",  "Latitude : " + parsed_info.lat + " , Longitude : " + parsed_info.lng, dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min,  "#ffbe33");
 
-                                Payload.find({DeviceId: device.toObject().SigfoxId, EventCode: 2}, function (err, payload)
-                                {
-                                    if (err)
-                                        console.log(err);
-                                    if(payload[0] !== undefined && payload[0] !== null) {
-                                        if(payload[0].toObject().Latitude !== null && payload[0].toObject().Longitude !== null) {
+                                if(needDownlink === 1) {
 
-                                            console.log("Last position : " + payload.toObject().Localisation);
-                                            console.log("Distance : " + Local.distance(payload[0].toObject().Latitude, payload[0].toObject().Longitude, parsed_info.lat, parsed_info.lng));
+                                    //check if is good
 
-                                            if(Local.distance(payload[0].toObject().Latitude, payload[0].toObject().Longitude, parsed_info.lat, parsed_info.lng) > 500) {
-                                                let newPayload = new Payload;
-                                                newPayload.EventCode = 3;
-                                                newPayload.DeviceId = device.toObject().SigfoxId;
-                                                newPayload.DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min;
-                                                newPayload.save();
-                                            }
-                                        }
-                                    }
+                                    let SigfoxId = device.toObject().SigfoxId;
 
+                                    //response in json ???? maybe bad ???
+                                    let resp_HD = device.toObject().Phase_start;
+                                    let resp_HF = device.toObject().Phase_stop;
+                                    let resp_PH1 = device.toObject().Wake_in;
+                                    let resp_PH2 = device.toObject().Wake_out;
+                                    let resp_N = device.toObject().MesureNbr;
 
-                                    sendBOT(device.toObject().Name, device.toObject().SigfoxId, device.toObject()._id, "Localisation",  "Latitude : " + parsed_info.lat + " , Longitude : " + parsed_info.lng, dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min,  "#ffbe33");
-
-                                    if(needDownlink === 1) {
-
-                                        //check if is good
-
-                                        let SigfoxId = device.toObject().SigfoxId;
-
-                                        //response in json ???? maybe bad ???
-                                        let resp_HD = device.toObject().Phase_start;
-                                        let resp_HF = device.toObject().Phase_stop;
-                                        let resp_PH1 = device.toObject().Wake_in;
-                                        let resp_PH2 = device.toObject().Wake_out;
-                                        let resp_N = device.toObject().MesureNbr;
-
-                                        if(resp_HD.toString().length === 1)
-                                            resp_HD = "0" + resp_HD;
-                                        if(resp_HF.toString().length === 1)
-                                            resp_HF = "0" + resp_HF;
-                                        if(resp_PH1.toString().length === 1)
-                                            resp_PH1 = "00" + resp_PH1;
-                                        else if(resp_PH1.toString().length === 2)
-                                            resp_PH1 = "0" + resp_PH1;
-                                        if(resp_PH2.toString().length === 1)
-                                            resp_PH2 = "00" + resp_PH2;
-                                        else if(resp_PH2.toString().length === 2)
-                                            resp_PH2 = "0" + resp_PH2;
+                                    if(resp_HD.toString().length === 1)
+                                        resp_HD = "0" + resp_HD;
+                                    if(resp_HF.toString().length === 1)
+                                        resp_HF = "0" + resp_HF;
+                                    if(resp_PH1.toString().length === 1)
+                                        resp_PH1 = "00" + resp_PH1;
+                                    else if(resp_PH1.toString().length === 2)
+                                        resp_PH1 = "0" + resp_PH1;
+                                    if(resp_PH2.toString().length === 1)
+                                        resp_PH2 = "00" + resp_PH2;
+                                    else if(resp_PH2.toString().length === 2)
+                                        resp_PH2 = "0" + resp_PH2;
 
 
-                                        let data = {
-                                            [SigfoxId] : {"downlinkData": hh + "" + min + "" + resp_HD + "" + resp_HF + "" + resp_PH1 + "" + resp_PH2 + "" + resp_N + "0"},
-                                        };
+                                    let data = {
+                                        [SigfoxId] : {"downlinkData": hh + "" + min + "" + resp_HD + "" + resp_HF + "" + resp_PH1 + "" + resp_PH2 + "" + resp_N + "0"},
+                                    };
 
-                                        console.log("DATA : " + hh + min + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N + "0");
-                                        res.json(data);
-                                    }
-
-
-                                    let newPayload = new Payload;
-                                    newPayload.EventCode = event;
-                                    newPayload.Latitude = parsed_info.lat;
-                                    newPayload.Longitude = parsed_info.lng;
-                                    newPayload.Localisation = parsed_get.address.road + " - " + City;
-                                    newPayload.DeviceId = device.toObject().SigfoxId;
-                                    newPayload.DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min;
-                                    newPayload.save();
-
-                                    return(res.end());
+                                    console.log("DATA : " + hh + min + resp_HD + resp_HF + resp_PH1 + resp_PH2 + resp_N + "0");
+                                    res.json(data);
+                                }
 
 
+                                let newPayload = new Payload;
+                                newPayload.EventCode = event;
+                                newPayload.Latitude = parsed_info.lat;
+                                newPayload.Longitude = parsed_info.lng;
+                                newPayload.Localisation = parsed_get.address.road + " - " + City;
+                                newPayload.DeviceId = device.toObject().SigfoxId;
+                                newPayload.DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min;
+                                newPayload.save();
 
-                                }).sort('-DateGot').limit(1);
+                                return(res.end());
                             });
                         } else {
                             return(res.end());
                         }
                     });
                 });
+
+
+                //check here lat / lng distance
+
+               /* Payload.findOne({DeviceId: device.toObject().SigfoxId, EventCode: 2}, function (err, payload)
+                {
+                    if (err)
+                        console.log(err);
+                    if(payload !== undefined && payload !== null) {
+                        if(payload.toObject().Latitude !== null && payload.toObject().Longitude !== null) {
+
+                            console.log("Last position : " + payload.toObject().Localisation);
+                            console.log("Distance : " + Local.distance(payload.toObject().Latitude, payload.toObject().Longitude, parsed_info.lat, parsed_info.lng));
+
+                            if(Local.distance(payload.toObject().Latitude, payload.toObject().Longitude, parsed_info.lat, parsed_info.lng) > 500) {
+                                let newPayload = new Payload;
+                                newPayload.EventCode = 3;
+                                newPayload.DeviceId = device.toObject().SigfoxId;
+                                newPayload.DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min;
+                                newPayload.save();
+                            }
+                        }
+                    }
+                }).sort('-DateGot');*/
+
 
                 req.open("GET", "https://eu1.locationiq.org/v1/reverse.php?key=9126593a665608&lat=" + parsed_info.lat + "&lon=" + parsed_info.lng + "&format=json", true);
                 req.send(null);
