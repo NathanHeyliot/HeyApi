@@ -65,7 +65,6 @@ exports.delete_all_payloads = function (req, res)
 
 
 
-
 exports.test_payloads = function (req, res) //create a new payload and POST it
 {
     let event;
@@ -242,6 +241,15 @@ exports.test_payloads = function (req, res) //create a new payload and POST it
         req.send(JSON.stringify({type: "ubiwifi", device: DeviceId, data: PositionCode}));
     }
 };
+
+
+
+
+
+
+
+
+
 
 
 
@@ -664,7 +672,6 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
 
 
-
 exports.get_paybydevice = function(req, res) //GET les payload associés au device
 {
     Payload.find({DeviceId: req.params.DeviceId}, function (err, payload)
@@ -681,23 +688,23 @@ exports.get_paybydevice = function(req, res) //GET les payload associés au devi
 
 exports.count_payloads = function (req, res)
 {
-  let id = req.params.appId;
-  let type = req.params.type;
+    let id = req.params.appId;
+    let type = req.params.type;
 
-  if(type === "all")
-  {
-      Payload.count({DeviceId: id}, function (err, payload) {
-         if(err)
-             console.log(err);
-         res.json(payload);
-      });
-  } else {
-      Payload.count({DeviceId: id, EventCode: type}, function (err, payload) {
-          if(err)
-              console.log(err);
-          res.json(payload);
-      });
-  }
+    if(type === "all")
+    {
+        Payload.count({DeviceId: id}, function (err, payload) {
+            if(err)
+                console.log(err);
+            res.json(payload);
+        });
+    } else {
+        Payload.count({DeviceId: id, EventCode: type}, function (err, payload) {
+            if(err)
+                console.log(err);
+            res.json(payload);
+        });
+    }
 };
 
 exports.adv_read_payloads = function (req, res)
