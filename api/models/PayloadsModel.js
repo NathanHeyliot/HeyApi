@@ -33,7 +33,7 @@ let PayloadSchema = new Schema
         },
     DateGot:
         {
-            type: Date
+            type: Date, default: moment().tz('Europe/Paris')
         },
 });
 
