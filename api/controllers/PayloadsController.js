@@ -110,9 +110,7 @@ exports.test_payloads = function (req, res) //create a new payload and POST it
 
                     var MS_PER_MINUTE = 60000;
                     var dateMeasure = new Date(now - (offset * MS_PER_MINUTE));
-                    PayloadArray[i].DateGot = dateMeasure.toUTCString();
-
-                    console.log(dateMeasure.toUTCString());
+                    PayloadArray[i].DateGot = dateMeasure;
                 }
 
                 console.log("Payload Array : " + PayloadArray);
