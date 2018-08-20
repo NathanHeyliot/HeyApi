@@ -600,9 +600,9 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                     if(payload !== undefined && payload !== null) {
                                         if(payload.toObject().Latitude !== null && payload.toObject().Longitude !== null) {
 
-                                            console.log("Distance : " + Local.distance(payload.toObject().Latitude, payload.toObject().Longitude, parsed_info.lat, parsed_info.lng, "K"));
+                                            console.log("Distance : " + Local.distance(payload.toObject().Latitude, payload.toObject().Longitude, parsed_info.lat, parsed_info.lng));
 
-                                            if(Local.distance(payload.toObject().Latitude, payload.toObject().Longitude, parsed_info.lat, parsed_info.lng, "K") > 500) {
+                                            if(Local.distance(payload.toObject().Latitude, payload.toObject().Longitude, parsed_info.lat, parsed_info.lng) > 500) {
                                                 let newPayload = new Payload;
                                                 newPayload.EventCode = 3;
                                                 newPayload.DeviceId = device.toObject().SigfoxId;
