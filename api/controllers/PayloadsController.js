@@ -126,7 +126,7 @@ exports.test_payloads = function (req, res) //create a new payload and POST it
                     if (min.toString().length === 1)
                         min = "0" + min;
 
-                    PayloadArray[i].DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min;
+                    PayloadArray[i].DateGot = dateMeasure;
                 }
 
                 console.log("Payload Array : " + PayloadArray);
