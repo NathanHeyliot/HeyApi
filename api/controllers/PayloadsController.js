@@ -596,7 +596,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                 {
                                     if (err)
                                         console.log(err);
-                                    if(payload !== undefined && payload !== null) {
+                                    if(payload[0] !== undefined && payload[0] !== null) {
                                         if(payload[0].toObject().Latitude !== null && payload[0].toObject().Longitude !== null) {
 
                                             console.log("Last position : " + payload.toObject().Localisation);
