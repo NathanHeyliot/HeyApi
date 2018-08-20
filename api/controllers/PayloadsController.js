@@ -65,6 +65,7 @@ exports.delete_all_payloads = function (req, res)
 
 
 
+
 exports.test_payloads = function (req, res) //create a new payload and POST it
 {
     let event;
@@ -116,6 +117,7 @@ exports.test_payloads = function (req, res) //create a new payload and POST it
                     let yyyy = dateMeasure.getFullYear();
                     let hh = dateMeasure.getHours();
                     let min = dateMeasure.getMinutes();
+
                     if (dd.toString().length === 1)
                         dd = "0" + dd;
                     if (mm.toString().length === 1)
@@ -143,13 +145,13 @@ exports.test_payloads = function (req, res) //create a new payload and POST it
     //si event = 0 -> calibration On sauvegarde la mesure et on update le device
     else if((event = checkEventCode(req.body)) === 0)
     {
-        let Date = new Date(req.body.Date);
+        let Date = req.body.Date;
 
         let newPayload = new Payload;
         newPayload.EventCode = event;
         newPayload.Mesure = Number(req.body.Code.toString().substr(2, 4));
         newPayload.DeviceId = req.body.DeviceId;
-        newPayload.DateGot = Date.toUTCString();
+        newPayload.DateGot = Date;
 
         console.log("Calibration ... Valeur :\n" + newPayload);
         let newDevice = fill_device(newPayload, 0);
@@ -182,7 +184,7 @@ exports.test_payloads = function (req, res) //create a new payload and POST it
         //ici faut s'occuper de l'event 2 qui permet la récupération d'une localisation avec une info crypté
         let PositionCode = String(req.body.Code.toString().substring(2,22));
         let DeviceId = req.body.DeviceId;
-        let mDate = req.body.Date;
+        let Date = req.body.Date;
 
         var req = new XMLHttpRequest();
 
@@ -212,14 +214,13 @@ exports.test_payloads = function (req, res) //create a new payload and POST it
                             {
                                 if (err)
                                     console.log(err);
-
                                 let newPayload = new Payload;
                                 newPayload.EventCode = event;
                                 newPayload.Latitude = parsed_info.lat;
                                 newPayload.Longitude = parsed_info.lng;
                                 newPayload.Localisation = parsed_get.address.road + " - " + City;
                                 newPayload.DeviceId = device.toObject().SigfoxId;
-                                newPayload.DateGot = new Date(mDate).toUTCString();
+                                newPayload.DateGot = Date;
                                 newPayload.save();
 
                                 return(res.end());
@@ -241,6 +242,8 @@ exports.test_payloads = function (req, res) //create a new payload and POST it
         req.send(JSON.stringify({type: "ubiwifi", device: DeviceId, data: PositionCode}));
     }
 };
+
+
 
 exports.create_payload = function (req, res) //create a new payload and POST it
 {
@@ -280,7 +283,26 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
                     var MS_PER_MINUTE = 60000;
                     var dateMeasure = new Date(now - (offset * MS_PER_MINUTE));
-                    PayloadArray[i].DateGot = dateMeasure.toUTCString();
+
+                    let dd = dateMeasure.getDate();
+                    let mm = dateMeasure.getMonth()+1;
+                    let yyyy = dateMeasure.getFullYear();
+                    let hh = dateMeasure.getHours();
+                    let min = dateMeasure.getMinutes();
+                    let sec = dateMeasure.getSeconds();
+
+                    if (dd.toString().length === 1)
+                        dd = "0" + dd;
+                    if (mm.toString().length === 1)
+                        mm = "0" + mm;
+                    if (hh.toString().length === 1)
+                        hh = "0" + hh;
+                    if (min.toString().length === 1)
+                        min = "0" + min;
+                    if (sec.toString().length === 1)
+                        sec = "0" + sec;
+
+                    PayloadArray[i].DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min + ":" + sec;
 
 
                     if(PayloadArray[i].Mesure === 9999)
@@ -298,8 +320,26 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
                         //on recupere la date de reception
                         let ActualTime = new Date();
+                        let dd = ActualTime.getDate();
+                        let mm = ActualTime.getMonth()+1;
+                        let yyyy = ActualTime.getFullYear();
+                        let hh = ActualTime.getHours();
+                        let min = ActualTime.getMinutes();
+                        let sec = ActualTime.getSeconds();
+
+                        if (dd.toString().length === 1)
+                            dd = "0" + dd;
+                        if (mm.toString().length === 1)
+                            mm = "0" + mm;
+                        if (hh.toString().length === 1)
+                            hh = "0" + hh;
+                        if (min.toString().length === 1)
+                            min = "0" + min;
+                        if (sec.toString().length === 1)
+                            sec = "0" + sec;
+
                         let newDevice = new Device;
-                        newDevice.LastUpdate = dateMeasure.toUTCString();
+                        newDevice.LastUpdate = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min + ":" + sec;
                         newDevice.SigfoxId = PayloadArray[i].DeviceId;
 
                         PayloadArray[i].save(function (err, payload) {
@@ -387,12 +427,29 @@ exports.create_payload = function (req, res) //create a new payload and POST it
     {
         //on recupere la date de reception
         let ActualTime = new Date();
+        let dd = ActualTime.getDate();
+        let mm = ActualTime.getMonth()+1;
+        let yyyy = ActualTime.getFullYear();
+        let hh = ActualTime.getHours();
+        let min = ActualTime.getMinutes();
+        let sec = ActualTime.getSeconds();
+
+        if (dd.toString().length === 1)
+            dd = "0" + dd;
+        if (mm.toString().length === 1)
+            mm = "0" + mm;
+        if (hh.toString().length === 1)
+            hh = "0" + hh;
+        if (min.toString().length === 1)
+            min = "0" + min;
+        if (sec.toString().length === 1)
+            sec = "0" + sec;
 
         let newPayload = new Payload;
         newPayload.EventCode = event;
         newPayload.Mesure = Number(req.body.Code.toString().substr(2, 4));
         newPayload.DeviceId = req.body.DeviceId;
-        newPayload.DateGot = ActualTime.toUTCString();
+        newPayload.DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min + ":" + sec;
 
         console.log("Calibration ... Valeur :\n" + newPayload);
         let newDevice = fill_device(newPayload, 0);
@@ -448,7 +505,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                             }
 
                             return(res.end());
-                    });
+                        });
                 } else {
                     return(res.end());
                 }
@@ -478,6 +535,24 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
                     //on recupere la date de reception
                     let ActualTime = new Date();
+                    let dd = ActualTime.getDate();
+                    let mm = ActualTime.getMonth()+1;
+                    let yyyy = ActualTime.getFullYear();
+                    let hh = ActualTime.getHours();
+                    let min = ActualTime.getMinutes();
+                    let sec = ActualTime.getSeconds();
+
+                    if (dd.toString().length === 1)
+                        dd = "0" + dd;
+                    if (mm.toString().length === 1)
+                        mm = "0" + mm;
+                    if (hh.toString().length === 1)
+                        hh = "0" + hh;
+                    if (min.toString().length === 1)
+                        min = "0" + min;
+                    if (sec.toString().length === 1)
+                        sec = "0" + sec;
+
 
                     Device.find({SigfoxId: DeviceId}, function (err, obj) {
                         if(obj[0] !== undefined && obj[0] != null) { //check if device has been found in database
@@ -490,7 +565,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                             else
                                 City = parsed_get.address.city;
 
-                            Device.findOneAndUpdate({SigfoxId: DeviceId}, ({Downlink: 0, PostCode: parsed_get.address.postcode, LastUpdate: ActualTime.toUTCString(), Lon: parsed_info.lng, Lat: parsed_info.lat, City: City, Address: parsed_get.address.road}), {new: true}, function (err, device)
+                            Device.findOneAndUpdate({SigfoxId: DeviceId}, ({Downlink: 0, PostCode: parsed_get.address.postcode, LastUpdate: dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min + ":" + sec, Lon: parsed_info.lng, Lat: parsed_info.lat, City: City, Address: parsed_get.address.road}), {new: true}, function (err, device)
                             {
                                 if (err)
                                     console.log(err);
@@ -511,7 +586,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                                 let newPayload = new Payload;
                                                 newPayload.EventCode = 3;
                                                 newPayload.DeviceId = device.toObject().SigfoxId;
-                                                newPayload.DateGot = ActualTime.toUTCString();
+                                                newPayload.DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min + ":" + sec;
                                                 newPayload.save();
                                             }
                                         }
@@ -562,7 +637,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                     newPayload.Longitude = parsed_info.lng;
                                     newPayload.Localisation = parsed_get.address.road + " - " + City;
                                     newPayload.DeviceId = device.toObject().SigfoxId;
-                                    newPayload.DateGot = ActualTime.toUTCString();
+                                    newPayload.DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min + ":" + sec;
                                     newPayload.save();
 
                                     return(res.end());
@@ -586,6 +661,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
         req.send(JSON.stringify({type: "ubiwifi", device: DeviceId, data: PositionCode}));
     }
 };
+
 
 
 
