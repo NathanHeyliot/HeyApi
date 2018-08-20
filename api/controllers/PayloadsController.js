@@ -600,6 +600,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                     if(payload !== undefined && payload !== null) {
                                         if(payload.toObject().Latitude !== null && payload.toObject().Longitude !== null) {
 
+                                            console.log("Last position : " + payload.toObject().Localisation);
                                             console.log("Distance : " + Local.distance(payload.toObject().Latitude, payload.toObject().Longitude, parsed_info.lat, parsed_info.lng));
 
                                             if(Local.distance(payload.toObject().Latitude, payload.toObject().Longitude, parsed_info.lat, parsed_info.lng) > 500) {
