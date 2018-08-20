@@ -592,17 +592,17 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
                                 //check here lat / lng distance
 
-                                Payload.findOne({DeviceId: device.toObject().SigfoxId, EventCode: 2}, function (err, payload)
+                                Payload.find({DeviceId: device.toObject().SigfoxId, EventCode: 2}, function (err, payload)
                                 {
                                     if (err)
                                         console.log(err);
                                     if(payload !== undefined && payload !== null) {
-                                        if(payload.toObject().Latitude !== null && payload.toObject().Longitude !== null) {
+                                        if(payload[0].toObject().Latitude !== null && payload[0].toObject().Longitude !== null) {
 
                                             console.log("Last position : " + payload.toObject().Localisation);
-                                            console.log("Distance : " + Local.distance(payload.toObject().Latitude, payload.toObject().Longitude, parsed_info.lat, parsed_info.lng));
+                                            console.log("Distance : " + Local.distance(payload[0].toObject().Latitude, payload[0].toObject().Longitude, parsed_info.lat, parsed_info.lng));
 
-                                            if(Local.distance(payload.toObject().Latitude, payload.toObject().Longitude, parsed_info.lat, parsed_info.lng) > 500) {
+                                            if(Local.distance(payload[0].toObject().Latitude, payload[0].toObject().Longitude, parsed_info.lat, parsed_info.lng) > 500) {
                                                 let newPayload = new Payload;
                                                 newPayload.EventCode = 3;
                                                 newPayload.DeviceId = device.toObject().SigfoxId;
@@ -664,7 +664,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
 
 
-                                }).sort('-DateGot');
+                                }).sort('-DateGot').limit(1);
                             });
                         } else {
                             return(res.end());
