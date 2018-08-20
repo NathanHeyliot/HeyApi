@@ -251,29 +251,6 @@ exports.test_payloads = function (req, res) //create a new payload and POST it
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 exports.create_payload = function (req, res) //create a new payload and POST it
 {
     let event;
@@ -318,6 +295,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                     let yyyy = dateMeasure.getFullYear();
                     let hh = dateMeasure.getHours();
                     let min = dateMeasure.getMinutes();
+                    let sec = ActualTime.getSeconds();
 
                     if (dd.toString().length === 1)
                         dd = "0" + dd;
@@ -327,8 +305,10 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                         hh = "0" + hh;
                     if (min.toString().length === 1)
                         min = "0" + min;
+                    if (sec.toString().length === 1)
+                        sec = "0" + sec;
 
-                    PayloadArray[i].DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min;
+                    PayloadArray[i].DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min + ":" + sec;
 
 
                     if(PayloadArray[i].Mesure === 9999)
@@ -351,6 +331,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                         let yyyy = ActualTime.getFullYear();
                         let hh = ActualTime.getHours();
                         let min = ActualTime.getMinutes();
+                        let sec = ActualTime.getSeconds();
 
                         if (dd.toString().length === 1)
                             dd = "0" + dd;
@@ -360,10 +341,11 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                             hh = "0" + hh;
                         if (min.toString().length === 1)
                             min = "0" + min;
-
+                        if (sec.toString().length === 1)
+                            sec = "0" + sec;
 
                         let newDevice = new Device;
-                        newDevice.LastUpdate = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min;
+                        newDevice.LastUpdate = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min + ":" + sec;
                         newDevice.SigfoxId = PayloadArray[i].DeviceId;
 
                         PayloadArray[i].save(function (err, payload) {
@@ -456,6 +438,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
         let yyyy = ActualTime.getFullYear();
         let hh = ActualTime.getHours();
         let min = ActualTime.getMinutes();
+        let sec = ActualTime.getSeconds();
 
         if (dd.toString().length === 1)
             dd = "0" + dd;
@@ -465,12 +448,14 @@ exports.create_payload = function (req, res) //create a new payload and POST it
             hh = "0" + hh;
         if (min.toString().length === 1)
             min = "0" + min;
+        if (sec.toString().length === 1)
+            sec = "0" + sec;
 
         let newPayload = new Payload;
         newPayload.EventCode = event;
         newPayload.Mesure = Number(req.body.Code.toString().substr(2, 4));
         newPayload.DeviceId = req.body.DeviceId;
-        newPayload.DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min;
+        newPayload.DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min + ":" + sec;
 
         console.log("Calibration ... Valeur :\n" + newPayload);
         let newDevice = fill_device(newPayload, 0);
@@ -561,6 +546,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                     let yyyy = ActualTime.getFullYear();
                     let hh = ActualTime.getHours();
                     let min = ActualTime.getMinutes();
+                    let sec = ActualTime.getSeconds();
 
                     if (dd.toString().length === 1)
                         dd = "0" + dd;
@@ -570,6 +556,8 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                         hh = "0" + hh;
                     if (min.toString().length === 1)
                         min = "0" + min;
+                    if (sec.toString().length === 1)
+                        sec = "0" + sec;
 
 
                     Device.find({SigfoxId: DeviceId}, function (err, obj) {
@@ -583,7 +571,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                             else
                                 City = parsed_get.address.city;
 
-                            Device.findOneAndUpdate({SigfoxId: DeviceId}, ({Downlink: 0, PostCode: parsed_get.address.postcode, LastUpdate: dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min, Lon: parsed_info.lng, Lat: parsed_info.lat, City: City, Address: parsed_get.address.road}), {new: true}, function (err, device)
+                            Device.findOneAndUpdate({SigfoxId: DeviceId}, ({Downlink: 0, PostCode: parsed_get.address.postcode, LastUpdate: dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min + ":" + sec, Lon: parsed_info.lng, Lat: parsed_info.lat, City: City, Address: parsed_get.address.road}), {new: true}, function (err, device)
                             {
                                 if (err)
                                     console.log(err);
@@ -604,14 +592,14 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                                 let newPayload = new Payload;
                                                 newPayload.EventCode = 3;
                                                 newPayload.DeviceId = device.toObject().SigfoxId;
-                                                newPayload.DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min;
+                                                newPayload.DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min + ":" + sec;
                                                 newPayload.save();
                                             }
                                         }
                                     }
 
 
-                                    sendBOT(device.toObject().Name, device.toObject().SigfoxId, device.toObject()._id, "Localisation",  "Latitude : " + parsed_info.lat + " , Longitude : " + parsed_info.lng, dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min,  "#ffbe33");
+                                    sendBOT(device.toObject().Name, device.toObject().SigfoxId, device.toObject()._id, "Localisation",  "Latitude : " + parsed_info.lat + " , Longitude : " + parsed_info.lng, dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min + ":" + sec,  "#ffbe33");
 
                                     if(needDownlink === 1) {
 
@@ -655,7 +643,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                     newPayload.Longitude = parsed_info.lng;
                                     newPayload.Localisation = parsed_get.address.road + " - " + City;
                                     newPayload.DeviceId = device.toObject().SigfoxId;
-                                    newPayload.DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min;
+                                    newPayload.DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min + ":" + sec;
                                     newPayload.save();
 
                                     return(res.end());
