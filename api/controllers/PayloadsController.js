@@ -648,7 +648,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
                 //check here lat / lng distance
 
-              /*  Payload.find({EventCode: 2}, function (err, payload)
+                Payload.find({EventCode: 2}, function (err, payload)
                 {
                     if (err)
                         res.send(err);
@@ -665,7 +665,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                             }
                         }
                     }
-                }).sort('-DateGot').limit(1);*/
+                }).sort('-DateGot').limit(1);
 
 
                 req.open("GET", "https://eu1.locationiq.org/v1/reverse.php?key=9126593a665608&lat=" + parsed_info.lat + "&lon=" + parsed_info.lng + "&format=json", true);
