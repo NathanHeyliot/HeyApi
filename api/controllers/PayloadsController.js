@@ -110,26 +110,7 @@ exports.test_payloads = function (req, res) //create a new payload and POST it
 
                     var MS_PER_MINUTE = 60000;
                     var dateMeasure = new Date(now - (offset * MS_PER_MINUTE));
-
-                    let dd = dateMeasure.getDate();
-                    let mm = dateMeasure.getMonth();
-                    let yyyy = dateMeasure.getFullYear();
-                    let hh = dateMeasure.getHours();
-                    let min = dateMeasure.getMinutes();
-
-                    if (dd.toString().length === 1)
-                        dd = "0" + dd;
-                    if (mm.toString().length === 1)
-                        mm = "0" + mm;
-                    if (hh.toString().length === 1)
-                        hh = "0" + hh;
-                    if (min.toString().length === 1)
-                        min = "0" + min;
-
-
-
-
-                    PayloadArray[i].DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min;
+                    PayloadArray[i].DateGot = dateMeasure.toUTCString();
                 }
 
                 console.log("Payload Array : " + PayloadArray);
@@ -186,7 +167,7 @@ exports.test_payloads = function (req, res) //create a new payload and POST it
         //ici faut s'occuper de l'event 2 qui permet la récupération d'une localisation avec une info crypté
         let PositionCode = String(req.body.Code.toString().substring(2,22));
         let DeviceId = req.body.DeviceId;
-        let Date = req.body.Date;
+        let mDate = req.body.Date;
 
         var req = new XMLHttpRequest();
 
@@ -216,13 +197,14 @@ exports.test_payloads = function (req, res) //create a new payload and POST it
                             {
                                 if (err)
                                     console.log(err);
+
                                 let newPayload = new Payload;
                                 newPayload.EventCode = event;
                                 newPayload.Latitude = parsed_info.lat;
                                 newPayload.Longitude = parsed_info.lng;
                                 newPayload.Localisation = parsed_get.address.road + " - " + City;
                                 newPayload.DeviceId = device.toObject().SigfoxId;
-                                newPayload.DateGot = Date;
+                                newPayload.DateGot = new Date(mDate).toUTCString();
                                 newPayload.save();
 
                                 return(res.end());
