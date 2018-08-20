@@ -648,11 +648,10 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
                 //check here lat / lng distance
 
-                Payload.findOne({EventCode: 2}, function (err, payload)
+                Payload.findOne({DeviceId: device.toObject().SigfoxId, EventCode: 2}, function (err, payload)
                 {
                     if (err)
                         res.send(err);
-                    res.json(payload);
                     if(payload !== undefined && payload !== null) {
                         if(payload.toObject().Latitude !== null && payload.toObject().Longitude !== null) {
 
