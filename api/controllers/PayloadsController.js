@@ -654,9 +654,8 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                         res.send(err);
                     res.json(payload);
                     if(payload !== undefined && payload !== null) {
-                        payload = payload.toObject();
-                        if(payload.Latitude !== null && payload.Longitude !== null) {
-                            if(Local.distance(payload.Latitude, payload.Longitude, parsed_info.lat, parsed_info.lng, "M") > 500) {
+                        if(payload.toObject().Latitude !== null && payload.toObject().Longitude !== null) {
+                            if(Local.distance(payload.toObject().Latitude, payload.toObject().Longitude, parsed_info.lat, parsed_info.lng, "M") > 500) {
                                 let newPayload = new Payload;
                                 newPayload.EventCode = 3;
                                 newPayload.DeviceId = device.toObject().SigfoxId;
