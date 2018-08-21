@@ -752,12 +752,20 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
 {
     console.log("Reading a paylaod");
 
-    Payload.find({DeviceId: req.params.appId}, function (err, payload)
+    /*Payload.find({DeviceId: req.params.appId}, function (err, payload)
     {
         if (err)
             res.send(err);
         res.json(payload);
-    }).sort({DateGot: -1});
+    }).sort({DateGot: -1});*/
+
+
+    var cursor = Payload.find();
+
+    while(cursor.hasNext()) {
+        var doc = cursor.next();
+        Payload.update({_id : doc._id}, {$set : {DateGot : new Date(doc.DateGot)}});
+    }
 
 };
 
@@ -766,19 +774,12 @@ exports.update_payload = function (req, res) //PUT Editer le payload spécifié
 {
     console.log("Updating a payload");
 
-   /* Payload.findOneAndUpdate({_id: req.params.appId}, (req.body), {new: true}, function (err, payload)
+   Payload.findOneAndUpdate({_id: req.params.appId}, (req.body), {new: true}, function (err, payload)
     {
         if (err)
             res.send(err);
         res.json(payload);
-    });*/
-
-   var cursor = Payload.find();
-
-   while(cursor.hasNext()) {
-       var doc = cursor.next();
-       Payload.update({_id : doc._id}, {$set : {DateGot : new Date(doc.DateGot)}});
-   }
+    });
 };
 
 
