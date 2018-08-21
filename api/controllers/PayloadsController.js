@@ -574,7 +574,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
                                     return(res.end());
 
-                                }).sort('-DateGot').limit(1);
+                                }).sort({DateGot: -1}).limit(1);
                             });
                         } else {
                             return(res.end());
@@ -607,7 +607,7 @@ exports.get_paybydevice = function(req, res) //GET les payload associés au devi
             res.send(err);
         }
         res.json(payload);
-    }).sort('-DateGot');
+    }).sort({DateGot: -1});
 };
 
 exports.count_payloads = function (req, res)
@@ -646,14 +646,14 @@ exports.adv_read_payloads = function (req, res)
                 if (err)
                     console.log(err);
                 res.json(payload);
-            }).sort('-DateGot');
+            }).sort({DateGot: -1});
         } else {
             Payload.find({DeviceId: id, EventCode: type}, function (err, payload)
             {
                 if (err)
                     console.log(err);
                 res.json(payload);
-            }).sort('-DateGot');
+            }).sort({DateGot: -1});
         }
     } else {
         if(type === "all") {
@@ -662,14 +662,14 @@ exports.adv_read_payloads = function (req, res)
                 if (err)
                     console.log(err);
                 res.json(payload);
-            }).sort('-DateGot').skip(Number(start)).limit(Number(end));
+            }).sort({DateGot: -1}).skip(Number(start)).limit(Number(end));
         } else {
             Payload.find({DeviceId: id, EventCode: type}, function (err, payload)
             {
                 if (err)
                     console.log(err);
                 res.json(payload);
-            }).sort('-DateGot').skip(Number(start)).limit(Number(end));
+            }).sort({DateGot: -1}).skip(Number(start)).limit(Number(end));
         }
     }
 };
@@ -687,14 +687,14 @@ exports.advb_read_payloads = function (req, res)
                 if (err)
                     res.send(err);
                 res.json(payload);
-            }).sort('-DateGot');
+            }).sort({DateGot: -1});
         } else {
             Payload.find({EventCode: type}, function (err, payload)
             {
                 if (err)
                     res.send(err);
                 res.json(payload);
-            }).sort('-DateGot');
+            }).sort({DateGot: -1});
         }
     } else {
         if(type === "all") {
@@ -703,14 +703,14 @@ exports.advb_read_payloads = function (req, res)
                 if (err)
                     res.send(err);
                 res.json(payload);
-            }).sort('-DateGot').limit(Number(nbr));
+            }).sort({DateGot: -1}).limit(Number(nbr));
         } else {
             Payload.find({EventCode: type}, function (err, payload)
             {
                 if (err)
                     res.send(err);
                 res.json(payload);
-            }).sort('-DateGot').limit(Number(nbr));
+            }).sort({DateGot: -1}).limit(Number(nbr));
         }
     }
 };
@@ -743,7 +743,7 @@ exports.get_last_com = function (req, res)
             if(p_do === i) {
                 res.json(list);
             }
-        }).sort('-DateGot').limit(1);
+        }).sort({DateGot: -1}).limit(1);
 
     }
 };
@@ -757,7 +757,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
         if (err)
             res.send(err);
         res.json(payload);
-    }).sort('-DateGot');
+    }).sort({DateGot: -1});
 
 };
 
