@@ -766,13 +766,19 @@ exports.update_payload = function (req, res) //PUT Editer le payload spécifié
 {
     console.log("Updating a payload");
 
-    Payload.findOneAndUpdate({_id: req.params.appId}, (req.body), {new: true}, function (err, payload)
+   /* Payload.findOneAndUpdate({_id: req.params.appId}, (req.body), {new: true}, function (err, payload)
     {
         if (err)
             res.send(err);
         res.json(payload);
-    });
+    });*/
 
+   var cursor = Payload.find();
+
+   while(cursor.hasNext()) {
+       var doc = cursor.next();
+       Payload.update({_id : doc._id}, {$set : {DateGot : new Date(doc.DateGot)}});
+   }
 };
 
 
