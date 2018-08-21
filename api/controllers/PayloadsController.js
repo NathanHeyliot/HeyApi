@@ -759,9 +759,11 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
         res.json(payload);
     }).sort({DateGot: -1});*/
 
-    Payload.find().forEach(function (doc) {
-        doc.DateGot = new Date(doc.DateGot);
-        Payload.save(doc);
+    Payload.find({}, function (etr, payload) {
+        payload.forEach(function (doc) {
+            doc.DateGot = new Date(doc.DateGot);
+            Payload.save(doc);
+        });
     });
 
 
