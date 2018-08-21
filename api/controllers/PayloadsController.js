@@ -763,8 +763,11 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
 
     Payload.find({}, function (etr, payload) {
         payload.forEach(function (doc) {
-            if(ActualDate < doc.DateGot)
-                console.log(doc.DateGot);
+            if(ActualDate < doc.DateGot) {
+                var d = new Date(doc.DateGot);
+                d.setMonth(d.getMonth() - 3);
+                console.log(d);
+            }
             //doc.DateGot = new Date(doc.DateGot);
             //doc.save();
         });
