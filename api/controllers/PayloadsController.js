@@ -759,21 +759,21 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
         res.json(payload);
     }).sort({DateGot: -1});
 
-   /* var ActualDate = new Date();
+    var ActualDate = new Date();
 
     Payload.find({}, function (etr, payload) {
         payload.forEach(function (doc) {
-            if(ActualDate < doc.DateGot) {
+            /*if(ActualDate < doc.DateGot) {
                 var d = new Date(doc.DateGot);
                 d.setMonth(d.getMonth() - 1);
                 doc.DateGot = d;
                 console.log(doc);
                 doc.save();
-            }
-            //doc.DateGot = new Date(doc.DateGot);
-            //doc.save();
+            }*/
+            doc.DateGot = new Date(doc.DateGot);
+            doc.save();
         });
-    });*/
+    });
 };
 
 
