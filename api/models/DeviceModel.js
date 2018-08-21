@@ -33,11 +33,11 @@ let DevicesSchema = new Schema
         },
     Created:
         {
-            type: Date
+            type: Date, default: Date.now
         },
     LastUpdate:
         {
-            type: Date
+            type: Date, default: Date.now
         },
     Lon:
         {
