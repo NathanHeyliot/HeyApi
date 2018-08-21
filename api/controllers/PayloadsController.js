@@ -286,7 +286,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                     if (sec.toString().length === 1)
                         sec = "0" + sec;
 
-                    PayloadArray[i].DateGot = yyyy + "-" + mm + "-" + dd + " " + hh + ":" + min + ":" + sec;
+                    PayloadArray[i].DateGot = dateMeasure;
 
 
                     if(PayloadArray[i].Mesure === 9999)
