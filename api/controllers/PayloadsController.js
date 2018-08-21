@@ -759,13 +759,16 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
         res.json(payload);
     }).sort({DateGot: -1});
 
-    /*Payload.find({}, function (etr, payload) {
+    var ActualDate = new Date();
+
+    Payload.find({}, function (etr, payload) {
         payload.forEach(function (doc) {
-            doc.DateGot = new Date(doc.DateGot);
-            console.log(doc);
-            doc.save();
+            if(ActualDate < doc.DateGot)
+                console.log(doc.DateGot);
+            //doc.DateGot = new Date(doc.DateGot);
+            //doc.save();
         });
-    });*/
+    });
 };
 
 
