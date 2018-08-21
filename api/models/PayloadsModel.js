@@ -34,7 +34,7 @@ let PayloadSchema = new Schema
     DateGot:
         {
             //type: Date
-            type: String
+            type: Date
         },
 });
 
