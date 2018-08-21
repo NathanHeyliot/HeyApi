@@ -504,7 +504,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
                                 //check here lat / lng distance
 
-                                Payload.find({ $query : {DeviceId: device.toObject().SigfoxId, EventCode: 2}, $orderby : { DateGot: -1 }}, function (err, payload)
+                                Payload.find({DeviceId: device.toObject().SigfoxId, EventCode: 2}, function (err, payload)
                                 {
                                     if (err)
                                         console.log(err);
@@ -574,7 +574,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
                                     return(res.end());
 
-                                }).limit(1);
+                                }).sort({DateGot: -1}).limit(1);
                             });
                         } else {
                             return(res.end());
@@ -607,7 +607,7 @@ exports.get_paybydevice = function(req, res) //GET les payload associés au devi
             res.send(err);
         }
         res.json(payload);
-    });
+    }).sort({DateGot: -1});
 };
 
 exports.count_payloads = function (req, res)
@@ -641,35 +641,35 @@ exports.adv_read_payloads = function (req, res)
     if(start < 0 || end < 0)
     {
         if(type === "all") {
-            Payload.find({ $query : {DeviceId: id}, $orderby : { DateGot: -1 }}, function (err, payload)
+            Payload.find({DeviceId: id}, function (err, payload)
             {
                 if (err)
                     console.log(err);
                 res.json(payload);
-            });
+            }).sort({DateGot: -1});
         } else {
-            Payload.find({ $query : {DeviceId: id, EventCode: type}, $orderby : { DateGot: -1 }}, function (err, payload)
+            Payload.find({DeviceId: id, EventCode: type}, function (err, payload)
             {
                 if (err)
                     console.log(err);
                 res.json(payload);
-            });
+            }).sort({DateGot: -1});
         }
     } else {
         if(type === "all") {
-            Payload.find({ $query : {DeviceId: id}, $orderby : { DateGot: -1 }}, function (err, payload)
+            Payload.find({DeviceId: id}, function (err, payload)
             {
                 if (err)
                     console.log(err);
                 res.json(payload);
-            }).skip(Number(start)).limit(Number(end));
+            }).sort({DateGot: -1}).skip(Number(start)).limit(Number(end));
         } else {
-            Payload.find({ $query : {DeviceId: id, EventCode: type}, $orderby : { DateGot: -1 }}, function (err, payload)
+            Payload.find({DeviceId: id, EventCode: type}, function (err, payload)
             {
                 if (err)
                     console.log(err);
                 res.json(payload);
-            }).skip(Number(start)).limit(Number(end));
+            }).sort({DateGot: -1}).skip(Number(start)).limit(Number(end));
         }
     }
 };
@@ -682,35 +682,35 @@ exports.advb_read_payloads = function (req, res)
     if(nbr < 0)
     {
         if(type === "all") {
-            Payload.find({$orderby : { DateGot: -1 }}, function (err, payload)
+            Payload.find({}, function (err, payload)
             {
                 if (err)
                     res.send(err);
                 res.json(payload);
-            });
+            }).sort({DateGot: -1});
         } else {
-            Payload.find({ $query : {EventCode: Type}, $orderby : { DateGot: -1 }}, function (err, payload)
+            Payload.find({EventCode: type}, function (err, payload)
             {
                 if (err)
                     res.send(err);
                 res.json(payload);
-            });
+            }).sort({DateGot: -1});
         }
     } else {
         if(type === "all") {
-            Payload.find({$orderby : { DateGot: -1 }}, function (err, payload)
+            Payload.find({}, function (err, payload)
             {
                 if (err)
                     res.send(err);
                 res.json(payload);
-            }).limit(Number(nbr));
+            }).sort({DateGot: -1}).limit(Number(nbr));
         } else {
-            Payload.find({ $query : {EventCode: Type}, $orderby : { DateGot: -1 }}, function (err, payload)
+            Payload.find({EventCode: type}, function (err, payload)
             {
                 if (err)
                     res.send(err);
                 res.json(payload);
-            }).limit(Number(nbr));
+            }).sort({DateGot: -1}).limit(Number(nbr));
         }
     }
 };
@@ -730,7 +730,7 @@ exports.get_last_com = function (req, res)
 
     for (var p in DevicesList) {
         let element = DevicesList[p];
-        Payload.find({ $query : {DeviceId: element}, $orderby : { DateGot: -1 }}, {__v: 0, Localisation: 0}, function (err, device)
+        Payload.find({DeviceId: element}, {__v: 0, Localisation: 0}, function (err, device)
         {
             p_do++;
             if (err)
@@ -743,7 +743,7 @@ exports.get_last_com = function (req, res)
             if(p_do === i) {
                 res.json(list);
             }
-        }).limit(1);
+        }).sort({DateGot: -1}).limit(1);
 
     }
 };
@@ -752,12 +752,12 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
 {
     console.log("Reading a paylaod");
 
-    Payload.find({ $query : {DeviceId: req.params.appId}, $orderby : { DateGot: -1 }}, function (err, payload)
+    Payload.find({DeviceId: req.params.appId}, function (err, payload)
     {
         if (err)
             res.send(err);
         res.json(payload);
-    });
+    }).sort({DateGot: -1});
 
 };
 
