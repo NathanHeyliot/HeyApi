@@ -762,11 +762,10 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
     Payload.find({}, function (etr, payload) {
         payload.forEach(function (doc) {
             doc.DateGot = new Date(doc.DateGot);
+            console.log(doc);
             doc.save();
         });
     });
-
-
 };
 
 
