@@ -770,11 +770,14 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                 console.log(doc);
                 doc.save();
             }*/
-
-            if(doc.EventCode === undefined || doc.EventCode === null)
+            console.log(doc);
+            if(doc.EventCode === undefined || doc.EventCode === null) {
+                console.log("Removed");
                 doc.remove();
+            }
             else {
                 doc.DateGot = new Date(doc.DateGot);
+                console.log("Updated");
                 doc.save();
             }
         });
