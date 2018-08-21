@@ -752,20 +752,20 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
 {
     console.log("Reading a paylaod");
 
-    /*Payload.find({DeviceId: req.params.appId}, function (err, payload)
+    Payload.find({DeviceId: req.params.appId}, function (err, payload)
     {
         if (err)
             res.send(err);
         res.json(payload);
-    }).sort({DateGot: -1});*/
+    }).sort({DateGot: -1});
 
-    Payload.find({}, function (etr, payload) {
+    /*Payload.find({}, function (etr, payload) {
         payload.forEach(function (doc) {
             doc.DateGot = new Date(doc.DateGot);
             console.log(doc);
             doc.save();
         });
-    });
+    });*/
 };
 
 
