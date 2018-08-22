@@ -753,7 +753,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
     console.log("Reading a paylaod");
 
 
-    Payload.find({_id: "5b7696f34be713f73a2569de", function(err, payload)
+    Payload.find({_id: "5b7696f34be713f73a2569de"}, function(err, payload)
         {
             console.log(payload);
 
@@ -761,7 +761,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                 elem.DateGot = new Date();
                 elem.save();
             });
-        }});
+        });
 
 
   /* Payload.find({DeviceId: req.params.appId}, function (err, payload)
