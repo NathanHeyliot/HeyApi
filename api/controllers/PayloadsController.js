@@ -764,6 +764,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
     for (; index < 50000; index = index + 50) {
         Payload.find({}, function (etr, payload) {
             payload.forEach(function (doc) {
+                console.log("Index : " + index);
                 console.log(doc);
                 if(doc.EventCode === undefined || doc.EventCode === null) {
                     console.log("Removed");
@@ -772,6 +773,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                 else {
                     doc.DateGot = new Date(doc.DateGot);
                     console.log("Updated");
+                    doc.remove();
                     doc.save();
                 }
             });
