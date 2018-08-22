@@ -759,17 +759,10 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
         res.json(payload);
     }).sort({DateGot: -1});*/
 
-    var ActualDate = new Date();
+    var index = req.params.appId;
 
     Payload.find({}, function (etr, payload) {
         payload.forEach(function (doc) {
-            /*if(ActualDate < doc.DateGot) {
-                var d = new Date(doc.DateGot);
-                d.setMonth(d.getMonth() - 1);
-                doc.DateGot = d;
-                console.log(doc);
-                doc.save();
-            }*/
             console.log(doc);
             if(doc.EventCode === undefined || doc.EventCode === null) {
                 console.log("Removed");
@@ -781,7 +774,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                 doc.save();
             }
         });
-    });
+    }).skip(Number(index)).limit(Number(index));
 };
 
 
