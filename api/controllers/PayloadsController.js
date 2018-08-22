@@ -759,9 +759,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
         res.json(payload);
     }).sort({DateGot: -1});*/
 
-    var index = 0;
-
-    for (; index < 50000; index = index + 50) {
+    for (let index = 0; index < 50000; index = index + 50) {
         Payload.find({}, function (etr, payload) {
             payload.forEach(function (doc) {
                 console.log("Index : " + index);
