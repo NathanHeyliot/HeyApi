@@ -752,18 +752,6 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
 {
     console.log("Reading a paylaod");
 
-    Payload.update({ _id: "5b7696f34be713f73a2569fe" }, {
-        $set: {
-            "Mesure": Number("503"),
-            "Localisation": null,
-            "EventCode": Number("1"),
-            "DeviceId": "229277",
-            "DateGot": new Date("2018-07-25T05:59:0.000Z"),
-            "__v": Number("0")
-        }
-    });
-
-
   /* Payload.find({DeviceId: req.params.appId}, function (err, payload)
     {
         if (err)
@@ -771,7 +759,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
         res.json(payload);
     }).sort({DateGot: -1});*/
 
- /*   for (let index = 0; index < 23000; index = index + 50) {
+    for (let index = 0; index < 23000; index = index + 50) {
         Payload.find({}, function (etr, payload) {
             payload.forEach(function (doc) {
                 console.log("Index : " + index);
@@ -781,8 +769,8 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                     doc.remove();
                 }
                 else {
-
-                    var date = new Date(doc.DateGot);
+                    doc.DateGot = new Date(doc.DateGot).toISOString();
+                   /* var date = new Date(doc.DateGot);
 
                     let dd = date.getDate();
                     let mm = date.getMonth()+1;
@@ -812,12 +800,13 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                             "__v": NumberInt("0")
                         }
                     });
-                    console.log("Type : " + typeof (doc.DateGot) + ", Date : " + yyyy + "-" + mm + "-" + dd + "T" + hh + ":" + min + ":" + sec + ".000");
-                    console.log("Updated");
+                    console.log("Type : " + typeof (doc.DateGot) + ", Date : " + yyyy + "-" + mm + "-" + dd + "T" + hh + ":" + min + ":" + sec + ".000");*/
+                   doc.save();
+                   console.log("Updated");
                 }
             });
-        }).skip(Number(index)).limit(Number(index) + 50);*/
-    //};
+        }).skip(Number(index)).limit(Number(index) + 50);
+    };
 };
 
 
