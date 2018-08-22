@@ -752,21 +752,6 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
 {
     console.log("Reading a paylaod");
 
-
-    Payload.find({DateGot: { $type: "string"}}, function(err, payload)
-        {
-            payload.forEach(function (elem) {
-                var mDate = elem.DateGot.toLocaleString().split(" ");
-                var mYears = mDate[0].split("-");
-                var mTime = mDate[1].split(":");
-
-                console.log("Old : " + mDate[0] + " " + mDate[1] + ", New : " + new Date(Number(mYears[0]), Number(mYears[1] - 1), Number(mYears[2]), Number(mTime[0]), Number(mTime[1]), Number(mTime[2])));
-                elem.DateGot =new Date(Number(mYears[0]), Number(mYears[1] - 1), Number(mYears[2]), Number(mTime[0]), Number(mTime[1]), Number(mTime[2]));
-                elem.save();
-            });
-        });
-
-
   /* Payload.find({DeviceId: req.params.appId}, function (err, payload)
     {
         if (err)
@@ -774,8 +759,8 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
         res.json(payload);
     }).sort({DateGot: -1});*/
 
- /*   for (let index = 0; index < 23000; index = index + 50) {
-        Payload.find({}, function (etr, payload) {
+    for (let index = 0; index < 23000; index = index + 50) {
+        Payload.find({DateGot: { $type: "string"}}, function (etr, payload) {
             payload.forEach(function (doc) {
                 console.log("Index : " + index);
                 console.log(doc);
@@ -784,43 +769,18 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                     doc.remove();
                 }
                 else {
+                    var mDate = doc.DateGot.toLocaleString().split(" ");
+                    var mYears = mDate[0].split("-");
+                    var mTime = mDate[1].split(":");
 
-                    var date = new Date(doc.DateGot);
-
-                    let dd = date.getDate();
-                    let mm = date.getMonth()+1;
-                    let yyyy = date.getFullYear();
-                    let hh = date.getHours();
-                    let min = date.getMinutes();
-                    let sec = date.getSeconds();
-
-                    if (dd.toString().length === 1)
-                        dd = "0" + dd;
-                    if (mm.toString().length === 1)
-                        mm = "0" + mm;
-                    if (hh.toString().length === 1)
-                        hh = "0" + hh;
-                    if (min.toString().length === 1)
-                        min = "0" + min;
-                    if (sec.toString().length === 1)
-                        sec = "0" + sec;
-
-                    Payload.update({ _id: ObjectId(doc._id) }, {
-                        $set: {
-                            "Mesure": NumberInt(doc.Mesure),
-                            "Localisation": doc.Localisation,
-                            "EventCode": NumberInt(Doc.EventCode),
-                            "DeviceId": doc.DeviceId,
-                            "DateGot": ISODate(mDate[0] + "T" + gtime[0] + ":" + gtime[1] + ":00.000"),
-                            "__v": NumberInt("0")
-                        }
-                    });
-                    console.log("Type : " + typeof (doc.DateGot) + ", Date : " + yyyy + "-" + mm + "-" + dd + "T" + hh + ":" + min + ":" + sec + ".000");
+                    console.log("Old : " + mDate[0] + " " + mDate[1] + ", New : " + new Date(Number(mYears[0]), Number(mYears[1] - 1), Number(mYears[2]), Number(mTime[0]), Number(mTime[1]), Number(mTime[2])));
+                    doc.DateGot =new Date(Number(mYears[0]), Number(mYears[1] - 1), Number(mYears[2]), Number(mTime[0]), Number(mTime[1]), Number(mTime[2]));
+                    doc.save();
                     console.log("Updated");
                 }
             });
-        }).skip(Number(index)).limit(Number(index) + 50);*/
-    //};
+        }).skip(Number(index)).limit(Number(index) + 50);
+    };
 };
 
 
