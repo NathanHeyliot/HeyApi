@@ -774,7 +774,6 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                     var mTime = mDate[1].split(":");
 
                     var ActualTime = new Date(Number(mYears[0]), Number(mYears[1] - 1), Number(mYears[2]), Number(mTime[0]), Number(mTime[1]), Number(mTime[2]));
-                    console.log("Old : " + mDate[0] + " " + mDate[1] + ", New : " + doc.DateGot);
 
                     let newPayload = new Payload;
                     newPayload.EventCode = doc.EventCode;
@@ -787,9 +786,9 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
 
                     newPayload.save(function (err, payload) {
                         Payload.remove({_id: doc._id}, function () {
+                            console.log("Saved ! ID : " + payload._id);
                             console.log("Old deleted");
                         });
-                        console.log("Saved ! ID : " + payload._id);
                     });
                 }
             });
