@@ -770,7 +770,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                 }
                 else {
 
-                    var mString = doc.DateGot;
+                    var mString = doc.DateGot.toString();
 
                     var mDate = mString.split(" ");
                     var gtime = mDate.split(":");
