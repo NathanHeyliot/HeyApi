@@ -768,7 +768,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                     console.log("Removed");
                     doc.remove();
                 }
-                else if (!doc.DateGot.includes("Z")){
+                else if (typeof (doc.DateGot) === String){
 
                     var mDate = doc.DateGot.split(" ");
                     var gtime = mDate.split(":");
