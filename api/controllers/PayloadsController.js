@@ -779,9 +779,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
 
                     Payload.findOneAndUpdate({_id: doc._id}, (doc), {new: true}, function (err, payload)
                     {
-                        if (err)
-                            res.send(err);
-                        res.json(payload);
+                       
                     });
 
                     console.log("Updated");
