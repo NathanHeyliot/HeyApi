@@ -752,6 +752,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
 {
     console.log("Reading a paylaod");
 
+
   /* Payload.find({DeviceId: req.params.appId}, function (err, payload)
     {
         if (err)
@@ -775,7 +776,14 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
 
                     console.log("Old : " + mDate[0] + " " + mDate[1] + ", New : " + new Date(Number(mYears[0]), Number(mYears[1] - 1), Number(mYears[2]), Number(mTime[0]), Number(mTime[1]), Number(mTime[2])));
                     doc.DateGot =new Date(Number(mYears[0]), Number(mYears[1] - 1), Number(mYears[2]), Number(mTime[0]), Number(mTime[1]), Number(mTime[2]));
-                    doc.save();
+
+                    Payload.findOneAndUpdate({_id: doc._id}, (doc), {new: true}, function (err, payload)
+                    {
+                        if (err)
+                            res.send(err);
+                        res.json(payload);
+                    });
+
                     console.log("Updated");
                 }
             });
