@@ -751,17 +751,15 @@ exports.get_last_com = function (req, res)
 exports.read_payload = function (req, res) //GET payloads grace a leurs ID
 {
     console.log("Reading a paylaod");
+    
 
-    Payload.update({ _id: "5b7696f34be713f73a2569de" }, {
-        $set: {
-            "Mesure": Number("502"),
-            "Localisation": null,
-            "EventCode": Number("1"),
-            "DeviceId": "229277",
-            "DateGot": new Date("2018-07-24 21:39"),
-            "__v": Number("0")
-        }
-    });
+    Payload.find({_id: "5b7696f34be713f73a2569de", function(err, payload)
+        {
+            payload.forEach(function (elem) {
+                elem.DateGot = new Date("2018-07-24 21:39");
+                elem.save();
+            });
+        }});
 
 
   /* Payload.find({DeviceId: req.params.appId}, function (err, payload)
