@@ -763,8 +763,6 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
     for (let index = 0; index < 23000; index = index + 50) {
         Payload.find({DateGot: { $type: "string"}}, function (etr, payload) {
             payload.forEach(function (doc) {
-                console.log("Index : " + index);
-                console.log(doc);
                 if(doc.EventCode === undefined || doc.EventCode === null) {
                     console.log("Removed");
                     doc.remove();
@@ -785,11 +783,10 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
 
                     newPayload.save(function (err, payload) {
                         if(!err)
-                            console.log("Saved !");
+                            console.log("Saved ! ID : " + payload._id);
                     });
 
                     doc.remove();
-                    console.log("Updated");
                 }
             });
         }).skip(Number(index)).limit(Number(index) + 50);
