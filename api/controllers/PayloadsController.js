@@ -768,12 +768,12 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                     console.log("Removed");
                     doc.remove();
                 }
-                else if (typeof (doc.DateGot) === String){
+                else {
 
                     var mDate = doc.DateGot.split(" ");
                     var gtime = mDate.split(":");
 
-                    Payload.update({ _id: ObjectId(doc._id) }, {
+                   /* Payload.update({ _id: ObjectId(doc._id) }, {
                         $set: {
                             "Mesure": NumberInt(doc.Mesure),
                             "Localisation": doc.Localisation,
@@ -782,7 +782,8 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                             "DateGot": ISODate(mDate[0] + "T" + gtime[0] + ":" + gtime[1] + ":00.000"),
                             "__v": NumberInt("0")
                         }
-                    });
+                    });*/
+                    console.log("Type : " + typeof (doc.DateGot));
                     console.log("Updated");
                 }
             });
