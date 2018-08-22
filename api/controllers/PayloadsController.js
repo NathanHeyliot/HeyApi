@@ -764,8 +764,9 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
         Payload.find({DateGot: { $type: "string"}}, function (etr, payload) {
             payload.forEach(function (doc) {
                 if(doc.EventCode === undefined || doc.EventCode === null) {
-                    console.log("Removed");
-                    doc.remove();
+                    Payload.remove({_id: doc._id}, function () {
+                        console.log("Removed");
+                    });
                 }
                 else {
                     var mDate = doc.DateGot.toLocaleString().split(" ");
@@ -782,11 +783,11 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                     newPayload.DateGot = ActualTime;
 
                     newPayload.save(function (err, payload) {
-                            console.log(err);
-                            console.log("Saved ! ID : " + payload._id);
+                        Payload.remove({_id: doc._id}, function () {
+                            console.log("Old deleted");
+                        });
+                        console.log("Saved ! ID : " + payload._id);
                     });
-
-                    doc.remove();
                 }
             });
         }).skip(Number(index)).limit(Number(index) + 50);
