@@ -759,22 +759,24 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
         res.json(payload);
     }).sort({DateGot: -1});*/
 
-    var index = req.params.appId;
+    var index = 0;
 
-    Payload.find({}, function (etr, payload) {
-        payload.forEach(function (doc) {
-            console.log(doc);
-            if(doc.EventCode === undefined || doc.EventCode === null) {
-                console.log("Removed");
-                doc.remove();
-            }
-            else {
-                doc.DateGot = new Date(doc.DateGot);
-                console.log("Updated");
-                doc.save();
-            }
-        });
-    }).skip(Number(index)).limit(Number(index) + 50);
+    for (; index < 50000; index = index + 50) {
+        Payload.find({}, function (etr, payload) {
+            payload.forEach(function (doc) {
+                console.log(doc);
+                if(doc.EventCode === undefined || doc.EventCode === null) {
+                    console.log("Removed");
+                    doc.remove();
+                }
+                else {
+                    doc.DateGot = new Date(doc.DateGot);
+                    console.log("Updated");
+                    doc.save();
+                }
+            });
+        }).skip(Number(index)).limit(Number(index) + 50);
+    }
 };
 
 
