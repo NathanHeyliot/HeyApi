@@ -760,10 +760,9 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
         res.json(payload);
     }).sort({DateGot: -1});*/
 
-    for (let index = 0; index < 23000; index = index + 50) {
         Payload.find({DateGot: { $type: "string"}}, function (etr, payload) {
             payload.forEach(function (doc) {
-                if(doc.EventCode === undefined || doc.EventCode === null) {
+                if (doc.EventCode === undefined || doc.EventCode === null) {
                     Payload.remove({_id: doc._id}, function () {
                         console.log("Removed");
                     });
@@ -792,8 +791,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                     });
                 }
             });
-        }).skip(Number(index)).limit(Number(index) + 50);
-    };
+        });
 };
 
 
