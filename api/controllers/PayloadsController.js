@@ -769,7 +769,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                     doc.remove();
                 }
                 else {
-                    doc.DateGot = new ISODate(doc.DateGot);
+                    doc.DateGot = Date(doc.DateGot);
                     console.log("Updated");
                     doc.remove();
                     doc.save();
