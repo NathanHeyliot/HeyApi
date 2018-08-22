@@ -756,9 +756,11 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
     Payload.find({DateGot: { $type: "string"}}, function(err, payload)
         {
             payload.forEach(function (elem) {
-                var mDate = elem.DateGot.toLocaleString().split("T");
+                var mDate = elem.DateGot.toLocaleString().split(" ");
+                var mYears = mDate[0].split("-");
+                var mTime = mDate[1].split(":");
 
-                console.log(mDate[0]);
+                console.log("Old : " + mDate[0] + " " + mDate[1] + ", New : " + new Date(Number(mYears[0]), Number(mYears[1]), Number(mYears[2]), Number(mTime[0]), Number(mTime[1]), Number(mTime[2])), 0);
                 //elem.DateGot = new Date(Number(2018), Number(8), Number(17), Number(10), Number(5), 0, 0);
                 //elem.save();
             });
