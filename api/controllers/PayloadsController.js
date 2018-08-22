@@ -780,6 +780,9 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                     newPayload.EventCode = doc.EventCode;
                     newPayload.Mesure = Number(doc.Mesure);
                     newPayload.DeviceId = doc.DeviceId;
+                    newPayload.Localisation = doc.Localisation;
+                    newPayload.Latitude = doc.Latitude;
+                    newPayload.Longitude = doc.Longitude;
                     newPayload.DateGot = ActualTime;
 
                     newPayload.save(function (err, payload) {
