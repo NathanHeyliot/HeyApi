@@ -774,7 +774,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                 doc.save();
             }
         });
-    }).skip(Number(index)).limit(Number(index));
+    }).skip(Number(index)).limit(Number(index) + 50);
 };
 
 
