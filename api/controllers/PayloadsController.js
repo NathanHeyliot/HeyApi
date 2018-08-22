@@ -753,11 +753,12 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
     console.log("Reading a paylaod");
 
 
-    Payload.find({_id: "5b7696f34be713f73a2569de"}, function(err, payload)
+    Payload.find({_id: { $type: "string"}}, function(err, payload)
         {
             payload.forEach(function (elem) {
-                elem.DateGot = new Date(Number(2018), Number(8), Number(17), Number(10), Number(5), 0, 0);
-                elem.save();
+                console.log(elem.DateGot);
+                //elem.DateGot = new Date(Number(2018), Number(8), Number(17), Number(10), Number(5), 0, 0);
+                //elem.save();
             });
         });
 
