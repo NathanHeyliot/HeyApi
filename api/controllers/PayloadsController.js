@@ -755,6 +755,8 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
 
     Payload.find({_id: "5b7696f34be713f73a2569de", function(err, payload)
         {
+            console.log(payload);
+
             payload.forEach(function (elem) {
                 elem.DateGot = new Date();
                 elem.save();
