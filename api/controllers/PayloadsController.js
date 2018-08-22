@@ -755,10 +755,13 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
 
     Payload.find({_id: "5b7696f34be713f73a2569de"}, function(err, payload)
         {
-            console.log(payload);
-
             payload.forEach(function (elem) {
-                elem.DateGot = new Date();
+
+                var mDate = elem.DateGot.split(" ");
+                var mYear = mDate[0].split("-");
+                var mTime = mDate[1].split(":");
+
+                elem.DateGot = new Date(Number(mYear[0]), Number(mYear[1]), Number(mYear[2]), Number(mTime[0]), Number(mTime[1]), 0, 0);
                 elem.save();
             });
         });
