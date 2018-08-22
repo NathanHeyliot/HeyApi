@@ -754,12 +754,12 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
 
     Payload.update({ _id: "5b7696f34be713f73a2569fe" }, {
         $set: {
-            "Mesure": NumberInt("503"),
+            "Mesure": Number("503"),
             "Localisation": null,
-            "EventCode": NumberInt("1"),
+            "EventCode": Number("1"),
             "DeviceId": "229277",
-            "DateGot": ISODate("2018-07-25T05:59:0.000"),
-            "__v": NumberInt("0")
+            "DateGot": new Date("2018-07-25T05:59:0.000Z"),
+            "__v": Number("0")
         }
     });
 
