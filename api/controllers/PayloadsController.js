@@ -782,7 +782,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                     newPayload.DateGot = ActualTime;
 
                     newPayload.save(function (err, payload) {
-                        if(!err)
+                            console.log(err);
                             console.log("Saved ! ID : " + payload._id);
                     });
 
