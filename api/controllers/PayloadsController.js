@@ -657,19 +657,19 @@ exports.adv_read_payloads = function (req, res)
         }
     } else {
         if(type === "all") {
-            Payload.find({DeviceId: id, DateGot: {$gt: start, $lt: end}}, function (err, payload)
+            Payload.find({DeviceId: id}, function (err, payload)
             {
                 if (err)
                     console.log(err);
                 res.json(payload);
-            }).sort({DateGot: -1});
+            }).sort({DateGot: -1}).skip(Number(start)).limit(Number(end));
         } else {
-            Payload.find({DeviceId: id, EventCode: type, DateGot: {$gt: start, $lt: end}}, function (err, payload)
+            Payload.find({DeviceId: id, EventCode: type}, function (err, payload)
             {
                 if (err)
                     console.log(err);
                 res.json(payload);
-            }).sort({DateGot: -1});
+            }).sort({DateGot: -1}).skip(Number(start)).limit(Number(end));
         }
     }
 };
@@ -753,14 +753,14 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
     console.log("Reading a paylaod");
 
 
-  /* Payload.find({DeviceId: req.params.appId}, function (err, payload)
+   Payload.find({DeviceId: req.params.appId}, function (err, payload)
     {
         if (err)
             res.send(err);
         res.json(payload);
-    }).sort({DateGot: -1});*/
+    }).sort({DateGot: -1});
 
-        Payload.find({DateGot: { $type: "string"}}, function (etr, payload) {
+     /*   Payload.find({DateGot: { $type: "string"}}, function (etr, payload) {
             payload.forEach(function (doc) {
                 if (doc.EventCode === undefined || doc.EventCode === null) {
                     Payload.remove({_id: doc._id}, function () {
@@ -791,7 +791,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                     });
                 }
             });
-        });
+        });*/
 };
 
 
