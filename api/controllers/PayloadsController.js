@@ -778,7 +778,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                     let newPayload = new Payload;
                     newPayload.EventCode = doc.EventCode;
                     newPayload.Mesure = Number(doc.Mesure);
-                    newPayload.DeviceId = doc.SigfoxId;
+                    newPayload.DeviceId = doc.DeviceId;
                     newPayload.DateGot = ActualTime;
 
                     newPayload.save(function (err, payload) {
