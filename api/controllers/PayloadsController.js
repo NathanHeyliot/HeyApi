@@ -773,7 +773,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                     var mString = doc.DateGot.toString();
 
                     var mDate = mString.split(" ");
-                    var gtime = mDate.split(":");
+                    var gtime = mDate[1].split(":");
 
                    /* Payload.update({ _id: ObjectId(doc._id) }, {
                         $set: {
