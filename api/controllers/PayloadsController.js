@@ -760,9 +760,9 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                 var mYears = mDate[0].split("-");
                 var mTime = mDate[1].split(":");
 
-                console.log("Old : " + mDate[0] + " " + mDate[1] + ", New : " + new Date(Number(mYears[0]), Number(mYears[1]), Number(mYears[2]), Number(mTime[0]), Number(mTime[1]), Number(mTime[2])), 0);
-                //elem.DateGot = new Date(Number(2018), Number(8), Number(17), Number(10), Number(5), 0, 0);
-                //elem.save();
+                console.log("Old : " + mDate[0] + " " + mDate[1] + ", New : " + new Date(Number(mYears[0]), Number(mYears[1] - 1), Number(mYears[2]), Number(mTime[0]), Number(mTime[1]), Number(mTime[2])));
+                elem.DateGot =new Date(Number(mYears[0]), Number(mYears[1] - 1), Number(mYears[2]), Number(mTime[0]), Number(mTime[1]), Number(mTime[2]));
+                elem.save();
             });
         });
 
