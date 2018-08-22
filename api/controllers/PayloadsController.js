@@ -768,11 +768,11 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                     console.log("Removed");
                     doc.remove();
                 }
-                else {
+                else if (!doc.DateGot.include("Z")){
 
                     var mDate = doc.DateGot.split(" ");
                     var gtime = mDate.split(":");
-                    
+
                     Payload.update({ _id: ObjectId(doc._id) }, {
                         $set: {
                             "Mesure": NumberInt(doc.Mesure),
