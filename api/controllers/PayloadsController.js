@@ -771,7 +771,6 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                 else {
                     doc.DateGot = Date(doc.DateGot);
                     console.log("Updated");
-                    doc.remove();
                     doc.save();
                 }
             });
