@@ -759,7 +759,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
         res.json(payload);
     }).sort({DateGot: -1});*/
 
-    for (let index = 0; index < 20000; index = index + 50) {
+    for (let index = 0; index < 23000; index = index + 50) {
         Payload.find({}, function (etr, payload) {
             payload.forEach(function (doc) {
                 console.log("Index : " + index);
@@ -769,9 +769,21 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                     doc.remove();
                 }
                 else {
-                    doc.DateGot = Date(doc.DateGot);
+
+                    var mDate = doc.DateGot.split(" ");
+                    var gtime = mDate.split(":");
+                    
+                    Payload.update({ _id: ObjectId(doc._id) }, {
+                        $set: {
+                            "Mesure": NumberInt(doc.Mesure),
+                            "Localisation": doc.Localisation,
+                            "EventCode": NumberInt(Doc.EventCode),
+                            "DeviceId": doc.DeviceId,
+                            "DateGot": ISODate(mDate[0] + "T" + gtime[0] + ":" + gtime[1] + ":00.000"),
+                            "__v": NumberInt("0")
+                        }
+                    });
                     console.log("Updated");
-                    doc.save();
                 }
             });
         }).skip(Number(index)).limit(Number(index) + 50);
