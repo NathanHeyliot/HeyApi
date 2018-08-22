@@ -774,8 +774,8 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                     var mYears = mDate[0].split("-");
                     var mTime = mDate[1].split(":");
 
-                    console.log("Old : " + mDate[0] + " " + mDate[1] + ", New : " + new Date(Number(mYears[0]), Number(mYears[1] - 1), Number(mYears[2]), Number(mTime[0]), Number(mTime[1]), Number(mTime[2])));
-                    doc.DateGot =new Date(Number(mYears[0]), Number(mYears[1] - 1), Number(mYears[2]), Number(mTime[0]), Number(mTime[1]), Number(mTime[2]));
+                    doc.DateGot = new Date(Number(mYears[0]), Number(mYears[1] - 1), Number(mYears[2]), Number(mTime[0]), Number(mTime[1]), Number(mTime[2]));
+                    console.log("Old : " + mDate[0] + " " + mDate[1] + ", New : " + doc.DateGot);
 
                     Payload.findOneAndUpdate({_id: doc._id}, (doc), {new: true}, function (err, payload)
                     {
