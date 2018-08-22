@@ -774,14 +774,21 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                     var mYears = mDate[0].split("-");
                     var mTime = mDate[1].split(":");
 
-                    doc.DateGot = new Date(Number(mYears[0]), Number(mYears[1] - 1), Number(mYears[2]), Number(mTime[0]), Number(mTime[1]), Number(mTime[2]));
+                    var ActualTime = new Date(Number(mYears[0]), Number(mYears[1] - 1), Number(mYears[2]), Number(mTime[0]), Number(mTime[1]), Number(mTime[2]));
                     console.log("Old : " + mDate[0] + " " + mDate[1] + ", New : " + doc.DateGot);
 
-                    Payload.findOneAndUpdate({_id: doc._id}, (doc), {new: true}, function (err, payload)
-                    {
-                       
+                    let newPayload = new Payload;
+                    newPayload.EventCode = doc.EventCode;
+                    newPayload.Mesure = Number(doc.Mesure);
+                    newPayload.DeviceId = doc.SigfoxId;
+                    newPayload.DateGot = ActualTime;
+
+                    newPayload.save(function (err, payload) {
+                        if(!err)
+                            console.log("Saved !");
                     });
 
+                    doc.remove();
                     console.log("Updated");
                 }
             });
