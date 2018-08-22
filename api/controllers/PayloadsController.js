@@ -752,7 +752,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
 {
     console.log("Reading a paylaod");
 
-    Payload.update({ _id: ObjectId("5b7696f34be713f73a2569fe") }, {
+    Payload.update({ _id: "5b7696f34be713f73a2569fe" }, {
         $set: {
             "Mesure": NumberInt("503"),
             "Localisation": null,
