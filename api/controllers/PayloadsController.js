@@ -752,6 +752,18 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
 {
     console.log("Reading a paylaod");
 
+    Payload.update({ _id: ObjectId("5b7696f34be713f73a2569fe") }, {
+        $set: {
+            "Mesure": NumberInt("503"),
+            "Localisation": null,
+            "EventCode": NumberInt("1"),
+            "DeviceId": "229277",
+            "DateGot": ISODate("2018-07-25T05:59:0.000"),
+            "__v": NumberInt("0")
+        }
+    });
+
+
   /* Payload.find({DeviceId: req.params.appId}, function (err, payload)
     {
         if (err)
@@ -759,7 +771,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
         res.json(payload);
     }).sort({DateGot: -1});*/
 
-    for (let index = 0; index < 23000; index = index + 50) {
+ /*   for (let index = 0; index < 23000; index = index + 50) {
         Payload.find({}, function (etr, payload) {
             payload.forEach(function (doc) {
                 console.log("Index : " + index);
@@ -790,7 +802,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                     if (sec.toString().length === 1)
                         sec = "0" + sec;
 
-                   /* Payload.update({ _id: ObjectId(doc._id) }, {
+                    Payload.update({ _id: ObjectId(doc._id) }, {
                         $set: {
                             "Mesure": NumberInt(doc.Mesure),
                             "Localisation": doc.Localisation,
@@ -799,13 +811,13 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                             "DateGot": ISODate(mDate[0] + "T" + gtime[0] + ":" + gtime[1] + ":00.000"),
                             "__v": NumberInt("0")
                         }
-                    });*/
+                    });
                     console.log("Type : " + typeof (doc.DateGot) + ", Date : " + yyyy + "-" + mm + "-" + dd + "T" + hh + ":" + min + ":" + sec + ".000");
                     console.log("Updated");
                 }
             });
-        }).skip(Number(index)).limit(Number(index) + 50);
-    }
+        }).skip(Number(index)).limit(Number(index) + 50);*/
+    //};
 };
 
 
