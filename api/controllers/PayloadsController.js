@@ -771,10 +771,24 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                 else {
 
                     var date = new Date(doc.DateGot);
-                    var mString = date.toString();
 
-                    var mDate = mString.split(" ");
-                    var gtime = mDate[1].split(":");
+                    let dd = date.getDate();
+                    let mm = date.getMonth()+1;
+                    let yyyy = date.getFullYear();
+                    let hh = date.getHours();
+                    let min = date.getMinutes();
+                    let sec = date.getSeconds();
+
+                    if (dd.toString().length === 1)
+                        dd = "0" + dd;
+                    if (mm.toString().length === 1)
+                        mm = "0" + mm;
+                    if (hh.toString().length === 1)
+                        hh = "0" + hh;
+                    if (min.toString().length === 1)
+                        min = "0" + min;
+                    if (sec.toString().length === 1)
+                        sec = "0" + sec;
 
                    /* Payload.update({ _id: ObjectId(doc._id) }, {
                         $set: {
@@ -786,7 +800,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                             "__v": NumberInt("0")
                         }
                     });*/
-                    console.log("Type : " + typeof (doc.DateGot) + ", Date : " + mDate[0] + "T" + gtime[0] + ":" + gtime[1] + ":00.000");
+                    console.log("Type : " + typeof (doc.DateGot) + ", Date : " + yyyy + "-" + mm + "-" + dd + "T" + hh + ":" + min + ":" + sec + ".000");
                     console.log("Updated");
                 }
             });
