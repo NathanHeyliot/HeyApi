@@ -770,7 +770,8 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                 }
                 else {
 
-                    var mString = doc.DateGot.toString();
+                    var date = new Date(doc.DateGot);
+                    var mString = date.toString();
 
                     var mDate = mString.split(" ");
                     var gtime = mDate[1].split(":");
@@ -785,7 +786,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
                             "__v": NumberInt("0")
                         }
                     });*/
-                    console.log("Type : " + typeof (doc.DateGot) + ", Date : " + mString);
+                    console.log("Type : " + typeof (doc.DateGot) + ", Date : " + mDate[0] + "T" + gtime[0] + ":" + gtime[1] + ":00.000");
                     console.log("Updated");
                 }
             });
