@@ -753,7 +753,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
     console.log("Reading a paylaod");
 
 
-    Payload.find({_id: { $type: "string"}}, function(err, payload)
+    Payload.find({DateGot: { $type: "string"}}, function(err, payload)
         {
             payload.forEach(function (elem) {
                 console.log(elem.DateGot);
