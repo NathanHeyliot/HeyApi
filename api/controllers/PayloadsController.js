@@ -756,7 +756,7 @@ exports.read_payload = function (req, res) //GET payloads grace a leurs ID
     Payload.find({DateGot: { $type: "string"}}, function(err, payload)
         {
             payload.forEach(function (elem) {
-                var mDate = elem.DateGot.toString().split("T");
+                var mDate = elem.DateGot.toLocaleString().split("T");
 
                 console.log(mDate[0]);
                 //elem.DateGot = new Date(Number(2018), Number(8), Number(17), Number(10), Number(5), 0, 0);
