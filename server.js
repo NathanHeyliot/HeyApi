@@ -15,13 +15,18 @@ var express = require('express'),
     Permissions = require('./api/models/PermissionsModel'),
     UserGroup = require("./api/models/UserGroupModel"),
     https = require("https"),
+    fs = require("fs"),
     helmet = require("helmet");
 
 
 
 //setup HTTPS PROTOCOL
+app.use(helmet()); // Setuping the helmet middleware (is a protection system)
 
-
+const options = {
+    key: fs.readFileSync("/srv/www/keys/my-site-key.pem"),
+    cert: fs.readFileSync("/srv/www/keys/chain.pem")
+};
 
 //connection a la BDD
 mongoose.Promise = global.Promise;
