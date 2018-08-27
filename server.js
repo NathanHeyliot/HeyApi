@@ -24,8 +24,8 @@ var express = require('express'),
 app.use(helmet()); // Setuping the helmet middleware (is a protection system)
 
 const options = {
-    key: fs.readFileSync("/srv/www/keys/my-site-key.pem"),
-    cert: fs.readFileSync("/srv/www/keys/chain.pem")
+    key: fs.readFileSync(" /etc/letsencrypt/live/api.heyliot.com/privkey.pem"),
+    cert: fs.readFileSync("/etc/letsencrypt/live/api.heyliot.com/fullchain.pem")
 };
 
 //connection a la BDD
