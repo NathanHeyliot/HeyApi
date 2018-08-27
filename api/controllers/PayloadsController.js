@@ -487,7 +487,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
 
                     Device.find({SigfoxId: DeviceId}, function (err, obj) {
-                        if(obj[0] !== undefined && obj[0] != null) { //check if device has been found in database
+                        if(obj[0] !== undefined && obj[0] !== null) { //check if device has been found in database
                             let needDownlink = obj[0].toObject().Downlink;
                             let City = "";
                             if(parsed_get.address.village && parsed_get.address.village !== "" && parsed_get.address.village !== undefined && parsed_get.address.village !== null)
