@@ -23,10 +23,10 @@ var express = require('express'),
 //setup HTTPS PROTOCOL
 app.use(helmet()); // Setuping the helmet middleware (is a protection system)
 
-/*const options = {
-    key: fs.readFileSync(" /etc/letsencrypt/live/api.heyliot.com/privkey.pem"),
+const options = {
+    key: fs.readFileSync("/etc/letsencrypt/live/api.heyliot.com/privkey.pem"),
     cert: fs.readFileSync("/etc/letsencrypt/live/api.heyliot.com/fullchain.pem")
-};*/
+};
 
 //connection a la BDD
 mongoose.Promise = global.Promise;
