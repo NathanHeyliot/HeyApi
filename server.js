@@ -52,7 +52,9 @@ app.set('view engine', 'ejs');
 let routes = require('./api/routes/ApiRoute');
 routes(app);
 
-app.listen(port);
+//app.listen(port); //HTTP PROTOCOL
+
+https.createServer(options, app).listen(port); //HTTPS PROTOCOL
 
 
 //error management
