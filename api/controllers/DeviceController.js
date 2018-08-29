@@ -71,8 +71,8 @@ exports.create_device = function (req, res)
         min = "0" + min;
 
 
-    newDevice.Created = new Date(dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min);
-    newDevice.LastUpdate = new Date(dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min);
+    newDevice.Created = new Date(yyyy + "/" + mm + "/" + dd + " " + hh + ":" + min);
+    newDevice.LastUpdate = new Date(yyyy + "/" + mm + "/" + dd + " " + hh + ":" + min);
     newDevice.Name = req.body.Name;
     newDevice.Description = req.body.Description;
     newDevice.GroupId = req.body.GroupId;
