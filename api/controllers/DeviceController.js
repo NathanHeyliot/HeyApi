@@ -83,6 +83,31 @@ exports.create_device = function (req, res)
     newDevice.Wake_in = req.body.Wake_in;
     newDevice.Wake_out = req.body.Wake_out;
     newDevice.MesureNbr = req.body.MesureNbr;
+    newDevice.Lon = req.body.Lon;
+    newDevice.Lat = req.body.Lat;
+
+    if(newDevice.Lat && newDevice.Lon) {
+
+        req.addEventListener('load', function() {
+            let parsed_get = JSON.parse(req.response);
+            let City = "";
+            if(parsed_get.address.village && parsed_get.address.village !== "" && parsed_get.address.village !== undefined && parsed_get.address.village !== null)
+                City = parsed_get.address.village;
+            else if (parsed_get.address.town && parsed_get.address.town !== "" && parsed_get.address.town !== undefined && parsed_get.address.town !== null)
+                City = parsed_get.address.town;
+            else
+                City = parsed_get.address.city;
+
+            newDevice.PostCode =  parsed_get.address.postcode;
+            newDevice.City = City;
+            newDevice.Address = parsed_get.address.road;
+
+        });
+
+        req.open("GET", "https://eu1.locationiq.org/v1/reverse.php?key=9126593a665608&lat=" + newDevice.Lat + "&lon=" + newDevice.Lon + "&format=json", true);
+        req.send(null);
+    }
+
 
     //on initialise un nouveau capteur avec un remplissage a 0% et une calibration a - 30 pour faciliter la mesure de calibration ensuite
 
