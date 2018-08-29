@@ -239,6 +239,28 @@ exports.create_payload = function (req, res) //create a new payload and POST it
     console.log("Payloads informations....");
     console.log(req.body);
 
+
+    //on recupere la date de reception
+    let ActualTime = new Date();
+    let dd = ActualTime.getDate();
+    let mm = ActualTime.getMonth()+1;
+    let yyyy = ActualTime.getFullYear();
+    let hh = ActualTime.getHours();
+    let min = ActualTime.getMinutes();
+    let sec = ActualTime.getSeconds();
+
+    if (dd.toString().length === 1)
+        dd = "0" + dd;
+    if (mm.toString().length === 1)
+        mm = "0" + mm;
+    if (hh.toString().length === 1)
+        hh = "0" + hh;
+    if (min.toString().length === 1)
+        min = "0" + min;
+    if (sec.toString().length === 1)
+        sec = "0" + sec;
+
+
     //si event = 1 -> mesures on les stockes toutes une par une et on update le device associé
     if ((event = checkEventCode(req.body)) === 1)
     {
