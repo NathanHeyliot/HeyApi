@@ -16,9 +16,11 @@ var express = require('express'),
     UserGroup = require("./api/models/UserGroupModel"),
     https = require("https"),
     fs = require("fs"),
+    const pathToSwaggerUi = require('swagger-ui-dist').absolutePath(),
     helmet = require("helmet");
 
 
+app.use(express.static(pathToSwaggerUi));
 
 //setup HTTPS PROTOCOL
 app.use(helmet()); // Setuping the helmet middleware (is a protection system)
