@@ -16,7 +16,7 @@ var express = require('express'),
     UserGroup = require("./api/models/UserGroupModel"),
     https = require("https"),
     fs = require("fs"),
-    const pathToSwaggerUi = require('swagger-ui-dist').absolutePath(),
+    pathToSwaggerUi = require('swagger-ui-dist').absolutePath(),
     helmet = require("helmet");
 
 
