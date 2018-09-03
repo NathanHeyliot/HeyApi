@@ -113,32 +113,51 @@ exports.create_device = function (req, res)
             newDevice.City = City;
             newDevice.Address = parsed_get.address.road;
 
+            //on initialise un nouveau capteur avec un remplissage a 0% et une calibration a - 30 pour faciliter la mesure de calibration ensuite
+
+            newDevice.FillLevel = 0;
+            newDevice.CalibrationMeasure = -30;
+
+            console.log("Submitting new device ...");
+            console.log(newDevice);
+
+            //Ajoute le nouveau device a la BDD
+            newDevice.save(function (err, device)
+            {
+                if(err) {
+                    console.log("Device can not be created.");
+                    res.send(err);
+                } else {
+                    console.log("Device succefully created.");
+                    res.json(Device);
+                }
+            });
+
         });
 
         req.open("GET", "https://eu1.locationiq.org/v1/reverse.php?key=9126593a665608&lat=" + newDevice.Lat + "&lon=" + newDevice.Lon + "&format=json", true);
         req.send(null);
+    } else {
+        //on initialise un nouveau capteur avec un remplissage a 0% et une calibration a - 30 pour faciliter la mesure de calibration ensuite
+
+        newDevice.FillLevel = 0;
+        newDevice.CalibrationMeasure = -30;
+
+        console.log("Submitting new device ...");
+        console.log(newDevice);
+
+        //Ajoute le nouveau device a la BDD
+        newDevice.save(function (err, device)
+        {
+            if(err) {
+                console.log("Device can not be created.");
+                res.send(err);
+            } else {
+                console.log("Device succefully created.");
+                res.json(Device);
+            }
+        });
     }
-
-
-    //on initialise un nouveau capteur avec un remplissage a 0% et une calibration a - 30 pour faciliter la mesure de calibration ensuite
-
-    newDevice.FillLevel = 0;
-    newDevice.CalibrationMeasure = -30;
-
-    console.log("Submitting new device ...");
-    console.log(newDevice);
-
-    //Ajoute le nouveau device a la BDD
-    newDevice.save(function (err, device)
-    {
-        if(err) {
-            console.log("Device can not be created.");
-            res.send(err);
-        } else {
-            console.log("Device succefully created.");
-            res.json(Device);
-        }
-    });
 };
 
 exports.read_device = function(req, res) //recupere les details d'un capteur et renvoie sous forme de JSON
