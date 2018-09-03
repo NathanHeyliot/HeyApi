@@ -92,4 +92,3 @@ app.use(function (req, res)
 
 console.log('Server started on: ' + port);
 console.log("Auth Token activated : true");
-console.log("Path to Swagger UI : " + pathToSwaggerUi);

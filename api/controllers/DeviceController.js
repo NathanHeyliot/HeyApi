@@ -5,6 +5,12 @@ let mongoose = require('mongoose'),
     Payload = mongoose.model('Payload'),
     UserGroup = mongoose.model('UserGroup');
 
+// Standalone usage
+var XMLHttpRequest = require('node-http-xhr');
+
+// Usage as global XHR constructor
+global.XMLHttpRequest = require('node-http-xhr');
+
 exports.list_device = function(req, res) // GET recupere les infos des devices et les retournes en format JSON
 {
     console.log("List of devices");
