@@ -98,6 +98,9 @@ exports.create_device = function (req, res)
 
         req.addEventListener('load', function() {
             let parsed_get = JSON.parse(req.response);
+
+            console.log(parsed_get);
+
             let City = "";
             if(parsed_get.address.village && parsed_get.address.village !== "" && parsed_get.address.village !== undefined && parsed_get.address.village !== null)
                 City = parsed_get.address.village;
