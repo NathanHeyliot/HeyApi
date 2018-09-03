@@ -753,8 +753,10 @@ exports.get_last_com = function (req, res)
     }
 
     for (var p in DevicesList) {
-        let element = DevicesList[p];
-        Payload.find({DeviceId: element}, {__v: 0, Localisation: 0}, function (err, device)
+        let element = DevicesList[p].split(":");
+        let device = element[0];
+        let type = element[1];
+        Payload.find({DeviceId: device, EventCode: type}, {__v: 0, Localisation: 0}, function (err, device)
         {
             p_do++;
             if (err)
