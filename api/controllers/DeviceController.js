@@ -94,6 +94,8 @@ exports.create_device = function (req, res)
 
     if(newDevice.Lat && newDevice.Lon) {
 
+        req = new XMLHttpRequest();
+
         req.addEventListener('load', function() {
             let parsed_get = JSON.parse(req.response);
             let City = "";
