@@ -3,6 +3,7 @@
 var express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
+    HttpPort = 3100,
     mongoose = require('mongoose'),
     Payload = require('./api/models/PayloadsModel'),
     Device = require('./api/models/DeviceModel'),
@@ -50,8 +51,7 @@ app.set('view engine', 'ejs');
 let routes = require('./api/routes/ApiRoute');
 routes(app);
 
-//app.listen(port); //HTTP PROTOCOL --- DO NOT USE THIS !!
-
+app.listen(HttpPort); //HTTP PORT used for local connect <3
 https.createServer(options, app).listen(port); //HTTPS PROTOCOL
 
 
