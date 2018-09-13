@@ -549,7 +549,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                 {
                                     if (err)
                                         console.log(err);
-                                    if(payload[0] !== undefined && payload[0] !== null) {
+                                    /*if(payload[0] !== undefined && payload[0] !== null) {
                                         if(payload[0].toObject().Latitude !== null && payload[0].toObject().Longitude !== null) {
 
                                             console.log("Last position : " + payload[0].toObject().Localisation);
@@ -563,7 +563,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                                 newPayload.save();
                                             }
                                         }
-                                    }
+                                    }*/
 
 
                                     sendBOT(device.toObject().Name, device.toObject().SigfoxId, device.toObject()._id, "Localisation",  "Latitude : " + parsed_info.lat + " , Longitude : " + parsed_info.lng, dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min + ":" + sec,  "#ffbe33");
