@@ -329,8 +329,8 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
                                         let minMeasure = (obj[0].toObject().MinMeasure);
 
-                                        if(cal < minMeasure) {
-                                            minMeasure = cal;
+                                        if(PayloadArray[i].Mesure < minMeasure) {
+                                            minMeasure = PayloadArray[i].Mesure;
                                             Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId}, {MinMeasure: minMeasure}, {new: true},
                                                 function ()
                                                 {
