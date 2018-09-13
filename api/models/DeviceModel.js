@@ -31,6 +31,10 @@ let DevicesSchema = new Schema
         {
             type: Number
         },
+    MinMeasure:
+        {
+            type: Number, default: 9999
+        },
     Created:
         {
             type: Date, default: Date.now

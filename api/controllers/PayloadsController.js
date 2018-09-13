@@ -323,11 +323,30 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                 Device.find({SigfoxId: newDevice.SigfoxId}, function (err, obj) {
                                     if(obj[0] !== undefined && obj[0] !== null) { //check if device has been found in database
                                         cal = (obj[0].toObject().CalibrationMeasure);
-                                        if (PayloadArray[i].Mesure !== 9999)// 9999 = error
-                                            newDevice.FillLevel =  100 - (PayloadArray[i].Mesure * 100 / cal);
-                                        else
-                                            newDevice.FillLevel = obj[0].toObject().FillLevel;
-                                        newDevice.FillLevel = newDevice.FillLevel.toFixed(2);
+
+
+
+
+                                        let minMeasure = (obj[0].toObject().MinMeasure);
+
+                                        if(cal < minMeasure) {
+                                            minMeasure = cal;
+                                            Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId}, {MinMeasure: minMeasure}, {new: true},
+                                                function ()
+                                                {
+                                                    console.log("updating min measure");
+                                                });
+                                            newDevice.FillLevel = 100;
+                                        } else if(PayloadArray[i].Mesure !== 9999) {
+                                            newDevice.FillLevel = 100 - (Math.round((PayloadArray[i].Mesure - minMeasure) * (100 - 0) / (cal - minMeasure) + 0,0));
+                                            newDevice.FillLevel = newDevice.FillLevel.toFixed(2);
+                                        } else {
+                                            newDevice.FillLevel = obj[0].toObject().FillLevel
+                                        }
+
+
+
+
                                         let needDownlink = obj[0].toObject().Downlink;
                                         //On update le device
                                         Device.findOneAndUpdate({SigfoxId: newDevice.SigfoxId},
