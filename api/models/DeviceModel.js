@@ -11,6 +11,10 @@ let DevicesSchema = new Schema
        {
            type: String, unique: true, required: true
        },
+    SlackChanel:
+        {
+            type: String, default: null
+        },
     SigfoxId:
         {
           type: String, required: true,
@@ -90,6 +94,10 @@ let DevicesSchema = new Schema
     Downlink:
         {
             type: Number, default: 1
+        },
+    Hide:
+        {
+            type: Boolean, default: false,
         },
 });
 

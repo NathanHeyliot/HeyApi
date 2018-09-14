@@ -80,6 +80,7 @@ exports.create_device = function (req, res)
     newDevice.Created = new Date(yyyy + "/" + mm + "/" + dd + " " + hh + ":" + min);
     newDevice.LastUpdate = new Date(yyyy + "/" + mm + "/" + dd + " " + hh + ":" + min);
     newDevice.Name = req.body.Name;
+    newDevice.SlackChanel = req.body.SlackChanel;
     newDevice.Description = req.body.Description;
     newDevice.GroupId = req.body.GroupId;
     newDevice.SigfoxId = req.body.SigfoxId;
@@ -91,6 +92,7 @@ exports.create_device = function (req, res)
     newDevice.MesureNbr = req.body.MesureNbr;
     newDevice.Lon = req.body.Lon;
     newDevice.Lat = req.body.Lat;
+    newDevice.Hide = req.body.hide;
 
     if(newDevice.Lat && newDevice.Lon) {
 

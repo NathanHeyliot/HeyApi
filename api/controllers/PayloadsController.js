@@ -294,9 +294,9 @@ exports.create_payload = function (req, res) //create a new payload and POST it
 
 
                     if(PayloadArray[i].Mesure === 9999)
-                        sendBOT(device.toObject().Name, req.body.DeviceId, device.toObject()._id, "Mesure",  "Erreur de mesure", PayloadArray[i].DateGot,  "#ea5153");
+                        sendBOT(device.toObject().SlackChanel, req.body.DeviceId, device.toObject()._id, "Mesure",  "Erreur de mesure", PayloadArray[i].DateGot,  "#ea5153");
                     else
-                        sendBOT(device.toObject().Name, req.body.DeviceId, device.toObject()._id, "Mesure",  PayloadArray[i].Mesure, PayloadArray[i].DateGot, "#45b384");
+                        sendBOT(device.toObject().SlackChanel, req.body.DeviceId, device.toObject()._id, "Mesure",  PayloadArray[i].Mesure, PayloadArray[i].DateGot, "#45b384");
                 }
 
                 console.log("Payload Array : " + PayloadArray);
@@ -441,7 +441,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                         {new: true}, function (err, device)
                         {
 
-                            sendBOT(device.toObject().Name, device.toObject().SigfoxId, device.toObject()._id, "Calibration",  newPayload.Mesure,newPayload.DateGot,  "#007cb3");
+                            sendBOT(device.toObject().SlackChanel, device.toObject().SigfoxId, device.toObject()._id, "Calibration",  newPayload.Mesure,newPayload.DateGot,  "#007cb3");
 
                             if(needDownlink === 1) {
                                 //check if is good
@@ -566,7 +566,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                                     }*/
 
 
-                                    sendBOT(device.toObject().Name, device.toObject().SigfoxId, device.toObject()._id, "Localisation",  "Latitude : " + parsed_info.lat + " , Longitude : " + parsed_info.lng, dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min + ":" + sec,  "#ffbe33");
+                                    sendBOT(device.toObject().SlackChanel, device.toObject().SigfoxId, device.toObject()._id, "Localisation",  "Latitude : " + parsed_info.lat + " , Longitude : " + parsed_info.lng, dd + "/" + mm + "/" + yyyy + " " + hh + ":" + min + ":" + sec,  "#ffbe33");
 
                                     if(needDownlink === 1) {
 
@@ -865,12 +865,14 @@ exports.delete_payload = function (req, res) //DELETE le payload specifié
 
 function sendBOT(Name, SigFoxId, id, Signal, Information, Date, Color)
 {
+    if(Name === null)
+        return;
     let req = new XMLHttpRequest();
     let data = JSON.stringify({
         "channel" : Name,
         "attachments": [{
-            "fallback": "Capteur : " + Name + " SigfoxId : " + SigFoxId + " <http://app.heyliot.com/devices/view/" + id + "|Voir le device>",
-            "pretext":"Capteur : " + Name + " SigfoxId : " + SigFoxId + " <http://app.heyliot.com/devices/view/" + id + "|Voir le device>",
+            "fallback": "Capteur : " + Name + " SigfoxId : " + SigFoxId + " <https://app.heyliot.com/devices/view/" + id + "|Voir le device>",
+            "pretext":"Capteur : " + Name + " SigfoxId : " + SigFoxId + " <https://app.heyliot.com/devices/view/" + id + "|Voir le device>",
             "color": Color,
             "fields":[
                 {
