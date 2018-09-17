@@ -197,9 +197,9 @@ exports.delete_device = function (req, res) //supprime le device séléctionné
 exports.list_group_devices = function (req, res) //Recupere tout les device d'un groupe séléctionné
 {
     
-    Groups.find({$or: [{_id: req.params.GroupId}, {ParentId: req.params.GroupId}]}, function (err, groups) {
+    //Groups.find({$or: [{_id: req.params.GroupId}, {ParentId: req.params.GroupId}]}, function (err, groups) {
         
-    });
+    //});
     
     console.log("List of groups of devices by id, GROUP ID : " + req.params.GroupId);
 
