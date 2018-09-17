@@ -2,6 +2,7 @@
 //include
 let mongoose = require('mongoose'),
     Device = mongoose.model('Device'),
+    Groups = mongoose.model('Group'),
     Payload = mongoose.model('Payload'),
     UserGroup = mongoose.model('UserGroup');
 
@@ -92,7 +93,7 @@ exports.create_device = function (req, res)
     newDevice.MesureNbr = req.body.MesureNbr;
     newDevice.Lon = req.body.Lon;
     newDevice.Lat = req.body.Lat;
-    newDevice.Hide = req.body.hide;
+    newDevice.Hide = req.body.Hide;
 
     if(newDevice.Lat && newDevice.Lon) {
 
@@ -195,6 +196,11 @@ exports.delete_device = function (req, res) //supprime le device séléctionné
 
 exports.list_group_devices = function (req, res) //Recupere tout les device d'un groupe séléctionné
 {
+    
+    Groups.find({$or: [{_id: req.params.GroupId}, {ParentId: req.params.GroupId}]}, function (err, groups) {
+        
+    });
+    
     console.log("List of groups of devices by id, GROUP ID : " + req.params.GroupId);
 
     Device.find({GroupId: req.params.GroupId}, function (err, device)
