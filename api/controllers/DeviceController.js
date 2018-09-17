@@ -200,8 +200,10 @@ exports.list_group_devices = function (req, res) //Recupere tout les device d'un
     //Groups.find({$or: [{_id: req.params.GroupId}, {ParentId: req.params.GroupId}]}, function (err, groups) {
         
     //});
+    let Hidden = req.headers['Hidden'];
     console.log("List of groups of devices by id, GROUP ID : " + req.params.GroupId);
 
+    if(Hidden) {
         Device.find({GroupId: req.params.GroupId}, function (err, device)
         {
             console.log("Looking for devices from group :" + req.params.GroupId);
@@ -212,6 +214,18 @@ exports.list_group_devices = function (req, res) //Recupere tout les device d'un
             }
             res.json(device);
         });
+    } else {
+        Device.find({GroupId: req.params.GroupId, Hide: false}, function (err, device)
+        {
+            console.log("Looking for devices from group :" + req.params.GroupId);
+            if (err)
+            {
+                console.log("Error at : " + err);
+                res.send(err);
+            }
+            res.json(device);
+        });
+    }
 };
 
 exports.list_user_devices = function (req, res)
