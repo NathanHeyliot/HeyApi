@@ -202,6 +202,7 @@ exports.list_group_devices = function (req, res) //Recupere tout les device d'un
     //});
     let Hidden = req.headers['Hidden'];
     console.log("List of groups of devices by id, GROUP ID : " + req.params.GroupId);
+    console.log(Hidden);
 
    // if(Hidden) {
         Device.find({GroupId: req.params.GroupId}, function (err, device)
