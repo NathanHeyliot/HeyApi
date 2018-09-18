@@ -46,7 +46,7 @@ exports.create_group = function (req, res)
             return(res.send(err));
         res.json(group);
     });
-}
+};
 
 exports.get_info = function (req, res)
 {

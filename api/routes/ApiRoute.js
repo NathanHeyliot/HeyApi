@@ -14,6 +14,7 @@ module.exports = function (app) {
     let Permissions = require('../controllers/PermissionsController');
 
     var cors = require('cors');
+    require('express-group-routes');
 
     app.use(cors());
 
@@ -23,6 +24,45 @@ module.exports = function (app) {
 
     app.use(jwt_auth.middle_token);
     app.use(Permissions.middlewarePermissions);
+
+
+    app.group("/admin", (router) => {
+        res.send("Hey welcome on admin part !");
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     /*
     * ----------------------------------------
