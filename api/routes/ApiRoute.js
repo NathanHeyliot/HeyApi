@@ -14,7 +14,7 @@ module.exports = function (app) {
     let Permissions = require('../controllers/PermissionsController');
 
     var cors = require('cors');
-    require('express-group-routes');
+    
 
     app.use(cors());
 
