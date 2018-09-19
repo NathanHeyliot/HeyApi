@@ -21,7 +21,7 @@ let DevicesSchema = new Schema
         },
     idLV:
         {
-            type: String, unique: true
+            type: String
         },
     Description:
         {
