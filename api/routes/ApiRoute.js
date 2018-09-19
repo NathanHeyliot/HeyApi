@@ -25,38 +25,6 @@ module.exports = function (app) {
     app.use(jwt_auth.middle_token);
     app.use(Permissions.middlewarePermissions);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /*
     * ----------------------------------------
     * API ROUTE
@@ -84,8 +52,8 @@ module.exports = function (app) {
     * -------------------
      */
 
-    app.route("/road")
-        .post(LocalisationApi.road); //API_ROAD_POST     OK
+    //app.route("/road")
+      //  .post(LocalisationApi.road); //API_ROAD_POST     OK
 
 
     /*
@@ -273,9 +241,9 @@ module.exports = function (app) {
     * -----------------------
      */
 
-    app.route('/localisation/crypted')
-        .post(LocalisationApi.crypted); //API_LOCALISATION_POST      OK
+    //app.route('/localisation/crypted')
+      //  .post(LocalisationApi.crypted); //API_LOCALISATION_POST      OK
 
-    app.route('/localisation/uncrypted')
-        .post(LocalisationApi.uncrypted); //API_LOCALISATION_POST        OK
+    //app.route('/localisation/uncrypted')
+      //  .post(LocalisationApi.uncrypted); //API_LOCALISATION_POST        OK
 };

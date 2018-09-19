@@ -93,6 +93,7 @@ exports.create_device = function (req, res)
     newDevice.Lon = req.body.Lon;
     newDevice.Lat = req.body.Lat;
     newDevice.Hide = req.body.Hide;
+    newDevice.idLV = req.body.idLV;
 
     if(newDevice.Lat && newDevice.Lon) {
 

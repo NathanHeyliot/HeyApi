@@ -17,7 +17,11 @@ let DevicesSchema = new Schema
         },
     SigfoxId:
         {
-          type: String, required: true,
+            type: String, required: true,
+        },
+    idLV:
+        {
+            type: String, unique: true
         },
     Description:
         {
