@@ -487,6 +487,23 @@ exports.route_config = function () {
             method: "POST",
             permission: "none",
             type: "FULL"
+        },
+
+        /*
+        * Sales
+        */
+
+        {
+            url: "/sales",
+            method: "POST",
+            permission: "API_SALES_POST",
+            type: "FULL"
+        },
+        {
+            url: "/sales/id/",
+            method: "GET",
+            permission: "API_SALES_GET",
+            type: "PARTIAL"
         }
     ];
     return route;

@@ -13,6 +13,10 @@ let UserSchema = new Schema
         {
             type: String, required: true
         },
+    Language:
+        {
+            type: String
+        },
     Email:
         {
             type: String, required: true, unique: true, lowercase: true

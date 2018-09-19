@@ -12,6 +12,7 @@ module.exports = function (app) {
     let LocalisationApi = require("../controllers/LocalisationController");
     let Ranks = require("../controllers/RanksController");
     let Permissions = require('../controllers/PermissionsController');
+    let Sales = require('../controllers/SalesController');
 
     var cors = require('cors');
 
@@ -233,6 +234,19 @@ module.exports = function (app) {
 
     app.route('/usersgroups/group/:Gid')
         .delete(userGroupApi.delete_infoG); //API_USERSGRP_GET     OK
+
+    /*
+    *------------------------
+    * SALES ROUTER
+    * -----------------------
+    */
+
+    app.route('/sales')
+        .post(Sales.post_sales);
+
+    app.route('/sales/id/:myid')
+        .get(Sales.get_sale);
+
 
 
     /*

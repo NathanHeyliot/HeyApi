@@ -295,6 +295,20 @@ let PermissionsModel = new Schema
           type: Boolean, default: false
         },
 
+    /*
+     *------------------------
+    * SALES ROUTER
+    * -----------------------
+     */
+
+    API_SALES_POST:
+        {
+            type: Boolean, default: false
+        },
+    API_SALES_GET:
+        {
+            type: Boolean, default: false
+        },
 
     //-------------------------------------------------------------------------
     // PANEL PERMISSIONS !!!!! /!\
