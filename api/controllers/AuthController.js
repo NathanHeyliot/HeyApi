@@ -16,7 +16,7 @@ exports.submit_auth = function (req, res)
                 user_id: user[0]._id, user: req.params.user, password: md5(req.params.password)
             }, secret_encrypt, { expiresIn: expiration_time});
             console.log("AUTH : [user_id : " + user[0]._id + ", user : " + req.params.user + ", token : " + token + "]");
-            res.json({messages: token, user_id: user[0]._id});
+            res.json({messages: token, user_id: user[0]._id, language: user[0].Language});
             res.end();
         } else {
             console.log("bad Creditentials !");
