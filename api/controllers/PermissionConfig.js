@@ -436,7 +436,7 @@ exports.route_config = function () {
         },
         {
             url: "/payloads/test/",
-            method: "POST",
+            method: "GET",
             permission: "none",
             type: "PARTIAL",
         },
