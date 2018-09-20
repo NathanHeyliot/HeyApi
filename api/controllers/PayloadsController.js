@@ -682,7 +682,7 @@ exports.date_payloads = function (req, res)
     let date_start = new Date();
     let date_end = new Date();
 
-    date_start.setdate(date_start.getDate() - start);
+    date_start.setDate(date_start.getDate() - start);
     date_end.setDate(date_end.getDate() - end);
 
 
