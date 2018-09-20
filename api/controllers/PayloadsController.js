@@ -687,7 +687,7 @@ exports.date_payloads = function (req, res)
             if (err)
                 console.log(err);
             res.json(payload);
-        });
+        }).sort({DateGot: -1});
     } else {
 
         console.log("HERE 2 : " + start + ", " + end + ", " + type);
@@ -696,7 +696,7 @@ exports.date_payloads = function (req, res)
             if (err)
                 console.log(err);
             res.json(payload);
-        });
+        }).sort({DateGot: -1});
     }
 };
 
