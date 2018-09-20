@@ -435,7 +435,7 @@ exports.route_config = function () {
             type: "FULL",
         },
         {
-            url: "/payloads/test/",
+            url: "/payloads/date/",
             method: "GET",
             permission: "none",
             type: "PARTIAL",

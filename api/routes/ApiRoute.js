@@ -107,7 +107,7 @@ module.exports = function (app) {
     app.route('/payloads/id/:appId/:type/:start/:end')
         .get(payApi.adv_read_payloads);
 
-    app.route('/payloads/test/:appId/:type/:start/:end')
+    app.route('/payloads/date/:appId/:type/:start/:end')
         .get(payApi.date_payloads);
 
     app.route('/payloads/id/:appId/:type')
