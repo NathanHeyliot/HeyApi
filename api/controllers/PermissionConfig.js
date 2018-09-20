@@ -435,10 +435,10 @@ exports.route_config = function () {
             type: "FULL",
         },
         {
-            url: "/test",
+            url: "/payloads/test/",
             method: "POST",
             permission: "none",
-            type: "FULL",
+            type: "PARTIAL",
         },
 
         /*

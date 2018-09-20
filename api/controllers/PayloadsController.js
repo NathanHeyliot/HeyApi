@@ -672,6 +672,35 @@ exports.count_payloads = function (req, res)
     }
 };
 
+exports.date_payloads = function (req, res)
+{
+    let id = req.params.appId;
+    let type = req.params.type;
+    let start = req.params.start;
+    let end = req.params.end;
+
+    let date_start = new Date();
+    let date_end = new Date();
+
+    date_start.setdate(date_start.getDate() - start);
+    date_end.setDate(date_end.getDate() - end);
+
+
+    if(type === "all") {
+        Payload.find({DeviceId: id, DateGot: {$gte: date_start, $lte: date_end}}, function (err, payload) {
+            if (err)
+                console.log(err);
+            res.json(payload);
+        });
+    } else {
+        Payload.find({DeviceId: id, DateGot: {$gte: date_start, $lte: date_end}, EventCode: type}, function (err, payload) {
+            if (err)
+                console.log(err);
+            res.json(payload);
+        });
+    }
+};
+
 exports.adv_read_payloads = function (req, res)
 {
     let id = req.params.appId;
