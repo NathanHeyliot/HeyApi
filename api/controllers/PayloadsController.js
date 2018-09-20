@@ -679,21 +679,15 @@ exports.date_payloads = function (req, res)
     let start = req.params.start;
     let end = req.params.end;
 
-    let date_start = new Date();
-    let date_end = new Date();
-
-    date_start.setDate(date_start.getDate() - start);
-    date_end.setDate(date_end.getDate() - end);
-
 
     if(type === "all") {
-        Payload.find({DeviceId: id, DateGot: {$gte: date_start, $lte: date_end}}, function (err, payload) {
+        Payload.find({DeviceId: id, DateGot: {$gte: start, $lte: end}}, function (err, payload) {
             if (err)
                 console.log(err);
             res.json(payload);
         });
     } else {
-        Payload.find({DeviceId: id, DateGot: {$gte: date_start, $lte: date_end}, EventCode: type}, function (err, payload) {
+        Payload.find({DeviceId: id, DateGot: {$gte: start, $lte: end}, EventCode: type}, function (err, payload) {
             if (err)
                 console.log(err);
             res.json(payload);
