@@ -11,7 +11,7 @@ exports.submit_auth = function (req, res)
 {
     User.find({Email: req.params.user, Password: md5(req.params.password)}, function(err, user)
     {
-        if(user[0]) {
+        if((user !== undefined || user !== null) && user[0] !== undefined) {
             var token = jwt.sign({
                 user_id: user[0]._id, user: req.params.user, password: md5(req.params.password)
             }, secret_encrypt, { expiresIn: expiration_time});
