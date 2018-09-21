@@ -177,7 +177,7 @@ exports.read_device = function(req, res) //recupere les details d'un capteur et 
                     res.send(err);
 
                 console.log("DEVICE TYPES  /  found : " + my_type);
-                Object.assign(device, my_type);
+                Object.assign(my_type, device);
                 console.log("RES : " + device);
                 res.json(device);
             });
