@@ -179,7 +179,7 @@ exports.read_device = function(req, res) //recupere les details d'un capteur et 
                 console.log("DEVICE TYPES  /  found : " + my_type);
                 let test = JSON.parse(JSON.stringify(device));
                 test.Type = my_type;
-                console.log("RES : " + test);
+                console.log("RES : " + JSON.stringify(test));
                 res.json(test);
             });
         });
