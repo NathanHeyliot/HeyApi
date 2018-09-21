@@ -225,7 +225,7 @@ exports.list_group_devices = function (req, res) //Recupere tout les device d'un
                 Types.find({_id: element.DeviceType}, function (err, my_type) {
                     if(err)
                         res.send(err);
-                    element.push(my_type[0]);
+                    device.push(my_type[0]);
                     res.json(device);
                 });
             });
