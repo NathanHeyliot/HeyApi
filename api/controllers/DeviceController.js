@@ -220,16 +220,6 @@ exports.list_group_devices = function (req, res) //Recupere tout les device d'un
                 console.log("Error at : " + err);
                 res.send(err);
             }
-            
-            device.forEach(function (element) {
-                Types.find({_id: element.DeviceType}, function (err, my_type) {
-                    if(err)
-                        res.send(err);
-                    device.push(my_type[0]);
-                    res.json(device);
-                });
-            });
-            
             res.json(device);
         });
  /*   } else {
