@@ -25,6 +25,10 @@ let SalesSchema = new Schema
         {
             type: Number, required: true
         },
+    Net:
+        {
+            type: Number, required: true
+        },
 });
 
 module.exports =  mongoose.model('Sales', SalesSchema);
