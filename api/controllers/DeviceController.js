@@ -4,6 +4,7 @@ let mongoose = require('mongoose'),
     Device = mongoose.model('Device'),
     Groups = mongoose.model('Group'),
     Payload = mongoose.model('Payload'),
+    Types = mongoose.mode('Type'),
     UserGroup = mongoose.model('UserGroup');
 
 // Standalone usage
@@ -170,7 +171,13 @@ exports.read_device = function(req, res) //recupere les details d'un capteur et 
         {
             if(err)
                 res.send(err);
-            res.json(device);
+
+            Types.find({_id: device.DeviceType}, function (err, type) {
+                if(err)
+                    res.send(err);
+                device.Type = type;
+                res.json(device);
+            });
         })
     } else {
         res.json({error: "Invalid mongoose ID !"});
