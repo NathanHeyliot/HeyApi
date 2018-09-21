@@ -186,12 +186,6 @@ exports.read_device = function(req, res) //recupere les details d'un capteur et 
     }
 };
 
-
-Object.prototype.push = function( key, value ){
-    this[ key ] = value;
-    return this;
-};
-
 exports.delete_device = function (req, res) //supprime le device séléctionné
 {
     if(mongoose.Types.ObjectId.isValid(req.params.appId)) {
