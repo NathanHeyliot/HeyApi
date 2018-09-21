@@ -172,12 +172,12 @@ exports.read_device = function(req, res) //recupere les details d'un capteur et 
             if(err)
                 res.send(err);
 
-            Types.find({_id: device[0].DeviceType}, function (err, type) {
+            Types.find({_id: device[0].DeviceType}, function (err, my_type) {
                 if(err)
                     res.send(err);
 
-                console.log("DEVICE TYPES  /  found : " + type);
-                device.Type = "XD";
+                console.log("DEVICE TYPES  /  found : " + my_type);
+                device.type_obj = my_type;
                 console.log("RES : " + device);
                 res.json(device);
             });
