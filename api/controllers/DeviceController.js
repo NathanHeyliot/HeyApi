@@ -177,7 +177,7 @@ exports.read_device = function(req, res) //recupere les details d'un capteur et 
                     res.send(err);
 
                 console.log("DEVICE TYPES  /  found : " + my_type);
-                _.extend(device, my_type);
+                device.push("Type", my_type);
                 console.log("RES : " + device);
                 res.json(device);
             });
@@ -185,6 +185,12 @@ exports.read_device = function(req, res) //recupere les details d'un capteur et 
     } else {
         res.json({error: "Invalid mongoose ID !"});
     }
+};
+
+
+Object.prototype.push = function( key, value ){
+    this[ key ] = value;
+    return this;
 };
 
 exports.delete_device = function (req, res) //supprime le device séléctionné
