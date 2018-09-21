@@ -4,7 +4,7 @@ let mongoose = require('mongoose'),
     Device = mongoose.model('Device'),
     Groups = mongoose.model('Group'),
     Payload = mongoose.model('Payload'),
-    Types = mongoose.model('Types'),
+    Types = mongoose.model('DeviceTypes'),
     UserGroup = mongoose.model('UserGroup');
 
 // Standalone usage
