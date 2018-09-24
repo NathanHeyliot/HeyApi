@@ -7,7 +7,7 @@ let SalesSchema = new Schema
 ({
     idLV:
         {
-            type: String, unique: true, required: true
+            type: String, required: true
         },
     Date:
         {
