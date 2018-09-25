@@ -21,14 +21,10 @@ exports.get_sale = function (req, res) {
     let end = req.params.end;
     let id = req.params.myid;
 
-    if(mongoose.Types.ObjectId.isValid(id)) {
         SalesModel.find({idLV: id, Date:{$gte: start, $lte: end}}, function (err, group)
         {
             if (err)
                 res.send(err);
             res.json(group);
         }).sort({Date: -1});
-    } else {
-        res.json({error: "Invalid mongoose ID !"});
-    }
 };
