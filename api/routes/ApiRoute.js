@@ -247,7 +247,7 @@ module.exports = function (app) {
     app.route('/sales')
         .post(Sales.post_sales);
 
-    app.route('/sales/id/:myid')
+    app.route('/sales/id/:myid/:start/:end')
         .get(Sales.get_sale);
 
 
