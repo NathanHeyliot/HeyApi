@@ -92,7 +92,7 @@ exports.create_user = function (req, res)
     console.log("Creating a new user");
 
     let token = jwt.sign({
-        FirstName: req.body.FirstName, Email: req.body.Email, password: md5(req.body.password)
+        FirstName: req.body.FirstName, Email: req.body.Email, Password: md5(req.body.Password)
     }, secret_encrypt, { expiresIn: expiration_time});
 
    let newUser = new User();
