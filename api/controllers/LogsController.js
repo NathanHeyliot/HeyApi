@@ -26,7 +26,7 @@ exports.middle_logs = function (req, res, next) {
     }
 };
 
-exports.setLogs = function (user_id) {
+exports.setLogs = function (user_id, req) {
     let newLogs = new Logs();
     newLogs.User = user_id;
     newLogs.Url = req.url;
