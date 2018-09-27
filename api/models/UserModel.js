@@ -36,7 +36,7 @@ let UserSchema = new Schema
         },
     ApiToken:
         {
-          type: String, required: true
+          type: String, default: null
         },
     Created:
         {
