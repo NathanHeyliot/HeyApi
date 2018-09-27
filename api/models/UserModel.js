@@ -3,6 +3,7 @@
 let mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
+
 let UserSchema = new Schema
 ({
     FirstName:
@@ -32,6 +33,10 @@ let UserSchema = new Schema
     OrganisationID:
         {
           type: String, required: true // dependante of organisation !!!!
+        },
+    ApiToken:
+        {
+          type: String, required: true
         },
     Created:
         {

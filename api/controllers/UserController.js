@@ -3,6 +3,9 @@
 let mongoose = require('mongoose'),
     User = mongoose.model('User'),
     md5 = require('md5'),
+    secret_encrypt = "Rmd8VY3OEFG2tX5Nr2uzdfyiqfdyizqlfdyizqfdyqziljota8FsPupTMXnGlY3jAkOeXEDQlmTY2p5QZUDFVL58vHOnNwAhPMRYwaCwaSCtsQIlEBZxEm4kT3hrj2A9faXr67cBEy2lcYRD1HdPVpzLiZJSoBR85XS9Jwv6vgVXBIE0uaw28AEs5QP15706jnJOSc1eImQo3eiKcle",
+    expiration_time = "300d",
+    jwt = require('jsonwebtoken'),
     globals = require('../../globals');
 
 exports.list_users = function (req, res)
@@ -88,6 +91,10 @@ exports.create_user = function (req, res)
 {
     console.log("Creating a new user");
 
+    let token = jwt.sign({
+        FirstName: req.body.FirstName, Email: req.body.Email, password: md5(req.body.password)
+    }, secret_encrypt, { expiresIn: expiration_time});
+
    let newUser = new User();
    newUser.FirstName = req.body.FirstName;
    newUser.LastName = req.body.LastName;
@@ -95,6 +102,7 @@ exports.create_user = function (req, res)
    newUser.Password = md5(req.body.Password);
    newUser.OrganisationID = req.body.OrganisationID;
    newUser.RankId = req.body.RankId;
+   newUser.ApiToken = token;
 
    newUser.save(function (err, user)
    {
