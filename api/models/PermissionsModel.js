@@ -322,6 +322,10 @@ let PermissionsModel = new Schema
         {
             type: Boolean, default: false
         },
+    PANEL_EXTRACT_CSV:
+        {
+            type: Boolean, default: false
+        },
 });
 
 module.exports =  mongoose.model('Permissions', PermissionsModel);

@@ -13,6 +13,7 @@ module.exports = function (app) {
     let Ranks = require("../controllers/RanksController");
     let Permissions = require('../controllers/PermissionsController');
     let Sales = require('../controllers/SalesController');
+    let Logs = require('../controllers/LogsController');
 
     var cors = require('cors');
 
@@ -25,6 +26,7 @@ module.exports = function (app) {
 
     app.use(jwt_auth.middle_token);
     app.use(Permissions.middlewarePermissions);
+    app.use(Logs.middle_logs);
 
     /*
     * ----------------------------------------

@@ -16,6 +16,7 @@ var express = require('express'),
     Permissions = require('./api/models/PermissionsModel'),
     UserGroup = require("./api/models/UserGroupModel"),
     Sales = require('./api/models/SalesModel'),
+    Logs = require('./api/models/LogsModel'),
     https = require("https"),
     fs = require("fs"),
     helmet = require("helmet");
