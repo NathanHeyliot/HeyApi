@@ -7,16 +7,17 @@ let  mongoose = require('mongoose'),
 exports.middle_logs = function (req, res, next) {
     let url = req.url;
     let method = req.method.toUpperCase();
-    var user_entity = Auth.check_token(req);
 
-    let newLogs = new Logs();
-    newLogs.User = user_entity.user_id;
-    newLogs.Url = url;
-    newLogs.Method = method;
+    Promise.all([Auth.check_token(req)]).then(response => {
+        let newLogs = new Logs();
+        newLogs.User = response[0].user_id;
+        newLogs.Url = url;
+        newLogs.Method = method;
 
-    newLogs.save(function (err, success) {
-        if(err)
-            console.log("Error when logging !!!! Details : " + err);
+        newLogs.save(function (err, success) {
+            if(err)
+                console.log("Error when logging !!!! Details : " + err);
+        });
+        next();
     });
-    next();
 };
