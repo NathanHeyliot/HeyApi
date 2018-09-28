@@ -69,11 +69,11 @@ exports.check_token = async function ResolveToken(req) {
                     if(err)
                         console.log(err);
                     if(user !== undefined && user !== null) {
-                        let res = null;
-                        res.user_id = user._id;
-                        res.user = user.Email;
-                        res.password = md5(user.Password);
-                        resolve(res);
+                        let decoded = null;
+                        decoded.user_id = user._id;
+                        decoded.user = user.Email;
+                        decoded.password = md5(user.Password);
+                        resolve(decoded);
                     } else {
                         reject(err);
                     }
