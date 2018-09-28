@@ -69,11 +69,7 @@ exports.check_token = async function ResolveToken(req) {
                     if(err)
                         console.log(err);
                     if(user !== undefined && user !== null) {
-                        let decoded = null;
-                        decoded.user_id = user._id;
-                        decoded.user = user.Email;
-                        decoded.password = md5(user.Password);
-
+                        let decoded = {user_id: user._id, user: user.Email, password: md5(user.Password)};
                         if(bypass === null || bypass === undefined || bypass === 'false')
                             decoded.bypass = false;
                         else
