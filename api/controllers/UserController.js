@@ -6,6 +6,7 @@ let mongoose = require('mongoose'),
     secret_encrypt = "Rmd8VY3OEFG2tX5Nr2uzdfyiqfdyizqlfdyizqfdyqziljota8FsPupTMXnGlY3jAkOeXEDQlmTY2p5QZUDFVL58vHOnNwAhPMRYwaCwaSCtsQIlEBZxEm4kT3hrj2A9faXr67cBEy2lcYRD1HdPVpzLiZJSoBR85XS9Jwv6vgVXBIE0uaw28AEs5QP15706jnJOSc1eImQo3eiKcle",
     expiration_time = "300d",
     jwt = require('jsonwebtoken'),
+    Auth = require('../controllers/AuthController'),
     globals = require('../../globals');
 
 exports.list_users = function (req, res)
@@ -74,7 +75,7 @@ exports.delete_all_users = function (req, res)
 exports.delete_user = function (req, res)
 {
     if(mongoose.Types.ObjectId.isValid(req.params.UserId)) {
-        console.log("Deleting an user : " + req.params.UserId)
+        console.log("Deleting an user : " + req.params.UserId);
 
         User.remove({_id: req.params.UserId}, function (err, user)
         {
@@ -85,6 +86,24 @@ exports.delete_user = function (req, res)
     } else {
         res.json({error: "Invalid mongoose ID !"});
     }
+};
+
+exports.gen_token = function (req, res)
+{
+    let rand = function() {
+        return Math.random().toString(36).substr(2); // remove `0.`
+    };
+    let token =  rand() + rand();
+
+    Promise.all([Auth.check_token(req)]).then(response => {
+        User.findOneAndUpdate({_id: response.user_id}, {$set: {ApiToken: token}}, {new: true}, function (err, success) {
+            if(err)
+                console.log(err);
+            else
+                console.log("user : " + success + ", Updated !");
+            res.json(success);
+        });
+    });
 };
 
 exports.create_user = function (req, res)

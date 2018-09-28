@@ -15,7 +15,7 @@ exports.submit_auth = function (req, res)
         console.log(user);
 
         if(user !== undefined && user !== null && user[0] !== undefined) {
-            var token = jwt.sign({
+            let token = jwt.sign({
                 user_id: user[0]._id, user: req.params.user, password: md5(req.params.password)
             }, secret_encrypt, { expiresIn: expiration_time});
             console.log("AUTH : [user_id : " + user[0]._id + ", user : " + req.params.user + ", token : " + token + "]");
@@ -31,7 +31,7 @@ exports.submit_auth = function (req, res)
 };
 
 exports.middle_token = function (req, res, next) {
-    var token = req.headers['x-access-token'];
+    let token = req.headers['x-access-token'];
 
     if (req.url.startsWith("/auth", 0) || req.url.startsWith("/callback", 0)) {
         next();
@@ -51,14 +51,27 @@ exports.middle_token = function (req, res, next) {
 };
 
 exports.check_token = async function ResolveToken(req) {
-    var token = req.headers['x-access-token'];
-    var bypass = req.headers['bypass'];
+    let token = req.headers['x-access-token'];
+    let bypass = req.headers['bypass'];
 
     return new Promise((resolve, reject) => {
         jwt.verify(token, secret_encrypt, function (err, decoded) {
-            if(decoded === undefined)
-                reject(err);
-            if (bypass === null || bypass === undefined || bypass === 'false')
+            if(decoded === undefined) {
+                User.findOne({ApiToken: token}, function (err, user) {
+                    if(err)
+                        console.log(err);
+                    if(user !== undefined && user !== null) {
+                        let res = null;
+                        res.user_id = user._id;
+                        res.user = user.Email;
+                        res.password = md5(user.Password);
+                        resolve(res);
+                    } else {
+                        reject(err);
+                    }
+                });
+            }
+            if(bypass === null || bypass === undefined || bypass === 'false')
                 decoded.bypass = false;
             else
                 decoded.bypass = true;
