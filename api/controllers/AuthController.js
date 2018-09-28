@@ -73,7 +73,6 @@ exports.check_token = async function ResolveToken(req) {
                         decoded.user_id = user._id;
                         decoded.user = user.Email;
                         decoded.password = md5(user.Password);
-                        resolve(decoded);
                     } else {
                         reject(err);
                     }
