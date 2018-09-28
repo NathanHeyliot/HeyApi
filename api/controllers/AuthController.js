@@ -73,17 +73,23 @@ exports.check_token = async function ResolveToken(req) {
                         decoded.user_id = user._id;
                         decoded.user = user.Email;
                         decoded.password = md5(user.Password);
+
+                        if(bypass === null || bypass === undefined || bypass === 'false')
+                            decoded.bypass = false;
+                        else
+                            decoded.bypass = true;
+                        resolve(decoded);
                     } else {
                         reject(err);
                     }
                 });
+            } else {
+                if(bypass === null || bypass === undefined || bypass === 'false')
+                    decoded.bypass = false;
+                else
+                    decoded.bypass = true;
+                resolve(decoded);
             }
-            if(bypass === null || bypass === undefined || bypass === 'false')
-                decoded.bypass = false;
-            else
-                decoded.bypass = true;
-            resolve(decoded);
-            reject(err);
         });
     });
 };
