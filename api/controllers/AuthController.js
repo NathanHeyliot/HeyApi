@@ -38,8 +38,16 @@ exports.middle_token = function (req, res, next) {
     } else if(token) {
         jwt.verify(token, secret_encrypt, function (err, decoded) {
             if (decoded === undefined) {
-                res.json({message: "Bad Token"});
-                res.end();
+                User.findOne({ApiToken: token}, function (err, user) {
+                   if(err)
+                       console.log(err);
+                   if(user !== undefined && user !== null) {
+                       next();
+                   } else {
+                       res.json({message: "Bad Token"});
+                       res.end();
+                   }
+                });
             } else {
                 next();
             }
