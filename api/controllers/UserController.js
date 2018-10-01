@@ -103,7 +103,7 @@ exports.gen_token = function (req, res)
                userC.gen_token(req, res);
                return null;
            } else {
-               User.findOneAndUpdate({_id: response.user_id}, {$set: {ApiToken: token}}, {new: true}, function (err, success) {
+               User.findOneAndUpdate({_id: response[0].user_id}, {$set: {ApiToken: token}}, {new: true}, function (err, success) {
                    if(err)
                        console.log(err);
                    else
