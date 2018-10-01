@@ -59,6 +59,10 @@ let DevicesSchema = new Schema
         {
             type: String
         },
+    accuracy:
+        {
+            type: Number, default: 0
+        },
     City:
         {
             type: String

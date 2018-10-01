@@ -538,7 +538,7 @@ exports.create_payload = function (req, res) //create a new payload and POST it
                             else
                                 City = parsed_get.address.city;
 
-                            Device.findOneAndUpdate({SigfoxId: DeviceId}, ({Downlink: 0, PostCode: parsed_get.address.postcode, LastUpdate: ActualTime, Lon: parsed_info.lng, Lat: parsed_info.lat, City: City, Address: parsed_get.address.road}), {new: true}, function (err, device)
+                            Device.findOneAndUpdate({SigfoxId: DeviceId}, ({Downlink: 0, PostCode: parsed_get.address.postcode, LastUpdate: ActualTime, Lon: parsed_info.lng, accuracy: parsed_info.accuracy, Lat: parsed_info.lat, City: City, Address: parsed_get.address.road}), {new: true}, function (err, device)
                             {
                                 if (err)
                                     console.log(err);
