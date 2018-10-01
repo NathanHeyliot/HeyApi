@@ -92,9 +92,9 @@ exports.delete_user = function (req, res)
 exports.gen_token = function (req, res)
 {
     let rand = function() {
-        return Math.random().toString(50).substr(2); // remove `0.`
+        return Math.random().toString(36).substr(2); // remove `0.`
     };
-    let token =  rand() + rand();
+    let token =  rand() + rand() + rand() + rand();
 
     Promise.all([Auth.check_token(req)]).then(response => {
         User.findOne({ApiToken: token}, function (err, succ) {
