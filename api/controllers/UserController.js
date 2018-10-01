@@ -98,7 +98,7 @@ exports.gen_token = function (req, res)
     Promise.all([Auth.check_token(req)]).then(response => {
         User.find({ApiToken: token}, function (err, succ) {
            if(succ !== null) {
-               User.gen_token(req, res);
+               this.gen_token(req, res);
                return null;
            } else {
                User.findOneAndUpdate({_id: response.user_id}, {$set: {ApiToken: token}}, {new: true}, function (err, success) {
