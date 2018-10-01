@@ -504,6 +504,17 @@ exports.route_config = function () {
             method: "GET",
             permission: "API_SALES_GET",
             type: "PARTIAL"
+        },
+
+        /*
+        * Account
+        */
+        
+        {
+            url: "/account/token",
+            method: "GET",
+            permission: "none",
+            type: "FULL"
         }
     ];
     return route;

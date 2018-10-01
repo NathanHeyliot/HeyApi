@@ -49,6 +49,9 @@ module.exports = function (app) {
     app.route('/auth/:user/:password')
         .get(jwt_auth.submit_auth); //NO PERMISSION NEEDED      OK
 
+    app.route('/account/token')
+        .get(userApi.gen_token);
+
     /*
     *---------------------
     * ROAD ROUTER
@@ -251,8 +254,6 @@ module.exports = function (app) {
 
     app.route('/sales/id/:myid/:start/:end')
         .get(Sales.get_sale);
-
-
 
     /*
     *------------------------
