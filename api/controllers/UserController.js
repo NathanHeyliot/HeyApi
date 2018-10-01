@@ -99,6 +99,7 @@ exports.gen_token = function (req, res)
     Promise.all([Auth.check_token(req)]).then(response => {
         User.find({ApiToken: token}, function (err, succ) {
            if(succ !== null) {
+               console.log(succ);
                userC.gen_token(req, res);
                return null;
            } else {
