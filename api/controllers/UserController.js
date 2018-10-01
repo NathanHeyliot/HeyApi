@@ -7,6 +7,7 @@ let mongoose = require('mongoose'),
     expiration_time = "300d",
     jwt = require('jsonwebtoken'),
     Auth = require('../controllers/AuthController'),
+    userC = require('../controllers/UserController'),
     globals = require('../../globals');
 
 exports.list_users = function (req, res)
@@ -98,7 +99,7 @@ exports.gen_token = function (req, res)
     Promise.all([Auth.check_token(req)]).then(response => {
         User.find({ApiToken: token}, function (err, succ) {
            if(succ !== null) {
-               this.gen_token(req, res);
+               userC.gen_token(req, res);
                return null;
            } else {
                User.findOneAndUpdate({_id: response.user_id}, {$set: {ApiToken: token}}, {new: true}, function (err, success) {
