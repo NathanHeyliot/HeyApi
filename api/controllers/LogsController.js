@@ -2,6 +2,7 @@
 
 let  mongoose = require('mongoose'),
      Auth = require('../controllers/AuthController'),
+     fs = require('fs'),
      Logs = mongoose.model('Logs');
 
 
@@ -66,13 +67,13 @@ exports.setLogs = function (user_id, req) {
 };
 
 exports.Logs_error = function (message) {
-    console.log("%c " + message, 'color:red;');
+    console.log(FgRed + message);
 };
 
 exports.Logs_info = function (message) {
-    console.log("%c " + message, 'color:cyan;');
+    console.log(FgCyan + message);
 };
 
 exports.Logs_success = function (message) {
-    console.log("%c " + message, 'color:green;');
+    console.log(FgGreen + message);
 };
