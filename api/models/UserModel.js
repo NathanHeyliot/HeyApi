@@ -32,11 +32,11 @@ let UserSchema = new Schema
         },
     OrganisationID:
         {
-          type: String, required: true // dependante of organisation !!!!
+            type: String, required: true // dependante of organisation !!!!
         },
     ApiToken:
         {
-          type: String, default: null
+            type: String, default: null
         },
     Created:
         {
