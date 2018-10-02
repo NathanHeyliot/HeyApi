@@ -14,7 +14,6 @@ exports.getRanks = function (req, res)
                     Ranks.find({}, function (err, ranks) {
                         if (err)
                         {
-                            console.log("Error at : " + err);
                             res.send(err);
                         }
                         console.log(ranks);
@@ -26,7 +25,6 @@ exports.getRanks = function (req, res)
                             Ranks.findOne({_id: User.RankId}, function (err, rank) {
                                 if (err)
                                 {
-                                    console.log("Error at : " + err);
                                     res.send(err);
                                 }
                                 console.log(rank);
@@ -41,8 +39,6 @@ exports.getRanks = function (req, res)
 };
 
 exports.createRanks = function (req, res) {
-            console.log("Submitting a new Rank");
-
             let newRank = new Ranks(req.body);
             newRank.save(function (err, ranks)
             {
@@ -53,7 +49,6 @@ exports.createRanks = function (req, res) {
 };
 
 exports.delete_allRanks = function (req, res) {
-            console.log("Deleting all ranks....");
             Ranks.collection.remove({});
             res.end();
             console.log("Success");
@@ -62,8 +57,6 @@ exports.delete_allRanks = function (req, res) {
 exports.getRank = function (req, res) {
 
     if(mongoose.Types.ObjectId.isValid(req.params.id)) {
-        console.log("Searching for rank : " + req.params.id);
-
         Ranks.findOne({_id: req.params.id}, function (err, rank) {
             if(err) {
                 console.log("Error at : " + err);
@@ -78,8 +71,6 @@ exports.getRank = function (req, res) {
 
 exports.removeRanks = function (req, res) {
     if(mongoose.Types.ObjectId.isValid(req.params.id)) {
-        console.log("Deleting of specified information, ID : " + req.params.id);
-
         Ranks.remove({_id: req.params.id}, function(err, ranks)
         {
             if(err)
@@ -93,8 +84,6 @@ exports.removeRanks = function (req, res) {
 
 exports.updateRanks = function (req, res) {
     if(mongoose.Types.ObjectId.isValid(req.params.id)) {
-        console.log("Updating rank, ID : " + req.params.id);
-
         Ranks.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, function (err, ranks)
         {
             if(err)

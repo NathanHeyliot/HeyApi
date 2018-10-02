@@ -12,14 +12,10 @@ let mongoose = require('mongoose'),
 
 exports.list_users = function (req, res)
 {
-
-    console.log("List of users...");
-
     User.find({}, function(err, user)
     {
         if(err)
         {
-            error("Error at: " + err);
             res.send(err);
         }
         res.json(user);
@@ -29,13 +25,10 @@ exports.list_users = function (req, res)
 exports.user_info = function (req, res)
 {
     if(mongoose.Types.ObjectId.isValid(req.params.UserId)) {
-        console.log("user Info about : " + req.params.UserId)
-
         User.find({_id: req.params.UserId}, function(err, user)
         {
             if(err)
             {
-                error("Error at: " + err);
                 res.send(err);
             }
             res.json(user);
@@ -48,9 +41,6 @@ exports.user_info = function (req, res)
 exports.update_user = function (req, res)
 {
     if(mongoose.Types.ObjectId.isValid(req.params.UserId)) {
-        console.log("Updating a user : " + req.params.UserId)
-        console.log(req.body);
-
         if(req.body.Password)
             req.body.Password = md5(req.body.Password);
 
@@ -67,7 +57,6 @@ exports.update_user = function (req, res)
 
 exports.delete_all_users = function (req, res)
 {
-    console.log("Deleting all users ....");
     User.collection.remove({});
     res.end();
     console.log("Success");
@@ -76,8 +65,6 @@ exports.delete_all_users = function (req, res)
 exports.delete_user = function (req, res)
 {
     if(mongoose.Types.ObjectId.isValid(req.params.UserId)) {
-        console.log("Deleting an user : " + req.params.UserId);
-
         User.remove({_id: req.params.UserId}, function (err, user)
         {
             if (err)
@@ -117,8 +104,6 @@ exports.gen_token = function (req, res)
 
 exports.create_user = function (req, res)
 {
-    console.log("Creating a new user");
-
     let token = jwt.sign({
         FirstName: req.body.FirstName, Email: req.body.Email, Password: md5(req.body.Password)
     }, secret_encrypt, { expiresIn: expiration_time});

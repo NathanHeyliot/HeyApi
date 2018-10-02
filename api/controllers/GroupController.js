@@ -9,7 +9,6 @@ exports.list_group = function (req, res) //get tout les devices
     {
         if (err)
         {
-            console.log("Error at : " + err);
             res.send(err);
         }
         res.json(group);
@@ -18,7 +17,6 @@ exports.list_group = function (req, res) //get tout les devices
 
 exports.delete_all_groups = function (req, res)
 {
-    console.log("Deleting all groups....");
     Group.collection.remove({});
     res.end();
     console.log("Success");

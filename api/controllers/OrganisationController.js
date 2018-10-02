@@ -6,8 +6,6 @@ let mongoose = require('mongoose'),
 
 exports.list_organisation = function (req, res) //Liste tout les clients
 {
-    console.log("List of organisations...");
-
     Organisation.find({}, function (err, organisation)
     {
         if (err)
@@ -21,7 +19,6 @@ exports.list_organisation = function (req, res) //Liste tout les clients
 
 exports.delete_all_organisations = function (req, res)
 {
-    console.log("Deleting all organisations....");
     Organisation.collection.remove({});
     res.end();
     console.log("Success");
@@ -29,8 +26,6 @@ exports.delete_all_organisations = function (req, res)
 
 exports.create_organisation = function (req, res)//crée un nouveau client
 {
-    console.log("Submitting a new organisation : " + req.params.Name);
-
     let newOrganisation = new Organisation(req.body);
     newOrganisation.save(function (err, organisation)
     {
@@ -45,7 +40,6 @@ exports.create_organisation = function (req, res)//crée un nouveau client
 exports.update_organisation = function (req, res) //met a jour les informations d'un client #CTristOnAPlusDeThunes
 {
     if(mongoose.Types.ObjectId.isValid(req.params.appId)) {
-        console.log("Updating organisations, ID : " + req.params.appId);
 
         Organisation.findOneAndUpdate({_id: req.params.appId}, req.body, {new: true}, function (err, organisation)
         {
@@ -61,7 +55,6 @@ exports.update_organisation = function (req, res) //met a jour les informations 
 exports.get_organisation = function (req, res) //get information about an organisation
 {
     if(mongoose.Types.ObjectId.isValid(req.params.appId)) {
-        console.log("Get organisation information, ID : " + req.params.appId);
 
         Organisation.find({_id: req.params.appId}, function(err, organisation) {
            if(err)
@@ -77,8 +70,6 @@ exports.get_organisation = function (req, res) //get information about an organi
 exports.delete_organisation = function (req, res) //Supprime un client
 {
     if(mongoose.Types.ObjectId.isValid(req.params.appId)) {
-        console.log("Deleting of specified information, ID : " + req.params.appId);
-
         Organisation.remove({_id: req.params.appId}, function(err, organisation)
         {
                 if(err)

@@ -18,7 +18,6 @@ exports.submit_auth = function (req, res)
             let token = jwt.sign({
                 user_id: user[0]._id, user: req.params.user, password: md5(req.params.password)
             }, secret_encrypt, { expiresIn: expiration_time});
-            console.log("AUTH : [user_id : " + user[0]._id + ", user : " + req.params.user + ", token : " + token + "]");
             Logs.setLogs(user[0]._id, req);
             res.json({messages: token, user_id: user[0]._id, language: user[0].Language});
             res.end();

@@ -4,15 +4,11 @@ let Permission = require('./PermissionsController');
 
 exports.crypted = function (req, res)
 {
-
-    console.log("Decrypt a location, CODE : " + req.body.PositionCode);
     var PositionCode = String(req.body.PositionCode);
             var req = new XMLHttpRequest();
             req.addEventListener('load', function() {
                 var parsed_info = JSON.parse(req.response);
                 if(parsed_info.code === "TECHNICAL") {
-                    console.log("Could not retrieve lat / long !");
-                    console.log(parsed_info);
                     res.json({message: "Error with API"});
                 } else {
                     req = new XMLHttpRequest();
@@ -32,8 +28,6 @@ exports.crypted = function (req, res)
 };
 
 exports.uncrypted = function (req, res) {
-            console.log("getting information with location... LAT : " + req.body.Lat + " , LON : " + req.body.Lon);
-
             let Lat = req.body.Lat;
             let Lon = req.body.Lon;
 
@@ -67,8 +61,6 @@ exports.distance = function distance(lat1, lon1, lat2, lon2) {
 
 
 exports.road = function (req, res) {
-            console.log("useing API for road");
-
             if(req.body.locations) {
                 const exec = require('child_process').exec;
                 const child = exec(__dirname + '\\RoadAPI.py "' + req.body.locations + '"',

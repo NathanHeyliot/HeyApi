@@ -88,5 +88,5 @@ app.use(function (req, res)
     res.status(406).send({url: req.originalUrl + "Can't be accepted !"})
 });
 
-console.log('Server started on: ' + port);
-console.log("Auth Token activated : true");
+console.log('%c Server started on: ' + port, 'color:green;');
+console.log("%c Auth Token activated : true", 'color:cyan;');

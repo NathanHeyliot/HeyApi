@@ -122,7 +122,6 @@ exports.getPermissions = function (req, res)
                     Permissions.find({}, function (err, permissions) {
                         if (err)
                         {
-                            console.log("Error at : " + err);
                             res.send(err);
                         }
                         res.json(permissions);
@@ -132,14 +131,12 @@ exports.getPermissions = function (req, res)
                     {
                         if (err)
                         {
-                            console.log("Error at : " + err);
                             res.send(err);
                         }
                         if(User !== null && User !== undefined && mongoose.Types.ObjectId.isValid(User.RankId)) {
                             Ranks.findOne({_id: User.RankId}, function (err, Rank) {
                                 if (err)
                                 {
-                                    console.log("Error at : " + err);
                                     res.send(err);
                                 }
 
@@ -147,7 +144,6 @@ exports.getPermissions = function (req, res)
                                     Permissions.findOne({RankId: Rank._id}, function (err, permissions) {
                                         if (err)
                                         {
-                                            console.log("Error at : " + err);
                                             res.send(err);
                                         }
                                         res.json(permissions);
@@ -166,8 +162,6 @@ exports.getPermissions = function (req, res)
 
 
 exports.createPermissions = function (req, res) {
-    console.log("Submitting a new Permissions");
-
     let newPermissions = new Permissions(req.body);
     newPermissions.save(function (err, permissions)
     {
@@ -178,7 +172,6 @@ exports.createPermissions = function (req, res) {
 };
 
 exports.delete_allPermissions = function (req, res) {
-    console.log("Deleting all permissions....");
     Permissions.collection.remove({});
     res.end();
     console.log("Success");
@@ -190,7 +183,6 @@ exports.getPermission = function (req, res) {
     if(mongoose.Types.ObjectId.isValid(req.params.id)) {
         Permissions.findOne({RankId: req.params.id}, function (err, perm) {
             if (err) {
-                console.log("Error at : " + err);
                 res.send(err);
             }
             res.json(perm);
@@ -203,7 +195,6 @@ exports.getPermission = function (req, res) {
 exports.removePermissions = function (req, res) {
 
     if(mongoose.Types.ObjectId.isValid(req.params.id)) {
-        console.log("Deleting of specified information, ID : " + req.params.id);
 
         Permissions.remove({_id: req.params.id}, function(err, permissions)
         {
@@ -219,7 +210,6 @@ exports.removePermissions = function (req, res) {
 exports.updatePermissions = function (req, res) {
 
     if(mongoose.Types.ObjectId.isValid(req.params.id)) {
-        console.log("Updating permissions, ID : " + req.params.id);
 
         Permissions.findOneAndUpdate({_id: req.params.id}, req.body, {new: true}, function (err, permissions)
         {

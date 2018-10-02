@@ -30,7 +30,6 @@ exports.list_device = function(req, res) // GET recupere les infos des devices e
 exports.update_device = function (req, res) //PUT Edit the specified payload
 {
     if(mongoose.Types.ObjectId.isValid(req.params.appId)) {
-        console.log("Update a device");
         console.log(req.body);
 
         Device.findOneAndUpdate({_id: req.params.appId}, (req.body), {new: true}, function (err, device)
@@ -47,7 +46,6 @@ exports.update_device = function (req, res) //PUT Edit the specified payload
 
 exports.delete_all_devices = function (req, res)
 {
-    console.log("Deleting all devices ....");
     Device.collection.remove({});
     res.end();
     console.log("Success");
@@ -122,17 +120,14 @@ exports.create_device = function (req, res)
             newDevice.FillLevel = 0;
             newDevice.CalibrationMeasure = -30;
 
-            console.log("Submitting new device ...");
             console.log(newDevice);
 
             //Ajoute le nouveau device a la BDD
             newDevice.save(function (err, device)
             {
                 if(err) {
-                    console.log("Device can not be created.");
                     res.send(err);
                 } else {
-                    console.log("Device succefully created.");
                     res.json(Device);
                 }
             });
@@ -147,17 +142,14 @@ exports.create_device = function (req, res)
         newDevice.FillLevel = 0;
         newDevice.CalibrationMeasure = -30;
 
-        console.log("Submitting new device ...");
         console.log(newDevice);
 
         //Ajoute le nouveau device a la BDD
         newDevice.save(function (err, device)
         {
             if(err) {
-                console.log("Device can not be created.");
                 res.send(err);
             } else {
-                console.log("Device succefully created.");
                 res.json(Device);
             }
         });
@@ -187,7 +179,6 @@ exports.read_device = function(req, res) //recupere les details d'un capteur et 
 exports.delete_device = function (req, res) //supprime le device séléctionné
 {
     if(mongoose.Types.ObjectId.isValid(req.params.appId)) {
-        console.log("Deleting a device, ID : " + req.params.appId);
 
         Device.remove({_id: req.params.appId}, function (err, device)
         {
@@ -208,13 +199,10 @@ exports.list_group_devices = function (req, res) //Recupere tout les device d'un
         
     //});
     let Hidden = req.body.Hidden;
-    console.log("List of groups of devices by id, GROUP ID : " + req.params.GroupId);
-    console.log(Hidden);
 
    // if(Hidden) {
         Device.find({GroupId: req.params.GroupId}, function (err, device)
         {
-            console.log("Looking for devices from group :" + req.params.GroupId);
             if (err)
             {
                 console.log("Error at : " + err);
@@ -238,15 +226,11 @@ exports.list_group_devices = function (req, res) //Recupere tout les device d'un
 
 exports.list_user_devices = function (req, res)
 {
-    console.log("List of devices for users : " + req.params.UID);
-
     UserGroup.find({user_id: req.params.UID}, function (err, group) {
         if(err) {
-            error("Error at: " + err);
             res.send(err);
         }
 
-        console.log("Groups found : " + group);
         get_user_devices_anex(res, group);
     })
 };
@@ -263,7 +247,6 @@ let get_user_devices_anex = async function(res, group)
             group_do++;
             if (err)
             {
-                console.log("Error at : " + err);
                 res.send(err);
             }
             devices_list.push(device);
@@ -277,7 +260,6 @@ let get_user_devices_anex = async function(res, group)
 
 exports.list_bytype = function (req, res) //recupere tout les device du type spécifié
 {
-    console.log("List groups of device by types, TYPES : " + req.params.DeviceType);
 
     Device.find({DeviceType: req.params.DeviceType}, function (err, device)
     {

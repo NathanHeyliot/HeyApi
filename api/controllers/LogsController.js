@@ -37,3 +37,15 @@ exports.setLogs = function (user_id, req) {
             console.log("Error when logging !!!! Details : " + err);
     });
 };
+
+exports.Logs_error = function (message) {
+    console.log("%c " + message, 'color:red;');
+};
+
+exports.Logs_info = function (message) {
+    console.log("%c " + message, 'color:cyan;');
+};
+
+exports.Logs_success = function (message) {
+    console.log("%c " + message, 'color:green;');
+};
